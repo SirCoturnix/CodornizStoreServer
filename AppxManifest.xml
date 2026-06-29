@@ -1,49 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://microsoft.com" xmlns:m2="http://microsoft.com" xmlns:build="http://microsoft.com" IgnorableNamespaces="build">
   
+  
+
   <Properties>
     <DisplayName>CodornizStore</DisplayName>
     <PublisherDisplayName>Rework</PublisherDisplayName>
     <Logo>images\codorniz.png</Logo>
   </Properties>
+
   <Prerequisites>
     <OSMinVersion>6.3.0</OSMinVersion>
-    <OSMaxVersionTested>6.3.0</OSMaxVersionTested>
+    <OSMaxVersionTested>10.0.0.0</OSMaxVersionTested>
   </Prerequisites>
+
   <Dependencies>
     <PackageDependency Name="Microsoft.WinJS.2.0" MinVersion="1.0.9600.17018" />
   </Dependencies>
+
   <Resources>
     <Resource Language="EN-US" />
   </Resources>
+
   <Applications>
     <Application Id="CodornizStore" StartPage="rwstore.html">
-      <m2:visualElements DisplayName="CodornizStore" Description="Una tienda metro de la codorniz" ForegroundText="light" BackgroundColor="#008A00" Square150x150Logo="images\codorniz.png" Square30x30Logo="images\codorniz.png" ToastCapable="true">
+      <m2:VisualElements DisplayName="CodornizStore" 
+                         Description="Una tienda metro de la codorniz" 
+                         ForegroundText="light" 
+                         BackgroundColor="#1F1F1F"
+                         Logo="images\codorniz.png"
+                         SmallLogo="images\codorniz.png">
         <m2:DefaultTile Wide310x150Logo="images\codorniz.png" Square310x310Logo="images\codorniz.png" ShortName="CodornizStore">
           <m2:ShowNameOnTiles>
             <m2:ShowOn Tile="square150x150Logo" />
             <m2:ShowOn Tile="wide310x150Logo" />
-            <m2:ShowOn Tile="square310x310Logo" />
           </m2:ShowNameOnTiles>
         </m2:DefaultTile>
-        <m2:SplashScreen Image="images\splashscreen.png" />
-      </m2:visualElements>
-      <Extensions>
-        <Extension Category="windows.protocol">
-          <Protocol Name="rwstore-install">
-            <DisplayName>App Installer</DisplayName>
-          </Protocol>
-        </Extension>
-      </Extensions>
+        <m2:SplashScreen Image="images\codorniz.png" />
+      </m2:VisualElements>
     </Application>
   </Applications>
-  <build:Metadata>
-    <build:Item Name="SharedGUID" Value="f968199e-c17c-4ed8-b985-b820c1075e55" />
-    <build:Item Name="CodeSharingProject" Value="248F659F-DAC5-46E8-AC09-60EC9FC95053" />
-    <build:Item Name="VisualStudio" Version="14.0" />
-    <build:Item Name="VisualStudioEdition" Value="Microsoft Visual Studio Community 2015" />
-    <build:Item Name="OperatingSystem" Version="6.3.9600.16384 (winblue_rtm.130821-1623)" />
-    <build:Item Name="Microsoft.Build.AppxPackage.dll" Version="14.0.25431.1" />
-    <build:Item Name="ProjectGUID" Value="d4ad2476-e600-4663-81df-f894bc3a0af2" />
-    <build:Item Name="MakePri.exe" Version="6.3.9600.17336 (winblue.150226-1500)" />
-  </build:Metadata>
+
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
 </Package>
