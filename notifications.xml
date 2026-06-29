@@ -2,35 +2,39 @@
   <visual version="2">
     <!-- BALDOSA CUADRADA NATIVA -->
     <binding 
-      template="TileSquare150x150Image">
+      template="TileSquare150x150Image"
+      fallback="TileSquareImage">
       <image 
         id="1" 
-        src="images\codorniz.png" />
+        src="ms-appx:///images/codorniz.png" />
     </binding>
-    <!-- BALDOSA ANCHA CON DESCRIPCIONES -->
+    <!-- BALDOSA ANCHA CON TU EJÉRCITO DE APPS -->
     <binding 
       template="TileWide310x150PeekImageCollection01">
+      <!-- Los 4 iconos frontales de deidad -->
       <image 
         id="1" 
-        src="images\iconos_extraidos\angrybirds.png" />
+        src="ms-appx:///images/iconos_extraidos/angrybirds.png" />
       <image 
         id="2" 
-        src="images\iconos_extraidos\fruitninja.png" />
+        src="ms-appx:///images/iconos_extraidos/fruitninja.png" />
       <image 
         id="3" 
-        src="images\iconos_extraidos\freshpaint.png" />
+        src="ms-appx:///images/iconos_extraidos/freshpaint.png" />
       <image 
         id="4" 
-        src="images\iconos_extraidos\wpapp.png" />
+        src="ms-appx:///images/iconos_extraidos/wpapp.png" />
+      <!-- Descripciones directas sin relleno pendejo -->
       <text id="1">
-        Angry Birds: Tiros en el espacio
+        Angry Birds Space • Fruit Ninja
       </text>
       <text id="2">
-        Fresh Paint: Lienzo de pintura digital
+        Fresh Paint • wpapp (Windows Phone)
       </text>
       <text id="3">
-        wpapp: Una app de windows phone
+        Netflix • newsXpresso • WPCentral
       </text>
     </binding>
   </visual>
 </tile>
+
