@@ -1,0 +1,355 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Store</title>
+
+    <link href="//Microsoft.WinJS.2.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/js/default.js"></script>
+
+    <style id="dynamic-theme-css"></style>
+
+    <style>
+        body {
+            overflow-x: auto;
+            overflow-y: hidden;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            -ms-overflow-style: -ms-autohiding-scrollbar;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        @keyframes win8Entrance {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .win8-anim {
+            opacity: 0;
+            animation-name: win8Entrance;
+            animation-duration: 0.6s;
+            animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+            animation-fill-mode: forwards;
+        }
+
+        .header-area {
+            display: flex;
+            align-items: baseline;
+            margin-top: 85px;
+            margin-left: 40px;
+            margin-bottom: 30px;
+        }
+
+        .win-backbutton {
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+        .page-title {
+            font-size: 45px;
+            font-weight: lighter;
+            margin: 0;
+            color: #000000;
+        }
+
+        .app-count {
+            font-size: 18px;
+            color: #999;
+            margin-left: 15px;
+            font-weight: lighter;
+        }
+
+        .apps-grid {
+            display: flex;
+            flex-flow: column wrap;
+            align-content: flex-start;
+            height: 810px;
+            padding-left: 100px;
+            padding-right: 100px;
+            width: max-content;
+        }
+
+        .app-item {
+            width: 150px;
+            height: 250px;
+            margin-right: 25px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+
+            .app-item:active {
+                transform: scale(0.95);
+            }
+
+        .app-tile {
+            width: 150px;
+            height: 150px;
+            background-color: #0078D7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            border-radius: 6px;
+        }
+
+            .app-tile img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+        .app-name {
+            margin-top: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #444;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+        }
+
+        .tile-text-price {
+            display: block;
+            font-size: 13px;
+            color: inherit;
+            margin-top: 4px;
+            font-weight: normal;
+        }
+
+
+        .tile-stars {
+            display: block;
+            font-size: 14px;
+            color: #555;
+            margin-top: 2px;
+            line-height: 1.2;
+            font-weight: normal;
+            font-family: "Segoe UI Symbol", "Segoe UI", sans-serif;
+        }
+
+        .rating-count-small {
+            font-size: 11px;
+            color: #666;
+            margin-left: 4px;
+            font-weight: normal;
+        }
+
+        .tile-category {
+            display: block;
+            font-size: 11px;
+            color: #666;
+            margin-top: 2px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">if (typeof window.MSApp === "undefined") { document.write('<style>html,body,body *{visibility:hidden!important;}html,body{background:white!important;}</style>'); }</script>
+    <div id="topBarContainer"></div>
+
+    <header class="header-area win8-anim" style="animation-delay: 0s;">
+        <a href="default.html"><button class="win-backbutton" aria-label="Back"></button></a>
+        <h1 id="appTitle" class="page-title">All Apps</h1>
+        <span id="appCountDisplay" class="app-count"></span>
+    </header>
+
+    <div id="allAppsGrid" class="apps-grid"></div>
+
+    <script type="text/javascript">
+        (function () {
+            "use strict";
+
+            var pageTranslations = {
+                "en": { allApps: "All Apps", results: "Results for ", app: " app", apps: " apps", free: "Free" },
+                "de": { allApps: "Alle Apps", results: "Ergebnisse für ", app: " App", apps: " Apps", free: "Kostenlos" },
+                "fr": { allApps: "Toutes les applications", results: "Résultats für ", app: " application", apps: " applications", free: "Gratuit" },
+                "es": { allApps: "Todas las aplicaciones", results: "Resultados para ", app: " aplicación", apps: " aplicaciones", free: "Gratis" },
+                "tr": { allApps: "Tüm Uygulamalar", results: "Sonuçlar: ", app: " uygulama", apps: " uygulama", free: "Ücretsiz" },
+                "ru": { allApps: "Все приложения", results: "Результаты для ", app: " приложение", apps: " приложения", free: "Бесплатно" },
+                "pl": { allApps: "Wszystkie aplikacje", results: "Wyniki dla ", app: " aplikacja", apps: " aplikacje", free: "Bezpłatne" },
+                "ro": { allApps: "Toate aplicațiile", results: "Rezultate pentru ", app: " aplicație", apps: " aplicații", free: "Gratuit" }
+            };
+
+            var lang = localStorage.getItem("ws_language") || "en";
+            var t = pageTranslations[lang] || pageTranslations["en"];
+
+            function applyTheme(theme) {
+                var styleTag = document.getElementById("dynamic-theme-css");
+                if (!styleTag) return;
+                if (theme === 'default') {
+                    styleTag.innerHTML = "";
+                } else {
+                    var bgImg = theme.img ? "background-image: url('" + theme.img + "') !important;" : "background-image: none !important;";
+                    styleTag.innerHTML = "body { " +
+                        "background-color: " + theme.bg + " !important; " +
+                        bgImg +
+                        "color: " + theme.text + " !important; " +
+                        "font-family: " + theme.font + " !important; " +
+                        "} " +
+                        ".page-title, .app-name, .app-count { color: " + theme.text + " !important; }";
+                }
+            }
+
+            var savedTheme = localStorage.getItem("ws_active_theme");
+            if (savedTheme) applyTheme(JSON.parse(savedTheme));
+
+            var MASTER_SERVER_URL = 'https://reworkw8.github.io/RwStoreMasterServer/data/AllApps.json';
+            var APPS_ENDPOINT = 'https://reworkw8.github.io/RwStoreMasterServer/data/apps/';
+            var displayedAppsCount = 0;
+
+
+            function starsFromRating(count) {
+                var starsHtml = "";
+                for (var i = 0; i < 5; i++) {
+                    if (i < count) {
+                        starsHtml += "★";
+                    } else {
+
+                        starsHtml += "<span style='color: #d3d3d3;'>★</span>";
+                    }
+                }
+                return starsHtml;
+            }
+
+            function get(url, successCallback) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        if (successCallback) successCallback(xhr.responseText);
+                    }
+                };
+                xhr.send();
+            }
+
+            function getQueryParameter(name) {
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+                var results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+
+            function updateCountDisplay(count) {
+                var label = (count === 1) ? t.app : t.apps;
+                document.getElementById("appCountDisplay").innerText = count + label;
+            }
+
+            function loadAllApps() {
+                var grid = document.getElementById('allAppsGrid');
+                var searchQuery = getQueryParameter('search');
+
+                if (searchQuery) {
+                    document.getElementById('appTitle').innerText = t.results + searchQuery;
+                } else {
+                    document.getElementById('appTitle').innerText = t.allApps;
+                }
+
+                get(MASTER_SERVER_URL, function (response) {
+                    var data;
+                    try {
+                        data = JSON.parse(response);
+                    } catch (e) {
+                        return;
+                    }
+
+                    var AllAppsIds = [];
+                    if (data.rework_core_system && data.rework_core_system.content_registry) {
+                        var groups = data.rework_core_system.content_registry.deployment_groups;
+                        var seen = {};
+                        for (var key in groups) {
+                            var payload = groups[key].payload;
+                            if(payload && Array.isArray(payload)) {
+                                for (var j = 0; j < payload.length; j++) {
+                                    var lbl = payload[j].label || payload[j];
+                                    if (!seen[lbl]) {
+                                        seen[lbl] = true;
+                                        AllAppsIds.push(lbl);
+                                    }
+                                }
+                            }
+                        }
+                    } else if (data.AllApps) {
+                        AllAppsIds = data.AllApps;
+                    }
+
+                    if (!searchQuery) updateCountDisplay(AllAppsIds.length);
+
+                    AllAppsIds.forEach(function (id) {
+                        var cleanId = id.replace(".json", "");
+                        get(APPS_ENDPOINT + cleanId + '.json', function (res) {
+                            try {
+                                var appData = JSON.parse(res);
+                                var name = appData.displayname || (appData.app_identity ? appData.app_identity.displayname : "Unknown");
+                                var img = appData.imgUrl || (appData.deployment ? appData.deployment.imgUrl : "");
+                                var uri = appData.downloadUri || (appData.deployment ? appData.deployment.downloadUri : "");
+                                var category = appData.category || "";
+                                var mainStars = parseInt(appData.mainStars) || 0;
+                                var ratingsCount = appData.ratingsCount || 0;
+
+                                if (searchQuery && name.toLowerCase().indexOf(searchQuery.toLowerCase()) === -1) return;
+
+                                displayedAppsCount++;
+                                if (searchQuery) updateCountDisplay(displayedAppsCount);
+
+                                var item = document.createElement("div");
+                                item.className = "app-item win8-anim";
+                                item.style.animationDelay = (displayedAppsCount * 0.03) + "s";
+
+                                item.innerHTML = '<div class="app-tile"><img src="' + img + '"></div>' +
+                                                  '<div class="app-name">' + name + '</div>' +
+                                                  '<div class="tile-text-price">' + (t.free || "Free") + '</div>' +
+                                                  '<div class="tile-stars">' + starsFromRating(mainStars) +
+                                                  '<span class="rating-count-small">' + ratingsCount + '</span></div>' +
+                                                  '<div class="tile-category">' + category + '</div>';
+
+                                item.onclick = function() {
+                                    window.location.href = "AppPage.html?title=" + encodeURIComponent(name) + "&uri=" + encodeURIComponent(uri);
+                                };
+
+                                if (window.MSApp && MSApp.execUnsafeLocalFunction) {
+                                    MSApp.execUnsafeLocalFunction(function () { grid.appendChild(item); });
+                                } else {
+                                    grid.appendChild(item);
+                                }
+                            } catch (e) {}
+                        });
+                    });
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", loadAllApps);
+        })();
+    </script>
+    <script type="text/javascript">
+        (function() {
+            function pingServer() {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "https://reworkw8.wixsite.com/rework", true);
+                xhr.onreadystatechange = function() {};
+                xhr.send();
+            }
+            pingServer();
+            setInterval(pingServer, 1000);
+        })();
+    </script>
+</body>
+</html>

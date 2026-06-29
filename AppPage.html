@@ -1,0 +1,1456 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Store</title>
+
+    <link href="//Microsoft.WinJS.2.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/js/default.js"></script>
+
+    <style id="dynamic-theme-css"></style>
+
+    <style>
+        body {
+            overflow-x: auto;
+            overflow-y: hidden;
+            background-color: white;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+            transition: background 0.3s ease;
+        }
+
+        @keyframes win8Entrance {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .win8-anim {
+            opacity: 0;
+            animation-name: win8Entrance;
+            animation-duration: 0.6s;
+            animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+            animation-fill-mode: forwards;
+        }
+
+        .panorama-wrapper {
+            display: flex;
+            height: 100vh;
+            padding-top: 100px;
+            padding-left: 50px;
+            box-sizing: border-box;
+            white-space: nowrap;
+        }
+
+        .section {
+            display: inline-block;
+            vertical-align: top;
+            height: 100%;
+            margin-right: 80px;
+            white-space: normal;
+            flex-shrink: 0;
+        }
+
+
+        .col-info {
+            width: 450px;
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 40px;
+            height: 85vh;
+        }
+
+        .info-content-scroll {
+            flex-grow: 1;
+            overflow-y: auto;
+            padding-right: 15px;
+        }
+
+            .info-content-scroll::-webkit-scrollbar {
+                width: 0px;
+                background: transparent;
+            }
+
+        .header-container {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+            max-width: 100%;
+            flex-shrink: 0;
+        }
+
+        .win-backbutton {
+            flex-shrink: 0 !important;
+            border-radius: 50%;
+        }
+
+        #appTitle {
+            margin-left: 15px;
+            font-weight: lighter;
+            font-size: 38px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            color: inherit;
+        }
+
+        #downloadBtn {
+            background-color: #008a00;
+            color: white;
+            padding: 10px 45px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+        #downloadProgress {
+            color: #008a00;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: baseline;
+            margin: 5px 0;
+        }
+
+        .price-text {
+            font-size: 22px;
+            font-weight: lighter;
+            margin: 0;
+            margin-right: 10px;
+        }
+
+        .rating-stars-small {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .legal-small {
+            font-size: 11px;
+            color: #666;
+            line-height: 1.4;
+            margin-bottom: 20px;
+        }
+
+            .legal-small span {
+                color: #008a00;
+            }
+
+
+        .desc-section {
+            border-top: 1px solid #eee;
+            padding-top: 25px;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        .desc-header {
+            font-size: 20px;
+            font-weight: 300;
+            color: #000;
+            margin-bottom: 15px;
+        }
+
+        .desc-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 10px;
+            white-space: pre-wrap;
+        }
+
+
+        .age-rating-area {
+            margin-top: 10px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .esrb-text {
+            font-size: 13px;
+            color: #666;
+        }
+
+            .esrb-text span {
+                color: #333;
+                font-weight: 600;
+            }
+
+        .col-gallery {
+            display: flex;
+            align-items: flex-start;
+        }
+
+
+        .thumb-strip {
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+            .thumb-strip img {
+                width: 75px;
+                height: 45px;
+                object-fit: fill;
+                cursor: pointer;
+                border: 1px solid #ddd;
+                transition: border-color 0.2s;
+                border-radius: 4px;
+            }
+
+        .main-img-view img {
+            height: 480px;
+            width: 735px;
+            object-fit: fill;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+
+        .meta-under-img {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            font-size: 13px;
+            opacity: 0.9;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .meta-column {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .meta-label {
+            color: #333;
+            margin-right: 5px;
+            font-weight: 600;
+        }
+
+        #appCopyright {
+            font-size: 11px;
+            color: #666;
+            position: relative;
+            left: -6px;
+        }
+
+        .col-ratings {
+            width: 380px;
+        }
+
+        .ratings-header-flex {
+            display: flex;
+            align-items: baseline;
+            margin-bottom: 10px;
+            white-space: nowrap;
+        }
+
+            .ratings-header-flex h2 {
+                margin: 0;
+            }
+
+        .rating-number {
+            font-size: 85px;
+            font-weight: lighter;
+            line-height: 1;
+            margin: 0;
+        }
+
+        .rating-stars {
+            color: #008a00;
+            font-size: 26px;
+            margin: 10px 0;
+        }
+
+        .bar-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 7px;
+            font-size: 13px;
+        }
+
+        .bar-label {
+            width: 50px;
+            flex-shrink: 0;
+        }
+
+        .bar-bg {
+            background: rgba(128,128,128,0.2);
+            height: 14px;
+            flex-grow: 1;
+            margin: 0 12px;
+        }
+
+        .bar-fill {
+            background: #008a00;
+            height: 100%;
+        }
+
+        .bar-count {
+            width: 30px;
+            text-align: right;
+            flex-shrink: 0;
+        }
+
+        h2, h3 {
+            font-weight: lighter;
+            color: inherit;
+        }
+
+        .main-img-view video {
+            height: 480px;
+            width: 735px;
+            object-fit: fill;
+            border: 1px solid #ccc;
+            display: block;
+            border-radius: 6px;
+        }
+
+        .thumb-strip .thumb-video-wrapper {
+            position: relative;
+            width: 75px;
+            height: 45px;
+            cursor: pointer;
+            border: 1px solid #ddd;
+            display: inline-block;
+            overflow: hidden;
+            flex-shrink: 0;
+            border-radius: 4px;
+        }
+
+            .thumb-strip .thumb-video-wrapper img {
+                width: 100%;
+                height: 100%;
+                object-fit: fill;
+                border: none;
+                display: block;
+            }
+
+            .thumb-strip .thumb-video-wrapper .play-badge {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: rgba(0, 0, 0, 0.35);
+                pointer-events: none;
+            }
+
+                .thumb-strip .thumb-video-wrapper .play-badge:after {
+                    content: "";
+                    display: block;
+                    width: 0;
+                    height: 0;
+                    border-top: 8px solid transparent;
+                    border-bottom: 8px solid transparent;
+                    border-left: 14px solid white;
+                    margin-left: 2px;
+                }
+
+        .fullscreen-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+
+            .fullscreen-overlay.active {
+                display: -ms-flexbox;
+                display: flex;
+            }
+
+        .fullscreen-close {
+            position: absolute;
+            top: 18px;
+            right: 28px;
+            font-size: 36px;
+            color: white;
+            cursor: pointer;
+            line-height: 1;
+            font-weight: lighter;
+            font-family: 'Segoe UI', sans-serif;
+            -ms-user-select: none;
+            user-select: none;
+            z-index: 10001;
+        }
+
+            .fullscreen-close:hover {
+                color: #ccc;
+            }
+
+        .fullscreen-img {
+            max-width: 95%;
+            max-height: 90%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .fullscreen-video {
+            max-width: 95%;
+            max-height: 90%;
+            display: block;
+            outline: none;
+        }
+
+        .main-img-view img {
+            cursor: pointer;
+        }
+
+        .main-img-view video {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">if (typeof window.MSApp === "undefined") { document.write('<style>html,body,body *{visibility:hidden!important;}html,body{background:white!important;}</style>'); }</script>
+    <div id="topBarContainer"></div>
+
+    <div id="fullscreenOverlay" class="fullscreen-overlay">
+        <span class="fullscreen-close" id="fullscreenClose">&#x2715;</span>
+        <img id="fullscreenImg" class="fullscreen-img" src="" style="display:none;" />
+        <video id="fullscreenVideo" class="fullscreen-video" controls style="display:none;"></video>
+    </div>
+
+    <div class="panorama-wrapper">
+        <div class="section col-info win8-anim" style="animation-delay: 0s;">
+            <div class="header-container">
+                <button id="backBtn" class="win-backbutton" aria-label="Back"></button>
+                <h1 id="appTitle"></h1>
+            </div>
+
+            <div class="info-content-scroll">
+                <button id="downloadBtn">Download</button>
+                <div id="statusArea" style="display:none;">
+                    <div id="downloadStatus">Initializing...</div>
+                    <progress id="downloadProgress" class="win-progress-bar" value="0" max="100"></progress>
+                </div>
+
+                <div class="price-container">
+                    <p id="priceText" class="price-text">Free</p>
+                    <span id="priceStars" class="rating-stars-small"></span>
+                </div>
+
+                <div id="legalArea" class="legal-small">
+                    When you install an app, you agree to the <span>Terms of Use</span> and any <span>additional terms</span>.
+                    <br><br>
+                    This app has <span>permission</span> to use some features of your PC.
+                </div>
+
+                <div class="desc-section">
+                    <div class="desc-header" id="descHeader">Description</div>
+                    <div id="appDescription" class="desc-text"></div>
+                </div>
+
+                <div id="tagsArea" style="margin-bottom: 20px; display: none;">
+                    <div class="desc-header" id="tagsHeader" style="font-size: 16px; margin-bottom: 5px;">Tags</div>
+                    <div id="appTags" class="desc-text"></div>
+                </div>
+
+                <div class="age-rating-area">
+                    <div class="esrb-text"><span id="contentRatingLabel">Content Rating:</span> <span id="ageRatingVal"></span></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section col-gallery win8-anim" style="animation-delay: 0.1s;">
+            <div class="thumb-strip" id="thumbList">
+            </div>
+            <div class="main-img-view" id="mainMediaView">
+                <img id="mainAppImage" src="images/placeholder.png" />
+
+                <div class="meta-under-img">
+                    <div class="meta-column">
+                        <div><span class="meta-label" id="labelPublishedBy">Published by</span><span id="appPublisher"></span></div>
+                        <div><span class="meta-label" id="labelOS">Supported OS</span><span id="appOS"></span></div>
+                        <div><span class="meta-label"></span> <span id="appCopyright"></span></div>
+                    </div>
+                    <div class="meta-column">
+                        <div><span class="meta-label" id="labelCategory">Category</span><span id="appCategory"></span></div>
+                        <div><span class="meta-label" id="labelSize">Approximate size</span><span id="appSize"></span></div>
+                        <div><span class="meta-label" id="labelArchitecture">Architecture</span><span id="appArchitecture"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section col-ratings win8-anim" style="animation-delay: 0.2s;">
+            <div class="ratings-header-flex">
+                <h2 id="ratingsTitleText">Ratings and reviews</h2>
+                <span id="seeAllBtn" style="font-size: 14px; color: #008a00; margin-left: 15px; cursor: pointer;">See all</span>
+            </div>
+
+            <p class="rating-number" id="ratingNumberBig">4.3</p>
+            <div class="rating-stars">
+                <span id="mainStars" style="font-size: 35px;">★★★★★</span>
+                <span id="avgRatingText" style="font-size: 14px; color: black;">average rating</span>
+            </div>
+
+            <p id="ratingsCount" style="font-size: 14px; margin-bottom: 20px;">149 ratings</p>
+
+            <div class="rating-bar-table">
+                <div class="bar-row"><span class="bar-label" id="star5">5 stars</span> <div class="bar-bg"><div class="bar-fill" style="width: 78%;"></div></div> <span class="bar-count">101</span></div>
+                <div class="bar-row"><span class="bar-label" id="star4">4 stars</span> <div class="bar-bg"><div class="bar-fill" style="width: 18%;"></div></div> <span class="bar-count">25</span></div>
+                <div class="bar-row"><span class="bar-label" id="star3">3 stars</span> <div class="bar-bg"><div class="bar-fill" style="width: 6%;"></div></div> <span class="bar-count">8</span></div>
+                <div class="bar-row"><span class="bar-label" id="star2">2 stars</span> <div class="bar-bg"><div class="bar-fill" style="width: 2%;"></div></div> <span class="bar-count">2</span></div>
+                <div class="bar-row"><span class="bar-label" id="star1">1 star</span> <div class="bar-bg"><div class="bar-fill" style="width: 10%;"></div></div> <span class="bar-count">13</span></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            "use strict";
+
+
+            var MASTER_SERVER_URL = 'https://reworkw8.github.io/RwStoreMasterServer/data/AllApps.json';
+            var APPS_ENDPOINT = 'https://reworkw8.github.io/RwStoreMasterServer/data/apps/';
+
+
+            var currentAppIconUrl = "";
+            var currentCategory = "";
+            var currentAppData = null;
+
+            function get(url, successCallback, isCritical) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            if (successCallback) successCallback(xhr.responseText);
+                        } else if (isCritical) {
+
+                        }
+                    }
+                };
+                xhr.send();
+            }
+
+
+            var pageTranslations = {
+                "en": {
+                    download: "Download", uninstall: "Uninstall", free: "Free", ratingsTitle: "Ratings and reviews",
+                    seeAll: "See all", avgRating: "average rating", ratings: "ratings",
+                    stars: " stars", star: " star", init: "Initializing...", install: "Installing...",
+                    downloaded: "downloaded", toastMsg: " was downloaded.",
+                    legal: "When you install an app, you agree to the <span>Terms of Use</span> and any <span>additional terms</span>.<br><br>This app has <span>permission</span> to use some features of your PC.",
+                    description: "Description",
+                    contentRating: "Content Rating:",
+                    publishedBy: "Published by",
+                    category: "Category",
+                    approxSize: "Approximate size",
+                    os: "Supported OS", architecture: "Architecture", tags: "Tags"
+                },
+                "de": {
+                    download: "Herunterladen", uninstall: "Deinstallieren", free: "Kostenlos", ratingsTitle: "Bewertungen und Rezensionen",
+                    seeAll: "Alle anzeigen", avgRating: "Durchschnittliche Bewertung", ratings: "Bewertungen",
+                    stars: " Sterne", star: " Stern", init: "Initialisierung...", install: "Installation...",
+                    downloaded: "heruntergeladen", toastMsg: " wurde heruntergeladen.",
+                    legal: "Wenn Sie eine App installieren, stimmen Sie den <span>Nutzungsbedingungen</span> und etwaigen <span>zusätzlichen Bedingungen</span> zu.<br><br>Diese App hat die <span>Berechtigung</span>, einige Funktionen Ihres PCs zu nutzen.",
+                    description: "Beschreibung",
+                    contentRating: "Altersfreigabe:",
+                    publishedBy: "Veröffentlicht von",
+                    category: "Kategorie",
+                    approxSize: "Größe",
+                    os: "Betriebssystem", architecture: "Architektur", tags: "Tags"
+                },
+                "fr": {
+                    download: "Télécharger", uninstall: "Désinstaller", free: "Gratuit", ratingsTitle: "Notes et avis",
+                    seeAll: "Tout afficher", avgRating: "note moyenne", ratings: "évaluations",
+                    stars: " étoiles", star: " étoile", init: "Initialisation...", install: "Installation...",
+                    downloaded: "téléchargé", toastMsg: " a été téléchargé.",
+                    legal: "En installant eine application, vous acceptez les <span>Conditions d'utilisation</span> et toutes <span>conditions supplémentaires</span>.<br><br>Cette application est <span>autorisée</span> à utiliser certaines fonctionnalités de votre PC.",
+                    description: "Description",
+                    contentRating: "Classification du contenu :",
+                    publishedBy: "Publié par",
+                    category: "Kategorie",
+                    approxSize: "Taille approximative",
+                    os: "Système d'exploitation", architecture: "Architecture", tags: "Mots-clés"
+                },
+                "es": {
+                    download: "Descargar", uninstall: "Desinstalar", free: "Gratis", ratingsTitle: "Calificaciones y opiniones",
+                    seeAll: "Ver todo", avgRating: "calificación promedio", ratings: "calificaciones",
+                    stars: " estrellas", star: " estrella", init: "Initializando...", install: "Instalando...",
+                    downloaded: "descargado", toastMsg: " se ha descargado.",
+                    legal: "Al instalar eine aplicación, aceptas las <span>Condiciones de uso</span> und cualquier <span>condición adicional</span>.<br><br>Diese aplicación tiene <span>permiso</span> para usar algunas funciones de tu PC.",
+                    description: "Descripción",
+                    contentRating: "Calificación de contenido:",
+                    publishedBy: "Publicado por",
+                    category: "Categoría",
+                    approxSize: "Tamaño approximado",
+                    os: "Sistema operativo", architecture: "Arquitectura", tags: "Etiquetas"
+                },
+                "tr": {
+                    download: "İndir", uninstall: "Kaldır", free: "Ücretsiz", ratingsTitle: "Derecelendirmeler ve incelemeler",
+                    seeAll: "Tümünü gör", avgRating: "ortalama puan", ratings: "derecelendirme",
+                    stars: " yıldız", star: " yıldız", init: "Başlatılıyor...", install: "Yükleniyor...",
+                    downloaded: "indirildi", toastMsg: " indirildi.",
+                    legal: "Bir uygulamayı yüklediğinizde, <span>Kullanım Koşullarını</span> ve tüm <span>ek koşulları</span> kabul etmiş olursunuz.<br><br>Bu uygulama, bilgisayarınızın some özelliklerini kullanma <span>iznine</span> sahiptir.",
+                    description: "Açıklama",
+                    contentRating: "İçerik Derecelendirmesi:",
+                    publishedBy: "Yayınlayan",
+                    category: "Kategorie",
+                    approxSize: "Yaklaşık boyut",
+                    os: "İşletim Sistemi", architecture: "Mimari", tags: "Etiketler"
+                },
+                "ru": {
+                    download: "Скачать", uninstall: "Удалить", free: "Бесплатно", ratingsTitle: "Рейтинги и отзывы",
+                    seeAll: "Посмотреть все", avgRating: "средняя оценка", ratings: "оценок",
+                    stars: " звезд", star: " звезда", init: "Инициализация...", install: "Установка...",
+                    downloaded: "скачано", toastMsg: " загружено.",
+                    legal: "Устанавливая приложение, вы соглашаетесь с <span>Условиями использования</span> и любыми <span>дополнительными условиями</span>.<br><br>Это приложение имеет <span>разрешение</span> на использование некоторых функций вашего ПК.",
+                    description: "Описание",
+                    contentRating: "Возрастной рейтинг:",
+                    publishedBy: "Опубликовано",
+                    category: "Категория",
+                    approxSize: "Приблизительный размер",
+                    os: "Операционная система", architecture: "Архитектура", tags: "Теги"
+                },
+                "pl": {
+                    download: "Pobierz", uninstall: "Odinstaluj", free: "Bezpłatne", ratingsTitle: "Oceny i recenzje",
+                    seeAll: "Zobacz wszystko", avgRating: "średnia ocena", ratings: "ocen",
+                    stars: " gwiazdek", star: " gwiazdka", init: "Inicjowanie...", install: "Instalowanie...",
+                    downloaded: "pobrano", toastMsg: " został pobrany.",
+                    legal: "Instalując aplikację, akceptujesz <span>Warunki użytkowania</span> i wszelkie <span>dodatkowe warunki</span>.<br><br>Ta aplikacja ma <span>uprawnienia</span> do korzystania z niektórych funkcji komputera.",
+                    description: "Opis",
+                    contentRating: "Klasyfikacja treści:",
+                    publishedBy: "Opublikowane przez",
+                    category: "Kategoria",
+                    approxSize: "Przybliżony rozmiar",
+                    os: "System operacyjny", architecture: "Architektura", tags: "Tagi"
+                },
+                "ro": {
+                    download: "Descărcare", uninstall: "Dezinstalare", free: "Gratuit", ratingsTitle: "Evaluări și recenzii",
+                    seeAll: "Vezi tot", avgRating: "evaluare medie", ratings: "evaluări",
+                    stars: " stele", star: " stea", init: "Se inițializează...", install: "Se instalează...",
+                    downloaded: "descărcat", toastMsg: " a fost descărcat.",
+                    legal: "Când instalezi o aplicație, ești de acord cu <span>Termenii de utilizare</span> și cu orice <span>termeni suplimentari</span>.<br><br>Această aplicație are <span>permisiunea</span> de a utiliza unele funcții ale computerului tău.",
+                    description: "Descriere",
+                    contentRating: "Evaluarea conținutului:",
+                    publishedBy: "Publicat de",
+                    category: "Categorie",
+                    approxSize: "Dimensiune aproximativă",
+                    os: "Sistem de operare", architecture: "Arhitectură", tags: "Etichete"
+                }
+            };
+
+            var lang = localStorage.getItem("ws_language") || "en";
+            var t = pageTranslations[lang] || pageTranslations["en"];
+
+            function updateRatingUI(ratingValue) {
+                var count = parseInt(ratingValue) || 0;
+                var starsHtml = "";
+                var plainStars = "";
+                var numericRating = "0.0";
+
+                if (count >= 149) { starsHtml = "★★★★★"; plainStars = "★★★★★"; numericRating = "4.8"; }
+                else if (count >= 100) { starsHtml = "★★★★<span style='opacity:0.3'>★</span>"; plainStars = "★★★★"; numericRating = "4.2"; }
+                else if (count >= 50) { starsHtml = "★★★<span style='opacity:0.3'>★★</span>"; plainStars = "★★★"; numericRating = "3.5"; }
+                else if (count >= 10) { starsHtml = "★★<span style='opacity:0.3'>★★★</span>"; plainStars = "★★"; numericRating = "2.5"; }
+                else { starsHtml = "★<span style='opacity:0.3'>★★★★</span>"; plainStars = "★"; numericRating = "1.0"; }
+
+                document.getElementById("mainStars").innerHTML = starsHtml;
+                document.getElementById("ratingNumberBig").innerText = numericRating;
+                document.getElementById("ratingsCount").innerText = count + " " + t.ratings;
+
+                var smallHtml = plainStars + ' <span style="font-size: 14px; opacity: 0.6;">' + count + '</span>';
+                document.getElementById("priceStars").innerHTML = smallHtml;
+            }
+
+            function applyPageTranslations() {
+                document.getElementById("avgRatingText").innerText = t.avgRating;
+                document.getElementById("ratingsTitleText").innerText = t.ratingsTitle;
+                document.getElementById("seeAllBtn").innerText = t.seeAll;
+                document.getElementById("legalArea").innerHTML = t.legal;
+                document.getElementById("star5").innerText = "5" + t.stars;
+                document.getElementById("star4").innerText = "4" + t.stars;
+                document.getElementById("star3").innerText = "3" + t.stars;
+                document.getElementById("star2").innerText = "2" + t.stars;
+                document.getElementById("star1").innerText = "1" + t.star;
+                document.getElementById("priceText").innerText = t.free;
+
+
+                if(document.getElementById("descHeader")) document.getElementById("descHeader").innerText = t.description;
+                if(document.getElementById("contentRatingLabel")) document.getElementById("contentRatingLabel").innerText = t.contentRating;
+                if(document.getElementById("labelPublishedBy")) document.getElementById("labelPublishedBy").innerText = t.publishedBy;
+                if(document.getElementById("labelCategory")) document.getElementById("labelCategory").innerText = t.category;
+                if(document.getElementById("labelSize")) document.getElementById("labelSize").innerText = t.approxSize;
+
+                if(document.getElementById("labelOS")) document.getElementById("labelOS").innerText = t.os;
+                if(document.getElementById("labelArchitecture")) document.getElementById("labelArchitecture").innerText = t.architecture;
+                if(document.getElementById("tagsHeader")) document.getElementById("tagsHeader").innerText = t.tags;
+            }
+            applyPageTranslations();
+
+            var notifications = (typeof Windows !== 'undefined' && Windows.UI && Windows.UI.Notifications) ? Windows.UI.Notifications : null;
+
+            function applyTheme(th) {
+                var styleTag = document.getElementById("dynamic-theme-css");
+                if (th === 'default') {
+                    styleTag.innerHTML = "";
+                } else {
+                    var bgImg = th.img ? "background-image: url('" + th.img + "') !important;" : "background-image: none !important;";
+                    styleTag.innerHTML = "body { " +
+                        "background-color: " + th.bg + " !important; " +
+                        bgImg +
+                        "color: " + th.text + " !important; " +
+                        "font-family: " + th.font + " !important; " +
+                        "} " +
+                        "#appTitle, h2, .rating-number, .price-text, .desc-header { color: " + th.text + " !important; }";
+                }
+            }
+
+            var savedTheme = localStorage.getItem("ws_active_theme");
+            if (savedTheme) applyTheme(JSON.parse(savedTheme));
+
+            document.getElementById("backBtn").onclick = function() {
+                if (window.history.length > 1) { window.history.back(); }
+                else { window.location.href = "default.html"; }
+            };
+
+            function getQueryParam(name) {
+                name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+                var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+                var results = regex.exec(location.search);
+                return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+            }
+
+            var currentTitle = getQueryParam('title');
+            var downloadUri = getQueryParam('uri');
+
+            if (currentTitle) {
+                document.getElementById('appTitle').innerText = currentTitle;
+                checkStatus();
+            }
+
+            document.getElementById("seeAllBtn").onclick = function() {
+                window.location.href = "AppComments.html?title=" + encodeURIComponent(currentTitle);
+            };
+
+            function checkStatus() {
+                var btn = document.getElementById("downloadBtn");
+                var history = [];
+                try { history = JSON.parse(localStorage.getItem("ws_download_history") || "[]"); } catch(e) { history = []; }
+
+                var isDownloaded = false;
+                if (Array.isArray(history)) {
+                    for (var d = 0; d < history.length; d++) {
+                        if (history[d].name === currentTitle) { isDownloaded = true; break; }
+                    }
+                } else {
+
+                    isDownloaded = !!history[currentTitle];
+                }
+                if (isDownloaded) {
+                    btn.innerText = t.uninstall;
+                } else {
+                    btn.innerText = t.download;
+                }
+            }
+
+            function showToastNotification(appName) {
+                if(!notifications) return;
+                try {
+                    var template = notifications.ToastTemplateType.toastImageAndText01;
+                    var toastXml = notifications.ToastNotificationManager.getTemplateContent(template);
+                    var textNodes = toastXml.getElementsByTagName("text");
+                    textNodes[0].appendChild(toastXml.createTextNode(appName + t.toastMsg));
+
+                    var imageNodes = toastXml.getElementsByTagName("image");
+
+
+                    var iconSrc = currentAppIconUrl || "images/placeholder.png";
+                    imageNodes[0].setAttribute("src", iconSrc);
+                    imageNodes[0].setAttribute("alt", "App Icon");
+
+                    var toast = new notifications.ToastNotification(toastXml);
+                    notifications.ToastNotificationManager.createToastNotifier().show(toast);
+                } catch(e) {}
+            }
+
+            function showSimpleDialog(message) {
+                if (typeof Windows !== 'undefined' && Windows.UI && Windows.UI.Popups) {
+                    var msg = new Windows.UI.Popups.MessageDialog(message);
+                    msg.showAsync();
+                } else {
+                    alert(message);
+                }
+            }
+
+            function handleButtonClick() {
+                var btn = document.getElementById("downloadBtn");
+                if (btn.innerText === t.uninstall) {
+                    removeAppx();
+                } else {
+                    downloadAppx();
+                }
+            }
+
+            function removeAppx() {
+                var history = [];
+                try { history = JSON.parse(localStorage.getItem("ws_download_history") || "[]"); } catch(e) { history = []; }
+                if (!Array.isArray(history)) { history = []; }
+
+
+                var fileName = null;
+                for (var d = 0; d < history.length; d++) {
+                    if (history[d].name === currentTitle) {
+                        fileName = history[d]._filename || null;
+                        break;
+                    }
+                }
+                if (!fileName) {
+                    fileName = currentTitle.replace(/[^a-z0-9]/gi, '') + ".appx";
+                }
+
+
+                function removeFromHistory() {
+                    var updated = [];
+                    for (var d = 0; d < history.length; d++) {
+                        if (history[d].name !== currentTitle) { updated.push(history[d]); }
+                    }
+                    localStorage.setItem("ws_download_history", JSON.stringify(updated));
+                    checkStatus();
+                }
+
+                if (typeof Windows !== 'undefined') {
+                    Windows.Storage.ApplicationData.current.localFolder.getFileAsync(fileName).done(function (file) {
+                        file.deleteAsync().done(function () {
+                            removeFromHistory();
+                        }, function(err) {
+                            showSimpleDialog("This app cannot be uninstalled on your PC at the moment.");
+                        });
+                    }, function (err) {
+
+                        removeFromHistory();
+                    });
+                } else {
+                    removeFromHistory();
+                }
+            }
+
+            function downloadAppx() {
+                var extension = ".appx";
+                if (downloadUri && downloadUri.toLowerCase().indexOf(".exe") !== -1) {
+                    extension = ".exe";
+                }
+                var tempFileName = currentTitle.replace(/[^a-z0-9]/gi, '') + extension;
+                startRealDownload(tempFileName);
+            }
+
+            function startRealDownload(tempFileName) {
+                if (!downloadUri || downloadUri === "") {
+                    showSimpleDialog("This app cannot be installed on your PC at the moment.");
+                    return;
+                }
+
+                var cleanUri = downloadUri.trim().replace(/ /g, "%20");
+
+
+                if (cleanUri.toLowerCase().indexOf(".appx") === -1 || currentCategory === "Windows RT" || currentCategory === "Windows Phone") {
+                    if (typeof Windows !== 'undefined' && Windows.System && Windows.System.Launcher) {
+                        var uri = new Windows.Foundation.Uri(cleanUri);
+                        Windows.System.Launcher.launchUriAsync(uri);
+                    } else {
+                        window.open(cleanUri, '_blank');
+                    }
+                    return;
+                }
+
+                document.getElementById('downloadBtn').style.display = 'none';
+                document.getElementById('statusArea').style.display = 'block';
+                document.getElementById('downloadStatus').innerText = t.init;
+
+                if (typeof Windows === 'undefined') {
+                    setTimeout(completeInstallation, 2000);
+                    return;
+                }
+
+                var isExe = tempFileName.toLowerCase().slice(-4) === ".exe";
+                var createFilePromise;
+                if (isExe) {
+                    createFilePromise = Windows.Storage.DownloadsFolder.createFileAsync(tempFileName, Windows.Storage.CreationCollisionOption.generateUniqueName);
+                } else {
+                    createFilePromise = Windows.Storage.ApplicationData.current.localFolder.createFileAsync(tempFileName, Windows.Storage.CreationCollisionOption.generateUniqueName);
+                }
+
+                createFilePromise.done(function (file) {
+
+                    var dlHistory = [];
+                    try { dlHistory = JSON.parse(localStorage.getItem("ws_download_history") || "[]"); } catch(e) { dlHistory = []; }
+                    if (!Array.isArray(dlHistory)) { dlHistory = []; }
+                    var existingEntry = null;
+                    for (var fi = 0; fi < dlHistory.length; fi++) {
+                        if (dlHistory[fi].name === currentTitle) { existingEntry = dlHistory[fi]; break; }
+                    }
+                    if (existingEntry) {
+                        existingEntry._filename = file.name;
+                    } else {
+
+                        var now = new Date().getTime();
+                        dlHistory.push({
+                            name: currentTitle,
+                            img: currentAppIconUrl || "",
+                            uri: downloadUri || "",
+                            version: (currentAppData && (currentAppData.version || currentAppData.appVersion)) ? (currentAppData.version || currentAppData.appVersion) : "",
+                            downloadedAt: now,
+                            updatedAt: now,
+                            hasUpdate: false,
+                            _filename: file.name
+                        });
+                    }
+                    localStorage.setItem("ws_download_history", JSON.stringify(dlHistory));
+
+                    try {
+                        var downloader = new Windows.Networking.BackgroundTransfer.BackgroundDownloader();
+                        var uri = new Windows.Foundation.Uri(cleanUri);
+                        var download = downloader.createDownload(uri, file);
+
+                        download.startAsync().then(function () {
+                            if (isExe) {
+                                document.getElementById('downloadStatus').innerText = "Download finished.";
+                                Windows.System.Launcher.launchFileAsync(file).done(function() {
+                                    completeInstallation();
+                                });
+                            } else {
+                                document.getElementById('downloadStatus').innerText = t.install;
+                                installAppxPackage(file);
+                            }
+                        }, function (err) {
+                            showSimpleDialog("This app cannot be installed on your PC at the moment.");
+                            resetUI();
+                        }, function (progress) {
+                            updateProgress(progress);
+                        });
+                    } catch (e) {
+                        showSimpleDialog("This app cannot be installed on your PC at the moment.");
+                        resetUI();
+                    }
+                }, function (err) {
+                    showSimpleDialog("This app cannot be installed on your PC at the moment.");
+                    resetUI();
+                });
+            }
+
+            function installAppxPackage(file) {
+                try {
+                    var packageManager = new Windows.Management.Deployment.PackageManager();
+                    var packageUri = new Windows.Foundation.Uri("file:///" + file.path.replace(/\\/g, '/'));
+
+                    var options = Windows.Management.Deployment.DeploymentOptions.developmentMode;
+
+                    packageManager.addPackageAsync(packageUri, null, options).done(
+                        function (result) {
+                            if (result.isCompleted) completeInstallation();
+                            else forceManualInstall(file);
+                        },
+                        function (error) {
+
+                            forceManualInstall(file);
+                        }
+                    );
+                } catch (e) {
+                    forceManualInstall(file);
+                }
+            }
+
+            function forceManualInstall(file) {
+                Windows.System.Launcher.launchFileAsync(file);
+                completeInstallation();
+            }
+
+            function completeInstallation() {
+                var history = [];
+                try { history = JSON.parse(localStorage.getItem("ws_download_history") || "[]"); } catch(e) { history = []; }
+
+                if (!Array.isArray(history)) {
+                    history = [];
+                }
+
+                var existingIdx = -1;
+                for (var d = 0; d < history.length; d++) {
+                    if (history[d].name === currentTitle) { existingIdx = d; break; }
+                }
+                var now = new Date().getTime();
+                var appImg = currentAppIconUrl || "";
+                var appVersion = (currentAppData && (currentAppData.version || currentAppData.appVersion)) ? (currentAppData.version || currentAppData.appVersion) : "";
+                var appUri = downloadUri || "";
+                if (existingIdx === -1) {
+                    history.push({
+                        name: currentTitle,
+                        img: appImg,
+                        uri: appUri,
+                        version: appVersion,
+                        downloadedAt: now,
+                        updatedAt: now,
+                        hasUpdate: false
+                    });
+                } else {
+
+                    history[existingIdx].updatedAt = now;
+                    history[existingIdx].hasUpdate = false;
+                    if (appVersion) history[existingIdx].version = appVersion;
+                    if (appImg) history[existingIdx].img = appImg;
+                }
+                localStorage.setItem("ws_download_history", JSON.stringify(history));
+                showToastNotification(currentTitle);
+                checkStatus();
+                resetUI();
+            }
+
+            function resetUI() {
+                document.getElementById('downloadBtn').style.display = 'block';
+                document.getElementById('statusArea').style.display = 'none';
+            }
+
+            function updateProgress(progress) {
+                var total = progress.progress.totalBytesToReceive;
+                var current = progress.progress.bytesReceived;
+                if (total > 0) {
+                    var percent = Math.floor((current / total) * 100);
+                    document.getElementById('downloadProgress').value = percent;
+                    document.getElementById('downloadStatus').innerText = percent + "% " + t.downloaded;
+                }
+            }
+
+            function loadAppData() {
+                if (!currentTitle) return;
+
+
+                get(MASTER_SERVER_URL, function (response) {
+                    var data;
+                    try {
+                        data = JSON.parse(response);
+                    } catch (e) {
+                        console.error("Syntax Error in the Master Server");
+                        var recoveredIds = response.match(/"(.*?)\.json"/g);
+                        if(recoveredIds) {
+                            data = { AllApps: recoveredIds.map(function(s){ return s.replace(/"/g, ''); }) };
+                        } else {
+                            return;
+                        }
+                    }
+
+                    var AllAppsIds = [];
+                    if (data.rework_core_system && data.rework_core_system.content_registry) {
+                        var groups = data.rework_core_system.content_registry.deployment_groups;
+                        var seen = {};
+                        for (var key in groups) {
+                            var payload = groups[key].payload;
+                            if(payload && Array.isArray(payload)) {
+                                for (var j = 0; j < payload.length; j++) {
+                                    var lbl = payload[j].label || payload[j];
+                                    if (!seen[lbl]) {
+                                        seen[lbl] = true;
+                                        AllAppsIds.push(lbl);
+                                    }
+                                }
+                            }
+                        }
+                    } else if (data.AllApps) {
+                        AllAppsIds = data.AllApps;
+                    }
+
+                    var appFound = false;
+
+
+                    AllAppsIds.forEach(function (id) {
+                        if (appFound) return;
+
+                        var cleanId = id.replace(".json", "");
+
+                        get(APPS_ENDPOINT + cleanId + '.json', function (res) {
+                            try {
+                                var appData = JSON.parse(res);
+
+
+                                var name = appData.displayname || (appData.app_identity ? appData.app_identity.displayname : "Unknown");
+
+
+                                if (name === currentTitle) {
+                                    appFound = true;
+                                    renderAppPage(appData);
+                                }
+                            } catch (e) { console.warn("Skipping app parse", e); }
+                        }, false);
+                    });
+                }, true);
+            }
+
+            function renderAppPage(data) {
+                currentAppData = data;
+
+                var pubEl = document.getElementById("appPublisher");
+                if (data.publisher) {
+                    pubEl.innerText = data.publisher;
+                    pubEl.parentElement.style.display = "block";
+                } else {
+                    pubEl.parentElement.style.display = "none";
+                }
+
+                document.getElementById("appCopyright").innerText = data.copyright || "";
+
+
+                var descContent = data["description_" + lang] || data.description;
+                var descSection = document.querySelector(".desc-section");
+
+                if (descContent) {
+                    document.getElementById("appDescription").innerText = descContent;
+                    descSection.style.display = "block";
+                } else {
+                    descSection.style.display = "none";
+                }
+
+
+                var tagsContent = data.tags;
+                var tagsArea = document.getElementById("tagsArea");
+                if (tagsContent) {
+                    if (Array.isArray(tagsContent)) {
+                        document.getElementById("appTags").innerText = tagsContent.join(", ");
+                    } else {
+                        document.getElementById("appTags").innerText = tagsContent;
+                    }
+                    tagsArea.style.display = "block";
+                } else {
+                    tagsArea.style.display = "none";
+                }
+
+
+                var sizeEl = document.getElementById("appSize");
+                if (data.size) {
+                    sizeEl.innerText = data.size;
+                    sizeEl.parentElement.style.display = "block";
+                } else {
+                    sizeEl.parentElement.style.display = "none";
+                }
+
+
+                var osEl = document.getElementById("appOS");
+                if (data.os) {
+                    osEl.innerText = data.os;
+                    osEl.parentElement.style.display = "block";
+                } else {
+                    osEl.parentElement.style.display = "none";
+                }
+
+
+                var archEl = document.getElementById("appArchitecture");
+                if (data.architecture) {
+                    archEl.innerText = data.architecture;
+                    archEl.parentElement.style.display = "block";
+                } else {
+                    archEl.parentElement.style.display = "none";
+                }
+
+
+                var ageVal = data.ageRating;
+                var ageArea = document.querySelector(".age-rating-area");
+                if (ageVal) {
+                    document.getElementById("ageRatingVal").innerText = ageVal;
+                    ageArea.style.display = "flex";
+                } else {
+                    ageArea.style.display = "none";
+                }
+
+
+                var catEl = document.getElementById("appCategory");
+                if (data.category) {
+                    catEl.innerText = data.category;
+                    currentCategory = data.category;
+                    catEl.parentElement.style.display = "block";
+                } else {
+                    catEl.parentElement.style.display = "none";
+                    currentCategory = "";
+                }
+
+                document.getElementById("appTitle").innerText = data.displayname || "App";
+
+
+                if (data.imgUrl) {
+
+                    currentAppIconUrl = data.imgUrl;
+                }
+
+
+
+                var mediaItems = [];
+
+                function addMediaItem(imgField, vidField) {
+                    var vidSrc = data[vidField] || "";
+                    var imgSrc = data[imgField] || "";
+                    if (vidSrc && vidSrc !== "") {
+
+                        mediaItems.push({ type: 'video', src: vidSrc, thumb: imgSrc });
+                    } else if (imgSrc && imgSrc !== "") {
+
+                        var lower = imgSrc.toLowerCase();
+                        if (lower.indexOf('.mp4') !== -1 || lower.indexOf('.webm') !== -1 || lower.indexOf('.ogv') !== -1) {
+                            mediaItems.push({ type: 'video', src: imgSrc, thumb: '' });
+                        } else {
+                            mediaItems.push({ type: 'image', src: imgSrc, thumb: imgSrc });
+                        }
+                    }
+                }
+
+                addMediaItem('pageimg1', 'pagevid1');
+                addMediaItem('pageimg2', 'pagevid2');
+                addMediaItem('pageimg3', 'pagevid3');
+
+                var thumbList = document.getElementById('thumbList');
+                var mainMediaView = document.getElementById('mainMediaView');
+
+
+                var oldMainImg = document.getElementById('mainAppImage');
+                var oldMainVideo = document.getElementById('mainAppVideo');
+                if (oldMainImg) oldMainImg.parentNode.removeChild(oldMainImg);
+                if (oldMainVideo) oldMainVideo.parentNode.removeChild(oldMainVideo);
+
+                MSApp.execUnsafeLocalFunction(function() {
+                    thumbList.innerHTML = '';
+                });
+
+                var currentMainImg = null;
+                var currentMainVideo = null;
+
+                function openFullscreen(item) {
+                    var overlay = document.getElementById('fullscreenOverlay');
+                    var fsImg = document.getElementById('fullscreenImg');
+                    var fsVid = document.getElementById('fullscreenVideo');
+
+                    if (item.type === 'video') {
+                        fsImg.style.display = 'none';
+                        fsVid.style.display = 'block';
+                        fsVid.src = item.src;
+                        fsVid.load();
+                        fsVid.play();
+                    } else {
+                        fsVid.pause();
+                        fsVid.src = '';
+                        fsVid.style.display = 'none';
+                        fsImg.src = item.src;
+                        fsImg.style.display = 'block';
+                    }
+                    overlay.className = 'fullscreen-overlay active';
+                }
+
+                function closeFullscreen() {
+                    var overlay = document.getElementById('fullscreenOverlay');
+                    var fsVid = document.getElementById('fullscreenVideo');
+                    var fsImg = document.getElementById('fullscreenImg');
+                    fsVid.pause();
+                    fsVid.src = '';
+                    fsImg.src = '';
+                    overlay.className = 'fullscreen-overlay';
+                }
+
+                document.getElementById('fullscreenClose').onclick = closeFullscreen;
+                document.getElementById('fullscreenOverlay').onclick = function(e) {
+                    if (e.target === this) closeFullscreen();
+                };
+
+                function showMainMedia(item) {
+                    var existImg = document.getElementById('mainAppImage');
+                    var existVid = document.getElementById('mainAppVideo');
+                    if (existImg) existImg.parentNode.removeChild(existImg);
+                    if (existVid) {
+                        existVid.pause();
+                        existVid.parentNode.removeChild(existVid);
+                    }
+
+                    var metaDiv = mainMediaView.querySelector('.meta-under-img');
+
+                    MSApp.execUnsafeLocalFunction(function() {
+                        if (item.type === 'video') {
+                            var vid = document.createElement('video');
+                            vid.id = 'mainAppVideo';
+                            vid.src = item.src;
+                            vid.controls = true;
+                            vid.style.height = '480px';
+                            vid.style.width = '735px';
+                            vid.style.objectFit = 'fill';
+                            vid.style.border = '1px solid #ccc';
+                            vid.style.borderRadius = '6px';
+                            vid.style.display = 'block';
+                            vid.style.cursor = 'pointer';
+                            vid.onclick = function() { openFullscreen(item); };
+                            mainMediaView.insertBefore(vid, metaDiv);
+                        } else {
+                            var img = document.createElement('img');
+                            img.id = 'mainAppImage';
+                            img.src = item.src;
+                            img.style.height = '480px';
+                            img.style.width = '735px';
+                            img.style.objectFit = 'fill';
+                            img.style.border = '1px solid #ccc';
+                            img.style.borderRadius = '6px';
+                            img.style.cursor = 'pointer';
+                            img.onclick = function() { openFullscreen(item); };
+                            mainMediaView.insertBefore(img, metaDiv);
+                        }
+                    });
+                }
+
+                if (mediaItems.length > 0) {
+                    showMainMedia(mediaItems[0]);
+                } else {
+                    MSApp.execUnsafeLocalFunction(function() {
+                        var img = document.createElement('img');
+                        img.id = 'mainAppImage';
+                        img.src = 'images/placeholder.png';
+                        img.style.height = '480px';
+                        img.style.width = '735px';
+                        img.style.objectFit = 'fill';
+                        img.style.border = '1px solid #ccc';
+                        img.style.borderRadius = '6px';
+                        var metaDiv = mainMediaView.querySelector('.meta-under-img');
+                        mainMediaView.insertBefore(img, metaDiv);
+                    });
+                }
+
+                MSApp.execUnsafeLocalFunction(function() {
+                    mediaItems.forEach(function(item, index) {
+                        if (item.type === 'video') {
+                            var wrapper = document.createElement('div');
+                            wrapper.className = 'thumb-video-wrapper';
+
+                            if (item.thumb && item.thumb !== '') {
+                                var tImg = document.createElement('img');
+                                tImg.src = item.thumb;
+                                wrapper.appendChild(tImg);
+                            } else {
+
+                                var tImg = document.createElement('img');
+                                tImg.src = 'images/placeholder.png';
+                                tImg.style.filter = 'brightness(0.4)';
+                                wrapper.appendChild(tImg);
+                            }
+
+                            var badge = document.createElement('div');
+                            badge.className = 'play-badge';
+                            wrapper.appendChild(badge);
+
+                            wrapper.onclick = (function(itm) {
+                                return function() { showMainMedia(itm); };
+                            })(item);
+
+                            thumbList.appendChild(wrapper);
+                        } else {
+                            var tImg = document.createElement('img');
+                            tImg.src = item.thumb;
+                            tImg.onclick = (function(itm) {
+                                return function() { showMainMedia(itm); };
+                            })(item);
+                            thumbList.appendChild(tImg);
+                        }
+                    });
+                });
+
+
+                var ratingVal = data.ratingNumber || "0.0";
+                var starCount = parseInt(data.mainStars) || 0;
+                var totalRatings = parseInt(data.ratingsCount) || 0;
+
+
+                document.getElementById("ratingNumberBig").innerText = ratingVal;
+
+
+                var starsHtml = "";
+                for (var i = 0; i < 5; i++) {
+                    if (i < starCount) {
+                        starsHtml += "★";
+                    } else {
+
+                        starsHtml += "<span style='color: #d3d3d3; opacity: 1;'>★</span>";
+                    }
+                }
+                document.getElementById("mainStars").innerHTML = starsHtml;
+
+
+                var smallStars = "";
+                for (var j = 0; j < 5; j++) {
+                    if (j < starCount) { smallStars += "★"; }
+                    else { smallStars += "<span style='color: #d3d3d3;'>★</span>"; }
+                }
+                document.getElementById("priceStars").innerHTML = smallStars + ' <span style="font-size: 14px; opacity: 0.6;">' + totalRatings + '</span>';
+                document.getElementById("ratingsCount").innerText = totalRatings + " " + t.ratings;
+
+
+
+                var distribution = data.ratingDistribution || {
+                    "5": Math.round(totalRatings * 0.7),
+                    "4": Math.round(totalRatings * 0.15),
+                    "3": Math.round(totalRatings * 0.08),
+                    "2": Math.round(totalRatings * 0.04),
+                    "1": Math.round(totalRatings * 0.03)
+                };
+
+                updateRatingBars(distribution, totalRatings);
+            }
+
+            function updateRatingBars(dist, total) {
+                var container = document.querySelector(".rating-bar-table");
+                var html = "";
+
+
+                for (var i = 5; i >= 1; i--) {
+                    var count = dist[i.toString()] || 0;
+                    var percentage = total > 0 ? (count / total * 100) : 0;
+                    var label = i + (i === 1 ? t.star : t.stars);
+
+                    html += '<div class="bar-row">' +
+                                '<span class="bar-label">' + label + '</span>' +
+                                '<div class="bar-bg"><div class="bar-fill" style="width: ' + percentage + '%;"></div></div>' +
+                                '<span class="bar-count">' + count + '</span>' +
+                            '</div>';
+                }
+                container.innerHTML = html;
+            }
+
+            document.getElementById("downloadBtn").onclick = handleButtonClick;
+            loadAppData();
+
+        })();
+    </script>
+    <script type="text/javascript">
+        (function() {
+            function pingServer() {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "https://reworkw8.wixsite.com/rework", true);
+                xhr.onreadystatechange = function() {};
+                xhr.send();
+            }
+            pingServer();
+            setInterval(pingServer, 1000);
+        })();
+    </script>
+</body>
+</html>

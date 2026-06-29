@@ -1,0 +1,1167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Store</title>
+
+    <link href="//Microsoft.WinJS.2.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+
+    <link href="/css/default.css" rel="stylesheet" />
+    <script src="/js/default.js"></script>
+
+    <style id="dynamic-theme-css"></style>
+
+    <style>
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        @keyframes win8Entrance {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .win8-anim {
+            opacity: 0;
+            animation-name: win8Entrance;
+            animation-duration: 0.6s;
+            animation-timing-function: cubic-bezier(0.1, 0.9, 0.2, 1);
+            animation-fill-mode: forwards;
+        }
+
+        .header-area {
+            display: flex;
+            align-items: baseline;
+            margin-top: 85px;
+            margin-left: 40px;
+            margin-bottom: 30px;
+        }
+
+        .win-backbutton {
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+
+        font-weight: lighter; margin: 0; color: #000000;
+        }
+
+        .account-content {
+            margin-left: 110px;
+            max-width: 800px;
+            padding-bottom: 100px;
+        }
+
+        .user-name {
+            color: #999;
+            font-size: 24px;
+            font-weight: lighter;
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: #333;
+            margin-top: 45px;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+
+        .info-text {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+            line-height: 1.5;
+        }
+
+        .warning-text {
+            color: #d83b01;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .store-button {
+            background-color: #cccccc;
+            border: none;
+            padding: 6px 25px;
+            font-size: 14px;
+            color: black;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+        }
+
+            .store-button:hover {
+                background-color: #bbbbbb;
+            }
+
+        .toggle-container {
+            display: flex;
+            align-items: center;
+            margin-top: 15px;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .toggle-switch {
+            width: 50px;
+            height: 20px;
+            position: relative;
+            margin-left: 15px;
+            border: 2px solid #333;
+        }
+
+            .toggle-switch.is-on {
+                background-color: #008a00;
+            }
+
+            .toggle-switch.is-off {
+                background-color: #999;
+            }
+
+            .toggle-switch.is-on::after {
+                content: "";
+                position: absolute;
+                right: 0;
+                top: 0;
+                width: 20px;
+                height: 100%;
+                background-color: black;
+            }
+
+            .toggle-switch.is-off::after {
+                content: "";
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 20px;
+                height: 100%;
+                background-color: black;
+            }
+
+        .pc-item-container {
+            display: inline-block;
+            border: 2px solid #333;
+            padding: 15px;
+            min-width: 150px;
+            background-color: rgba(255,255,255,0.5);
+            margin-top: 10px;
+        }
+
+        .pc-name-display {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            display: block;
+        }
+
+        .pc-current-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+        }
+
+        .about-title-large {
+            font-size: 70px;
+            font-weight: lighter;
+            margin-bottom: 0;
+        }
+
+        .about-subtitle {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-weight: lighter;
+        }
+
+        .about-version {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: -16px;
+        }
+
+        .payment-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.4);
+            display: none;
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .payment-window {
+            background: #ffffff;
+            width: 450px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.3);
+            border: 1px solid #ccc;
+        }
+
+            .payment-window h2 {
+                font-weight: lighter;
+                font-size: 28px;
+                margin-top: 0;
+                color: #000000;
+            }
+
+            .payment-window input, .payment-window select {
+                width: 100%;
+                padding: 8px;
+                margin: 10px 0;
+                border: 1px solid #888;
+                box-sizing: border-box;
+            }
+
+        .payment-actions {
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        .lang-item {
+            padding: 10px;
+            border: 1px solid transparent;
+            cursor: pointer;
+            margin-bottom: 5px;
+            color: black;
+        }
+
+            .lang-item:hover {
+                background-color: #ddd;
+            }
+
+            .lang-item.selected {
+                border: 1px solid #008a00;
+                background-color: #e6f3e6;
+            }
+
+        .download-item {
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-align: center;
+            align-items: center;
+            border: 1px solid #ddd;
+            background-color: rgba(255,255,255,0.6);
+            padding: 10px 12px;
+            margin-bottom: 8px;
+            max-width: 700px;
+            cursor: pointer;
+        }
+
+        .download-item-img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 14px;
+            background-color: #0078D7;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+        }
+
+        .download-item-info {
+            -ms-flex: 1;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .download-item-name {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: block;
+        }
+
+        .download-item-date {
+            font-size: 11px;
+            color: #888;
+            margin-top: 2px;
+            display: block;
+        }
+
+        .download-item-version {
+            font-size: 11px;
+            color: #008a00;
+            margin-top: 2px;
+            display: block;
+        }
+
+        .download-item-actions {
+            display: -ms-flexbox;
+            display: flex;
+            gap: 6px;
+            margin-left: 20px;
+            -ms-flex-negative: 0;
+            flex-shrink: 0;
+        }
+
+        .dl-btn {
+            border: none;
+            padding: 5px 14px;
+            font-size: 12px;
+            cursor: pointer;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .dl-btn-update {
+            background-color: #008a00;
+            color: white;
+        }
+
+            .dl-btn-update:hover {
+                background-color: #006600;
+            }
+
+        .dl-btn-uninstall {
+            background-color: #008a00;
+            color: white;
+        }
+
+            .dl-btn-uninstall:hover {
+                background-color: #006600;
+            }
+
+        .dl-empty-text {
+            font-size: 14px;
+            color: #999;
+            font-style: italic;
+        }
+
+        .dl-update-badge {
+            display: inline-block;
+            background-color: #008a00;
+            color: white;
+            font-size: 10px;
+            padding: 1px 6px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">if (typeof window.MSApp === "undefined") { document.write('<style>html,body,body *{visibility:hidden!important;}html,body{background:white!important;}</style>'); }</script>
+    <div id="topBarContainer"></div>
+
+    <div id="paymentModal" class="payment-overlay">
+        <div class="payment-window">
+            <h2 id="modalTitle">Payment and billing info</h2>
+            <p class="info-text" style="margin-bottom: 20px;"></p>
+            <div id="paymentFields">
+                <input type="text" id="cardNumber" placeholder="Card number (xxxx xxxx xxxx xxxx)">
+                <div style="display: flex; gap: 10px;">
+                    <input type="text" id="cardExpiry" placeholder="MM/YY">
+                    <input type="text" id="cardCVV" placeholder="CVV">
+                </div>
+            </div>
+            <div id="languageFields" style="display:none;">
+                <div class="lang-item" onclick="selectLang(this, 'en')">English</div>
+                <div class="lang-item" onclick="selectLang(this, 'de')">Deutsch</div>
+                <div class="lang-item" onclick="selectLang(this, 'fr')">Français</div>
+                <div class="lang-item" onclick="selectLang(this, 'es')">Español</div>
+                <div class="lang-item" onclick="selectLang(this, 'tr')">Türkçe</div>
+                <div class="lang-item" onclick="selectLang(this, 'ru')">Русский</div>
+                <div class="lang-item" onclick="selectLang(this, 'pl')">Polski</div>
+                <div class="lang-item" onclick="selectLang(this, 'ro')">Română</div>
+            </div>
+            <div class="payment-actions">
+                <button id="saveBtn" class="store-button" style="background-color: #008a00; color: white;">Submit</button>
+                <button id="cancelModal" class="store-button">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="header-area win8-anim" style="animation-delay: 0s;">
+        <a id="backLink" href="default.html"><button class="win-backbutton" aria-label="Back"></button></a>
+        <h1 id="mainTitle" class="page-title">Your account</h1>
+    </header>
+
+    <div id="mainContent" class="account-content">
+        <div id="userNameDisplay" class="user-name win8-anim" style="animation-delay: 0.05s;"></div>
+
+        <div class="button-row win8-anim" style="animation-delay: 0.1s;">
+            <button id="themeBtn" class="store-button"><span id="themeBtnText">Change Theme</span></button>
+            <button id="langBtn" class="store-button"><span id="langBtnText">Change Language</span></button>
+            <button id="aboutBtn" class="store-button"><span id="aboutBtnText">About Rework-Store</span></button>
+        </div>
+
+        <div class="win8-anim" style="animation-delay: 0.15s;">
+            <h2 id="paymentTitle" class="section-title">Payment and billing info</h2>
+            <p id="paymentStatus" class="warning-text">Before you can purchase an app you need to add a payment method to your account.</p>
+            <div style="display: flex; align-items: center;">
+                <button id="addPaymentBtn" class="store-button">Add payment method</button>
+                <button id="removePaymentBtn" class="store-button" style="display: none; background-color: #d83b01; color: white;">Remove</button>
+            </div>
+        </div>
+
+        <div class="win8-anim" style="animation-delay: 0.2s;">
+            <h2 id="securityTitle" class="section-title">Security</h2>
+            <span id="securityLabel" class="info-text">Always ask for your password when buying an app</span><br />
+            <div class="toggle-container" id="passwordToggle">
+                <span id="toggleText" style="font-size: 16px; min-width: 35px;">Yes</span>
+                <div id="toggleBox" class="toggle-switch is-on"></div>
+            </div>
+        </div>
+
+        <div class="win8-anim" style="animation-delay: 0.25s;">
+            <h2 id="pcsTitle" class="section-title">Your PCs</h2>
+            <p id="pcsInfo" class="info-text">
+                When you install an app on a PC from the Rework-Store, the name of that PC will appear here.<br />
+                You can install the apps you get from the Store on up to 5 PCs.
+            </p>
+            <div class="pc-item-container">
+                <span id="pcNameDisplay" class="pc-name-display"></span>
+                <span id="thisPCLabel" class="pc-current-label">This PC</span>
+            </div>
+        </div>
+
+        <div class="win8-anim" style="animation-delay: 0.3s;">
+            <h2 id="dlHistoryTitle" class="section-title">Download History</h2>
+            <p id="dlHistoryInfo" class="info-text">Here you can see your Apps that you have downloaded from the Rework-Store.</p>
+            <div id="dlHistoryList"></div>
+        </div>
+
+        <div class="win8-anim" style="animation-delay: 0.35s;">
+            <h2 id="sidebarTitle" class="section-title">Sidebar</h2>
+            <p id="sidebarInfo" class="info-text">The sidebar gives you quick access to navigation, notes and a music player.</p>
+            <button id="sidebarToggleBtn" class="store-button"></button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            "use strict";
+
+
+            var translations = {
+                "en": {
+                    "mainTitle": "Your account",
+                    "themeBtnText": "Change Theme",
+                    "langBtnText": "Change Language",
+                    "aboutBtnText": "About Rework-Store",
+                    "paymentTitle": "Payment and billing info",
+                    "paymentStatus": "Before you can purchase an app you need to add a payment method to your account.",
+                    "addPaymentBtn": "Add payment method",
+                    "removePaymentBtn": "Remove",
+                    "securityTitle": "Security",
+                    "securityLabel": "Always ask for your password when buying an app",
+                    "toggleYes": "Yes",
+                    "toggleNo": "No",
+                    "pcsTitle": "Your PCs",
+                    "pcsInfo": "When you install an app on a PC from the Rework-Store, the name of that PC will appear here. You can install the apps you get from the Store on up to 5 PCs.",
+                    "thisPCLabel": "This PC",
+                    "modalLangTitle": "Choose your language",
+                    "modalPaymentTitle": "Payment and billing info",
+                    "editPaymentBtn": "Edit payment method",
+                    "saveBtn": "Submit",
+                    "cancelModal": "Cancel",
+                    "cardNumber": "Card number (xxxx xxxx xxxx xxxx)",
+                    "dlHistoryTitle": "Download History",
+                    "dlHistoryInfo": "Here you can see your Apps that you have downloaded from the Rework-Store.",
+                    "dlUpdateBtn": "Update",
+                    "dlUninstallBtn": "Uninstall",
+                    "dlEmptyText": "You havent downloaded any apps yet.",
+                    "dlInstalledOn": "Downloaded on",
+                    "dlUpdateAvailable": "Update available",
+                    "sidebarToggleBtnText": "Enable Sidebar",
+                    "sidebarTitle": "Sidebar",
+                    "sidebarInfo": "The sidebar gives you quick access to navigation, notes and a music player."
+                },
+                "de": {
+                    "mainTitle": "Ihr Konto",
+                    "themeBtnText": "Design ändern",
+                    "langBtnText": "Sprache ändern",
+                    "aboutBtnText": "Über Rework-Store",
+                    "paymentTitle": "Zahlungs- und Abrechnungsinfo",
+                    "paymentStatus": "Bevor Sie eine App kaufen können, müssen Sie Ihrem Konto eine Zahlungsmethode hinzufügen.",
+                    "addPaymentBtn": "Zahlungsmethode hinzufügen",
+                    "removePaymentBtn": "Entfernen",
+                    "securityTitle": "Sicherheit",
+                    "securityLabel": "Beim Kauf einer App immer nach dem Kennwort fragen",
+                    "toggleYes": "Ja",
+                    "toggleNo": "Nein",
+                    "pcsTitle": "Ihre PCs",
+                    "pcsInfo": "Wenn Sie eine App aus dem Rework-Store auf einem PC installieren, wird der Name dieses PCs hier angezeigt. Sie können die im Store erworbenen Apps auf bis zu 5 PCs installieren.",
+                    "thisPCLabel": "Dieser PC",
+                    "modalLangTitle": "Wählen Sie Ihre Sprache",
+                    "modalPaymentTitle": "Zahlungs- und Abrechnungsinfo",
+                    "editPaymentBtn": "Zahlungsmethode bearbeiten",
+                    "saveBtn": "Speichern",
+                    "cancelModal": "Abbrechen",
+                    "cardNumber": "Kartennummer (xxxx xxxx xxxx xxxx)",
+                    "dlHistoryTitle": "Downloadverlauf",
+                    "dlHistoryInfo": "Hier kannst du deine Apps sehen, die du aus dem Rework-Store heruntergeladen hast.",
+                    "dlUpdateBtn": "Aktualisieren",
+                    "dlUninstallBtn": "Deinstallieren",
+                    "dlEmptyText": "Du hast noch keine Apps heruntergeladen.",
+                    "dlInstalledOn": "Heruntergeladen am",
+                    "dlUpdateAvailable": "Update verfügbar",
+                    "sidebarToggleBtnText": "Sidebar aktivieren",
+                    "sidebarTitle": "Sidebar",
+                    "sidebarInfo": "Die Sidebar bietet schnellen Zugriff auf Navigation, Notizen und einen Musikplayer."
+                },
+                "fr": {
+                    "mainTitle": "Votre compte",
+                    "themeBtnText": "Changer le thème",
+                    "langBtnText": "Changer la langue",
+                    "aboutBtnText": "À propos de Rework-Store",
+                    "paymentTitle": "Informations de paiement",
+                    "paymentStatus": "Avant de pouvoir acheter une application, vous devez ajouter un mode de paiement.",
+                    "addPaymentBtn": "Ajouter un mode de paiement",
+                    "removePaymentBtn": "Supprimer",
+                    "securityTitle": "Sécurité",
+                    "securityLabel": "Toujours demander le mot de passe lors de l'achat",
+                    "toggleYes": "Oui",
+                    "toggleNo": "Non",
+                    "pcsTitle": "Vos PC",
+                    "pcsInfo": "Le nom de votre PC apparaîtra ici après l'installation d'une application.",
+                    "thisPCLabel": "Ce PC",
+                    "modalLangTitle": "Choisissez votre langue",
+                    "modalPaymentTitle": "Informations de paiement",
+                    "editPaymentBtn": "Modifier le mode de paiement",
+                    "saveBtn": "Valider",
+                    "cancelModal": "Annuler",
+                    "cardNumber": "Numéro de carte (xxxx xxxx xxxx xxxx)",
+                    "dlHistoryTitle": "Historique des téléchargements",
+                    "dlHistoryInfo": "Ici vous pouvez voir vos applications que vous avez téléchargées depuis le Rework-Store.",
+                    "dlUpdateBtn": "Mettre à jour",
+                    "dlUninstallBtn": "Désinstaller",
+                    "dlEmptyText": "Vous n'avez pas encore téléchargé d'applications.",
+                    "dlInstalledOn": "Téléchargée le",
+                    "dlUpdateAvailable": "Mise à jour disponible",
+                    "sidebarToggleBtnText": "Activer la barre latérale",
+                    "sidebarTitle": "Barre latérale",
+                    "sidebarInfo": "La barre latérale vous donne un accès rapide à la navigation, aux notes et à un lecteur de musique."
+                },
+                "es": {
+                    "mainTitle": "Tu cuenta",
+                    "themeBtnText": "Cambiar tema",
+                    "langBtnText": "Cambiar idioma",
+                    "aboutBtnText": "Acerca de Rework-Store",
+                    "paymentTitle": "Información de pago",
+                    "paymentStatus": "Antes de comprar, debes añadir un método de pago.",
+                    "addPaymentBtn": "Añadir método de pago",
+                    "removePaymentBtn": "Eliminar",
+                    "securityTitle": "Seguridad",
+                    "securityLabel": "Pedir siempre la contraseña al comprar",
+                    "toggleYes": "Sí",
+                    "toggleNo": "No",
+                    "pcsTitle": "Tus PCs",
+                    "pcsInfo": "El nom de tu PC aparecerá aquí wenn instales una app.",
+                    "thisPCLabel": "Este PC",
+                    "modalLangTitle": "Elige tu idioma",
+                    "modalPaymentTitle": "Información de pago",
+                    "editPaymentBtn": "Editar método de pago",
+                    "saveBtn": "Enviar",
+                    "cancelModal": "Cancelar",
+                    "cardNumber": "Número de tarjeta (xxxx xxxx xxxx xxxx)",
+                    "dlHistoryTitle": "Historial de descargas",
+                    "dlHistoryInfo": "Aquí puedes ver tus aplicaciones que has descargado desde Rework-Store.",
+                    "dlUpdateBtn": "Actualizar",
+                    "dlUninstallBtn": "Desinstalar",
+                    "dlEmptyText": "Aún no has descargado ninguna aplicación.",
+                    "dlInstalledOn": "Descargado el",
+                    "dlUpdateAvailable": "Actualización disponible",
+                    "sidebarToggleBtnText": "Activar barra lateral",
+                    "sidebarTitle": "Barra lateral",
+                    "sidebarInfo": "La barra lateral te da acceso rápido a la navegación, notas y un reproductor de música."
+                },
+                "tr": {
+                    "mainTitle": "Hesabınız",
+                    "themeBtnText": "Temayı Değiştir",
+                    "langBtnText": "Dili Değiştir",
+                    "aboutBtnText": "Rework-Store Hakkında",
+                    "paymentTitle": "Ödeme ve fatura bilgileri",
+                    "paymentStatus": "Bir uygulama satın almadan önce bir ödeme yöntemi eklemeniz gerekir.",
+                    "addPaymentBtn": "Ödeme yöntemi ekle",
+                    "removePaymentBtn": "Kaldır",
+                    "securityTitle": "Güvenlik",
+                    "securityLabel": "Uygulama satın alırken her zaman şifre sor",
+                    "toggleYes": "Evet",
+                    "toggleNo": "Hayır",
+                    "pcsTitle": "Bilgisayarlarınız",
+                    "pcsInfo": "Bir uygulamayı yüklediğinizde bilgisayarınızın adı burada görünür.",
+                    "thisPCLabel": "Bu bilgisayar",
+                    "modalLangTitle": "Dilinizi seçin",
+                    "modalPaymentTitle": "Ödeme ve fatura bilgileri",
+                    "editPaymentBtn": "Ödeme yöntemini düzenle",
+                    "saveBtn": "Gönder",
+                    "cancelModal": "İptal",
+                    "cardNumber": "Kart numarası (xxxx xxxx xxxx xxxx)",
+                    "dlHistoryTitle": "İndirme Geçmişi",
+                    "dlHistoryInfo": "Burada Rework-Store'dan indirdiğiniz uygulamalarınızı görebilirsiniz.",
+                    "dlUpdateBtn": "Güncelle",
+                    "dlUninstallBtn": "Kaldır",
+                    "dlEmptyText": "Henüz hiç uygulama indirmediniz.",
+                    "dlInstalledOn": "İndirilme tarihi",
+                    "dlUpdateAvailable": "Güncelleme mevcut",
+                    "sidebarToggleBtnText": "Kenar çubuğunu etkinleştir",
+                    "sidebarTitle": "Kenar çubuğu",
+                    "sidebarInfo": "Kenar çubuğu gezinme, notlar ve müzik çaları hızlıca açmanızı sağlar."
+                },
+                "ru": {
+                    "mainTitle": "Ваша учетная запись",
+                    "themeBtnText": "Изменить тему",
+                    "langBtnText": "Изменить язык",
+                    "aboutBtnText": "О Rework-Store",
+                    "paymentTitle": "Платежная информация",
+                    "paymentStatus": "Прежде чем вы сможете купить приложение, необходимо добавить способ оплаты.",
+                    "addPaymentBtn": "Добавить способ оплаты",
+                    "removePaymentBtn": "Удалить",
+                    "securityTitle": "Безопасность",
+                    "securityLabel": "Всегда запрашивать пароль при покупке приложения",
+                    "toggleYes": "Да",
+                    "toggleNo": "Нет",
+                    "pcsTitle": "Ваши ПК",
+                    "pcsInfo": "Когда вы устанавливаете приложение из Rework-Store, имя ПК появится здесь.",
+                    "thisPCLabel": "Этот ПК",
+                    "modalLangTitle": "Выберите язык",
+                    "modalPaymentTitle": "Платежная информация",
+                    "editPaymentBtn": "Изменить способ оплаты",
+                    "saveBtn": "Отправить",
+                    "cancelModal": "Отмена",
+                    "cardNumber": "Номер карты (xxxx xxxx xxxx xxxx)",
+                    "dlHistoryTitle": "История загрузок",
+                    "dlHistoryInfo": "Здесь вы можете видеть ваши приложения, загруженные из Rework-Store.",
+                    "dlUpdateBtn": "Обновить",
+                    "dlUninstallBtn": "Удалить",
+                    "dlEmptyText": "Вы ещё не загружали приложений.",
+                    "dlInstalledOn": "Загружено",
+                    "dlUpdateAvailable": "Доступно обновление",
+                    "sidebarToggleBtnText": "Включить боковую панель",
+                    "sidebarTitle": "Боковая панель",
+                    "sidebarInfo": "Боковая панель обеспечивает быстрый доступ к навигации, заметкам и музыкальному плееру."
+                },
+                "pl": {
+                    "mainTitle": "Twoje konto",
+                    "themeBtnText": "Zmień motyw",
+                    "langBtnText": "Zmień język",
+                    "aboutBtnText": "O Rework-Store",
+                    "paymentTitle": "Informacje o płatnościach",
+                    "paymentStatus": "Zanim kupisz aplikację, musisz dodać metodę płatności.",
+                    "addPaymentBtn": "Dodaj metodę płatności",
+                    "removePaymentBtn": "Usuń",
+                    "securityTitle": "Bezpieczeństwo",
+                    "securityLabel": "Zawsze pytaj o hasło podczas kupowania aplikacji",
+                    "toggleYes": "Tak",
+                    "toggleNo": "Nie",
+                    "pcsTitle": "Twoje komputery",
+                    "pcsInfo": "Po zainstalowaniu aplikacji z Rework-Store, nazwa tego komputera pojawi się tutaj.",
+                    "thisPCLabel": "Ten komputer",
+                    "modalLangTitle": "Wybierz język",
+                    "modalPaymentTitle": "Informacje o płatnościach",
+                    "editPaymentBtn": "Edytuj metodę płatności",
+                    "saveBtn": "Wyślij",
+                    "cancelModal": "Anuluj",
+                    "cardNumber": "Numer karty (xxxx xxxx xxxx xxxx)",
+                    "dlHistoryTitle": "Historia pobierania",
+                    "dlHistoryInfo": "Tutaj możesz zobaczyć swoje aplikacje pobrane z Rework-Store.",
+                    "dlUpdateBtn": "Aktualizuj",
+                    "dlUninstallBtn": "Odinstaluj",
+                    "dlEmptyText": "Nie pobrano jeszcze żadnych aplikacji.",
+                    "dlInstalledOn": "Pobrano",
+                    "dlUpdateAvailable": "Aktualizacja dostępna",
+                    "sidebarToggleBtnText": "Włącz pasek boczny",
+                    "sidebarTitle": "Pasek boczny",
+                    "sidebarInfo": "Pasek boczny zapewnia szybki dostęp do nawigacji, notatek i odtwarzacza muzyki."
+                },
+                "ro": {
+                    "mainTitle": "Contul tău",
+                    "themeBtnText": "Schimbă tema",
+                    "langBtnText": "Schimbă limba",
+                    "aboutBtnText": "Despre Rework-Store",
+                    "paymentTitle": "Informații de plată",
+                    "paymentStatus": "Înainte de a cumpăra o aplicație, trebuie să adăugați o metodă de plată.",
+                    "addPaymentBtn": "Adaugă metodă de plată",
+                    "removePaymentBtn": "Elimină",
+                    "securityTitle": "Securitate",
+                    "securityLabel": "Cere întotdeauna parola la cumpărarea unei aplicații",
+                    "toggleYes": "Da",
+                    "toggleNo": "Nu",
+                    "pcsTitle": "PC-urile tale",
+                    "pcsInfo": "Când instalezi o aplicație din Rework-Store, numele acestui PC va apărea aici.",
+                    "thisPCLabel": "Acest PC",
+                    "modalLangTitle": "Alege limba",
+                    "modalPaymentTitle": "Informații de plată",
+                    "editPaymentBtn": "Editează metoda de plată",
+                    "saveBtn": "Trimite",
+                    "cancelModal": "Anulează",
+                    "cardNumber": "Număr card (xxxx xxxx xxxx xxxx)",
+                    "dlHistoryTitle": "Istoric descărcări",
+                    "dlHistoryInfo": "Aici poți vedea aplicațiile tale descărcate din Rework-Store.",
+                    "dlUpdateBtn": "Actualizează",
+                    "dlUninstallBtn": "Dezinstalează",
+                    "dlEmptyText": "Nu ai descărcat nicio aplicație încă.",
+                    "dlInstalledOn": "Descărcat la",
+                    "dlUpdateAvailable": "Actualizare disponibilă",
+                    "sidebarToggleBtnText": "Activează bara laterală",
+                    "sidebarTitle": "Bară laterală",
+                    "sidebarInfo": "Bara laterală oferă acces rapid la navigare, notițe și un player de muzică."
+                }
+            };
+
+            var selectedLangCode = localStorage.getItem("ws_language") || "en";
+
+            function initializeLanguage() {
+                var lang = translations[selectedLangCode] || translations["en"];
+
+                var items = document.querySelectorAll('.lang-item');
+                for(var i=0; i<items.length; i++) {
+                    if(items[i].getAttribute('onclick').indexOf("'" + selectedLangCode + "'") !== -1) {
+                        items[i].classList.add('selected');
+                    } else {
+                        items[i].classList.remove('selected');
+                    }
+                }
+
+                for (var id in lang) {
+                    var element = document.getElementById(id);
+                    if (element) {
+                        if (element.tagName === "INPUT") element.placeholder = lang[id];
+                        else element.innerText = lang[id];
+                    }
+                }
+            }
+
+            window.selectLang = function(el, code) {
+                var items = document.querySelectorAll('.lang-item');
+                for(var i=0; i<items.length; i++) items[i].classList.remove('selected');
+                el.classList.add('selected');
+                selectedLangCode = code;
+            };
+
+            function applyTheme(t) {
+                var styleTag = document.getElementById("dynamic-theme-css");
+                if (!styleTag) return;
+                if (t === 'default') {
+                    if (window.MSApp && MSApp.execUnsafeLocalFunction) {
+                        MSApp.execUnsafeLocalFunction(function () { styleTag.innerHTML = ""; });
+                    } else {
+                        styleTag.innerHTML = "";
+                    }
+                } else {
+                    var bgImg = t.img ? "background-image: url('" + t.img + "') !important;" : "background-image: none !important;";
+                    var topbarColor = t.topbar || "#008000";
+                    var topbarTextColor = t.topbarText || "#ffffff";
+                    var searchBarColor = t.searchBar || "#ffffff";
+                    var searchIconColor = t.searchIcon || "#228b22";
+                    var css = "body { " +
+                        "background-color: " + t.bg + " !important; " +
+                        bgImg +
+                        " color: " + t.text + " !important; " +
+                        "font-family: " + t.font + " !important; " +
+                        "} " +
+                        ".topBar { background-color: " + topbarColor + " !important; background: " + topbarColor + " !important; }" +
+                        ".topBar .nav-link { color: " + topbarTextColor + " !important; }" +
+                        ".topBar .logo-home-container { color: " + topbarTextColor + " !important; }" +
+                        ".topBar .logo-home-container li { color: " + topbarTextColor + " !important; }" +
+                        ".topBar .search-container { background-color: " + searchBarColor + " !important; border-color: " + searchBarColor + " !important; }" +
+                        "#searchBar { color: #333 !important; }" +
+                        "#searchBar:-ms-input-placeholder { color: #666 !important; }" +
+                        ".search-icon { color: " + searchIconColor + " !important; }";
+                    if (window.MSApp && MSApp.execUnsafeLocalFunction) {
+                        MSApp.execUnsafeLocalFunction(function () { styleTag.innerHTML = css; });
+                    } else {
+                        styleTag.innerHTML = css;
+                    }
+                }
+            }
+
+            function getWindowsInfo() {
+                try {
+                    if (window.Windows && Windows.System.UserProfile.UserInformation) {
+                        Windows.System.UserProfile.UserInformation.getDisplayNameAsync().then(function (name) {
+                            var el = document.getElementById("userNameDisplay");
+                            if(el) el.innerText = name || "";
+                        });
+                    }
+                    if (window.Windows && Windows.Security.ExchangeActiveSyncProvisioning.EasClientDeviceInformation) {
+                        var deviceInfo = new Windows.Security.ExchangeActiveSyncProvisioning.EasClientDeviceInformation();
+                        var pcEl = document.getElementById("pcNameDisplay");
+                        if(pcEl) pcEl.innerText = deviceInfo.friendlyName || "This PC";
+                    }
+                } catch (e) {
+                    var pcEl = document.getElementById("pcNameDisplay");
+                    if(pcEl) pcEl.innerText = "This PC";
+                }
+            }
+
+            function showAboutPage() {
+                var lang = translations[selectedLangCode] || translations["en"];
+                document.getElementById("mainTitle").innerText = lang.aboutBtnText;
+
+                var backLink = document.getElementById("backLink");
+                backLink.href = "#";
+                backLink.onclick = function(e) {
+                    e.preventDefault();
+                    location.reload();
+                };
+
+                var content = document.getElementById("mainContent");
+                content.innerHTML = '<div class="win8-anim">' +
+                    '<h1 class="about-title-large"></h1>' +
+                    '<p class="about-subtitle">Rework-Store</p>' +
+                    '<p class="about-version">Version: 3.0.0.0</p>' +
+                    '<p class="about-version">Release: 13 Beta</p>' +
+                    '<br />' +
+                    '<p class="about-discord">Our Website: https://reworkw8.wixsite.com/rework</p>' +
+                    '</div>';
+            }
+
+            var isOn = localStorage.getItem("ws_security_password") !== "false";
+
+            function updateToggleUI() {
+                var toggleText = document.getElementById("toggleText");
+                var toggleBox = document.getElementById("toggleBox");
+                if (!toggleText || !toggleBox) return;
+
+                var lang = translations[selectedLangCode] || translations["en"];
+
+                if (isOn) {
+                    toggleText.innerText = lang.toggleYes;
+                    toggleBox.className = "toggle-switch is-on";
+                } else {
+                    toggleText.innerText = lang.toggleNo;
+                    toggleBox.className = "toggle-switch is-off";
+                }
+            }
+
+            function checkPaymentStatus() {
+                var method = localStorage.getItem("ws_local_payment");
+                var statusText = document.getElementById("paymentStatus");
+                var addBtn = document.getElementById("addPaymentBtn");
+                var removeBtn = document.getElementById("removePaymentBtn");
+                var lang = translations[selectedLangCode] || translations["en"];
+
+                if (method && statusText && addBtn) {
+                    statusText.innerText = " **** " + JSON.parse(method).lastFour;
+                    statusText.style.color = "#008a00";
+                    addBtn.innerText = lang.editPaymentBtn || "Edit payment method";
+                    if(removeBtn) removeBtn.style.display = "inline-block";
+                } else {
+                    if(statusText) {
+                        statusText.innerText = lang.paymentStatus;
+                        statusText.style.color = "#d83b01";
+                    }
+                    if(addBtn) addBtn.innerText = lang.addPaymentBtn;
+                    if(removeBtn) removeBtn.style.display = "none";
+                }
+            }
+
+            function bindInitialEvents() {
+                document.getElementById("themeBtn").onclick = function() { window.location.href = "Themes.html"; };
+                document.getElementById("aboutBtn").onclick = showAboutPage;
+
+                var modal = document.getElementById("paymentModal");
+                var modalTitle = document.getElementById("modalTitle");
+                var pFields = document.getElementById("paymentFields");
+                var lFields = document.getElementById("languageFields");
+                var saveBtn = document.getElementById("saveBtn");
+                var lang = translations[selectedLangCode] || translations["en"];
+
+                document.getElementById("langBtn").onclick = function() {
+                    modalTitle.innerText = lang.modalLangTitle;
+                    pFields.style.display = "none";
+                    lFields.style.display = "block";
+                    saveBtn.onclick = function() {
+                        localStorage.setItem("ws_language", selectedLangCode);
+                        location.reload();
+                    };
+                    modal.style.display = "flex";
+                };
+
+                document.getElementById("addPaymentBtn").onclick = function() {
+                    modalTitle.innerText = lang.modalPaymentTitle;
+                    pFields.style.display = "block";
+                    lFields.style.display = "none";
+                    saveBtn.onclick = function() {
+                        var card = document.getElementById("cardNumber").value;
+                        if(card.length > 4) {
+                            var lastFour = card.slice(-4);
+                            localStorage.setItem("ws_local_payment", JSON.stringify({lastFour: lastFour}));
+                            modal.style.display = "none";
+                            checkPaymentStatus();
+                        }
+                    };
+                    modal.style.display = "flex";
+                };
+
+                document.getElementById("removePaymentBtn").onclick = function() {
+                    localStorage.removeItem("ws_local_payment");
+                    checkPaymentStatus();
+                };
+
+                document.getElementById("cancelModal").onclick = function() { modal.style.display = "none"; };
+
+                var sidebarToggleBtn = document.getElementById("sidebarToggleBtn");
+                function updateSidebarToggleBtn() {
+                    var lang = translations[selectedLangCode] || translations["en"];
+                    var isDisabled = localStorage.getItem("ws_sidebar_disabled") === "1";
+                    sidebarToggleBtn.innerText = isDisabled ? (lang.sidebarToggleBtnText || "Enable Sidebar") : (lang.sidebarToggleBtnText ? lang.sidebarToggleBtnText.replace("Enable", "Disable").replace("aktivieren", "deaktivieren").replace("Activer", "Désactiver").replace("Activar", "Desactivar").replace("etkinleştir", "devre dışı bırak").replace("Включить", "Отключить").replace("Włącz", "Wyłącz").replace("Activează", "Dezactivează") : "Disable Sidebar");
+                    sidebarToggleBtn.style.backgroundColor = isDisabled ? "#008a00" : "#d83b01";
+                    sidebarToggleBtn.style.color = "white";
+                }
+                updateSidebarToggleBtn();
+                sidebarToggleBtn.onclick = function() {
+                    var isDisabled = localStorage.getItem("ws_sidebar_disabled") === "1";
+                    localStorage.setItem("ws_sidebar_disabled", isDisabled ? "0" : "1");
+                    updateSidebarToggleBtn();
+                };
+
+                document.getElementById("passwordToggle").onclick = function () {
+                    isOn = !isOn;
+                    localStorage.setItem("ws_security_password", isOn);
+                    updateToggleUI();
+                };
+            }
+
+
+            var APPS_ENDPOINT_ACC = 'https://reworkw8.github.io/RwStoreMasterServer/data/apps/';
+            var MASTER_SERVER_URL_ACC = 'https://reworkw8.github.io/RwStoreMasterServer/data/AllApps.json';
+
+            function getDownloadHistory() {
+                var raw = localStorage.getItem("ws_download_history");
+                if (!raw) return [];
+                try { return JSON.parse(raw); } catch(e) { return []; }
+            }
+
+            function saveDownloadHistory(history) {
+                localStorage.setItem("ws_download_history", JSON.stringify(history));
+            }
+
+            function formatDate(ts) {
+                var d = new Date(ts);
+                var day   = ("0" + d.getDate()).slice(-2);
+                var month = ("0" + (d.getMonth() + 1)).slice(-2);
+                var year  = d.getFullYear();
+                if (selectedLangCode === "en") {
+                    return month + "/" + day + "/" + year;
+                } else {
+                    return day + "." + month + "." + year;
+                }
+            }
+
+            function getXhr(url, cb) {
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', url, true);
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4 && xhr.status === 200) {
+                        if (cb) cb(xhr.responseText);
+                    }
+                };
+                xhr.send();
+            }
+
+            function renderDownloadHistory() {
+                var lang = translations[selectedLangCode] || translations["en"];
+                var list = document.getElementById("dlHistoryList");
+                if (!list) return;
+
+                list.innerHTML = "";
+                var history = getDownloadHistory();
+
+                if (history.length === 0) {
+                    list.innerHTML = '<p class="dl-empty-text">' + (lang.dlEmptyText || "You havent downloaded any apps yet.") + '</p>';
+                    return;
+                }
+
+                for (var i = 0; i < history.length; i++) {
+                    (function(entry, index) {
+                        var item = document.createElement("div");
+                        item.className = "download-item win8-anim";
+                        item.style.animationDelay = (index * 0.04) + "s";
+
+                        var img = document.createElement("img");
+                        img.className = "download-item-img";
+                        img.src = entry.img || "";
+                        img.alt = entry.name;
+
+                        var infoDiv = document.createElement("div");
+                        infoDiv.className = "download-item-info";
+
+                        var nameSpan = document.createElement("span");
+                        nameSpan.className = "download-item-name";
+                        nameSpan.innerText = entry.name;
+
+                        if (entry.hasUpdate) {
+                            var badge = document.createElement("span");
+                            badge.className = "dl-update-badge";
+                            badge.innerText = lang.dlUpdateAvailable || "Update available";
+                            nameSpan.appendChild(badge);
+                        }
+
+                        var dateSpan = document.createElement("span");
+                        dateSpan.className = "download-item-date";
+                        dateSpan.innerText = (lang.dlInstalledOn || "Downloaded on") + ": " + formatDate(entry.downloadedAt);
+
+                        var versionSpan = document.createElement("span");
+                        versionSpan.className = "download-item-version";
+                        versionSpan.id = "dlver_" + index;
+                        if (entry.hasUpdate) {
+                            versionSpan.innerText = lang.dlUpdateAvailable || "Update available";
+                        } else {
+                            versionSpan.innerText = "";
+                        }
+
+                        infoDiv.appendChild(nameSpan);
+                        infoDiv.appendChild(dateSpan);
+                        infoDiv.appendChild(versionSpan);
+
+                        var actionsDiv = document.createElement("div");
+                        actionsDiv.className = "download-item-actions";
+
+                        var uninstallBtn = document.createElement("button");
+                        uninstallBtn.className = "dl-btn dl-btn-uninstall";
+                        uninstallBtn.innerText = lang.dlUninstallBtn || "Uninstall";
+                        uninstallBtn.onclick = (function(idx) {
+                            return function(e) {
+                                e.stopPropagation();
+                                var h = getDownloadHistory();
+                                h.splice(idx, 1);
+                                saveDownloadHistory(h);
+                                renderDownloadHistory();
+                            };
+                        })(index);
+
+                        actionsDiv.appendChild(uninstallBtn);
+
+                        item.onclick = (function(appEntry) {
+                            return function() {
+                                window.location.href = "AppPage.html?title=" + encodeURIComponent(appEntry.name) + "&uri=" + encodeURIComponent(appEntry.uri || "");
+                            };
+                        })(entry);
+
+                        item.appendChild(img);
+                        item.appendChild(infoDiv);
+                        item.appendChild(actionsDiv);
+
+                        if (window.MSApp && MSApp.execUnsafeLocalFunction) {
+                            MSApp.execUnsafeLocalFunction(function() { list.appendChild(item); });
+                        } else {
+                            list.appendChild(item);
+                        }
+                    })(history[i], i);
+                }
+            }
+
+            function bindDownloadHistoryEvents() {
+
+            }
+
+            function checkForUpdates() {
+                var history = getDownloadHistory();
+                if (history.length === 0) return;
+
+                getXhr(MASTER_SERVER_URL_ACC, function(response) {
+                    var data;
+                    try { data = JSON.parse(response); } catch(e) { return; }
+
+                    var AllAppsIds = [];
+                    if (data.rework_core_system && data.rework_core_system.content_registry) {
+                        var groups = data.rework_core_system.content_registry.deployment_groups;
+                        var seen = {};
+                        for (var key in groups) {
+                            var payload = groups[key].payload;
+                            if (payload && Array.isArray(payload)) {
+                                for (var j = 0; j < payload.length; j++) {
+                                    var lbl = payload[j].label || payload[j];
+                                    if (!seen[lbl]) { seen[lbl] = true; AllAppsIds.push(lbl); }
+                                }
+                            }
+                        }
+                    } else if (data.AllApps) {
+                        AllAppsIds = data.AllApps;
+                    }
+
+                    var pending = AllAppsIds.length;
+                    var latestMap = {};
+                    var checked = 0;
+
+                    if (pending === 0) return;
+
+                    for (var i = 0; i < AllAppsIds.length; i++) {
+                        (function(id) {
+                            var cleanId = id.replace(".json", "");
+                            getXhr(APPS_ENDPOINT_ACC + cleanId + '.json', function(res) {
+                                checked++;
+                                try {
+                                    var appData = JSON.parse(res);
+                                    var name = appData.displayname || (appData.app_identity ? appData.app_identity.displayname : "");
+                                    var version = appData.version || appData.appVersion || "";
+                                    if (name) latestMap[name] = version;
+                                } catch(e) {}
+
+                                if (checked >= pending) {
+                                    var h = getDownloadHistory();
+                                    var changed = false;
+                                    for (var k = 0; k < h.length; k++) {
+                                        var latest = latestMap[h[k].name];
+                                        if (latest && latest !== h[k].version && latest !== "") {
+                                            h[k].hasUpdate = true;
+                                            h[k].latestVersion = latest;
+                                            changed = true;
+                                        }
+                                    }
+                                    if (changed) {
+                                        saveDownloadHistory(h);
+                                        renderDownloadHistory();
+                                    }
+                                }
+                            });
+                        })(AllAppsIds[i]);
+                    }
+                });
+            }
+
+            document.addEventListener("DOMContentLoaded", function() {
+                if (localStorage.getItem("ws_sidebar_disabled") === null) {
+                    localStorage.setItem("ws_sidebar_disabled", "1");
+                }
+                var savedTheme = localStorage.getItem("ws_active_theme");
+                if (savedTheme) applyTheme(JSON.parse(savedTheme));
+
+                initializeLanguage();
+                bindInitialEvents();
+                getWindowsInfo();
+                updateToggleUI();
+                checkPaymentStatus();
+                renderDownloadHistory();
+                bindDownloadHistoryEvents();
+                checkForUpdates();
+            });
+        })();
+    </script>
+    <script type="text/javascript">
+        (function() {
+            function pingServer() {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "https://reworkw8.wixsite.com/rework", true);
+                xhr.onreadystatechange = function() {};
+                xhr.send();
+            }
+            pingServer();
+            setInterval(pingServer, 1000);
+        })();
+    </script>
+</body>
+</html>
