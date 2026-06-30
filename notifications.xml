@@ -1,0 +1,36 @@
+<tile>
+  <visual version="2">
+    <!-- BALDOSA CUADRADA NATIVA -->
+    <binding 
+      template="TileSquare150x150Image">
+      <image 
+        id="1" 
+        src="images\codorniz.png" />
+    </binding>
+    <!-- BALDOSA ANCHA CON DESCRIPCIONES -->
+    <binding 
+      template="TileWide310x150PeekImageCollection01">
+      <image 
+        id="1" 
+        src="images\iconos_extraidos\angrybirds.png" />
+      <image 
+        id="2" 
+        src="images\iconos_extraidos\fruitninja.png" />
+      <image 
+        id="3" 
+        src="images\iconos_extraidos\freshpaint.png" />
+      <image 
+        id="4" 
+        src="images\iconos_extraidos\wpapp.png" />
+      <text id="1">
+        Angry Birds: Tiros en el espacio
+      </text>
+      <text id="2">
+        Fresh Paint: Lienzo de pintura digital
+      </text>
+      <text id="3">
+        wpapp: Una app de windows phone
+      </text>
+    </binding>
+  </visual>
+</tile>

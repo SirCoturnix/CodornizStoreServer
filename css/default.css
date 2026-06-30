@@ -1,0 +1,120 @@
+﻿body {
+    font-family: 'Segoe UI Variable Text', 'Segoe UI', 'Helvetica Neue', sans-serif;
+    background-image: url('/images/storebgr.png');
+    background-size: cover;        
+    background-repeat: no-repeat;  
+    background-position: center;   
+    margin: 0;
+    width: 400000px;                     
+    white-space: nowrap;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.title {
+    font-size: 45px;
+    margin-left: 60px;
+    margin-top: 100px;
+}
+
+.listItem {
+    float: left;
+}
+
+.listItem button {
+    width: 170px;
+    height: 250px;
+    margin: 5px;
+    background-color: #f0f0f0;
+    border-color: transparent;
+}
+
+.listItem button h4 {
+    font-size: 13px;
+}
+
+.topBar {
+  
+    background-color: green;
+    list-style: none;
+    width: 100%;
+    height: 50px;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.topBar .listItem {
+    float: left;
+    margin-right: 50px; 
+    margin-top: 10px;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+}
+
+.topBar .search-container {
+    position: absolute;
+    right: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    background-color: white;
+    border: 2px solid white;
+    padding: 0px 8px;
+    width: 320px;
+    height: 27px;
+}
+
+#searchBar {
+    flex-grow: 1;
+    border: none !important;
+    background-color: transparent !important;
+    color: #666;
+    font-size: 15px;
+    padding: 0;
+    outline: none;
+    height: 100%;
+}
+
+.search-icon {
+    color: #228B22;
+    font-size: 17px;
+    font-weight: normal;
+    cursor: default;
+    font-family: "Segoe UI Symbol", "Segoe UI", sans-serif;
+    margin-left: 5px;
+    user-select: none;
+}
+
+#pageContent {
+    width: 3000px; 
+    height: 100%;
+    white-space: nowrap;
+}
+
+#content {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    -ms-touch-action: pan-x;
+}
+
+#spotImg {
+    max-width: 550px;
+    max-height: 320px;
+    width: auto;
+    height: auto;
+    vertical-align: middle;
+}

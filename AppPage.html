@@ -1,0 +1,194 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://w3.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Visualizador de Aplicación - CodornizCorp</title>
+    <link href="//Microsoft.WinJS.2.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+    <style>
+        html, body { margin: 0; background: url('images/storebgr.jpg') no-repeat fixed center / 100% 100% !important; background-color: #228B22 !important; color: #fff; font-family: 'Segoe UI', sans-serif; overflow-x: hidden; overflow-y: auto; width: 100vw; height: 100vh; }
+        #topbar { height: 70px; background: #228B22; display: flex; align-items: center; padding: 0 40px 0 20px; box-sizing: border-box; width: 100%; position: relative; z-index: 1000; }
+        .topbar-codorniz-logo { height: 100%; width: auto; max-height: 70px; object-fit: contain; margin-right: 14px; cursor: pointer; }
+        .store-brand { font-size: 24px; font-weight: 300; margin-right: 32px; cursor: pointer; }
+        .page-title { font-size: 24px; font-weight: 200; cursor: pointer; margin-right: 30px; }
+        #view-wrapper { padding: 40px 80px; display: flex; gap: 60px; box-sizing: border-box; opacity: 0; }
+        .download-sidebar { width: 280px; }
+        .download-icon { width: 140px; height: 140px; background-size: cover; background-position: center; display: flex; align-items: center; justify-content: center; background-color: rgba(0,0,0,0.2); }
+        .metro-progress-container { width: 100%; height: 10px; background: rgba(255,255,255,0.15); margin: 25px 0 10px 0; display: none; }
+        .metro-progress-bar { width: 0%; height: 100%; background: #228B22; transition: width 0.1s linear; }
+        .btn-install { background: #228B22; color: #fff; padding: 12px 30px; width: 100%; cursor: pointer; border: none; font-size: 16px; font-weight: bold; }
+        .btn-install.btn-open-ready { background: #1ba1e2 !important; }
+        .btn-back { background: transparent; color: #aaa; border: 2px solid #555; padding: 8px 20px; width: 100%; cursor: pointer; margin-top: 10px; }
+        .download-details { flex: 1; }
+        .download-details h1 { font-weight: 200; font-size: 42px; margin: 0; }
+        .publisher { color: #228B22; font-weight: bold; margin-top: 5px; }
+        .description { color: #ccc; max-width: 700px; margin-top: 20px; font-size: 16px; line-height: 1.5; }
+        .comments-container { margin-top: 40px; width: 100%; max-width: 800px; border: none; height: 400px; background: rgba(0,0,0,0.2); }
+        .metro-activa { opacity: 1 !important; animation: metroEntrance 0.42s cubic-bezier(0.1, 0.9, 0.2, 1) forwards; }
+        @keyframes metroEntrance { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body>
+    <div id="topbar">
+        <img src="images/codorniz.png" class="topbar-codorniz-logo" onclick="window.location.href='default.html'">
+        <div class="store-brand" onclick="window.location.href='default.html'">CodornizStore</div>
+        <div class="page-title" onclick="window.location.href='AllApps.html'">Aplicaciones</div>
+        <div class="page-title" onclick="window.location.href='ChartsPage.html'">Tendencias</div>
+        <div class="page-title" onclick="window.location.href='AccountPage.html'">Mi Cuenta</div>
+    </div>
+
+    <div id="view-wrapper">
+        <div class="download-sidebar">
+            <div id="view-app-icon" class="download-icon"></div>
+            <div class="metro-progress-container" id="view-progress-wrapper"><div class="metro-progress-bar" id="view-progress-bar"></div></div>
+            <button class="btn-install" id="view-download-action">Instalar</button>
+            <button class="btn-back" onclick="window.location.href='AllApps.html'">Volver al Catálogo</button>
+        </div>
+        <div class="download-details">
+            <h1 id="view-app-title">Cargando...</h1>
+            <div class="publisher" id="view-app-pub">CodornizCorp</div>
+            <div id="view-app-stars" style="color:#ffb900; margin:10px 0; font-size: 18px;">★★★★★</div>
+            <div class="description" id="view-app-desc">La codorniz anda buscando la info...</div>
+            <iframe id="view-comments-frame" class="comments-container" src="AppComments.html"></iframe>
+        </div>
+    </div>
+    <script>
+        if (appSeleccionada === 'Angry Birds Space') {
+            if (pubBox) pubBox.innerText = 'Rovio Entertainment';
+            if (descBox) descBox.innerText = 'Los pájaros espaciales se trasladan al espacio exterior. Usa la atracción de los astros para realizar tiros parabólicos orbitales en gravedad cero con total fluidez nativa horizontal de deidad.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/angrybirds.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1oStrLgIrknt95EcIkLwY_YiZbMsFHIUQ/view?usp=drive_link';
+        } 
+        else if (appSeleccionada === 'Fruit Ninja') {
+            if (pubBox) pubBox.innerText = 'Halfbrick Studios';
+            if (descBox) descBox.innerText = 'El clásico juego de rebanar sandías, manzanas y plátanos evitando las bombas con total fluidez nativa horizontal, soporte de gestos multi-touch y combos de puntuación extrema.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/fruitninja.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1q5qowDPr-Htm12JrrNK418Lzu_lQJNOL/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'ProdigyMath') {
+            if (pubBox) pubBox.innerText = 'Prodigy Math Team';
+            if (descBox) descBox.innerText = 'Plataforma educativa de matemáticas adaptada a un entorno de fantasía y rol. Resuelve desafíos aritméticos y sube de nivel de forma estable.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1Bm5y9laQEVD2EzH3ObBj5XBTEPVC6mo_/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'newsXpresso Metro') {
+            if (pubBox) pubBox.innerText = 'newsXpresso';
+            if (descBox) descBox.innerText = 'Tu revista digital personal adaptada con diseño de lectura horizontal de deidad, organización inteligente de categorías y feeds de noticias automatizados.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/newsxpresso.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1Zp11rRSB3clkymzKDPb2bKkCPnL4M_dx/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'Opentracks') {
+            if (pubBox) pubBox.innerText = 'Opentracks Studio';
+            if (descBox) descBox.innerText = 'Reproductor de audio libre de código abierto optimizado con ecualización de frecuencias nativa y soporte para la indexación rápida de tus archivos de música locales.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/mp3hubesopentracks.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1Cond9OlNdjPee0RdtALNhasntS8JZKXA/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'wpapp') {
+            if (pubBox) pubBox.innerText = 'wpapp Team';
+            if (descBox) descBox.innerText = 'Una aplicación de windows phone preservada de forma legítima para revivir la sincronización y el despliegue de mosaicos del ecosistema móvil clásico.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/wpapp.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1rDJgRwSaZ1LdJg8sM2nrZlyxAIM1CCE3/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'Evernote') {
+            if (pubBox) pubBox.innerText = 'Evernote Corp';
+            if (descBox) descBox.innerText = 'Toma notas, organiza tus ideas, archiva tus documentos importantes y sincroniza tus libretas de apuntes de forma fluida con el diseño de rejilla Metro nativo.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/evernote.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1D6TPEhleJFXa9n9JfnQ04vt2A-j2gLYv/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'mytube') {
+            if (pubBox) pubBox.innerText = 'Ryken Studio';
+            if (descBox) descBox.innerText = 'El mejor cliente de videos de terceros para la interfaz Metro con soporte de reproducción de audio en segundo plano y descargas a tu disco duro local.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/mytube.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1EthmDqW2kcgDsaZ7EpPSdiB8Rv1tNTWC/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'DrayMusic') {
+            if (pubBox) pubBox.innerText = 'DrayMusic Studio';
+            if (descBox) descBox.innerText = 'Reproductor y gestor de listas musicales nativo con interfaz fluida adaptativa estilo Metro para la indexación rápida de tu catálogo de audio local.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/1773704616_DrayMusic_1.0.0.0_AnyCPU.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1DJOGR0OaH9jP0jaGTQ8Y0VvgTfbj_Dvz/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'Netflix') {
+            if (pubBox) pubBox.innerText = 'Netflix Inc';
+            if (descBox) descBox.innerText = 'Disfruta de películas, series y documentales vía streaming directo en tu pantalla completa con interfaz Metro optimizada para la reproducción de alta definición.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/netflix.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1895kZuRaM7CmUmNfuvnwwzTTTIAoIcb6/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'Rowi') {
+            if (pubBox) pubBox.innerText = 'Hidden Pineapple';
+            if (descBox) descBox.innerText = 'Cliente de Twitter panorámico estilo Metro diseñado para la lectura cómoda de tus feeds de noticias y timelines directamente en una grilla horizontal continua.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/rowi-150x150.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1-1leuVqfzwpCaIf7wDbCpNqyZ780Ot1o/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'Nokia AppSocial') {
+            if (pubBox) pubBox.innerText = 'Nokia Corporation';
+            if (descBox) descBox.innerText = 'Explora, descubre y descarga las aplicaciones recomendadas y curadas por la comunidad de Nokia en una interfaz fluida nativa de herencia clásica.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/nokiaappsocial.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1LIDK37Jsnz8hnbelIWC-aWzAtXB3vMNB/view?usp=drive_link;
+        }
+        else if (appSeleccionada === 'Koode Reader') {
+            if (pubBox) pubBox.innerText = 'Koode Team';
+            if (descBox) descBox.innerText = 'Lector avanzado de libros electrónicos con soporte multiplataforma de lectura para archivos EPUB, PDF y creación nativa de notas de estudio.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/koodereader.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1e8QpSamGGLevpQBODUvPTNPIKbMNb3Fw/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'El Tenedor') {
+            if (pubBox) pubBox.innerText = 'La Fourchette';
+            if (descBox) descBox.innerText = 'Guía gastronómica oficial de La Fourchette. Encuentra recetas de cocina, opiniones de chefs calificados y gestiona tus reservas de mesas en línea.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/eltenedor.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1aHYx97Ug17RF8cNmBcderkRnA10zGzhA/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'Rayman Jungle Run') {
+            if (pubBox) pubBox.innerText = 'Ubisoft';
+            if (descBox) descBox.innerText = '¡El legendario héroe de las plataformas llega a la interfaz Metro de Windows con un motor físico fluido, escenarios rápidos y soporte de deidad!';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/raymanjunglerun.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1mHxYD_VFBC7lI78mGY_BuHtYd7P7nzyh/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'Cut The Rope') {
+            if (pubBox) pubBox.innerText = 'ZeptoLab UK';
+            if (descBox) descBox.innerText = 'Corta las cuerdas correctas utilizando las leyes de la física para alimentar al entrañable monstruito Om Nom con sus dulces y caramelos favoritos.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/CutTheRope.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1IeQRrxmj0jrgTDSGSaEjN2tCmd6o1Ky1/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'Xurxo News') {
+            if (pubBox) pubBox.innerText = 'XunxoCorp';
+            if (descBox) descBox.innerText = 'Lector de noticias RSS independiente con soporte de feeds locales estructurados libres de cualquier tipo de gatekeep para una lectura veloz.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/Xuxo.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1000ZWnzxWE-NCzKp87TQ_43xXmkW2qKz/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'Fresh Paint') {
+            if (pubBox) pubBox.innerText = 'Microsoft Studios';
+            if (descBox) descBox.innerText = 'Lienzo de pintura digital con simulación realista de óleos, acuarelas y mezcla física de pinceles en tiempo real directo en tu pantalla táctil panorámica.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/freshpaint.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1easaK47p8H1vAXQOvKWSSQkfGNS0pOfq/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'RecipeKeeper') {
+            if (pubBox) pubBox.innerText = 'Recipe Keeper Team';
+            if (descBox) descBox.innerText = 'Organiza tus recetas familiares favoritas, planifica tus comidas de la semana y genera listas de compras de forma automática en mosaicos interactivos.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/recipekeeper.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1n6jz5gI76eR8Pf9aWblZwtMqaM908mN2/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'Adobe Reader') {
+            if (pubBox) pubBox.innerText = 'Adobe Systems';
+            if (descBox) descBox.innerText = 'El visor de documentos PDF oficial de Adobe optimizado con interfaz táctil fluida, herramientas de zoom simétricas y opción de lectura continua.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/metro_reader_small_logo.targetsize-256.png')";
+            urlDescarga = 'https://drive.google.com/file/d/148Md224s8Jh_wHOFTihllvDtgyX1QOuD/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'InsiderHub') {
+            if (pubBox) pubBox.innerText = 'Microsoft Insider';
+            if (descBox) descBox.innerText = 'Accede a las últimas compilaciones, desafíos técnicos de desarrollo y foros de retroalimentación de la comunidad Insider oficial del sistema operativo.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/insiderhub.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1oZhHFJoZtujtljIVt2GwVUmJn5SWFufr/view?usp=drive_link';
+        }
+        else if (appSeleccionada === 'WPCentral') {
+            if (pubBox) pubBox.innerText = 'WPCentral Team';
+            if (descBox) descBox.innerText = 'Mantente al día con las noticias, análisis detallados de software, tutoriales y coberturas exclusivas de todo el ecosistema de Windows clásico.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/WPAPPCENTRAL.png')";
+            urlDescarga = 'https://drive.google.com/file/d/1JnoKGiIaxYuFm9dn428G0ELkYOJSxxPb/view?usp=drive_link';
+        }
+        else {
+            if (pubBox) pubBox.innerText = 'CodornizCorp';
+            if (descBox) descBox.innerText = 'La codorniz no ha escrito una descripcion aun.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/codorniz.png')";
+            urlDescarga = "";
+        }

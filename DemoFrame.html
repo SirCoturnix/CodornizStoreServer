@@ -1,0 +1,74 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Store</title>
+    <style id="cssStub"></style>
+</head>
+
+<script language="javascript" id="scriptStub"></script>
+
+<script language="javascript">
+
+var wsOrigin = "ms-appx://rwstore";
+var wsFrame;
+var OM;
+
+function DemoHandleMessageFromNative(msgId, uParam, strParam) {
+}
+
+window.addEventListener("DOMContentLoaded", function () {
+
+    wsFrame = document.getElementById("wsFrame");
+    OM = new WinStore.UI.OM(DemoHandleMessageFromNative);
+    
+
+    window.addEventListener("message", function (e) {
+        if (e.origin.toLowerCase() === wsOrigin) {
+            if (e.data.method === "navigateAjax") {
+                MSApp.execUnsafeLocalFunction(function() { wsFrame.innerHTML = e.data.html; });
+
+
+                var cssSrc = OM.imageUrlRoot + "\\Demo.css";
+                OM.getFile(cssSrc, function (contents) { 
+                    var cssStub = document.getElementById("cssStub");
+                    if (cssStub) {
+                        MSApp.execUnsafeLocalFunction(function() { cssStub.innerHTML = contents; });
+                    }
+                });
+                
+                var scriptSrc = OM.imageUrlRoot + "\\Demo.js";
+                OM.getFile(scriptSrc, function (contents) { 
+                    var scriptStub = document.getElementById("scriptStub");
+                    if (scriptStub) {
+                        MSApp.execUnsafeLocalFunction(function() { scriptStub.innerHTML = contents; });
+                        onDemoContentLoaded();
+                    }
+                });
+            }
+        }
+    }, false);
+
+
+    top.postMessage({ method: "WS", event: "open" }, wsOrigin);
+
+}, false);
+
+window.addEventListener("unload", function () {
+    try
+    {
+        onDemoContentUnloaded();
+    } catch(e) 
+    {
+
+    }
+    
+
+    top.postMessage({method:"WS", event:"close"}, wsOrigin);
+}, false);
+</script>
+
+<body tabindex="-1">
+    <div id="wsFrame" role="document" style="height:100%; width:100%;"></div>
+</body>
+</html>

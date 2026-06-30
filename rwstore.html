@@ -1,0 +1,200 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://w3.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            background-color: #008A00 !important; /* Verde Metro oficial */
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: "Segoe UI", sans-serif;
+        }
+
+        #splash {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #008A00;
+            z-index: 1;
+        }
+
+        /* REPARADO: Carga tu codorniz desde el fondo de forma 100% segura */
+        #fotoSplash {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            width: 180px; /* Tamaño ideal estilo Windows */
+            height: 180px;
+            background-image: url('images/codorniz.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 7;
+            animation: moveLogoLeft 1s ease-in-out 0.7s forwards;
+        }
+
+        /* REPARADO: Texto nativo corregido a CodornizStore */
+        #splashText {
+            position: absolute;
+            top: 50%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+            -ms-transform: translate(-50%, -50%);
+            width: auto;
+            height: auto;
+            display: block;
+            opacity: 0;
+            z-index: 2;
+            font-size: 62px;
+            font-weight: 200;
+            color: #ffffff;
+            letter-spacing: 1px;
+            animation: moveTextRight 1s ease-in-out 0.5s forwards;
+        }
+        @keyframes moveLogoLeft {
+            from { transform: translate(-50%, -50%); }
+            to { transform: translate(-105%, -50%); }
+        }
+
+        @-ms-keyframes moveLogoLeft {
+            from { -ms-transform: translate(-50%, -50%); }
+            to { -ms-transform: translate(-105%, -50%); }
+        }
+
+        @keyframes moveTextRight {
+            from { opacity: 0; transform: translate(-50%, -50%); }
+            to { opacity: 1; transform: translate(15%, -50%); }
+        }
+
+        @-ms-keyframes moveTextRight {
+            from { opacity: 0; -ms-transform: translate(-50%, -50%); }
+            to { opacity: 1; -ms-transform: translate(15%, -50%); }
+        }
+
+        #splashContent {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+            -ms-transform: translateX(-50%);
+            margin-top: 186px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInSmooth 0.4s ease-out forwards;
+        }
+
+        @keyframes fadeInSmooth { from { opacity: 0; } to { opacity: 1; } }
+        @-ms-keyframes fadeInSmooth { from { opacity: 0; } to { opacity: 1; } }
+
+        #splashProgress {
+            width: 30px;
+            height: 30px;
+            border-style: none;
+            background-color: transparent;
+            z-index: 2;
+            color: White;
+        }
+        #splashProgress::-ms-fill { animation-name: -ms-ring; }
+
+        @media (-ms-high-contrast) {
+            #splashProgress { color: Highlight; }
+            #splashProgress::-ms-fill {
+                border-right: 1px solid ButtonText;
+                background-color: Highlight;
+            }
+        }
+
+        #splash.zoom-in {
+            -ms-animation: zoomInSplash 0.35s ease-in forwards;
+            animation: zoomInSplash 0.35s ease-in forwards;
+        }
+
+        @keyframes zoomInSplash {
+            from { transform: scale(1); opacity: 1; }
+            to { transform: scale(3); opacity: 0; }
+        }
+        @-ms-keyframes zoomInSplash {
+            from { -ms-transform: scale(1); opacity: 1; }
+            to { -ms-transform: scale(3); opacity: 0; }
+        }
+    </style>
+    <script>
+        var MASTER_SERVER = "https://github.com/SirCoturnix/CodornizStoreServer";
+
+        function getRwToken() {
+            try { return localStorage.getItem("cs_session_token") || ""; } catch(e) { return ""; }
+        }
+
+        function showBgAndRedirect() {
+            var splash = document.getElementById("splash");
+            if (splash) {
+                splash.style.backgroundImage = "url('images/storebgr.png')";
+                splash.style.backgroundSize = "cover";
+                splash.style.backgroundPosition = "center";
+                splash.style.backgroundRepeat = "no-repeat";
+            }
+            document.body.style.backgroundImage = "url('images/storebgr.png')";
+            document.body.style.backgroundSize = "cover";
+            document.body.style.backgroundPosition = "center";
+            document.body.style.backgroundRepeat = "no-repeat";
+            setTimeout(function () {
+                window.location.href = "default.html";
+            }, 80);
+        }
+
+        function triggerZoomAndRedirect() {
+            var splash = document.getElementById("splash");
+            if (splash) {
+                splash.className = "zoom-in";
+                var redirectTimer = setTimeout(function () { showBgAndRedirect(); }, 350);
+                splash.addEventListener("animationend", function () {
+                    clearTimeout(redirectTimer); showBgAndRedirect();
+                });
+                splash.addEventListener("MSAnimationEnd", function () {
+                    clearTimeout(redirectTimer); showBgAndRedirect();
+                });
+            } else {
+                showBgAndRedirect();
+            }
+        }
+
+        function checkConnectionAndRedirect() {
+            if (navigator.onLine) {
+                triggerZoomAndRedirect();
+            } else {
+                setTimeout(checkConnectionAndRedirect, 2000);
+            }
+        }
+
+        setTimeout(checkConnectionAndRedirect, 2000);
+    </script>
+</head>
+<body>
+
+    <div id="splash">
+        <!-- El contenedor CSS seguro para tu foto de la codorniz -->
+        <div id="fotoSplash"></div>
+        
+        <!-- El texto nativo libre de bugs -->
+        <div id="splashText">__CodornizStore</div>
+        
+        <!-- El anillo de carga infinita circular Metro -->
+        <div id="splashContent">
+            <progress id="splashProgress" class="win-ring"></progress>
+        </div>
+    </div>
+
+</body>
+</html>

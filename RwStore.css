@@ -1,0 +1,736 @@
+﻿html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    -ms-user-select: none;
+    cursor: default;
+    -ms-scroll-translation: vertical-to-horizontal;
+}
+html {
+    overflow: hidden;
+}
+body {
+    -ms-content-zooming: none;
+    padding: 0;
+    color: rgb(0, 0, 0);
+    background-color: #F2F2F2;
+    letter-spacing: 0.02em;
+}
+iframe {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    background-color: #F2F2F2;
+}
+html:-ms-lang(ar, dv, fa, he, ku-Arab, pa-Arab, prs, ps, sd-Arab, syr, ug, ur, qps-plocm) {
+    direction: rtl;
+}
+a {
+    color: rgb(0, 138, 0);
+    text-decoration: none;
+    cursor: default;
+}
+a:hover:active {
+    color: rgba(0, 138, 0, 0.6);
+}
+a:hover {
+    color: rgba(0, 138, 0, 0.8);
+}
+a[disabled], a[disabled]:active {
+    color: rgba(0, 0, 0, 0.4);
+}
+@media (-ms-high-contrast) 
+{
+    a {
+        color: -ms-hotlight;
+    }
+}
+#splash
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #008A00;
+    z-index: 1;
+}
+#splashLogo
+{
+    position: absolute;
+}
+#splashContent
+{
+    position: absolute;
+    text-align: center;
+}
+#splashProgress
+{
+    width: 30px;
+    height: 30px;
+    margin-top: 32px;
+    border-style: none;
+    background-color: transparent;
+    z-index: 2;
+    color: White;
+}
+#splashProgress::-ms-fill
+{
+    animation-name: -ms-ring;
+}
+@media (-ms-high-contrast) 
+{
+    #splashProgress
+    {
+        color: Highlight;
+    }
+    #splashProgress::-ms-fill
+    {
+        border-right: 1px solid ButtonText;
+        background-color: Highlight;
+    }
+}
+#frame
+{
+    display: -ms-grid;
+    -ms-grid-rows: 160px 1fr;
+    -ms-grid-columns: 80px 1fr 40px;
+    height: 100vh;
+}
+#errorBackButton
+{
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    cursor: default;
+    margin-top: 60px;
+    margin-left: 40px;
+    display: none;
+}
+.flipButton
+{
+    margin-left: 0px;
+    margin-right: 40px;
+}
+#errorPageTitle
+{
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+    position: relative;
+    font-size: 28pt;
+    top: 16px;
+    margin-top: 40px;
+    -ms-text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: default;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+#errorMsg
+{
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+    margin-top: 10px;
+    max-width: 840px;
+    cursor: default;
+}
+
+
+@font-face {
+    font-family: "Segoe UI";
+    font-weight: 200;
+    src: local("Segoe UI Light");
+}
+@font-face {
+    font-family: "Segoe UI";
+    font-weight: 300;
+    src: local("Segoe UI Semilight");
+}
+@font-face {
+    font-family: "Segoe UI";
+    font-weight: 400;
+    src: local("Segoe UI");
+}
+@font-face {
+    font-family: "Segoe UI";
+    font-weight: 600;
+    src: local("Segoe UI Semibold");
+}
+@font-face {
+    font-family: "Segoe UI";
+    font-weight: 700;
+    src: local("Segoe UI Bold");
+}
+@font-face {
+    font-family: "Segoe UI";
+    font-style: italic;
+    font-weight: 400;
+    src: local("Segoe UI Italic");
+}
+@font-face {
+    font-family: "Segoe UI";
+    font-style: italic;
+    font-weight: 700;
+    src: local("Segoe UI Bold Italic");
+}
+h1, .win-type-xx-large {
+    font-size: 42pt;
+    font-weight: 200;
+    line-height: 1.1429;
+}
+h2, .win-type-x-large {
+    font-size: 20pt;
+    font-weight: 200;
+    line-height: 1.2;
+}
+.win-backbutton {
+    position: relative;
+    top: 12px;
+    display: inline-block;
+    min-width: 0;
+    min-height: 0;
+    background-clip: border-box;
+    box-sizing: border-box;
+    border-radius: 50%;
+    border-width: 2px;
+    border-style: solid;
+    padding: 0;
+    text-align: center;
+    width: 28px;
+    height: 28px;
+    font-size: 12pt;
+    line-height: 24px;
+    vertical-align: baseline;
+    background-color: transparent;
+    border-color: rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+}
+.win-backbutton:hover, .win-backbutton:hover:active {
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+}
+.win-backbutton:hover {
+    background-color: rgba(0, 0, 0, 0.13);
+    border-color: rgb(0, 0, 0);
+}
+.win-backbutton:hover:active, .win-backbutton:-ms-keyboard-active
+{
+    background-color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+}
+.win-backbutton::before {
+    font-family: "Segoe UI Symbol";
+    font-weight: normal;
+    content: "\E112";
+    vertical-align: 50%;
+}
+.win-backbutton:-ms-lang(ar, dv, fa, he, ku-Arab, pa-Arab, prs, ps, sd-Arab, syr, ug, ur, qps-plocm)::before {
+    content: "\E111";
+}
+.win-backbutton:disabled, .win-backbutton:disabled:active {
+    visibility: hidden;
+    background-color: transparent;
+    border-color: rgba(0, 0, 0, 0.4);
+    color: rgba(0, 0, 0, 0.4);
+}
+@media (-ms-high-contrast) 
+{
+    .win-backbutton {
+        background-color: ButtonFace;
+        border-color: ButtonText;
+        color: ButtonText;
+    }
+    .win-backbutton:hover {
+        background-color: Highlight;
+        border-color: ButtonText;
+        color: HighlightText;
+    }
+    .win-backbutton:hover:active {
+        background-clip: border-box;
+        background-color: ButtonText;
+        border-color: transparent;
+        color: ButtonFace;
+    }
+    .win-backbutton:disabled, .win-backbutton:disabled:active {
+        background-color: ButtonFace;
+        border-color: GrayText;
+        color: GrayText;
+    }   
+}
+body,
+.win-type-xx-large,
+.win-type-x-large,
+.win-type-large,
+.win-type-medium,
+.win-type-small,
+.win-type-x-small,
+.win-type-xx-small,
+input,
+textarea,
+.win-textarea,
+button,
+select,
+option {
+    font-family: 
+        "Segoe UI",
+        "Ebrima",
+        "Nirmala UI",
+        "Gadugi",
+        "Segoe UI Symbol",
+        "Meiryo UI",
+        "Khmer UI",
+        "Tunga",
+        "Lao UI",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Leelawadee",
+        "Microsoft YaHei UI",
+        "Microsoft JhengHei UI",
+        "Malgun Gothic",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}
+
+body:-ms-lang(am, ti),
+.win-type-xx-large:-ms-lang(am, ti),
+.win-type-x-large:-ms-lang(am, ti),
+.win-type-large:-ms-lang(am, ti),
+.win-type-medium:-ms-lang(am, ti),
+.win-type-small:-ms-lang(am, ti),
+.win-type-x-small:-ms-lang(am, ti),
+.win-type-xx-small:-ms-lang(am, ti),
+input:-ms-lang(am, ti),
+textarea:-ms-lang(am, ti),
+.win-textarea:-ms-lang(am, ti),
+button:-ms-lang(am, ti),
+select:-ms-lang(am, ti),
+option:-ms-lang(am, ti) {
+    font-family: 
+        "Ebrima",
+        "Segoe UI",
+        "Nirmala UI",
+        "Gadugi",
+        "Segoe UI Symbol",
+        "Meiryo UI",
+        "Khmer UI",
+        "Tunga",
+        "Lao UI",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Leelawadee",
+        "Microsoft YaHei UI",
+        "Microsoft JhengHei UI",
+        "Malgun Gothic",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}
+
+body:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+.win-type-xx-large:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+.win-type-x-large:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+.win-type-large:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+.win-type-medium:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+.win-type-small:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+.win-type-x-small:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+.win-type-xx-small:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+input:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+textarea:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+.win-textarea:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+button:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+select:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te),
+option:-ms-lang(as, bn, gu, hi, kn, kok, ml, mr, ne, or, pa, si, ta, te) {
+    font-family: 
+        "Nirmala UI",
+        "Segoe UI",
+        "Ebrima",
+        "Gadugi",
+        "Segoe UI Symbol",
+        "Meiryo UI",
+        "Khmer UI",
+        "Tunga",
+        "Lao UI",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Leelawadee",
+        "Microsoft YaHei UI",
+        "Microsoft JhengHei UI",
+        "Malgun Gothic",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}
+
+body:lang(chr-CHER-US),
+.win-type-xx-large:lang(chr-CHER-US),
+.win-type-x-large:lang(chr-CHER-US),
+.win-type-large:lang(chr-CHER-US),
+.win-type-medium:lang(chr-CHER-US),
+.win-type-small:lang(chr-CHER-US),
+.win-type-x-small:lang(chr-CHER-US),
+.win-type-xx-small:lang(chr-CHER-US),
+input:lang(chr-CHER-US),
+textarea:lang(chr-CHER-US),
+.win-textarea:lang(chr-CHER-US),
+button:lang(chr-CHER-US),
+select:lang(chr-CHER-US),
+option:lang(chr-CHER-US) {
+    font-family: 
+        "Gadugi",
+        "Segoe UI",
+        "Ebrima",
+        "Nirmala UI",
+        "Segoe UI Symbol",
+        "Meiryo UI",
+        "Khmer UI",
+        "Tunga",
+        "Lao UI",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Leelawadee",
+        "Microsoft YaHei UI",
+        "Microsoft JhengHei UI",
+        "Malgun Gothic",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}
+
+body:lang(ja),
+.win-type-xx-large:lang(ja),
+.win-type-x-large:lang(ja),
+.win-type-large:lang(ja),
+.win-type-medium:lang(ja),
+.win-type-small:lang(ja),
+.win-type-x-small:lang(ja),
+.win-type-xx-small:lang(ja),
+input:lang(ja),
+textarea:lang(ja),
+.win-textarea:lang(ja),
+button:lang(ja),
+select:lang(ja),
+option:lang(ja) {
+    font-family: 
+        "Meiryo UI",
+        "Segoe UI",
+        "Ebrima",
+        "Nirmala UI",
+        "Gadugi",
+        "Segoe UI Symbol",
+        "Khmer UI",
+        "Tunga",
+        "Lao UI",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Leelawadee",
+        "Microsoft YaHei UI",
+        "Microsoft JhengHei UI",
+        "Malgun Gothic",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}
+
+body:lang(km),
+.win-type-xx-large:lang(km),
+.win-type-x-large:lang(km),
+.win-type-large:lang(km),
+.win-type-medium:lang(km),
+.win-type-small:lang(km),
+.win-type-x-small:lang(km),
+.win-type-xx-small:lang(km),
+input:lang(km),
+textarea:lang(km),
+.win-textarea:lang(km),
+button:lang(km),
+select:lang(km),
+option:lang(km) {
+    font-family: 
+        "Khmer UI",
+        "Segoe UI",
+        "Ebrima",
+        "Nirmala UI",
+        "Gadugi",
+        "Segoe UI Symbol",
+        "Meiryo UI",
+        "Tunga",
+        "Lao UI",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Leelawadee",
+        "Microsoft YaHei UI",
+        "Microsoft JhengHei UI",
+        "Malgun Gothic",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}
+
+body:lang(ko),
+.win-type-xx-large:lang(ko),
+.win-type-x-large:lang(ko),
+.win-type-large:lang(ko),
+.win-type-medium:lang(ko),
+.win-type-small:lang(ko),
+.win-type-x-small:lang(ko),
+.win-type-xx-small:lang(ko),
+input:lang(ko),
+textarea:lang(ko),
+.win-textarea:lang(ko),
+button:lang(ko),
+select:lang(ko),
+option:lang(ko) {
+    font-family: 
+        "Malgun Gothic",
+        "Segoe UI",
+        "Ebrima",
+        "Nirmala UI",
+        "Gadugi",
+        "Segoe UI Symbol",
+        "Meiryo UI",
+        "Khmer UI",
+        "Tunga",
+        "Lao UI",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Leelawadee",
+        "Microsoft YaHei UI",
+        "Microsoft JhengHei UI",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}
+
+body:lang(lo),
+.win-type-xx-large:lang(lo),
+.win-type-x-large:lang(lo),
+.win-type-large:lang(lo),
+.win-type-medium:lang(lo),
+.win-type-small:lang(lo),
+.win-type-x-small:lang(lo),
+.win-type-xx-small:lang(lo),
+input:lang(lo),
+textarea:lang(lo),
+.win-textarea:lang(lo),
+button:lang(lo),
+select:lang(lo),
+option:lang(lo) {
+    font-family: 
+        "Lao UI",
+        "Segoe UI",
+        "Ebrima",
+        "Nirmala UI",
+        "Gadugi",
+        "Segoe UI Symbol",
+        "Meiryo UI",
+        "Khmer UI",
+        "Tunga",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Leelawadee",
+        "Microsoft YaHei UI",
+        "Microsoft JhengHei UI",
+        "Malgun Gothic",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}
+
+body:lang(th),
+.win-type-xx-large:lang(th),
+.win-type-x-large:lang(th),
+.win-type-large:lang(th),
+.win-type-medium:lang(th),
+.win-type-small:lang(th),
+.win-type-x-small:lang(th),
+.win-type-xx-small:lang(th),
+input:lang(th),
+textarea:lang(th),
+.win-textarea:lang(th),
+button:lang(th),
+select:lang(th),
+option:lang(th) {
+    font-family: 
+        "Leelawadee",
+        "Segoe UI",
+        "Ebrima",
+        "Nirmala UI",
+        "Gadugi",
+        "Segoe UI Symbol",
+        "Meiryo UI",
+        "Khmer UI",
+        "Tunga",
+        "Lao UI",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Microsoft YaHei UI",
+        "Microsoft JhengHei UI",
+        "Malgun Gothic",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}
+
+body:-ms-lang(zh-CN, zh-Hans, zh-SG),
+.win-type-xx-large:-ms-lang(zh-CN, zh-Hans, zh-SG),
+.win-type-x-large:-ms-lang(zh-CN, zh-Hans, zh-SG),
+.win-type-large:-ms-lang(zh-CN, zh-Hans, zh-SG),
+.win-type-medium:-ms-lang(zh-CN, zh-Hans, zh-SG),
+.win-type-small:-ms-lang(zh-CN, zh-Hans, zh-SG),
+.win-type-x-small:-ms-lang(zh-CN, zh-Hans, zh-SG),
+.win-type-xx-small:-ms-lang(zh-CN, zh-Hans, zh-SG),
+input:-ms-lang(zh-CN, zh-Hans, zh-SG),
+textarea:-ms-lang(zh-CN, zh-Hans, zh-SG),
+.win-textarea:-ms-lang(zh-CN, zh-Hans, zh-SG),
+button:-ms-lang(zh-CN, zh-Hans, zh-SG),
+select:-ms-lang(zh-CN, zh-Hans, zh-SG),
+option:-ms-lang(zh-CN, zh-Hans, zh-SG) {
+    font-family: 
+        "Microsoft YaHei UI",
+        "Segoe UI",
+        "Ebrima",
+        "Nirmala UI",
+        "Gadugi",
+        "Segoe UI Symbol",
+        "Meiryo UI",
+        "Khmer UI",
+        "Tunga",
+        "Lao UI",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Leelawadee",
+        "Microsoft JhengHei UI",
+        "Malgun Gothic",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}
+
+body:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+.win-type-xx-large:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+.win-type-x-large:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+.win-type-large:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+.win-type-medium:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+.win-type-small:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+.win-type-x-small:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+.win-type-xx-small:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+input:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+textarea:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+.win-textarea:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+button:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+select:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO),
+option:-ms-lang(zh-HK, zh-TW, zh-Hant, zh-MO) {
+    font-family: 
+        "Microsoft JhengHei UI",
+        "Segoe UI",
+        "Ebrima",
+        "Nirmala UI",
+        "Gadugi",
+        "Segoe UI Symbol",
+        "Meiryo UI",
+        "Khmer UI",
+        "Tunga",
+        "Lao UI",
+        "Raavi",
+        "Iskoola Pota",
+        "Latha",
+        "Leelawadee",
+        "Microsoft YaHei UI",
+        "Malgun Gothic",
+        "Estrangelo Edessa",
+        "Microsoft Himalaya",
+        "Microsoft New Tai Lue",
+        "Microsoft PhagsPa",
+        "Microsoft Tai Le",
+        "Microsoft Yi Baiti",
+        "Mongolian Baiti",
+        "MV Boli",
+        "Myanmar Text",
+        "Cambria Math";
+}

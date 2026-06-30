@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://w3.org">
+<head>
+    <meta charset="UTF-8" />
+    <title>Mi Cuenta Microsoft - CodornizStore</title>
+    <link href="//Microsoft.WinJS.2.0/css/ui-dark.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+    <style>
+        html, body { margin: 0; background: url('images/storebgr.jpg') no-repeat fixed center / 100% 100% !important; background-color: #228B22 !important; color: #fff; font-family: 'Segoe UI', sans-serif; overflow-x: auto; overflow-y: hidden; width: 100vw; height: 100vh; }
+        #topbar { height: 70px; background: #228B22; display: flex; align-items: center; padding: 0 40px 0 20px; box-sizing: border-box; width: max-content; min-width: 100%; position: absolute; top: 0; left: 0; z-index: 1000; }
+        .topbar-codorniz-logo { height: 100%; width: auto; max-height: 70px; object-fit: contain; margin-right: 14px; cursor: pointer; }
+        .store-brand { font-size: 24px; font-weight: 300; margin-right: 32px; cursor: pointer; }
+        .page-title { font-size: 24px; font-weight: 200; cursor: pointer; margin-right: 30px; }
+        .active-title { font-weight: bold; border-bottom: 4px solid #fff; padding-bottom: 4px; }
+        #content { padding: 100px 80px 30px 80px; height: calc(100vh - 70px); box-sizing: border-box; display: block; opacity: 0; }
+        .hub-title { font-weight: 200; font-size: 42px; margin-bottom: 25px; }
+        .profile-container { background: rgba(0, 0, 0, 0.4); border: 2px solid rgba(255, 255, 255, 0.1); padding: 40px; max-width: 700px; display: flex; gap: 30px; align-items: center; }
+        .avatar-box { width: 120px; height: 120px; background: #228B22; display: flex; align-items: center; justify-content: center; font-size: 48px; font-weight: 300; color: #fff; border: 2px solid rgba(255,255,255,0.4); }
+        .profile-info h2 { font-weight: 300; font-size: 28px; margin: 0 0 8px 0; }
+        .profile-info p { margin: 4px 0; color: #ccc; font-size: 14px; }
+        .tag-badge { background: #0078d7; color: #fff; padding: 4px 12px; display: inline-block; font-size: 12px; font-weight: bold; margin-top: 10px; text-transform: uppercase; }
+        .metro-activa { opacity: 1 !important; animation: metroEntrance 0.42s cubic-bezier(0.1, 0.9, 0.2, 1) forwards; }
+        @keyframes metroEntrance { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body>
+    <div id="topbar">
+        <img src="images/codorniz.png" class="topbar-codorniz-logo" onclick="window.location.href='default.html'">
+        <div class="store-brand" onclick="window.location.href='default.html'">CodornizStore</div>
+        <div class="page-title" onclick="window.location.href='AllApps.html'">Aplicaciones</div>
+        <div class="page-title" onclick="window.location.href='ChartsPage.html'">Tendencias</div>
+        <div class="page-title active-title" onclick="window.location.href='AccountPage.html'">Mi Cuenta</div>
+    </div>
+
+    <div id="content">
+        <h1 class="hub-title">Configuración de la cuenta</h1>
+        
+        <!-- PANEL DE ADAPTACIÓN AUTOMÁTICA: Las etiquetas cambian solas según el Windows del usuario -->
+        <div class="profile-container">
+            <div class="avatar-box" id="user-initial">U</div>
+            <div class="profile-info">
+                <h2 id="user-type-label">Cargando Cuenta...</h2>
+                <p><strong>Nombre de perfil:</strong> <span id="user-display-name">Buscando nombre...</span></p>
+                <p><strong>Correo asociado:</strong> <span id="user-email-address">Iniciando sesión...</span></p>
+                <p><strong>Ecosistema de Red:</strong> CodornizCorp Hibrid Server</p>
+                <p><strong>Estado del Servidor:</strong> Sincronizado vía GitHub CDN</p>
+                <div class="tag-badge" id="user-tier-badge">Suscriptor Store</div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var labelTipo = document.getElementById("user-type-label");
+            var nombreBox = document.getElementById("user-display-name");
+            var emailBox = document.getElementById("user-email-address");
+            var inicialBox = document.getElementById("user-initial");
+            var badgeBox = document.getElementById("user-tier-badge");
+
+            /* INYECTOR APIS NATIVAS WINRT: Chupa los datos reales del usuario logueado en Windows 10 */
+            if (typeof Windows !== 'undefined' && Windows.System && Windows.System.UserProfile) {
+                try {
+                    var userProfile = Windows.System.UserProfile;
+                    
+                    // Extrae el nombre para mostrar de Windows 10
+                    userProfile.getDisplayNameAsync().then(function (name) {
+                        if (name) {
+                            nombreBox.innerText = name;
+                            inicialBox.innerText = name.charAt(0).toUpperCase();
+                        } else {
+                            nombreBox.innerText = "Usuario de Windows 10";
+                        }
+                    });
+
+                    // Extrae el correo principal de la cuenta Microsoft vinculada
+                    userProfile.getDomainNameAsync().then(function (domain) {
+                        if (domain) {
+                            emailBox.innerText = domain;
+                        } else {
+                            emailBox.innerText = "Cuenta local de Windows";
+                        }
+                    });
+
+                    labelTipo.innerText = "Cuenta de Microsoft Activa";
+                    badgeBox.innerText = "Desarrollador Codorniz Oro";
+                    badgeBox.style.background = "#228B22";
+
+                } catch (e) {
+                    // Control de fallos de inicialización del WinRT
+                    labelTipo.innerText = "Usuario Invitado Store";
+                    nombreBox.innerText = "Usuario Local Desconectado";
+                    emailBox.innerText = "cuenta@codornizstore.local";
+                }
+            } else {
+                /* CONTADOR CHROME WEB: Si se ejecuta en navegador, simula un perfil limpio genérico */
+                labelTipo.innerText = "Cuenta Microsoft (Modo Web)";
+                nombreBox.innerText = "Usuario Externo de Internet";
+                emailBox.innerText = "usuario.web@outlook.com";
+                inicialBox.innerText = "W";
+                badgeBox.innerText = "Invitado Público Store";
+            }
+
+            // Dispara la animación de entrada Metro horizontal de forma controlada
+            setTimeout(function() {
+                var content = document.getElementById("content");
+                if (content) { content.classList.add("metro-activa"); }
+            }, 50);
+        });
+    </script>
+</body>
+</html>
