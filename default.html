@@ -462,47 +462,65 @@
         </div>
     </div>
     <script>
-        var baseNombresApps = ["Angry Birds Space", "Fruit Ninja", "RecipeKeeper", "Rayman Jungle Run", "WPCentral", "Cut The Rope", "wpapp"];
-        function ejecutarBusquedaStore(e){ if(e.key==="Enter") filtrarCatalogoBoton(); }
-        function filtrarCatalogoBoton(){ var t=document.getElementById('store-search-input').value.toLowerCase().trim(); if(t==="") { irAlInicio(); return; } }
-        /* REPARACIÓN CLÍNICA DE LA CORTINA SLIDE: Inserta los datos antes de estirar la transición animada */
-        function openAppDetails(appName) {
-            if (!appName) return; var btn = document.getElementById('view-download-action'); if (btn) { btn.innerText = "Instalar"; btn.style.display = "block"; }
-            var titleBox = document.getElementById('view-app-title'); if (titleBox) titleBox.innerText = appName;
-            var pubBox = document.getElementById('view-app-pub'); var descBox = document.getElementById('view-app-desc');
-            if (appName === 'Angry Birds Space') { if(pubBox) pubBox.innerText = 'Rovio Entertainment'; if(descBox) descBox.innerText = 'El iconico juego angry birds y los pajaros se trasladan al espacio! tirate hacia los campos orbitales y tumba cardos!!!!.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('Angry Birds Space', 'https://google.com'); }; }
-            else if (appName === 'Fruit Ninja') { if(pubBox) pubBox.innerText = 'Halfbrick Studios'; if(descBox) descBox.innerText = 'El clásico juego de rebanar sandías nativo horizontal.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('Fruit Ninja', 'https://google.com'); }; }
-            else if (appName === 'RecipeKeeper') { if(pubBox) pubBox.innerText = 'Recipe Keeper Team'; if(descBox) descBox.innerText = 'Organiza tus recetas y planifica comidas.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('RecipeKeeper', 'https://google.com'); }; }
-            else if (appName === 'Rayman Jungle Run') { if(pubBox) pubBox.innerText = 'Ubisoft'; if(descBox) descBox.innerText = '¡El legendario héroe de las plataformas fluidas Metro!'; if(btn) btn.onclick = function() { iniciarDescargaMetro('Rayman Jungle Run', 'https://google.com'); }; }
-            else if (appName === 'WPCentral') { if(pubBox) pubBox.innerText = 'WPCentral Team'; if(descBox) descBox.innerText = 'Noticias, análisis de software y coberturas de Windows.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('WPCentral', 'https://google.com'); }; }
-            else if (appName === 'Cut The Rope') { if(pubBox) pubBox.innerText = 'ZeptoLab UK'; if(descBox) descBox.innerText = 'Corta las cuerdas correctas en este puzzle de física.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('Cut The Rope', 'https://google.com'); }; }
-            else if (appName === 'wpapp') { if(pubBox) pubBox.innerText = 'wpapp Team'; if(descBox) descBox.innerText = 'Una app de windows phone'; if(btn) btn.onclick = function() { iniciarDescargaMetro('wpapp', 'https://google.com'); }; }
-            else if (appName === 'Fresh Paint') { if(pubBox) pubBox.innerText = 'Microsoft Studios'; if(descBox) descBox.innerText = 'Lienzo de pintura digital con simulación realista de óleos.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('Fresh Paint', 'https://google.com'); }; }
-            else if (appName === 'ProdigyMath') { if(pubBox) pubBox.innerText = 'Prodigy Math Team'; if(descBox) descBox.innerText = 'Plataforma educativa de matemáticas adaptada a un entorno de fantasía y rol. Resuelve desafíos aritméticos y sube de nivel.'; }
-            else if (appName === 'newsXpresso Metro') { if(pubBox) pubBox.innerText = 'newsXpresso'; if(descBox) descBox.innerText = 'Tu revista digital personal adaptada con diseño de lectura horizontal, organización inteligente de categorías y feeds de noticias.'; }
-            else if (appName === 'Opentracks') { if(pubBox) pubBox.innerText = 'Opentracks Studio'; if(descBox) descBox.innerText = 'Reproductor de audio libre de código abierto optimizado con ecualización de frecuencias y soporte para indexación rápida.'; }
-            else if (appName === 'Evernote') { if(pubBox) pubBox.innerText = 'Evernote Corp'; if(descBox) descBox.innerText = 'Toma notas, organiza tus ideas, archiva tus documentos importantes y sincroniza tus libretas de apuntes de forma fluida.'; }
-            else if (appName === 'mytube') { if(pubBox) pubBox.innerText = 'Ryken Studio'; if(descBox) descBox.innerText = 'El mejor cliente de videos de terceros para la interfaz con soporte de reproducción de audio en segundo plano y descargas.'; }
-            else if (appName === 'DrayMusic') { if(pubBox) pubBox.innerText = 'DrayMusic Studio'; if(descBox) descBox.innerText = 'Reproductor y gestor de listas musicales nativo con interfaz fluida adaptativa para la indexación rápida de tu catálogo de audio.'; }
-            else if (appName === 'Netflix') { if(pubBox) pubBox.innerText = 'Netflix Inc'; if(descBox) descBox.innerText = 'Disfruta de películas, series y documentales vía streaming directo en tu pantalla completa con interfaz optimizada de alta definición.'; }
-            else if (appName === 'Rowi') { if(pubBox) pubBox.innerText = 'Hidden Pineapple'; if(descBox) descBox.innerText = 'Cliente de Twitter panorámico diseñado para la lectura cómoda de tus feeds de noticias y timelines directamente en una grilla horizontal.'; }
-            else if (appName === 'Nokia AppSocial') { if(pubBox) pubBox.innerText = 'Nokia Corporation'; if(descBox) descBox.innerText = 'Explora, descubre y descarga las aplicaciones recomendadas y curadas por la comunidad de Nokia en una interfaz fluida nativa.'; }
-            else if (appName === 'Koode Reader') { if(pubBox) pubBox.innerText = 'Koode Team'; if(descBox) descBox.innerText = 'Lector avanzado de libros electrónicos con soporte multiplataforma de lectura para archivos EPUB, PDF y creación de notas.'; }
-            else if (appName === 'El Tenedor') { if(pubBox) pubBox.innerText = 'La Fourchette'; if(descBox) descBox.innerText = 'Guía gastronómica oficial de La Fourchette. Encuentra recetas de cocina, opiniones de chefs y gestiona tus reservas de mesas.'; }
-            else if (appName === 'Xunxo News') { if(pubBox) pubBox.innerText = 'XunxoCorp'; if(descBox) descBox.innerText = 'Lector de noticias RSS independiente con soporte de feeds locales estructurados libres de cualquier tipo de bloqueo corporativo.'; }
-            else if (appName === 'InsiderHub') { if(pubBox) pubBox.innerText = 'Microsoft Insider'; if(descBox) descBox.innerText = 'Accede a las últimas compilaciones, desafíos técnicos de desarrollo y foros de retroalimentación de la comunidad Insider oficial.'; }
+    // 1. LISTA COMPLETA DE APPS (Aquí puedes añadir más sin miedo a romper el código)
+    var catalogoApps = {
+        'Angry Birds Space': { pub: 'Rovio Entertainment', desc: 'Los pájaros espaciales se trasladan al espacio exterior.', icon: 'angrybirds.png', url: 'https://drive.google.com/file/d/1oStrLgIrknt95EcIkLwY_YiZbMsFHIUQ/view?usp=drive_link' },
+        'Fruit Ninja': { pub: 'Halfbrick Studios', desc: 'El clásico juego de rebanar sandías.', icon: 'fruitninja.png', url: 'https://drive.google.com/file/d/1q5qowDPr-Htm12JrrNK418Lzu_lQJNOL/view?usp=drive_link' },
+        'ProdigyMath': { pub: 'Prodigy Math Team', desc: 'Plataforma educativa de matemáticas.', icon: 'ProdigyMath_1.17.0.0_AnyCPU_Debug.png', url: 'https://drive.google.com/file/d/1Bm5y9laQEVD2EzH3ObBj5XBTEPVC6mo_/view?usp=drive_link' },
+        'newsXpresso Metro': { pub: 'newsXpresso', desc: 'Tu revista digital personal.', icon: 'newsxpresso.png', url: 'https://drive.google.com/file/d/1Zp11rRSB3clkymzKDPb2bKkCPnL4M_dx/view?usp=drive_link' },
+        'Opentracks': { pub: 'Opentracks Studio', desc: 'Reproductor de audio libre.', icon: 'mp3hubesopentracks.png', url: 'https://drive.google.com/file/d/1Cond9OlNdjPee0RdtALNhasntS8JZKXA/view?usp=drive_link' },
+        'wpapp': { pub: 'wpapp Team', desc: 'Sincronización de mosaicos clásicos.', icon: 'wpapp.png', url: 'https://drive.google.com/file/d/1rDJgRwSaZ1LdJg8sM2nrZlyxAIM1CCE3/view?usp=drive_link' },
+        'Evernote': { pub: 'Evernote Corp', desc: 'Toma notas y organiza ideas.', icon: 'evernote.png', url: 'https://drive.google.com/file/d/1D6TPEhleJFXa9n9JfnQ04vt2A-j2gLYv/view?usp=drive_link' },
+        'mytube': { pub: 'Ryken Studio', desc: 'Cliente de videos estilo Metro.', icon: 'mytube.png', url: 'https://drive.google.com/file/d/1EthmDqW2kcgDsaZ7EpPSdiB8Rv1tNTWC/view?usp=drive_link' },
+        'DrayMusic': { pub: 'DrayMusic Studio', desc: 'Reproductor y gestor musical.', icon: '1773704616_DrayMusic_1.0.0.0_AnyCPU.png', url: 'https://drive.google.com/file/d/1DJOGR0OaH9jP0jaGTQ8Y0VvgTfbj_Dvz/view?usp=drive_link' },
+        'Netflix': { pub: 'Netflix Inc', desc: 'Streaming en alta definición.', icon: 'netflix.png', url: 'https://drive.google.com/file/d/1895kZuRaM7CmUmNfuvnwwzTTTIAoIcb6/view?usp=drive_link' },
+        'Rowi': { pub: 'Hidden Pineapple', desc: 'Cliente de Twitter panorámico.', icon: 'rowi-150x150.png', url: 'https://drive.google.com/file/d/1-1leuVqfzwpCaIf7wDbCpNqyZ780Ot1o/view?usp=drive_link' },
+        'Nokia AppSocial': { pub: 'Nokia Corporation', desc: 'Recomendaciones de la comunidad.', icon: 'nokiaappsocial.png', url: 'https://drive.google.com/file/d/1LIDK37Jsnz8hnbelIWC-aWzAtXB3vMNB/view?usp=drive_link' },
+        'Koode Reader': { pub: 'Koode Team', desc: 'Lector de libros electrónicos.', icon: 'koodereader.png', url: 'https://drive.google.com/file/d/1e8QpSamGGLevpQBODUvPTNPIKbMNb3Fw/view?usp=drive_link' },
+        'El Tenedor': { pub: 'La Fourchette', desc: 'Guía gastronómica oficial.', icon: 'eltenedor.png', url: 'https://drive.google.com/file/d/1aHYx97Ug17RF8cNmBcderkRnA10zGzhA/view?usp=drive_link' },
+        'Rayman Jungle Run': { pub: 'Ubisoft', desc: 'Legendario héroe de plataformas.', icon: 'raymanjunglerun.png', url: 'https://drive.google.com/file/d/1mHxYD_VFBC7lI78mGY_BuHtYd7P7nzyh/view?usp=drive_link' },
+        'Cut The Rope': { pub: 'ZeptoLab UK', desc: 'Física para alimentar a Om Nom.', icon: 'CutTheRope.png', url: 'https://drive.google.com/file/d/1IeQRrxmj0jrgTDSGSaEjN2tCmd6o1Ky1/view?usp=drive_link' },
+        'Xurxo News': { pub: 'XunxoCorp', desc: 'Lector de noticias RSS.', icon: 'Xuxo.png', url: 'https://drive.google.com/file/d/1000ZWnzxWE-NCzKp87TQ_43xXmkW2qKz/view?usp=drive_link' },
+        'Fresh Paint': { pub: 'Microsoft Studios', desc: 'Lienzo de pintura digital.', icon: 'freshpaint.png', url: 'https://drive.google.com/file/d/1easaK47p8H1vAXQOvKWSSQkfGNS0pOfq/view?usp=drive_link' },
+        'RecipeKeeper': { pub: 'Recipe Keeper Team', desc: 'Organiza tus recetas familiares.', icon: 'recipekeeper.png', url: 'https://drive.google.com/file/d/1n6jz5gI76eR8Pf9aWblZwtMqaM908mN2/view?usp=drive_link' },
+        'Adobe Reader': { pub: 'Adobe Systems', desc: 'Visor de PDF oficial.', icon: 'metro_reader_small_logo.targetsize-256.png', url: 'https://drive.google.com/file/d/148Md224s8Jh_wHOFTihllvDtgyX1QOuD/view?usp=drive_link' },
+        'InsiderHub': { pub: 'Microsoft Insider', desc: 'Foros y compilaciones Insider.', icon: 'insiderhub.png', url: 'https://drive.google.com/file/d/1oZhHFJoZtujtljIVt2GwVUmJn5SWFufr/view?usp=drive_link' },
+        'WPCentral': { pub: 'WPCentral Team', desc: 'Noticias del ecosistema Windows.', icon: 'WPAPPCENTRAL.png', url: 'https://drive.google.com/file/d/1JnoKGiIaxYuFm9dn428G0ELkYOJSxxPb/view?usp=drive_link' }
+    };
 
-            var dlView = document.getElementById('app-download-view'); if (dlView) { dlView.style.visibility = "visible"; dlView.classList.add('open'); }
+    // 2. FUNCIÓN ÚNICA (No rompe nada, solo busca en el catálogo)
+    function openAppDetails(nombreApp) {
+        var app = catalogoApps[nombreApp];
+        var pubBox = document.getElementById('view-app-pub');
+        var descBox = document.getElementById('view-app-desc');
+        var iconBox = document.getElementById('view-app-icon');
+        var btnAction = document.getElementById('view-download-action');
+        var urlDescarga = app ? app.url : "";
+
+        if (app) {
+            if (pubBox) pubBox.innerText = app.pub;
+            if (descBox) descBox.innerText = app.desc;
+            if (iconBox) iconBox.style.backgroundImage = "url('images/iconos_extraidos/" + app.icon + "')";
+        } else {
+            if (pubBox) pubBox.innerText = 'CodornizCorp';
+            if (descBox) descBox.innerText = 'La codorniz no ha escrito una descripcion aun.';
+            if (iconBox) iconBox.style.backgroundImage = "url('images/codorniz.png')";
         }
-        function closeAppDetails() { var dlView = document.getElementById('app-download-view'); if (dlView) { dlView.classList.remove('open'); setTimeout(function(){ dlView.style.visibility = "hidden"; }, 280); } }
-        function irAlInicio() { ocultarTodasLasSecciones(); closeAppDetails(); var m = document.getElementById('content'); if (m) m.style.display = 'block'; }
-        function mostrarSeccionAplicaciones(){ closeAppDetails(); ocultarTodasLasSecciones(); var l = document.getElementById('apps-list-view'); if (l) l.style.display = "block"; }
-        function mostrarSeccionDescargas(){ closeAppDetails(); ocultarTodasLasSecciones(); var d = document.getElementById('downloads-hub-view'); if (d) d.style.display = "block"; }
-        function mostrarSeccionCuenta(){ closeAppDetails(); ocultarTodasLasSecciones(); var v = document.getElementById('account-view'); if (v) v.style.display = "block"; }
-        function mostrarSeccionWishlist(){ closeAppDetails(); ocultarTodasLasSecciones(); var v = document.getElementById('wishlist-view'); if (v) v.style.display = "block"; }
-        function ocultarTodasLasSecciones(){ document.getElementById('apps-list-view').style.display="none"; document.getElementById('downloads-hub-view').style.display="none"; document.getElementById('wishlist-view').style.display="none"; document.getElementById('account-view').style.display="none"; document.getElementById('content').style.display='none'; }
-        function iniciarDescargaMetro(appName, rutaOArchivo) { var btn = document.getElementById('view-download-action'); var wrapper = document.getElementById('view-progress-wrapper'); if (wrapper) wrapper.style.display = "block"; var porcentaje = 0; var temporizador = setInterval(function () { porcentaje += 10; if (porcentaje > 100) { clearInterval(temporizador); if (btn) { btn.style.display = "block"; btn.innerText = "Abrir instalador"; btn.onclick = function () { window.location.href = rutaOArchivo; }; } } }, 100); }
-    </script>
+
+        // Configuración botón de descarga
+        if (btnAction) {
+            btnAction.onclick = function() {
+                if (urlDescarga !== "") {
+                    window.location.href = "ms-appinstaller:?source=" + encodeURIComponent(urlDescarga);
+                } else {
+                    alert("App en mantenimiento.");
+                }
+            };
+        }
+        document.getElementById('app-download-view').classList.add("open");
+    }
+</script>  
+</script>
     <div id="metro-appbar-superior"><div style="display:flex; flex-direction:row; gap:32px; padding:20px;"><div onclick="irAlInicio()" style="cursor:pointer;">Inicio Store</div><div onclick="mostrarSeccionAplicaciones()" style="cursor:pointer;">Apps</div></div></div>
     <div id="metro-appbar-inferior"><div style="display:flex; flex-direction:row; gap:32px; padding:20px;"><div onclick="mostrarSeccionDescargas()" style="cursor:pointer;">Descargas</div><div onclick="mostrarSeccionCuenta()" style="cursor:pointer;">Cuenta Oro</div><div onclick="mostrarSeccionWishlist()" style="cursor:pointer;">Wishlist</div></div></div>
     <style>
