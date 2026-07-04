@@ -14,7 +14,7 @@
                 no-repeat fixed center / 100% 100% !important;
             background-color: #228B22 !important;
             color: #fff;
-            font-family: 'Segoe UI', sans-serif;
+            font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
             overflow: hidden;
             width: 100vw !important;
             height: 100vh !important;
@@ -27,7 +27,7 @@
         }
         #topbar {
             height: 70px;
-            background: #228B22;
+            background: #1A1A1A;
             display: flex;
             align-items: center;
             padding: 0 40px 0 20px;
@@ -171,7 +171,6 @@
             from { opacity: 0; transform: translateX(60px); }
             to { opacity: 1; transform: translateX(0); }
         }
-        /* ANIMACIÓN RESTAURADA: Se elimina el display:none y se usa visibilidad y posición externa para que el deslizamiento sea 100% suave */
         #app-download-view {
             position: fixed !important;
             top: 70px !important;
@@ -271,35 +270,56 @@
             display: block !important;
             opacity: 1 !important;
         }
+
+        /* ESTILOS DEL TOAST NOTIFICATION DE LA APP */
+        #toast-container {
+            position: fixed;
+            top: 90px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+        .Codorniz-toast {
+            background-color: #228B22;
+            color: white;
+            padding: 15px 25px;
+            font-size: 16px;
+            font-weight: 300;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            opacity: 0;
+            transform: translateX(100%);
+            animation: slideInToast 0.4s forwards, fadeOutToast 0.4s 4s forwards;
+            pointer-events: auto;
+            border-left: 5px solid #fff;
+        }
+        @keyframes slideInToast {
+            to { opacity: 1; transform: translateX(0); }
+        }
+        @keyframes fadeOutToast {
+            to { opacity: 0; transform: translateX(100%); }
+        }
     </style>
 </head>
 <body>
-    <div id="topbar">
-        <img src="images/codorniz.png"
-             class="topbar-codorniz-logo"
-             onclick="irAlInicio()">
-        <div class="store-brand"
-             onclick="irAlInicio()">CodornizStore</div>
-        <div class="page-title"
-             onclick="mostrarSeccionAplicaciones()">
-             Aplicaciones</div>
-        <div class="page-title"
-             onclick="mostrarSeccionDescargas()">
-             Descargas</div>
-        <div class="page-title"
-             onclick="mostrarSeccionCuenta()">
-             Mi Cuenta</div>
-        <div class="page-title"
-             onclick="mostrarSeccionWishlist()">
-             Wishlist</div>
-        <div class="search-container">
-            <input type="text"
-                   id="store-search-input"
-                   placeholder="Buscar..."
-                   onkeyup="ejecutarBusquedaStore(event)">
-            <span onclick="filtrarCatalogoBoton()">🔍</span>
-        </div>
+<div id="topbar">
+    <img src="images/codorniz.png" class="topbar-codorniz-logo" onclick="irAlInicio()">
+    <div class="store-brand" onclick="irAlInicio()">CodornizStore</div>
+    <div class="page-title" onclick="mostrarSeccion('apps-list-view')">Aplicaciones</div>
+    <div class="page-title" onclick="mostrarSeccion('downloads-hub-view')">Descargas</div>
+    <div class="page-title" onclick="mostrarSeccion('account-view')">Mi Cuenta</div>
+    <div class="page-title" onclick="mostrarSeccion('wishlist-view')">Wishlist</div>
+    
+    <div class="search-container">
+        <input type="text" id="store-search-input" placeholder="Buscar...">
+        <span onclick="filtrarCatalogoBoton()">🔍</span>
     </div>
+</div>
+
+<div id="toast-container"></div> <!-- CONTENEDOR DE TOASTS -->
+
     <div id="content">
         <div class="section-group metro-fade">
             <div class="section-title-container">
@@ -380,14 +400,14 @@
             </div>
         </div>
     </div>
-    <!-- ELEMENTOS DEL SUBSUELO DE LA COLA DE DESCARGAS -->
+    
     <div id="app-download-view">
         <div class="download-sidebar">
             <div id="view-app-icon" class="download-icon"></div>
             <div class="metro-progress-container" id="view-progress-wrapper">
                 <div class="metro-progress-bar" id="view-progress-bar"></div>
             </div>
-            <button class="btn-install" id="view-download-action">Instalar</button>
+            <button class="btn-install" id="view-download-action">Descargar</button>
             <button class="btn-back" onclick="closeAppDetails()">Volver</button>
         </div>
         <div class="download-details">
@@ -402,6 +422,7 @@
             </div>
         </div>
     </div>
+    
     <div id="downloads-hub-view" class="metro-fade">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
              <h1>Cola de descargas</h1><button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;">Volver</button>
@@ -410,6 +431,7 @@
             <div id="empty-downloads-msg" style="opacity:0.6;">No hay descargas pendientes en este momento.</div>
         </div>
     </div>
+    
     <div id="wishlist-view" class="metro-fade">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
              <h1>Wishlist Codorniz Nativa</h1><button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;">Volver</button>
@@ -418,6 +440,7 @@
             <div class="app-item-wrapper" onclick="openAppDetails('Angry Birds Space')"><div class="app-tile" style="background:#004d99;"><img src="images/iconos_extraidos/angrybirds.png"></div><div class="tile-title">Angry Birds Space</div></div>
         </div>
     </div>
+    
     <div id="account-view" class="metro-fade">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
              <h1>Mi Cuenta Codorniz</h1><button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;">Volver</button>
@@ -432,6 +455,7 @@
             </div>
         </div>
     </div>
+    
     <div id="apps-list-view" class="metro-fade">
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
              <h1>Todas las aplicaciones</h1><button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;">Volver</button>
@@ -461,57 +485,216 @@
             <div class="app-item-wrapper" onclick="openAppDetails('WPCentral')"><div class="app-tile" style="background:#00a300;"><img src="images/iconos_extraidos/WPAPPCENTRAL.png"></div><div class="tile-title" id="title-21">WPCentral</div></div>
         </div>
     </div>
-    <script>
-        var baseNombresApps = ["Angry Birds Space", "Fruit Ninja", "RecipeKeeper", "Rayman Jungle Run", "WPCentral", "Cut The Rope", "wpapp"];
-        function ejecutarBusquedaStore(e){ if(e.key==="Enter") filtrarCatalogoBoton(); }
-        function filtrarCatalogoBoton(){ var t=document.getElementById('store-search-input').value.toLowerCase().trim(); if(t==="") { irAlInicio(); return; } }
-        /* REPARACIÓN CLÍNICA DE LA CORTINA SLIDE: Inserta los datos antes de estirar la transición animada */
-        function openAppDetails(appName) {
-            if (!appName) return; var btn = document.getElementById('view-download-action'); if (btn) { btn.innerText = "Instalar"; btn.style.display = "block"; }
-            var titleBox = document.getElementById('view-app-title'); if (titleBox) titleBox.innerText = appName;
-            var pubBox = document.getElementById('view-app-pub'); var descBox = document.getElementById('view-app-desc');
-            if (appName === 'Angry Birds Space') { if(pubBox) pubBox.innerText = 'Rovio Entertainment'; if(descBox) descBox.innerText = 'El iconico juego angry birds y los pajaros se trasladan al espacio! tirate hacia los campos orbitales y tumba cardos!!!!.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('Angry Birds Space', 'https://google.com'); }; }
-            else if (appName === 'Fruit Ninja') { if(pubBox) pubBox.innerText = 'Halfbrick Studios'; if(descBox) descBox.innerText = 'El clásico juego de rebanar sandías nativo horizontal.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('Fruit Ninja', 'https://google.com'); }; }
-            else if (appName === 'RecipeKeeper') { if(pubBox) pubBox.innerText = 'Recipe Keeper Team'; if(descBox) descBox.innerText = 'Organiza tus recetas y planifica comidas.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('RecipeKeeper', 'https://google.com'); }; }
-            else if (appName === 'Rayman Jungle Run') { if(pubBox) pubBox.innerText = 'Ubisoft'; if(descBox) descBox.innerText = '¡El legendario héroe de las plataformas fluidas Metro!'; if(btn) btn.onclick = function() { iniciarDescargaMetro('Rayman Jungle Run', 'https://google.com'); }; }
-            else if (appName === 'WPCentral') { if(pubBox) pubBox.innerText = 'WPCentral Team'; if(descBox) descBox.innerText = 'Noticias, análisis de software y coberturas de Windows.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('WPCentral', 'https://google.com'); }; }
-            else if (appName === 'Cut The Rope') { if(pubBox) pubBox.innerText = 'ZeptoLab UK'; if(descBox) descBox.innerText = 'Corta las cuerdas correctas en este puzzle de física.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('Cut The Rope', 'https://google.com'); }; }
-            else if (appName === 'wpapp') { if(pubBox) pubBox.innerText = 'wpapp Team'; if(descBox) descBox.innerText = 'Una app de windows phone'; if(btn) btn.onclick = function() { iniciarDescargaMetro('wpapp', 'https://google.com'); }; }
-            else if (appName === 'Fresh Paint') { if(pubBox) pubBox.innerText = 'Microsoft Studios'; if(descBox) descBox.innerText = 'Lienzo de pintura digital con simulación realista de óleos.'; if(btn) btn.onclick = function() { iniciarDescargaMetro('Fresh Paint', 'https://google.com'); }; }
-            else if (appName === 'ProdigyMath') { if(pubBox) pubBox.innerText = 'Prodigy Math Team'; if(descBox) descBox.innerText = 'Plataforma educativa de matemáticas adaptada a un entorno de fantasía y rol. Resuelve desafíos aritméticos y sube de nivel.'; }
-            else if (appName === 'newsXpresso Metro') { if(pubBox) pubBox.innerText = 'newsXpresso'; if(descBox) descBox.innerText = 'Tu revista digital personal adaptada con diseño de lectura horizontal, organización inteligente de categorías y feeds de noticias.'; }
-            else if (appName === 'Opentracks') { if(pubBox) pubBox.innerText = 'Opentracks Studio'; if(descBox) descBox.innerText = 'Reproductor de audio libre de código abierto optimizado con ecualización de frecuencias y soporte para indexación rápida.'; }
-            else if (appName === 'Evernote') { if(pubBox) pubBox.innerText = 'Evernote Corp'; if(descBox) descBox.innerText = 'Toma notas, organiza tus ideas, archiva tus documentos importantes y sincroniza tus libretas de apuntes de forma fluida.'; }
-            else if (appName === 'mytube') { if(pubBox) pubBox.innerText = 'Ryken Studio'; if(descBox) descBox.innerText = 'El mejor cliente de videos de terceros para la interfaz con soporte de reproducción de audio en segundo plano y descargas.'; }
-            else if (appName === 'DrayMusic') { if(pubBox) pubBox.innerText = 'DrayMusic Studio'; if(descBox) descBox.innerText = 'Reproductor y gestor de listas musicales nativo con interfaz fluida adaptativa para la indexación rápida de tu catálogo de audio.'; }
-            else if (appName === 'Netflix') { if(pubBox) pubBox.innerText = 'Netflix Inc'; if(descBox) descBox.innerText = 'Disfruta de películas, series y documentales vía streaming directo en tu pantalla completa con interfaz optimizada de alta definición.'; }
-            else if (appName === 'Rowi') { if(pubBox) pubBox.innerText = 'Hidden Pineapple'; if(descBox) descBox.innerText = 'Cliente de Twitter panorámico diseñado para la lectura cómoda de tus feeds de noticias y timelines directamente en una grilla horizontal.'; }
-            else if (appName === 'Nokia AppSocial') { if(pubBox) pubBox.innerText = 'Nokia Corporation'; if(descBox) descBox.innerText = 'Explora, descubre y descarga las aplicaciones recomendadas y curadas por la comunidad de Nokia en una interfaz fluida nativa.'; }
-            else if (appName === 'Koode Reader') { if(pubBox) pubBox.innerText = 'Koode Team'; if(descBox) descBox.innerText = 'Lector avanzado de libros electrónicos con soporte multiplataforma de lectura para archivos EPUB, PDF y creación de notas.'; }
-            else if (appName === 'El Tenedor') { if(pubBox) pubBox.innerText = 'La Fourchette'; if(descBox) descBox.innerText = 'Guía gastronómica oficial de La Fourchette. Encuentra recetas de cocina, opiniones de chefs y gestiona tus reservas de mesas.'; }
-            else if (appName === 'Xunxo News') { if(pubBox) pubBox.innerText = 'XunxoCorp'; if(descBox) descBox.innerText = 'Lector de noticias RSS independiente con soporte de feeds locales estructurados libres de cualquier tipo de bloqueo corporativo.'; }
-            else if (appName === 'InsiderHub') { if(pubBox) pubBox.innerText = 'Microsoft Insider'; if(descBox) descBox.innerText = 'Accede a las últimas compilaciones, desafíos técnicos de desarrollo y foros de retroalimentación de la comunidad Insider oficial.'; }
+<script>
+    var catalogoApps = {
+        'Angry Birds Space': { pub: 'Rovio Entertainment', desc: 'Los iconicos pajaros de angry birds se trasladan al espacio,usa la resortera y tumba cerdos.', icon: 'angrybirds.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx' },
+        'Fruit Ninja': { pub: 'Halfbrick Studios', desc: 'Saca tu katana y corta las frutas.', icon: 'fruitninja.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx' },
+        'ProdigyMath': { pub: 'Prodigy Math Team', desc: 'Una Plataforma educativa de matemáticas.', icon: 'ProdigyMath_1.17.0.0_AnyCPU_Debug.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ProdigyMath_1.17.0.0_AnyCPU_Debug.appx' },
+        'newsXpresso Metro': { pub: 'newsXpresso', desc: 'Tus noticias en el expreso.', icon: 'newsxpresso.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/esobiIncorporated.newsXpressoMetro_2.0.2.208_neutral__sngswjb5h6fyg.appx' },
+        'Opentracks': { pub: 'Opentracks Studio', desc: 'El reproductor de audio del dramatico de chockingnetdude xdxd.', icon: 'mp3hubesopentracks.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx' },
+        'wpapp': { pub: 'wpapp Team', desc: 'La aplicacion tipo sandbox de windows phone ehh no se.', icon: 'wpapp.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/wpapp.appx' },
+        'Evernote': { pub: 'Evernote Corp', desc: 'Toma notas y organiza ideas.', icon: 'evernote.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Evernote.Evernote_3.3.0.102_x86__q4d96b2w5wcc2.appx' },
+        'mytube': { pub: 'Ryken Studio', desc: 'Un cliente de videos iconico para windows 8 y 8.1!.', icon: 'mytube.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/mytube.appx' },
+        'DrayMusic': { pub: 'DrayMusic Studio', desc: 'Reproductor de musica increible.', icon: '1773704616_DrayMusic_1.0.0.0_AnyCPU.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1773704616_DrayMusic_1.0.0.0_AnyCPU.appx' },
+        'Netflix': { pub: 'Netflix Inc', desc: 'Ve tus series y peliculas favoritas agarra tus palomitas ahora mismo.', icon: 'netflix.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/4DF9E0F8.Netflix_2.22.0.39_x86__mcm4njqhnhss8.appx' },
+        'Rowi': { pub: 'Hidden Pineapple', desc: 'El gran cliente de twitter conocido de windows phone ha llegado a pc.', icon: 'rowi-150x150.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HiddenPineappleLLC.Rowi_0.8.0.0_x86__8364z769gkj0p.appx' },
+        'Nokia AppSocial': { pub: 'Nokia Corporation', desc: 'La app social de nokia,habla con tus conocidos.', icon: 'nokiaappsocial.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/NokiaCorporation.AppSocial_1.9.0.0_x86__6d0q6r3z979nw.appx' },
+        'Koode Reader': { pub: 'Koode Team', desc: 'Un lector de pdfs,documentos etc etc.', icon: 'koodereader.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/52487Koode.56414CB813359_1.5.0.4_neutral__m1bqtb7san9p0.appx' },
+        'El Tenedor': { pub: 'La Fourchette', desc: 'Una gran aplicacions de recetas despues de bing food and drink/gourmet.', icon: 'eltenedor.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/LaFourchette.comElTenedor.LaFourchette_2015.407.1353.2545_neutral_._xjascxykqffr4.AppxBundle.appx' },
+        'Rayman Jungle Run': { pub: 'Ubisoft', desc: 'El Legendario heroe Rayman llega a windows 8.1!juegalo ahora mismo.', icon: 'raymanjunglerun.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/UbisoftEntertainment.RaymanJungleRun_1.2.0.88_x86__dbgk1hhpxymar.Appx' },
+        'Cut The Rope': { pub: 'ZeptoLab UK', desc: 'Corta las cuerdas y dale de comer al gran Om Nom.', icon: 'CutTheRope.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ZeptoLabUKLimited.CutTheRope_1.2.0.43_x86__sq9zxnwrk84pj.appx' },
+        'Xunxo News': { pub: 'XunxoCorp', desc: 'Mira tus noticias en donde sea.', icon: 'Xuxo.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/12022Xurxo.XurxoNews_1.0.0.0_neutral__cffdx9p3b7k32.appx' },
+        'Fresh Paint': { pub: 'Microsoft Studios', desc: 'Pinta,Dibuja,bocetea aqui tienes el set completo de pinceles,pintura seca y lapices.', icon: 'freshpaint.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.FreshPaint_2.0.15133.0_x86__8wekyb3d8bbwe.appx' },
+        'RecipeKeeper': { pub: 'Recipe Keeper Team', desc: 'Organiza tus recetas y cocina para alimentar a tu familia.', icon: 'recipekeeper.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/TudorspanLimited.RecipeKeeperFree_1.5.2.0_x86__mnckez06wj9wa.appx' },
+        'Adobe Reader': { pub: 'Adobe Systems', desc: 'El iconico lector de pdfs ha llegado a windows 8.1 prueba y visualiza tus documentos!.', icon: 'metro_reader_small_logo.targetsize-256.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/AdobeSystemsIncorporated.AdobeReader_3.1.8.7675_x86__ynb6jyjzte8ga.Appx' },
+        'InsiderHub': { pub: 'Microsoft Insider', desc: 'Opina y prueba las nuevas compilaciones.', icon: 'insiderhub.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.InsiderHub_15.3.30.1_x86__8wekyb3d8bbwe_1780310454359.appx' },
+        'WPCentral': { pub: 'WPCentral Team', desc: 'Noticias,y mas en windows 8 y 8.1.', icon: 'WPAPPCENTRAL.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/WPCentral.Win8_1.3.1.2_AnyCPU.appx' }
+    };
 
-            var dlView = document.getElementById('app-download-view'); if (dlView) { dlView.style.visibility = "visible"; dlView.classList.add('open'); }
+    function irAlInicio() {
+        var vistas = document.querySelectorAll('[id$="-view"]');
+        for (var i = 0; i < vistas.length; i++) {
+            vistas[i].classList.remove('view-open', 'open');
         }
-        function closeAppDetails() { var dlView = document.getElementById('app-download-view'); if (dlView) { dlView.classList.remove('open'); setTimeout(function(){ dlView.style.visibility = "hidden"; }, 280); } }
-        function irAlInicio() { ocultarTodasLasSecciones(); closeAppDetails(); var m = document.getElementById('content'); if (m) m.style.display = 'block'; }
-        function mostrarSeccionAplicaciones(){ closeAppDetails(); ocultarTodasLasSecciones(); var l = document.getElementById('apps-list-view'); if (l) l.style.display = "block"; }
-        function mostrarSeccionDescargas(){ closeAppDetails(); ocultarTodasLasSecciones(); var d = document.getElementById('downloads-hub-view'); if (d) d.style.display = "block"; }
-        function mostrarSeccionCuenta(){ closeAppDetails(); ocultarTodasLasSecciones(); var v = document.getElementById('account-view'); if (v) v.style.display = "block"; }
-        function mostrarSeccionWishlist(){ closeAppDetails(); ocultarTodasLasSecciones(); var v = document.getElementById('wishlist-view'); if (v) v.style.display = "block"; }
-        function ocultarTodasLasSecciones(){ document.getElementById('apps-list-view').style.display="none"; document.getElementById('downloads-hub-view').style.display="none"; document.getElementById('wishlist-view').style.display="none"; document.getElementById('account-view').style.display="none"; document.getElementById('content').style.display='none'; }
-        function iniciarDescargaMetro(appName, rutaOArchivo) { var btn = document.getElementById('view-download-action'); var wrapper = document.getElementById('view-progress-wrapper'); if (wrapper) wrapper.style.display = "block"; var porcentaje = 0; var temporizador = setInterval(function () { porcentaje += 10; if (porcentaje > 100) { clearInterval(temporizador); if (btn) { btn.style.display = "block"; btn.innerText = "Abrir instalador"; btn.onclick = function () { window.location.href = rutaOArchivo; }; } } }, 100); }
-    </script>
-    <div id="metro-appbar-superior"><div style="display:flex; flex-direction:row; gap:32px; padding:20px;"><div onclick="irAlInicio()" style="cursor:pointer;">Inicio Store</div><div onclick="mostrarSeccionAplicaciones()" style="cursor:pointer;">Apps</div></div></div>
-    <div id="metro-appbar-inferior"><div style="display:flex; flex-direction:row; gap:32px; padding:20px;"><div onclick="mostrarSeccionDescargas()" style="cursor:pointer;">Descargas</div><div onclick="mostrarSeccionCuenta()" style="cursor:pointer;">Cuenta Oro</div><div onclick="mostrarSeccionWishlist()" style="cursor:pointer;">Wishlist</div></div></div>
-    <style>
-        #metro-appbar-superior { position: fixed; top: -110px; left: 0; width: 100%; height: 95px; background: rgba(28, 28, 28, 0.95); transition: top 0.2s; z-index: 99998; } #metro-appbar-superior.appbar-activa { top: 0; }
-        #metro-appbar-inferior { position: fixed; bottom: -130px; left: 0; width: 100%; height: 95px; background: rgba(28, 28, 28, 0.95); transition: bottom 0.2s; z-index: 99998; } #metro-appbar-inferior.appbar-activa { bottom: 0; }
-    </style>
-    <script>
-        document.addEventListener("contextmenu", function(e){ e.preventDefault(); document.getElementById("metro-appbar-superior").classList.toggle("appbar-activa"); document.getElementById("metro-appbar-inferior").classList.toggle("appbar-activa"); });
-        document.addEventListener("click", function(e){ if(!document.getElementById("metro-appbar-superior").contains(e.target) && !document.getElementById("metro-appbar-inferior").contains(e.target)){ document.getElementById("metro-appbar-superior").classList.remove("appbar-activa"); document.getElementById("metro-appbar-inferior").classList.remove("appbar-activa"); } });
-    </script>
+    }
+
+    function closeAppDetails() {
+        document.getElementById('app-download-view').classList.remove("open");
+    }
+
+    function mostrarSeccion(id) {
+        irAlInicio();
+        var seccion = document.getElementById(id);
+        if (seccion) seccion.classList.add('view-open');
+    }
+
+    function mostrarSeccionAplicaciones() { mostrarSeccion('apps-list-view'); }
+    function mostrarSeccionDescargas() { mostrarSeccion('downloads-hub-view'); }
+    function mostrarSeccionCuenta() { mostrarSeccion('account-view'); }
+    function mostrarSeccionWishlist() { mostrarSeccion('wishlist-view'); }
+    
+    function filtrarCatalogoBoton() { console.log("Búsqueda en desarrollo..."); }
+
+    // SISTEMA INTEGRADO DE TOASTS: APP + WINDOWS 10 NATIVO
+    function mostrarToast(mensaje) {
+        // 1. Toast interno (El verde de la app estilo Windows 8)
+        var container = document.getElementById('toast-container');
+        var toast = document.createElement('div');
+        toast.className = 'Codorniz-toast';
+        toast.innerText = mensaje;
+        container.appendChild(toast);
+
+        // Remover el toast interno después de 4.5 segundos
+        setTimeout(function() {
+            if (container.contains(toast)) {
+                container.removeChild(toast);
+            }
+        }, 4500);
+
+        // 2. Notificación Nativa en el sistema (Windows 10/11)
+        if (typeof Windows !== 'undefined' && typeof Windows.UI !== 'undefined') {
+            var notifications = Windows.UI.Notifications;
+            var template = notifications.ToastTemplateType.toastText01;
+            var toastXml = notifications.ToastNotificationManager.getTemplateContent(template);
+            var toastTextElements = toastXml.getElementsByTagName("text");
+            toastTextElements[0].appendChild(toastXml.createTextNode(mensaje));
+            
+            var nativeToast = new notifications.ToastNotification(toastXml);
+            notifications.ToastNotificationManager.createToastNotifier().show(nativeToast);
+        } else if (window.Notification) {
+            if (Notification.permission === "granted") {
+                new Notification("CodornizStore", { body: mensaje, icon: "images/codorniz.png" });
+            } else if (Notification.permission !== "denied") {
+                Notification.requestPermission().then(function(permission) {
+                    if (permission === "granted") {
+                        new Notification("CodornizStore", { body: mensaje, icon: "images/codorniz.png" });
+                    }
+                });
+            }
+        }
+    }
+
+    function openAppDetails(nombreApp) {
+        var app = catalogoApps[nombreApp];
+        if (!app) return;
+        
+        document.getElementById('view-app-title').innerText = nombreApp;
+        document.getElementById('view-app-pub').innerText = app.pub;
+        document.getElementById('view-app-desc').innerText = app.desc;
+        document.getElementById('view-app-icon').style.backgroundImage = "url('images/iconos_extraidos/" + app.icon + "')";
+        
+        var btnAction = document.getElementById('view-download-action');
+        
+        // ESTADO INICIAL: BOTON PARA DESCARGAR
+        btnAction.innerText = "Descargar";
+        btnAction.style.background = "#228B22";
+        btnAction.disabled = false;
+        
+        btnAction.onclick = function() {
+            // CAMBIO DE ESTADO: DESCARGANDO
+            btnAction.innerText = "Descargando...";
+            btnAction.style.background = "#555";
+            btnAction.disabled = true; // Desactivar para evitar multiples clicks
+            
+            mostrarToast("Mr Codorniz está cargando tu appx hacia tu pc, espérate un ratito.");
+            
+            // Lógica para entorno nativo WinJS (donde tienes acceso al Launcher)
+            if (typeof Windows !== 'undefined' && typeof Windows.Networking !== 'undefined') {
+                try {
+                    var uri = new Windows.Foundation.Uri(app.url);
+                    var localFolder = Windows.Storage.ApplicationData.current.localFolder;
+                    var nombreArchivoLimpio = app.icon.replace(".png", "") + ".appx"; // Usa el nombre de la app para el archivo
+                    
+                    localFolder.createFileAsync(nombreArchivoLimpio, Windows.Storage.CreationCollisionOption.replaceExisting)
+                        .then(function (newFile) {
+                            var downloader = new Windows.Networking.BackgroundTransfer.BackgroundDownloader();
+                            var download = downloader.createDownload(uri, newFile);
+                            
+                            // Iniciar descarga real
+                            return download.startAsync().then(function () {
+                                return newFile; // Pasar el archivo listo
+                            });
+                        })
+                        .done(function (fileObj) {
+                            // CAMBIO DE ESTADO: LISTO PARA INSTALAR
+                            btnAction.innerText = "Instalar";
+                            btnAction.style.background = "#1ba1e2"; // Azul para resaltar la acción de abrir
+                            btnAction.disabled = false;
+                            
+                            // Reemplazamos el evento onclick para que ahora abra el instalador por defecto
+                            btnAction.onclick = function() {
+                                Windows.System.Launcher.launchFileAsync(fileObj).done(function (success) {
+                                    if (!success) {
+                                        mostrarToast("No se pudo abrir el instalador del sistema.");
+                                    }
+                                }, function(error) {
+                                    mostrarToast("Error al lanzar: " + error.message);
+                                });
+                            };
+                            
+                        }, function (error) {
+                            btnAction.innerText = "Error";
+                            btnAction.style.background = "#e51400"; // Rojo en caso de error
+                            mostrarToast("Error en la descarga: " + error.message);
+                        });
+                } catch (e) {
+                    mostrarToast("Error de sistema: " + e.message);
+                }
+            } 
+            // Lógica fallback por si abres el HTML en un navegador web normal
+            else {
+                var iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = app.url; 
+                document.body.appendChild(iframe);
+                
+                setTimeout(function() {
+                    if (document.body.contains(iframe)) {
+                        document.body.removeChild(iframe);
+                    }
+                    // En navegador, como no hay Launcher, simplemente indicamos que bajó
+                    btnAction.innerText = "Descargado";
+                    btnAction.style.background = "#228B22";
+                    btnAction.disabled = true;
+                }, 5000); 
+            }
+        };
+        
+        document.getElementById('app-download-view').classList.add("open");
+    }
+
+    document.addEventListener("contextmenu", function(e){ 
+        e.preventDefault(); 
+        var ms = document.getElementById("metro-appbar-superior");
+        var mi = document.getElementById("metro-appbar-inferior");
+        if(ms && mi) {
+            ms.classList.toggle("appbar-activa"); 
+            mi.classList.toggle("appbar-activa"); 
+        }
+    });
+
+    document.addEventListener("click", function(e){ 
+        var s = document.getElementById("metro-appbar-superior");
+        var i = document.getElementById("metro-appbar-inferior");
+        if(s && i && !s.contains(e.target) && !i.contains(e.target)){ 
+            s.classList.remove("appbar-activa"); 
+            i.classList.remove("appbar-activa"); 
+        } 
+    });
+</script>
+
+<div id="metro-appbar-superior">
+    <div style="display:flex; flex-direction:row; gap:32px; padding:20px;">
+        <div onclick="irAlInicio()" style="cursor:pointer;">Inicio Store</div>
+        <div onclick="mostrarSeccionAplicaciones()" style="cursor:pointer;">Apps</div>
+    </div>
+</div>
+<div id="metro-appbar-inferior">
+    <div style="display:flex; flex-direction:row; gap:32px; padding:20px;">
+        <div onclick="mostrarSeccionDescargas()" style="cursor:pointer;">Descargas</div>
+        <div onclick="mostrarSeccionCuenta()" style="cursor:pointer;">Cuenta Oro</div>
+        <div onclick="mostrarSeccionWishlist()" style="cursor:pointer;">Wishlist</div>
+    </div>
+</div>
 </body>
 </html>
