@@ -1,0 +1,1094 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Store</title>
+
+    <link href="//Microsoft.WinJS.2.0/css/ui-light.css" rel="stylesheet" />
+    <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
+    <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
+
+    <link href="../css/default.css" rel="stylesheet" />
+    <script src="../js/default.js"></script>
+
+    <style id="dynamic-theme-css"></style>
+
+    <style>
+        body {
+            overflow-x: hidden;
+            overflow-y: auto;
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s ease, color 0.3s ease;
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        @keyframes win8Entrance {
+            0% {
+                opacity: 0;
+                transform: translateX(100px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes topBarSlideDown {
+            0% {
+                opacity: 0;
+                -ms-transform: translateY(-100%);
+                transform: translateY(-100%);
+            }
+
+            100% {
+                opacity: 1;
+                -ms-transform: translateY(0);
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes topBarSlideUp {
+            0% {
+                opacity: 1;
+                -ms-transform: translateY(0);
+                transform: translateY(0);
+            }
+
+            100% {
+                opacity: 0;
+                -ms-transform: translateY(-100%);
+                transform: translateY(-100%);
+            }
+        }
+
+        #topBarContainer.topbar-hidden {
+            overflow: hidden;
+        }
+
+        .win8-anim {
+            opacity: 0;
+            animation: win8Entrance 0.6s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+        }
+
+        .header-area {
+            display: flex;
+            align-items: baseline;
+            margin-top: 85px;
+            margin-left: 40px;
+            margin-bottom: 30px;
+            padding: 10px;
+        }
+
+        .win-backbutton {
+            margin-right: 20px;
+            border-radius: 50%;
+        }
+            font-weight: lighter;
+            margin: 0;
+            color: #000000;
+        }
+
+        .app-count {
+            font-size: 18px;
+            color: #999;
+            margin-left: 15px;
+            font-weight: lighter;
+        }
+
+        .content-area {
+            margin-left: 110px;
+            max-width: 800px;
+            padding-bottom: 100px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            color: inherit;
+            margin-top: 45px;
+            margin-bottom: 15px;
+            font-weight: normal;
+        }
+
+        .store-button {
+            background-color: #cccccc;
+            border: none;
+            padding: 8px 25px;
+            font-size: 14px;
+            color: black !important;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+            outline: none;
+            border-radius: 4px;
+        }
+
+            .store-button:hover {
+                background-color: #bbbbbb;
+            }
+
+            .store-button:active {
+                background-color: #999999 !important;
+            }
+
+        .btn-delete {
+            background-color: #e81123;
+            color: white !important;
+            border-radius: 4px;
+        }
+
+        .creator-panel, .shop-panel {
+            background: white;
+            padding: 25px;
+            border: 1px solid #ccc;
+            margin-top: 20px;
+            display: none;
+            color: #333 !important;
+        }
+
+        #shopList {
+            margin-top: 30px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            position: relative;
+        }
+
+            .input-group label {
+                display: block;
+                font-size: 14px;
+                margin-bottom: 5px;
+                color: #333;
+            }
+
+        .color-preview {
+            width: 40px;
+            height: 40px;
+            border: 1px solid #999;
+            display: inline-block;
+            vertical-align: middle;
+            cursor: pointer;
+        }
+
+        .input-group input[type="text"], .input-group select {
+            padding: 8px;
+            width: 250px;
+            border: 1px solid #999;
+            outline: none;
+        }
+
+            .input-group input[type="text"]:focus,
+            .input-group select:focus,
+            .input-group input[type="text"]:active {
+                border: 2px solid #008a00 !important;
+                outline: none !important;
+            }
+
+            .input-group select option:checked {
+                background: #008a00 !important;
+                color: white !important;
+            }
+
+        .theme-card {
+            padding: 15px;
+            background: rgba(128,128,128,0.1);
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border: 1px solid #ccc;
+            color: #333 !important;
+        }
+
+        .theme-info {
+            cursor: pointer;
+            flex-grow: 1;
+            font-size: 18px;
+        }
+
+        .official-badge {
+            font-size: 12px;
+            color: #008a00;
+            display: block;
+            margin-top: 2px;
+            font-weight: bold;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+
+        #ieColorPicker {
+            position: absolute;
+            z-index: 1000;
+            background: #fff;
+            border: 1px solid #999;
+            padding: 10px;
+            display: none;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="topBarContainer"></div>
+    <script type="text/javascript">if (typeof window.MSApp === "undefined") { document.write('<style>html,body,body *{visibility:hidden!important;}html,body{background:white!important;}</style>'); }</script>
+    <header id="topBar" class="header-area win8-anim">
+        <a href="../default.html"><button class="win-backbutton" aria-label="Back"></button></a>
+        <h1 id="mainTitle" class="page-title">Themes</h1>
+        <span id="themeCountDisplay" class="app-count"></span>
+    </header>
+
+    <div class="content-area">
+        <div class="win8-anim" style="animation-delay: 0.1s;">
+            <h2 id="availableTitle" class="section-title">Available Designs</h2>
+            <div id="themeList"></div>
+            <div style="margin-top: 20px;">
+                <button id="btnCreate" class="store-button" onclick="showCreator()">Create Theme</button>
+                <button id="btnImport" class="store-button" onclick="importTheme()">Import Theme</button>
+                <button id="btnShop" class="store-button" style="background-color: #008a00; color: white !important;" onclick="showShop()">Theme-Shop</button>
+            </div>
+        </div>
+
+        <div id="creatorPanel" class="creator-panel win8-anim">
+            <h2 id="creatorTitle" style="margin-top:0">Theme Creator</h2>
+
+            <div class="input-group" style="margin-top: 20px;">
+                <label id="labelName">Theme Name:</label>
+                <input type="text" id="themeName" placeholder="...">
+            </div>
+
+            <div class="input-group">
+                <label id="labelBgImg">Custom Background Image:</label>
+                <button id="btnSelectImg" class="store-button" onclick="pickBackgroundImage()">Select Image...</button>
+                <span id="imgStatus" style="font-size:12px; color:green"></span>
+                <input type="hidden" id="bgImage" value="">
+                <button id="btnRemoveImg" class="store-button btn-delete" style="padding: 4px 10px; font-size:11px" onclick="clearBgImage()">Remove</button>
+            </div>
+
+            <div class="input-group">
+                <label id="labelBgCol">Background Color:</label>
+                <div id="previewBg" class="color-preview" style="background-color: #f2f2f2;" onclick="openPicker('bgColor', 'previewBg', event)"></div>
+                <input type="hidden" id="bgColor" value="#f2f2f2">
+            </div>
+
+            <div class="input-group">
+                <label id="labelTxtCol">Text Color:</label>
+                <div id="previewText" class="color-preview" style="background-color: #000000;" onclick="openPicker('textColor', 'previewText', event)"></div>
+                <input type="hidden" id="textColor" value="#000000">
+            </div>
+
+            <div class="input-group">
+                <label id="labelTopbarCol">TopBar Color:</label>
+                <div id="previewTopbar" class="color-preview" style="background-color: #008a00;" onclick="openPicker('topbarColor', 'previewTopbar', event)"></div>
+                <input type="hidden" id="topbarColor" value="#008a00">
+            </div>
+
+            <div class="input-group">
+                <label id="labelTopbarTextCol">TopBar Text Color:</label>
+                <div id="previewTopbarText" class="color-preview" style="background-color: #ffffff;" onclick="openPicker('topbarTextColor', 'previewTopbarText', event)"></div>
+                <input type="hidden" id="topbarTextColor" value="#ffffff">
+            </div>
+
+            <div class="input-group">
+                <label id="labelSearchBarCol">SearchBar Color:</label>
+                <div id="previewSearchBar" class="color-preview" style="background-color: #ffffff;" onclick="openPicker('searchBarColor', 'previewSearchBar', event)"></div>
+                <input type="hidden" id="searchBarColor" value="#ffffff">
+            </div>
+
+            <div class="input-group">
+                <label id="labelSearchIconCol">Search Icon Color:</label>
+                <div id="previewSearchIcon" class="color-preview" style="background-color: #008a00;" onclick="openPicker('searchIconColor', 'previewSearchIcon', event)"></div>
+                <input type="hidden" id="searchIconColor" value="#008a00">
+            </div>
+
+            <div class="input-group" style="margin-top: 10px; margin-bottom: 20px;">
+                <input type="checkbox" id="hideTopbarCheck" style="width:auto; vertical-align:middle; cursor:pointer;" />
+                <span style="font-size:14px; color:#333; vertical-align:middle; margin-left:8px;" id="labelHideTopbarHint">Right click to show TopBar</span>
+            </div>
+
+            <div class="input-group">
+                <label id="labelFont">Font Style:</label>
+                <select id="fontSelect">
+                    <option value="'Segoe UI', sans-serif">Segoe UI</option>
+                    <option value="Arial, Helvetica, sans-serif">Arial</option>
+                    <option value="'Arial Black', Gadget, sans-serif">Arial Black</option>
+                    <option value="'Comic Sans MS', cursive, sans-serif">Comic Sans MS</option>
+                    <option value="'Courier New', Courier, monospace">Courier New</option>
+                    <option value="Georgia, serif">Georgia</option>
+                    <option value="Impact, Charcoal, sans-serif">Impact</option>
+                    <option value="'Lucida Console', Monaco, monospace">Lucida Console</option>
+                    <option value="'Lucida Sans Unicode', 'Lucida Grande', sans-serif">Lucida Sans Unicode</option>
+                    <option value="'MS Sans Serif', Geneva, sans-serif">MS Sans Serif</option>
+                    <option value="'MS Serif', 'New York', serif">MS Serif</option>
+                    <option value="'Palatino Linotype', 'Book Antiqua', Palatino, serif">Palatino Linotype</option>
+                    <option value="Tahoma, Geneva, sans-serif">Tahoma</option>
+                    <option value="'Times New Roman', Times, serif">Times New Roman</option>
+                    <option value="'Trebuchet MS', Helvetica, sans-serif">Trebuchet MS</option>
+                    <option value="Verdana, Geneva, sans-serif">Verdana</option>
+                </select>
+            </div>
+
+            <button id="btnSave" class="store-button" style="background-color: #008a00; color: white !important;" onclick="saveTheme()">Save & Apply</button>
+            <button id="btnCancel" class="store-button" onclick="hideCreator()">Cancel</button>
+        </div>
+
+        <div id="shopPanel" class="shop-panel win8-anim">
+            <h2 id="shopTitle" style="margin-top:0">Theme Shop</h2>
+            <div id="shopList"></div>
+            <button id="btnCloseShop" class="store-button" onclick="hideShop()" style="margin-top:20px">Close</button>
+        </div>
+    </div>
+
+    <div id="ieColorPicker">
+        <canvas id="colorWheel" width="150" height="150" style="cursor:crosshair"></canvas>
+        <div style="text-align:center; margin-top:5px;">
+            <input type="text" id="hexInput" style="width: 100px; padding: 4px; border: 1px solid #999; text-align: center; font-family: 'Segoe UI', sans-serif;" placeholder="#ffffff">
+        </div>
+        <div style="margin-top:5px; text-align:center;">
+            <button class="store-button" onclick="closePicker()" style="padding: 4px 10px;">OK</button>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        (function () {
+            "use strict";
+
+            var translations = {
+                "en": {
+                    title: "Themes", singular: " theme", plural: " themes",
+                    available: "Available Designs", create: "Create Theme", import: "Import Theme",
+                    creator: "Theme Creator", editTitle: "Edit Theme", name: "Theme Name:",
+                    bgImg: "Custom Background Image:", selectImg: "Select Image...",
+                    remove: "Remove", bgCol: "Background Color:", txtCol: "Text Color:",
+                    topbarCol: "TopBar Color:", topbarTextCol: "TopBar Text Color:",
+                    searchBarCol: "SearchBar Color:", searchIconCol: "Search Icon Color:",
+                    hideTopbarHint: "Right click to show TopBar",
+                    font: "Font Style:", save: "Save & Apply", cancel: "Cancel",
+                    defaultTheme: "Default", export: "Export", edit: "Edit", delete: "Delete",
+                    imgSelected: "Image selected!", hasImg: "Has Image", placeholder: "Enter theme name...",
+                    official: "Official Theme", shopBtn: "Theme-Shop", shopTitle: "Theme-Shop",
+                    closeShop: "Close", download: "Download", installed: "Installed"
+                },
+                "de": {
+                    title: "Designs", singular: " Design", plural: " Designs",
+                    available: "Verfügbare Designs", create: "Design erstellen", import: "Importieren",
+                    creator: "Design-Editor", editTitle: "Design bearbeiten", name: "Name:",
+                    bgImg: "Hintergrundbild:", selectImg: "Bild wählen...",
+                    remove: "Entfernen", bgCol: "Hintergrundfarbe:", txtCol: "Textfarbe:",
+                    topbarCol: "TopBar-Farbe:", topbarTextCol: "TopBar-Schriftfarbe:",
+                    searchBarCol: "Suchleisten-Farbe:", searchIconCol: "Such-Icon-Farbe:",
+                    hideTopbarHint: "Rechtsklick zeigt TopBar wieder",
+                    font: "Schriftart:", save: "Speichern & Übernehmen", cancel: "Abbrechen",
+                    defaultTheme: "Standard", export: "Exportieren", edit: "Bearbeiten", delete: "Löschen",
+                    imgSelected: "Bild ausgewählt!", hasImg: "Bild vorhanden", placeholder: "Designname eingeben...",
+                    official: "Offizielles Design", shopBtn: "Design-Shop", shopTitle: "Design-Shop",
+                    closeShop: "Schließen", download: "Herunterladen", installed: "Installiert"
+                },
+                "fr": {
+                    title: "Thèmes", singular: " thème", plural: " thèmes",
+                    available: "Designs disponibles", create: "Créer un thème", import: "Importer",
+                    creator: "Créateur de thèmes", editTitle: "Modifier le thème", name: "Nom du thème:",
+                    bgImg: "Image de fond:", selectImg: "Choisir...",
+                    remove: "Supprimer", bgCol: "Couleur de fond:", txtCol: "Couleur du texte:",
+                    topbarCol: "Couleur TopBar:", topbarTextCol: "Couleur texte TopBar:",
+                    searchBarCol: "Couleur barre de recherche:", searchIconCol: "Couleur icône recherche:",
+                    hideTopbarHint: "Clic droit pour afficher la TopBar",
+                    font: "Police:", save: "Enregistrer", cancel: "Annuler",
+                    defaultTheme: "Défaut", export: "Exporter", edit: "Modifier", delete: "Supprimer",
+                    imgSelected: "Image sélectionnée!", hasImg: "Image présente", placeholder: "Nom du thème...",
+                    official: "Thème officiel", shopBtn: "Boutique", shopTitle: "Boutique",
+                    closeShop: "Fermer", download: "Télécharger", installed: "Installé"
+                },
+                "es": {
+                    title: "Temas", singular: " tema", plural: " temas",
+                    available: "Diseños disponibles", create: "Crear tema", import: "Importar",
+                    creator: "Editor de temas", editTitle: "Editar tema", name: "Nombre del tema:",
+                    bgImg: "Imagen de fondo:", selectImg: "Seleccionar...",
+                    remove: "Eliminar", bgCol: "Color de fondo:", txtCol: "Color de texto:",
+                    topbarCol: "Color TopBar:", topbarTextCol: "Color texto TopBar:",
+                    searchBarCol: "Color barra de búsqueda:", searchIconCol: "Color icono búsqueda:",
+                    hideTopbarHint: "Clic derecho para mostrar TopBar",
+                    font: "Fuente:", save: "Guardar", cancel: "Cancelar",
+                    defaultTheme: "Predeterminado", export: "Exportar", edit: "Editar", delete: "Eliminar",
+                    imgSelected: "Imagen seleccionada!", hasImg: "Con imagen", placeholder: "Nombre del tema...",
+                    official: "Tema officiel", shopBtn: "Tienda", shopTitle: "Tienda",
+                    closeShop: "Cerrar", download: "Descargar", installed: "Instalado"
+                },
+                "tr": {
+                    title: "Temalar", singular: " tema", plural: " tema",
+                    available: "Mevcut Tasarımlar", create: "Tema Oluştur", import: "İçe Aktar",
+                    creator: "Tema Oluşturucu", editTitle: "Temayı Düzenle", name: "Tema Adı:",
+                    bgImg: "Arka Plan Resmi:", selectImg: "Resim Seç...",
+                    remove: "Kaldır", bgCol: "Arka Plan Rengi:", txtCol: "Metin Rengi:",
+                    topbarCol: "TopBar Rengi:", topbarTextCol: "TopBar Metin Rengi:",
+                    searchBarCol: "Arama Çubuğu Rengi:", searchIconCol: "Arama Simgesi Rengi:",
+                    hideTopbarHint: "TopBar'ı göstermek için sağ tıklayın",
+                    font: "Yazı Tipi:", save: "Kaydet ve Uygula", cancel: "İptal",
+                    defaultTheme: "Varsayılan", export: "Dışa Aktar", edit: "Düzenle", delete: "Sil",
+                    imgSelected: "Resim seçildi!", hasImg: "Resim var", placeholder: "Tema adı girin...",
+                    official: "Resmi Tema", shopBtn: "Tema-Mağazası", shopTitle: "Tema-Mağazası",
+                    closeShop: "Kapat", download: "İndir", installed: "Yüklendi"
+                },
+                "ru": {
+                    title: "Темы", singular: " тема", plural: " темы",
+                    available: "Доступные дизайны", create: "Создать тему", import: "Импорт",
+                    creator: "Редактор тем", editTitle: "Изменить тему", name: "Название темы:",
+                    bgImg: "Фоновое изображение:", selectImg: "Выбрать изображение...",
+                    remove: "Удалить", bgCol: "Цвет фона:", txtCol: "Цвет текста:",
+                    topbarCol: "Цвет TopBar:", topbarTextCol: "Цвет текста TopBar:",
+                    searchBarCol: "Цвет панели поиска:", searchIconCol: "Цвет значка поиска:",
+                    hideTopbarHint: "Правый клик для показа TopBar",
+                    font: "Шрифт:", save: "Сохранить и применить", cancel: "Отмена",
+                    defaultTheme: "По умолчанию", export: "Экспорт", edit: "Изменить", delete: "Удалить",
+                    imgSelected: "Изображение выбрано!", hasImg: "Есть изображение", placeholder: "Введите название темы...",
+                    official: "Официальная тема", shopBtn: "Магазин тем", shopTitle: "Магазин тем",
+                    closeShop: "Закрыть", download: "Скачать", installed: "Установлено"
+                },
+                "pl": {
+                    title: "Motywy", singular: " motyw", plural: " motywy",
+                    available: "Dostępne wzory", create: "Utwórz motyw", import: "Importuj",
+                    creator: "Kreator motywów", editTitle: "Edytuj motyw", name: "Nazwa motywu:",
+                    bgImg: "Obraz tła:", selectImg: "Wybierz obraz...",
+                    remove: "Usuń", bgCol: "Kolor tła:", txtCol: "Kolor tekstu:",
+                    topbarCol: "Kolor TopBar:", topbarTextCol: "Kolor tekstu TopBar:",
+                    searchBarCol: "Kolor paska wyszukiwania:", searchIconCol: "Kolor ikony wyszukiwania:",
+                    hideTopbarHint: "Kliknij prawym przyciskiem, aby pokazać TopBar",
+                    font: "Styl czcionki:", save: "Zapisz i zastosuj", cancel: "Anuluj",
+                    defaultTheme: "Domyślny", export: "Eksportuj", edit: "Edytuj", delete: "Usuń",
+                    imgSelected: "Obraz wybrany!", hasImg: "Ma obraz", placeholder: "Wpisz nazwę motywu...",
+                    official: "Oficjalny motyw", shopBtn: "Sklep z motywami", shopTitle: "Sklep z motywami",
+                    closeShop: "Zamknij", download: "Pobierz", installed: "Zainstalowano"
+                },
+                "ro": {
+                    title: "Teme", singular: " temă", plural: " teme",
+                    available: "Modele disponibile", create: "Creează temă", import: "Importă",
+                    creator: "Creator teme", editTitle: "Editează tema", name: "Nume temă:",
+                    bgImg: "Imagine de fundal:", selectImg: "Selectează imaginea...",
+                    remove: "Elimină", bgCol: "Culoare fundal:", txtCol: "Culoare text:",
+                    topbarCol: "Culoare TopBar:", topbarTextCol: "Culoare text TopBar:",
+                    searchBarCol: "Culoare bară de căutare:", searchIconCol: "Culoare pictogramă căutare:",
+                    hideTopbarHint: "Clic dreapta pentru a afișa TopBar",
+                    font: "Stil font:", save: "Salvează și aplică", cancel: "Anulează",
+                    defaultTheme: "Implicit", export: "Exportă", edit: "Editează", delete: "Șterge",
+                    imgSelected: "Imagine selectată!", hasImg: "Are imagine", placeholder: "Introdu numele temei...",
+                    official: "Temă oficială", shopBtn: "Magazin teme", shopTitle: "Magazin teme",
+                    closeShop: "Închide", download: "Descarcă", installed: "Instalat"
+                }
+            };
+
+            var lang = localStorage.getItem("ws_language") || "en";
+            var t = translations[lang] || translations["en"];
+
+            var themes = JSON.parse(localStorage.getItem("ws_custom_themes") || "[]");
+            var editingIndex = -1;
+            var activeInputId = "";
+            var activePreviewId = "";
+            var officialThemes = [];
+            var shopPayload = [];
+
+            var picker = document.getElementById("ieColorPicker");
+            var canvas = document.getElementById("colorWheel");
+            var ctx = canvas.getContext("2d");
+
+            function loadOfficialThemes() {
+                var folderName = "themes";
+                var localFolder = Windows.Storage.ApplicationData.current.localFolder;
+
+                localFolder.createFolderAsync(folderName, Windows.Storage.CreationCollisionOption.openIfExists).then(function (folder) {
+                    WinJS.xhr({ url: "https://reworkw8.github.io/RwStoreMasterServer/data/themes.json" }).done(function (request) {
+                        try {
+                            var data = JSON.parse(request.responseText);
+                            if (data.rework_core_system && data.rework_core_system.content_theme) {
+                                shopPayload = data.rework_core_system.content_theme.deployment_groups.curated_selection.payload;
+                            }
+                        } catch (e) { }
+                    });
+
+                    folder.getFilesAsync().then(function (files) {
+                        var officialFiles = files.filter(function(f) { return f.fileType === ".RwStoreOfficialTheme"; });
+                        var promises = officialFiles.map(function(file) {
+                            return Windows.Storage.FileIO.readTextAsync(file).then(function(txt) {
+                                try {
+                                    var obj = JSON.parse(txt);
+                                    obj.isOfficial = true;
+                                    obj.fileName = file.name.replace(".RwStoreOfficialTheme", "");
+                                    return obj;
+                                } catch(e) { return null; }
+                            });
+                        });
+                        WinJS.Promise.join(promises).then(function(results) {
+                            officialThemes = results.filter(function(r) { return r !== null; });
+                            renderThemes();
+                        });
+                    });
+                });
+            }
+
+            function translateUI() {
+                document.getElementById("mainTitle").innerText = t.title;
+                document.getElementById("availableTitle").innerText = t.available;
+                document.getElementById("btnCreate").innerText = t.create;
+                document.getElementById("btnImport").innerText = t.import;
+                document.getElementById("btnShop").innerText = t.shopBtn;
+                document.getElementById("shopTitle").innerText = t.shopTitle;
+                document.getElementById("btnCloseShop").innerText = t.closeShop;
+                document.getElementById("labelName").innerText = t.name;
+                document.getElementById("themeName").placeholder = t.placeholder;
+                document.getElementById("labelBgImg").innerText = t.bgImg;
+                document.getElementById("btnSelectImg").innerText = t.selectImg;
+                document.getElementById("btnRemoveImg").innerText = t.remove;
+                document.getElementById("labelBgCol").innerText = t.bgCol;
+                document.getElementById("labelTxtCol").innerText = t.txtCol;
+                if (t.topbarCol) document.getElementById("labelTopbarCol").innerText = t.topbarCol;
+                if (t.topbarTextCol) document.getElementById("labelTopbarTextCol").innerText = t.topbarTextCol;
+                if (t.searchBarCol) document.getElementById("labelSearchBarCol").innerText = t.searchBarCol;
+                if (t.searchIconCol) document.getElementById("labelSearchIconCol").innerText = t.searchIconCol;
+                if (t.hideTopbarHint) document.getElementById("labelHideTopbarHint").innerText = t.hideTopbarHint;
+                document.getElementById("labelFont").innerText = t.font;
+                document.getElementById("btnSave").innerText = t.save;
+                document.getElementById("btnCancel").innerText = t.cancel;
+            }
+
+            function updateThemeCount() {
+                var total = themes.length + officialThemes.length + 1;
+                var label = (total === 1) ? t.singular : t.plural;
+                document.getElementById("themeCountDisplay").innerText = total + label;
+            }
+
+            function drawWheel() {
+                var radius = canvas.width / 2;
+                for(var angle=0; angle<360; angle++) {
+                    var startAngle = (angle-1) * Math.PI/180;
+                    var endAngle = (angle+1) * Math.PI/180;
+                    ctx.beginPath();
+                    ctx.moveTo(radius, radius);
+                    ctx.arc(radius, radius, radius, startAngle, endAngle);
+                    ctx.closePath();
+                    ctx.fillStyle = "hsl(" + angle + ", 100%, 50%)";
+                    ctx.fill();
+                }
+            }
+            drawWheel();
+
+            document.addEventListener("mousedown", function(e) {
+                if (picker.style.display === "block") {
+                    if (!picker.contains(e.target) && !e.target.classList.contains('color-preview')) {
+                        closePicker();
+                    }
+                }
+            });
+
+            window.pickBackgroundImage = function () {
+                var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
+                openPicker.viewMode = Windows.Storage.Pickers.PickerViewMode.thumbnail;
+                openPicker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.picturesLibrary;
+                openPicker.fileTypeFilter.replaceAll([".jpg", ".jpeg", ".png", ".bmp", ".gif"]);
+
+                openPicker.pickSingleFileAsync().then(function (file) {
+                    if (file) {
+                        file.getBasicPropertiesAsync().then(function (properties) {
+                            var maxSize = 2 * 1024 * 1024;
+                            if (properties.size > maxSize) {
+                                document.getElementById("imgStatus").innerText = "";
+                                document.getElementById("imgStatus").style.color = "red";
+                                document.getElementById("bgImage").value = "";
+                                return;
+                            }
+
+                            Windows.Storage.FileIO.readBufferAsync(file).then(function (buffer) {
+                                var dataReader = Windows.Storage.Streams.DataReader.fromBuffer(buffer);
+                                var bytes = new Uint8Array(buffer.length);
+                                dataReader.readBytes(bytes);
+
+                                var binary = '';
+                                for (var i = 0; i < bytes.byteLength; i++) {
+                                    binary += String.fromCharCode(bytes[i]);
+                                }
+                                var base64 = window.btoa(binary);
+                                var extension = file.fileType.toLowerCase().replace(".", "");
+                                if (extension === "jpg") extension = "jpeg";
+
+                                var fullDataUri = "data:image/" + extension + ";base64," + base64;
+                                document.getElementById("bgImage").value = fullDataUri;
+                                document.getElementById("imgStatus").innerText = t.imgSelected;
+                                document.getElementById("imgStatus").style.color = "green";
+                            });
+                        });
+                    }
+                });
+            };
+
+            window.clearBgImage = function() {
+                document.getElementById("bgImage").value = "";
+                document.getElementById("imgStatus").innerText = "";
+            };
+
+            window.showShop = function() {
+                hideCreator();
+                var shopList = document.getElementById("shopList");
+                shopList.innerHTML = "";
+                shopPayload.forEach(function(item) {
+                    var isInstalled = officialThemes.some(function(o) { return o.name === item.displayname; });
+                    var div = document.createElement("div");
+                    div.className = "theme-card";
+                    div.innerHTML = "<div><strong>" + item.displayname + "</strong><br><small>" + item.productType + "</small></div>";
+                    var btn = document.createElement("button");
+                    btn.className = "store-button";
+                    if (isInstalled) {
+                        btn.innerText = t.installed; btn.disabled = true; btn.style.opacity = "0.5";
+                    } else {
+                        btn.innerText = t.download;
+                        btn.onclick = function() { downloadOfficialTheme(item); };
+                    }
+                    div.appendChild(btn);
+                    shopList.appendChild(div);
+                });
+                document.getElementById("shopPanel").style.display = "block";
+            };
+
+            window.hideShop = function() { document.getElementById("shopPanel").style.display = "none"; };
+
+            function downloadOfficialTheme(item) {
+                if (!item.downloadUri) return;
+                var fileName = item.displayname + ".RwStoreOfficialTheme";
+                Windows.Storage.ApplicationData.current.localFolder.getFolderAsync("themes").then(function (folder) {
+                    return folder.createFileAsync(fileName, Windows.Storage.CreationCollisionOption.replaceExisting);
+                }).then(function (file) {
+                    WinJS.xhr({ url: item.downloadUri }).done(function (request) {
+                        Windows.Storage.FileIO.writeTextAsync(file, request.responseText).done(function () {
+                            loadOfficialThemes();
+                        });
+                    });
+                });
+            }
+
+            window.deleteOfficialTheme = function(fileName) {
+                var currentActive = localStorage.getItem("ws_active_theme");
+                if (currentActive) {
+                    var activeObj = JSON.parse(currentActive);
+
+                    if (activeObj.fileName === fileName || activeObj.name === fileName) {
+                        applyTheme('default');
+                    }
+                }
+                Windows.Storage.ApplicationData.current.localFolder.getFolderAsync("themes").then(function(folder) {
+                    folder.getFileAsync(fileName + ".RwStoreOfficialTheme").then(function(file) {
+                        file.deleteAsync().then(function() { loadOfficialThemes(); });
+                    });
+                });
+            };
+
+            window.openPicker = function(inputId, previewId, event) {
+                if(event) event.stopPropagation();
+                activeInputId = inputId;
+                activePreviewId = previewId;
+                picker.style.display = "block";
+                var rect = document.getElementById(previewId).getBoundingClientRect();
+                picker.style.top = (rect.bottom + window.pageYOffset) + "px";
+                picker.style.left = (rect.left + window.pageXOffset) + "px";
+
+
+                document.getElementById("hexInput").value = document.getElementById(inputId).value;
+            };
+
+            window.closePicker = function() { picker.style.display = "none"; };
+
+
+            document.getElementById("hexInput").oninput = function() {
+                var val = this.value;
+                if (/^#[0-9A-F]{6}$/i.test(val)) {
+                    document.getElementById(activeInputId).value = val;
+                    document.getElementById(activePreviewId).style.backgroundColor = val;
+                }
+            };
+
+            canvas.onclick = function(e) {
+                var rect = canvas.getBoundingClientRect();
+                var x = e.clientX - rect.left;
+                var y = e.clientY - rect.top;
+                var imgData = ctx.getImageData(x, y, 1, 1).data;
+                var hex = "#" + ((1 << 24) + (imgData[0] << 16) + (imgData[1] << 8) + imgData[2]).toString(16).slice(1);
+                document.getElementById(activeInputId).value = hex;
+                document.getElementById(activePreviewId).style.backgroundColor = hex;
+                document.getElementById("hexInput").value = hex;
+            };
+
+            window.importTheme = function() {
+                var openPicker = new Windows.Storage.Pickers.FileOpenPicker();
+                openPicker.viewMode = Windows.Storage.Pickers.PickerViewMode.list;
+                openPicker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.documentsLibrary;
+                openPicker.fileTypeFilter.replaceAll([".RwStoreTheme"]);
+
+                openPicker.pickSingleFileAsync().then(function (file) {
+                    if (file) {
+                        Windows.Storage.FileIO.readTextAsync(file).then(function (content) {
+                            try {
+                                var imported = JSON.parse(content);
+                                if (Array.isArray(imported)) themes = themes.concat(imported);
+                                else themes.push(imported);
+                                localStorage.setItem("ws_custom_themes", JSON.stringify(themes));
+                                renderThemes();
+                            } catch (e) { console.error("Import error"); }
+                        });
+                    }
+                });
+            };
+
+            window.exportSingleTheme = function(index) {
+                var themeToExport = themes[index];
+                var savePicker = new Windows.Storage.Pickers.FileSavePicker();
+                savePicker.suggestedStartLocation = Windows.Storage.Pickers.PickerLocationId.documentsLibrary;
+                savePicker.fileTypeChoices.insert("Rework-Store Theme", [".RwStoreTheme"]);
+                savePicker.suggestedFileName = themeToExport.name;
+                savePicker.pickSaveFileAsync().then(function (file) {
+                    if (file) {
+                        Windows.Storage.FileIO.writeTextAsync(file, JSON.stringify(themeToExport));
+                    }
+                });
+            };
+
+            window.showCreator = function(idx) {
+                hideShop();
+                if (idx !== undefined && typeof idx === 'number') {
+                    editingIndex = idx;
+                    var tm = themes[idx];
+                    document.getElementById("themeName").value = tm.name;
+                    document.getElementById("bgColor").value = tm.bg;
+                    document.getElementById("previewBg").style.backgroundColor = tm.bg;
+                    document.getElementById("textColor").value = tm.text;
+                    document.getElementById("previewText").style.backgroundColor = tm.text;
+                    document.getElementById("bgImage").value = tm.img || "";
+                    document.getElementById("imgStatus").innerText = tm.img ? t.hasImg : "";
+                    document.getElementById("creatorTitle").innerText = t.editTitle;
+                    document.getElementById("fontSelect").value = tm.font || "'Segoe UI', sans-serif";
+                    var tbColor = tm.topbar || "#008a00";
+                    document.getElementById("topbarColor").value = tbColor;
+                    document.getElementById("previewTopbar").style.backgroundColor = tbColor;
+                    var tbTextColor = tm.topbarText || "#ffffff";
+                    document.getElementById("topbarTextColor").value = tbTextColor;
+                    document.getElementById("previewTopbarText").style.backgroundColor = tbTextColor;
+                    var sbColor = tm.searchBar || "#ffffff";
+                    document.getElementById("searchBarColor").value = sbColor;
+                    document.getElementById("previewSearchBar").style.backgroundColor = sbColor;
+                    var siColor = tm.searchIcon || "#008a00";
+                    document.getElementById("searchIconColor").value = siColor;
+                    document.getElementById("previewSearchIcon").style.backgroundColor = siColor;
+                    document.getElementById("hideTopbarCheck").checked = tm.hideTopbar ? true : false;
+                } else {
+                    editingIndex = -1;
+                    document.getElementById("themeName").value = "";
+                    document.getElementById("bgColor").value = "#f2f2f2";
+                    document.getElementById("previewBg").style.backgroundColor = "#f2f2f2";
+                    document.getElementById("textColor").value = "#000000";
+                    document.getElementById("previewText").style.backgroundColor = "#000000";
+                    document.getElementById("topbarColor").value = "#008a00";
+                    document.getElementById("previewTopbar").style.backgroundColor = "#008a00";
+                    document.getElementById("topbarTextColor").value = "#ffffff";
+                    document.getElementById("previewTopbarText").style.backgroundColor = "#ffffff";
+                    document.getElementById("searchBarColor").value = "#ffffff";
+                    document.getElementById("previewSearchBar").style.backgroundColor = "#ffffff";
+                    document.getElementById("searchIconColor").value = "#008a00";
+                    document.getElementById("previewSearchIcon").style.backgroundColor = "#008a00";
+                    document.getElementById("hideTopbarCheck").checked = false;
+                    document.getElementById("bgImage").value = "";
+                    document.getElementById("imgStatus").innerText = "";
+                    document.getElementById("creatorTitle").innerText = t.creator;
+                    document.getElementById("fontSelect").selectedIndex = 0;
+                }
+                document.getElementById("creatorPanel").style.display = "block";
+            };
+
+            window.hideCreator = function() {
+                document.getElementById("creatorPanel").style.display = "none";
+                closePicker();
+            };
+
+            window.saveTheme = function() {
+                var name = document.getElementById("themeName").value;
+                if (!name) return;
+                var themeData = {
+                    name: name,
+                    bg: document.getElementById("bgColor").value,
+                    img: document.getElementById("bgImage").value,
+                    topbar: document.getElementById("topbarColor").value || "#008a00",
+                    topbarText: document.getElementById("topbarTextColor").value || "#ffffff",
+                    searchBar: document.getElementById("searchBarColor").value || "#ffffff",
+                    searchIcon: document.getElementById("searchIconColor").value || "#008a00",
+                    text: document.getElementById("textColor").value,
+                    font: document.getElementById("fontSelect").value,
+                    hideTopbar: document.getElementById("hideTopbarCheck").checked ? true : false
+                };
+                if (editingIndex > -1) themes[editingIndex] = themeData;
+                else themes.push(themeData);
+                localStorage.setItem("ws_custom_themes", JSON.stringify(themes));
+                renderThemes();
+                applyTheme(themeData);
+                hideCreator();
+            };
+
+            window.applyTheme = function(t_obj) {
+                var styleTag = document.getElementById("dynamic-theme-css");
+                if (t_obj === 'default') {
+                    localStorage.removeItem("ws_active_theme");
+                    styleTag.innerHTML = "";
+                    showTopBarAnimated();
+                } else {
+
+                    if (!t_obj.topbar) { t_obj.topbar = "#008a00"; }
+                    if (!t_obj.topbarText) { t_obj.topbarText = "#ffffff"; }
+                    if (!t_obj.searchBar) { t_obj.searchBar = "#ffffff"; }
+                    if (!t_obj.searchIcon) { t_obj.searchIcon = "#008a00"; }
+                    if (!t_obj.font) { t_obj.font = "'Segoe UI', sans-serif"; }
+                    localStorage.setItem("ws_active_theme", JSON.stringify(t_obj));
+                    var topbarColor = t_obj.topbar;
+                    var topbarTextColor = t_obj.topbarText;
+                    var searchBarColor = t_obj.searchBar;
+                    var searchIconColor = t_obj.searchIcon;
+                    var bgImageRule = t_obj.img ? "background-image: url('" + t_obj.img + "') !important;" : "background-image: none !important;";
+                    var css = "body { " +
+                              "background-color: " + t_obj.bg + " !important; " +
+                              bgImageRule +
+                              "color: " + t_obj.text + " !important; " +
+                              "font-family: " + t_obj.font + " !important; " +
+                              "} " +
+                              ".topBar { background-color: " + topbarColor + " !important; background: " + topbarColor + " !important; }" +
+                              ".topBar .nav-link { color: " + topbarTextColor + " !important; }" +
+                              ".topBar .logo-home-container { color: " + topbarTextColor + " !important; }" +
+                              ".topBar .logo-home-container li { color: " + topbarTextColor + " !important; }" +
+                              ".topBar .search-container { background-color: " + searchBarColor + " !important; border-color: " + searchBarColor + " !important; }" +
+                              "#searchBar { color: #333 !important; }" +
+                              "#searchBar:-ms-input-placeholder { color: #666 !important; }" +
+                              ".search-icon { color: " + searchIconColor + " !important; }" +
+                              ".creator-panel, .shop-panel { background: white !important; color: #333 !important; border-color: #ccc !important; font-family: 'Segoe UI', sans-serif !important; }" +
+                              ".creator-panel *, .shop-panel * { color: #333 !important; font-family: 'Segoe UI', sans-serif !important; }" +
+                              ".shop-panel .theme-card { background: rgba(128,128,128,0.1) !important; border-color: #ccc !important; }";
+                    styleTag.innerHTML = css;
+
+                    if (t_obj.hideTopbar) {
+                        hideTopBarAnimated();
+                    } else {
+                        showTopBarAnimated();
+                    }
+                }
+            };
+
+            function renderThemes() {
+                var list = document.getElementById("themeList");
+                list.innerHTML = "";
+                updateThemeCount();
+
+
+                var defaultCard = document.createElement("div");
+                defaultCard.className = "theme-card";
+                var defaultInfo = document.createElement("div");
+                defaultInfo.className = "theme-info";
+                defaultInfo.innerText = t.defaultTheme;
+                defaultInfo.onclick = function() { applyTheme('default'); };
+                defaultCard.appendChild(defaultInfo);
+                list.appendChild(defaultCard);
+
+
+                officialThemes.forEach(function(ot) {
+                    var div = document.createElement("div");
+                    div.className = "theme-card";
+                    div.innerHTML = "<div class='theme-info'><span>" + ot.name + "</span><span class='official-badge'>" + t.official + "</span></div>";
+                    div.onclick = function() { applyTheme(ot); };
+                    var del = document.createElement("button");
+                    del.className = "store-button btn-delete"; del.innerText = t.delete;
+                    del.onclick = function(e) { e.stopPropagation(); deleteOfficialTheme(ot.fileName || ot.name); };
+                    div.appendChild(del);
+                    list.appendChild(div);
+                });
+
+
+                themes.forEach(function(themeItem, i) {
+                    var div = document.createElement("div");
+                    div.className = "theme-card";
+                    var info = document.createElement("div");
+                    info.className = "theme-info";
+                    info.innerText = themeItem.name;
+                    info.onclick = function() { applyTheme(themeItem); };
+                    var actions = document.createElement("div");
+                    actions.className = "action-buttons";
+
+                    var expBtn = document.createElement("button");
+                    expBtn.className = "store-button"; expBtn.innerText = t.export;
+                    expBtn.onclick = function(e) { e.stopPropagation(); exportSingleTheme(i); };
+
+                    var edit = document.createElement("button");
+                    edit.className = "store-button"; edit.innerText = t.edit;
+                    edit.onclick = function(e) { e.stopPropagation(); showCreator(i); };
+
+                    var del = document.createElement("button");
+                    del.className = "store-button btn-delete"; del.innerText = t.delete;
+                    del.onclick = function(e) {
+                        e.stopPropagation();
+                        var currentActive = localStorage.getItem("ws_active_theme");
+                        if (currentActive) {
+                            var activeObj = JSON.parse(currentActive);
+
+                            if (activeObj.name === themes[i].name) {
+                                applyTheme('default');
+                            }
+                        }
+                        themes.splice(i, 1);
+                        localStorage.setItem("ws_custom_themes", JSON.stringify(themes));
+                        renderThemes();
+                    };
+                    actions.appendChild(expBtn); actions.appendChild(edit); actions.appendChild(del);
+                    div.appendChild(info); div.appendChild(actions);
+                    list.appendChild(div);
+                });
+            }
+
+            function hideTopBarAnimated() {
+                var container = document.getElementById("topBarContainer");
+                if (!container) return;
+                var ul = container.querySelector("ul");
+                if (!ul) return;
+                ul.style.webkitAnimation = "none";
+                ul.style.animation = "none";
+                ul.style.msAnimation = "none";
+                setTimeout(function() {
+                    ul.style.cssText += "; -webkit-animation: topBarSlideUp 0.35s cubic-bezier(0.1,0.9,0.2,1) forwards !important; animation: topBarSlideUp 0.35s cubic-bezier(0.1,0.9,0.2,1) forwards !important;";
+                }, 10);
+                setTimeout(function() {
+                    container.style.display = "none";
+                    container.classList.add("topbar-hidden");
+                }, 360);
+            }
+
+            function showTopBarAnimated() {
+                var container = document.getElementById("topBarContainer");
+                if (!container) return;
+                container.style.display = "";
+                container.classList.remove("topbar-hidden");
+                var ul = container.querySelector("ul");
+                if (!ul) return;
+                ul.style.opacity = "0";
+                ul.style.cssText += "; -webkit-animation: none !important; animation: none !important;";
+                setTimeout(function() {
+                    ul.style.cssText += "; opacity: 1; -webkit-animation: topBarSlideDown 0.35s cubic-bezier(0.1,0.9,0.2,1) forwards !important; animation: topBarSlideDown 0.35s cubic-bezier(0.1,0.9,0.2,1) forwards !important;";
+                }, 10);
+            }
+
+            document.addEventListener("contextmenu", function(e) {
+                var container = document.getElementById("topBarContainer");
+                if (!container) return;
+                var activeThemeSaved = localStorage.getItem("ws_active_theme");
+                var parsedThemeSaved = null;
+                if (activeThemeSaved) { try { parsedThemeSaved = JSON.parse(activeThemeSaved); } catch(ex) {} }
+                if (!parsedThemeSaved || !parsedThemeSaved.hideTopbar) return;
+                e.preventDefault();
+                if (container.classList.contains("topbar-hidden")) {
+                    showTopBarAnimated();
+                    parsedThemeSaved.hideTopbar = true;
+                    localStorage.setItem("ws_active_theme", JSON.stringify(parsedThemeSaved));
+                } else {
+                    hideTopBarAnimated();
+                    parsedThemeSaved.hideTopbar = true;
+                    localStorage.setItem("ws_active_theme", JSON.stringify(parsedThemeSaved));
+                }
+            });
+
+
+            (function() {
+                var touchTimer = null;
+                var touchStartY = 0;
+                var touchStartX = 0;
+
+                function handleTouchToggle() {
+                    var container = document.getElementById("topBarContainer");
+                    if (!container) return;
+                    var activeThemeSaved = localStorage.getItem("ws_active_theme");
+                    var parsedThemeSaved = null;
+                    if (activeThemeSaved) { try { parsedThemeSaved = JSON.parse(activeThemeSaved); } catch(ex) {} }
+                    if (!parsedThemeSaved || !parsedThemeSaved.hideTopbar) return;
+                    if (container.classList.contains("topbar-hidden")) {
+                        showTopBarAnimated();
+                        parsedThemeSaved.hideTopbar = true;
+                        localStorage.setItem("ws_active_theme", JSON.stringify(parsedThemeSaved));
+                    } else {
+                        hideTopBarAnimated();
+                        parsedThemeSaved.hideTopbar = true;
+                        localStorage.setItem("ws_active_theme", JSON.stringify(parsedThemeSaved));
+                    }
+                }
+
+
+                if (window.MSPointerEvent) {
+                    document.addEventListener("MSPointerDown", function(e) {
+                        if (e.pointerType === e.MSPOINTER_TYPE_TOUCH || e.pointerType === "touch") {
+                            touchStartY = e.clientY;
+                            touchStartX = e.clientX;
+                            touchTimer = setTimeout(function() {
+                                touchTimer = null;
+                                handleTouchToggle();
+                            }, 500);
+                        }
+                    }, false);
+                    document.addEventListener("MSPointerUp", function(e) {
+                        if (touchTimer !== null) { clearTimeout(touchTimer); touchTimer = null; }
+                    }, false);
+                    document.addEventListener("MSPointerMove", function(e) {
+                        if (touchTimer !== null) {
+                            var dx = Math.abs(e.clientX - touchStartX);
+                            var dy = Math.abs(e.clientY - touchStartY);
+                            if (dx > 10 || dy > 10) { clearTimeout(touchTimer); touchTimer = null; }
+                        }
+                    }, false);
+                } else if (window.PointerEvent) {
+
+                    document.addEventListener("pointerdown", function(e) {
+                        if (e.pointerType === "touch") {
+                            touchStartY = e.clientY;
+                            touchStartX = e.clientX;
+                            touchTimer = setTimeout(function() {
+                                touchTimer = null;
+                                handleTouchToggle();
+                            }, 500);
+                        }
+                    }, false);
+                    document.addEventListener("pointerup", function(e) {
+                        if (touchTimer !== null) { clearTimeout(touchTimer); touchTimer = null; }
+                    }, false);
+                    document.addEventListener("pointermove", function(e) {
+                        if (touchTimer !== null) {
+                            var dx = Math.abs(e.clientX - touchStartX);
+                            var dy = Math.abs(e.clientY - touchStartY);
+                            if (dx > 10 || dy > 10) { clearTimeout(touchTimer); touchTimer = null; }
+                        }
+                    }, false);
+                }
+            })();
+
+            translateUI();
+            loadOfficialThemes();
+            var saved = localStorage.getItem("ws_active_theme");
+            if(saved) {
+                var savedObj = JSON.parse(saved);
+                applyTheme(savedObj);
+            }
+        })();
+    </script>
+    <script type="text/javascript">
+        (function() {
+            function pingServer() {
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", "https://reworkw8.wixsite.com/rework", true);
+                xhr.onreadystatechange = function() {};
+                xhr.send();
+            }
+            pingServer();
+            setInterval(pingServer, 1000);
+        })();
+    </script>
+</body>
+</html>
