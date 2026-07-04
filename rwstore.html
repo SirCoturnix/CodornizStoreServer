@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         body {
-            background-color: #008A00 !important; /* Verde Metro oficial */
+            background-color: #252526 !important; /* Verde Metro oficial */
             margin: 0;
             padding: 0;
             height: 100vh;
@@ -24,7 +24,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background-color: #008A00;
+            background-color: #252526;
             z-index: 1;
         }
 
@@ -131,7 +131,7 @@
         }
     </style>
     <script>
-        var MASTER_SERVER = "https://github.com/SirCoturnix/CodornizStoreServer";
+        var MASTER_SERVER = "https://raw.githubusercontent.com/SirCoturnix/CodornizStoreServer/main/<default.html>";
 
         function getRwToken() {
             try { return localStorage.getItem("cs_session_token") || ""; } catch(e) { return ""; }
@@ -188,7 +188,7 @@
         <div id="fotoSplash"></div>
         
         <!-- El texto nativo libre de bugs -->
-        <div id="splashText">__CodornizStore</div>
+        <div id="splashText">____CodornizStore</div>
         
         <!-- El anillo de carga infinita circular Metro -->
         <div id="splashContent">
