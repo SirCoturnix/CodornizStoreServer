@@ -3,15 +3,13 @@
 <head>
     <meta charset="utf-8" />
     <title>CodornizStore Server</title>
-    <link href="//Microsoft.WinJS.2.0/css/ui-dark.css"
-          rel="stylesheet" />
+    <link href="//Microsoft.WinJS.2.0/css/ui-dark.css" rel="stylesheet" />
     <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
     <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
     <style>
         html, body {
             margin: 0;
-            background: url('images/storebgr.jpg')
-                no-repeat fixed center / 100% 100% !important;
+            background: url('images/storebgr.jpg') no-repeat fixed center / 100% 100% !important;
             background-color: #228B22 !important;
             color: #fff;
             font-family: 'Segoe UI', Tahoma, Verdana, sans-serif;
@@ -164,8 +162,7 @@
         }
         .metro-fade {
             opacity: 0;
-            animation: metroEntrance 0.4s
-                cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+            animation: metroEntrance 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
         }
         @keyframes metroEntrance {
             from { opacity: 0; transform: translateX(60px); }
@@ -301,6 +298,34 @@
         @keyframes fadeOutToast {
             to { opacity: 0; transform: translateX(100%); }
         }
+<<<<<<< HEAD
+=======
+        
+        /* ESTILOS DE LAS APPBARS */
+        #metro-appbar-superior { 
+            position: fixed; 
+            top: -110px; 
+            left: 0; 
+            width: 100%; 
+            height: 95px; 
+            background: rgba(28, 28, 28, 0.95); 
+            transition: top 0.2s; 
+            z-index: 99998; 
+        } 
+        #metro-appbar-superior.appbar-activa { top: 0; }
+        
+        #metro-appbar-inferior { 
+            position: fixed; 
+            bottom: -130px; 
+            left: 0; 
+            width: 100%; 
+            height: 95px; 
+            background: rgba(28, 28, 28, 0.95); 
+            transition: bottom 0.2s; 
+            z-index: 99998; 
+        } 
+        #metro-appbar-inferior.appbar-activa { bottom: 0; }
+>>>>>>> 14e0322 (Actualizacion de CodornizStore: paquete firmado y funcional 1.0.0.1)
     </style>
 </head>
 <body>
@@ -411,7 +436,11 @@
             <button class="btn-back" onclick="closeAppDetails()">Volver</button>
         </div>
         <div class="download-details">
+<<<<<<< HEAD
             <h1 id="view-app-title">Cargando kaplow...</h1>
+=======
+            <h1 id="view-app-title"></h1>
+>>>>>>> 14e0322 (Actualizacion de CodornizStore: paquete firmado y funcional 1.0.0.1)
             <div class="publisher" id="view-app-pub">Codorniz Developer</div>
             <div id="view-app-stars" style="color:#ffb900; margin:10px 0;">★★★★★</div>
             <div class="description" id="view-app-desc" style="color:#ccc; max-width:700px; white-space:normal; margin-bottom:20px;">Espere...</div>
@@ -451,7 +480,7 @@
                  <div><h2 style="font-weight:300; margin:0; font-size:24px;">Usuario Familiar</h2><div style="font-size:14px; color:#228B22; font-weight:bold;">Desarrollador Codorniz Oro</div></div>
             </div>
             <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:20px; font-size:14px; color:#ccc; display:flex; flex-direction:column; gap:12px;">
-                 <div><strong>Servidor de Estáticos:</strong> GitHub Pages Server</div><div><strong>Servidor de Descargas:</strong> Google Drive Dedicated CDN</div>
+                 <div><strong>Servidor de Estáticos:</strong> GitHub Pages Server</div><div><strong>Servidor de Descargas:</strong> GitHub Releases CDN</div>
             </div>
         </div>
     </div>
@@ -486,6 +515,7 @@
         </div>
     </div>
 <<<<<<< HEAD
+<<<<<<< HEAD
 <script>
     var catalogoApps = {
         'Angry Birds Space': { pub: 'Rovio Entertainment', desc: 'Los iconicos pajaros de angry birds se trasladan al espacio,usa la resortera y tumba cerdos.', icon: 'angrybirds.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx' },
@@ -512,6 +542,35 @@
         'WPCentral': { pub: 'WPCentral Team', desc: 'Noticias,y mas en windows 8 y 8.1.', icon: 'WPAPPCENTRAL.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/WPCentral.Win8_1.3.1.2_AnyCPU.appx' }
     };
 
+=======
+
+<script>
+    var catalogoApps = {
+        'Angry Birds Space': { pub: 'Rovio Entertainment', desc: 'Los iconicos pajaros de angry birds se trasladan al espacio,usa la resortera y tumba cerdos.', icon: 'angrybirds.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx' },
+        'Fruit Ninja': { pub: 'Halfbrick Studios', desc: 'Saca tu katana y corta las frutas.', icon: 'fruitninja.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx' },
+        'ProdigyMath': { pub: 'Prodigy Math Team', desc: 'Una Plataforma educativa de matemáticas.', icon: 'ProdigyMath_1.17.0.0_AnyCPU_Debug.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ProdigyMath_1.17.0.0_AnyCPU_Debug.appx' },
+        'newsXpresso Metro': { pub: 'newsXpresso', desc: 'Tus noticias en el expreso.', icon: 'newsxpresso.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/esobiIncorporated.newsXpressoMetro_2.0.2.208_neutral__sngswjb5h6fyg.appx' },
+        'Opentracks': { pub: 'Opentracks Studio', desc: 'El reproductor de audio del dramatico de chockingnetdude xdxd.', icon: 'mp3hubesopentracks.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx' },
+        'wpapp': { pub: 'wpapp Team', desc: 'La aplicacion tipo sandbox de windows phone ehh no se.', icon: 'wpapp.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/wpapp.appx' },
+        'Evernote': { pub: 'Evernote Corp', desc: 'Toma notas y organiza ideas.', icon: 'evernote.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Evernote.Evernote_3.3.0.102_x86__q4d96b2w5wcc2.appx' },
+        'mytube': { pub: 'Ryken Studio', desc: 'Un cliente de videos iconico para windows 8 y 8.1!.', icon: 'mytube.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/mytube.appx' },
+        'DrayMusic': { pub: 'DrayMusic Studio', desc: 'Reproductor de musica increible.', icon: '1773704616_DrayMusic_1.0.0.0_AnyCPU.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1773704616_DrayMusic_1.0.0.0_AnyCPU.appx' },
+        'Netflix': { pub: 'Netflix Inc', desc: 'Ve tus series y peliculas favoritas agarra tus palomitas ahora mismo.', icon: 'netflix.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/4DF9E0F8.Netflix_2.22.0.39_x86__mcm4njqhnhss8.appx' },
+        'Rowi': { pub: 'Hidden Pineapple', desc: 'El gran cliente de twitter conocido de windows phone ha llegado a pc.', icon: 'rowi-150x150.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HiddenPineappleLLC.Rowi_0.8.0.0_x86__8364z769gkj0p.appx' },
+        'Nokia AppSocial': { pub: 'Nokia Corporation', desc: 'La app social de nokia,habla con tus conocidos.', icon: 'nokiaappsocial.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/NokiaCorporation.AppSocial_1.9.0.0_x86__6d0q6r3z979nw.appx' },
+        'Koode Reader': { pub: 'Koode Team', desc: 'Un lector de pdfs,documentos etc etc.', icon: 'koodereader.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/52487Koode.56414CB813359_1.5.0.4_neutral__m1bqtb7san9p0.appx' },
+        'El Tenedor': { pub: 'La Fourchette', desc: 'Una gran aplicacions de recetas despues de bing food and drink/gourmet.', icon: 'eltenedor.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/LaFourchette.comElTenedor.LaFourchette_2015.407.1353.2545_neutral_._xjascxykqffr4.AppxBundle.appx' },
+        'Rayman Jungle Run': { pub: 'Ubisoft', desc: 'El Legendario heroe Rayman llega a windows 8.1!juegalo ahora mismo.', icon: 'raymanjunglerun.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/UbisoftEntertainment.RaymanJungleRun_1.2.0.88_x86__dbgk1hhpxymar.Appx' },
+        'Cut The Rope': { pub: 'ZeptoLab UK', desc: 'Corta las cuerdas y dale de comer al gran Om Nom.', icon: 'CutTheRope.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ZeptoLabUKLimited.CutTheRope_1.2.0.43_x86__sq9zxnwrk84pj.appx' },
+        'Xunxo News': { pub: 'XunxoCorp', desc: 'Mira tus noticias en donde sea.', icon: 'Xuxo.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/12022Xurxo.XurxoNews_1.0.0.0_neutral__cffdx9p3b7k32.appx' },
+        'Fresh Paint': { pub: 'Microsoft Studios', desc: 'Pinta,Dibuja,bocetea aqui tienes el set completo de pinceles,pintura seca y lapices.', icon: 'freshpaint.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.FreshPaint_2.0.15133.0_x86__8wekyb3d8bbwe.appx' },
+        'RecipeKeeper': { pub: 'Recipe Keeper Team', desc: 'Organiza tus recetas y cocina para alimentar a tu familia.', icon: 'recipekeeper.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/TudorspanLimited.RecipeKeeperFree_1.5.2.0_x86__mnckez06wj9wa.appx' },
+        'Adobe Reader': { pub: 'Adobe Systems', desc: 'El iconico lector de pdfs ha llegado a windows 8.1 prueba y visualiza tus documentos!.', icon: 'metro_reader_small_logo.targetsize-256.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/AdobeSystemsIncorporated.AdobeReader_3.1.8.7675_x86__ynb6jyjzte8ga.Appx' },
+        'InsiderHub': { pub: 'Microsoft Insider', desc: 'Opina y prueba las nuevas compilaciones.', icon: 'insiderhub.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.InsiderHub_15.3.30.1_x86__8wekyb3d8bbwe_1780310454359.appx' },
+        'WPCentral': { pub: 'WPCentral Team', desc: 'Noticias,y mas en windows 8 y 8.1.', icon: 'WPAPPCENTRAL.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/WPCentral.Win8_1.3.1.2_AnyCPU.appx' }
+    };
+
+>>>>>>> 14e0322 (Actualizacion de CodornizStore: paquete firmado y funcional 1.0.0.1)
     function irAlInicio() {
         var vistas = document.querySelectorAll('[id$="-view"]');
         for (var i = 0; i < vistas.length; i++) {
@@ -664,6 +723,10 @@
         document.getElementById('app-download-view').classList.add("open");
     }
 
+<<<<<<< HEAD
+=======
+    // MANEJO DE APPBARS (Click derecho o tap fuera)
+>>>>>>> 14e0322 (Actualizacion de CodornizStore: paquete firmado y funcional 1.0.0.1)
     document.addEventListener("contextmenu", function(e){ 
         e.preventDefault(); 
         var ms = document.getElementById("metro-appbar-superior");
@@ -697,6 +760,7 @@
         <div onclick="mostrarSeccionWishlist()" style="cursor:pointer;">Wishlist</div>
     </div>
 </div>
+<<<<<<< HEAD
 =======
     <script>
     // 1. LISTA COMPLETA DE APPS (Aquí puedes añadir más sin miedo a romper el código)
@@ -769,5 +833,8 @@
         document.addEventListener("click", function(e){ if(!document.getElementById("metro-appbar-superior").contains(e.target) && !document.getElementById("metro-appbar-inferior").contains(e.target)){ document.getElementById("metro-appbar-superior").classList.remove("appbar-activa"); document.getElementById("metro-appbar-inferior").classList.remove("appbar-activa"); } });
     </script>
 >>>>>>> e2cf9a6906aefa00b0aca3102c816800f6e97bb0
+=======
+
+>>>>>>> 14e0322 (Actualizacion de CodornizStore: paquete firmado y funcional 1.0.0.1)
 </body>
 </html>
