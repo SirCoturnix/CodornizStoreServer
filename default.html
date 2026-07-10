@@ -386,7 +386,6 @@
                 <div class="app-item-wrapper" onclick="openAppDetails('Nokia AppSocial')"><div class="app-tile"><img src="images/iconos_extraidos/nokiaappsocial.png"></div><div class="tile-title">Nokia AppSocial</div><div class="tile-sub">Gratis</div></div>
                 <div class="app-item-wrapper" onclick="openAppDetails('InsiderHub')"><div class="app-tile"><img src="images/iconos_extraidos/insiderhub.png"></div><div class="tile-title">InsiderHub</div><div class="tile-sub">Gratis</div></div>
                 <div class="app-item-wrapper" onclick="openAppDetails('mytube')"><div class="app-tile"><img src="images/iconos_extraidos/mytube.png"></div><div class="tile-title">mytube</div><div class="tile-sub">Gratis</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Chrome Metro')"><div class="app-tile"><img src="images/iconos_extraidos/Xuxo.png"></div><div class="tile-title">Chrome Metro</div><div class="tile-sub">Gratis</div></div>
             </div>
         </div>
         <div class="section-group metro-fade" style="animation-delay: 0.1s;">
@@ -509,7 +508,7 @@
         </div>
     </div>
 
-    <!-- AppBar elements (now placed after all content) -->
+    <!-- AppBar elements -->
     <div id="metro-appbar-superior">
         <div style="display:flex; flex-direction:row; gap:32px; padding:20px;">
             <div onclick="irAlInicio()" style="cursor:pointer;">Inicio Store</div>
@@ -524,14 +523,59 @@
         </div>
     </div>
 
-    <!-- Main Script: Catalog and Functions -->
     <script>
+    // =========================================================================
+    // 1. ESCUDO ANTI-CRASH GLOBAL (Evitará que WWAHost cierre la app)
+    // =========================================================================
+    window.onerror = function (msg, url, line) {
+        var errDiv = document.createElement("div");
+        errDiv.style.cssText = "position:fixed; top:0; left:0; width:100%; background:#e51400; color:white; z-index:999999; padding:20px; font-size:16px; font-family:'Segoe UI', sans-serif;";
+        errDiv.innerText = "Error detectado: " + msg + " (Línea: " + line + "). La app sigue abierta gracias al escudo protector.";
+        document.body.appendChild(errDiv);
+        return true; // Magia: Al retornar 'true', Windows no cierra tu app.
+    };
+
+    // =========================================================================
+    // 2. CICLO DE VIDA DE LA APP Y CARGA DE EVENTOS (Crítico para el Splash)
+    // =========================================================================
+    document.addEventListener("DOMContentLoaded", function() {
+        // Eventos del Appbar
+        document.addEventListener("contextmenu", function(e){ 
+            e.preventDefault(); 
+            var ms = document.getElementById("metro-appbar-superior");
+            var mi = document.getElementById("metro-appbar-inferior");
+            if(ms && mi) { ms.classList.toggle("appbar-activa"); mi.classList.toggle("appbar-activa"); }
+        });
+        document.addEventListener("click", function(e){ 
+            var s = document.getElementById("metro-appbar-superior");
+            var i = document.getElementById("metro-appbar-inferior");
+            if(s && i && !s.contains(e.target) && !i.contains(e.target)){ s.classList.remove("appbar-activa"); i.classList.remove("appbar-activa"); } 
+        });
+
+        // Completar activación WinJS si existe
+        if (typeof WinJS !== 'undefined') {
+            WinJS.Application.onerror = function (e) { return true; }; // Protege errores asíncronos
+            WinJS.Application.onactivated = function (args) {
+                args.setPromise(WinJS.UI.processAll().then(function() {
+                    iniciarCatalogoRemoto();
+                }));
+            };
+            WinJS.Application.start(); // <-- ESTE ES EL COMANDO QUE EVITA EL CIERRE TRAS EL SPLASH
+        } else {
+            // Fallback por si la librería no vinculó correctamente
+            iniciarCatalogoRemoto();
+        }
+    });
+
+    // =========================================================================
+    // 3. VARIABLES Y FUNCIONES DE INTERFAZ LOCAL
+    // =========================================================================
     var catalogoApps = {
-        'Angry Birds Space': { pub: 'Rovio Entertainment', desc: 'Los iconicos pajaros de angry birds se trasladan al espacio,usa la resortera y tumba cerdos lets go.', icon: 'angrybirds.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx' },
+        'Angry Birds Space': { pub: 'Rovio Entertainment', desc: 'Los iconicos pajaros de angry birds se trasladan al espacio,usa la resortera y tumba cerdos.', icon: 'angrybirds.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx' },
         'Fruit Ninja': { pub: 'Halfbrick Studios', desc: 'Saca tu katana y corta las frutas.', icon: 'fruitninja.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx' },
         'ProdigyMath': { pub: 'Prodigy Math Team', desc: 'Una Plataforma educativa de matemáticas.', icon: 'ProdigyMath_1.17.0.0_AnyCPU_Debug.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ProdigyMath_1.17.0.0_AnyCPU_Debug.appx' },
         'newsXpresso Metro': { pub: 'newsXpresso', desc: 'Tus noticias en el expreso.', icon: 'newsxpresso.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/esobiIncorporated.newsXpressoMetro_2.0.2.208_neutral__sngswjb5h6fyg.appx' },
-        'Opentracks': { pub: 'Opentracks Studio', desc: 'El reproductor de audio del dramatico de chockingnetdude xdxd OPENDRAMAS cua cua.', icon: 'mp3hubesopentracks.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx' },
+        'Opentracks': { pub: 'Opentracks Studio', desc: 'El reproductor de audio del dramatico de chockingnetdude xdxd OPENDRAMAS.', icon: 'mp3hubesopentracks.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx' },
         'wpapp': { pub: 'wpapp Team', desc: 'La aplicacion tipo sandbox de windows phone ehh no se.', icon: 'wpapp.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/wpapp.appx' },
         'Evernote': { pub: 'Evernote Corp', desc: 'Toma notas y organiza ideas.', icon: 'evernote.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Evernote.Evernote_3.3.0.102_x86__q4d96b2w5wcc2.appx' },
         'mytube': { pub: 'Ryken Studio', desc: 'Un cliente de videos iconico para windows 8 y 8.1!.', icon: 'mytube.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/mytube.appx' },
@@ -558,55 +602,33 @@
         }
     }
 
-    function closeAppDetails() {
-        document.getElementById('app-download-view').classList.remove("open");
-    }
-
+    function closeAppDetails() { document.getElementById('app-download-view').classList.remove("open"); }
     function mostrarSeccion(id) {
         irAlInicio();
         var seccion = document.getElementById(id);
         if (seccion) seccion.classList.add('view-open');
     }
-
-    function mostrarSeccionAplicaciones() { mostrarSeccion('apps-list-view'); }
-    function mostrarSeccionDescargas() { mostrarSeccion('downloads-hub-view'); }
-    function mostrarSeccionCuenta() { mostrarSeccion('account-view'); }
-    function mostrarSeccionWishlist() { mostrarSeccion('wishlist-view'); }
     
     function filtrarCatalogoBoton() { console.log("Búsqueda en desarrollo..."); }
 
-    // Toast system
     function mostrarToast(mensaje) {
         var container = document.getElementById('toast-container');
         var toast = document.createElement('div');
         toast.className = 'Codorniz-toast';
         toast.innerText = mensaje;
         container.appendChild(toast);
-
-        setTimeout(function() {
-            if (container.contains(toast)) {
-                container.removeChild(toast);
-            }
-        }, 4500);
+        setTimeout(function() { if (container.contains(toast)) { container.removeChild(toast); } }, 4500);
 
         if (typeof Windows !== 'undefined' && typeof Windows.UI !== 'undefined') {
-            var notifications = Windows.UI.Notifications;
-            var template = notifications.ToastTemplateType.toastText01;
-            var toastXml = notifications.ToastNotificationManager.getTemplateContent(template);
-            var toastTextElements = toastXml.getElementsByTagName("text");
-            toastTextElements[0].appendChild(toastXml.createTextNode(mensaje));
-            var nativeToast = new notifications.ToastNotification(toastXml);
-            notifications.ToastNotificationManager.createToastNotifier().show(nativeToast);
-        } else if (window.Notification) {
-            if (Notification.permission === "granted") {
-                new Notification("CodornizStore", { body: mensaje, icon: "images/codorniz.png" });
-            } else if (Notification.permission !== "denied") {
-                Notification.requestPermission().then(function(permission) {
-                    if (permission === "granted") {
-                        new Notification("CodornizStore", { body: mensaje, icon: "images/codorniz.png" });
-                    }
-                });
-            }
+            try {
+                var notifications = Windows.UI.Notifications;
+                var template = notifications.ToastTemplateType.toastText01;
+                var toastXml = notifications.ToastNotificationManager.getTemplateContent(template);
+                var toastTextElements = toastXml.getElementsByTagName("text");
+                toastTextElements[0].appendChild(toastXml.createTextNode(mensaje));
+                var nativeToast = new notifications.ToastNotification(toastXml);
+                notifications.ToastNotificationManager.createToastNotifier().show(nativeToast);
+            } catch(e) {}
         }
     }
 
@@ -620,7 +642,6 @@
         document.getElementById('view-app-icon').style.backgroundImage = "url('images/iconos_extraidos/" + app.icon + "')";
         
         var btnAction = document.getElementById('view-download-action');
-        
         btnAction.innerText = "Descargar";
         btnAction.style.background = "#228B22";
         btnAction.disabled = false;
@@ -642,22 +663,15 @@
                         .then(function (newFile) {
                             var downloader = new Windows.Networking.BackgroundTransfer.BackgroundDownloader();
                             var download = downloader.createDownload(uri, newFile);
-                            return download.startAsync().then(function () {
-                                return newFile;
-                            });
+                            return download.startAsync().then(function () { return newFile; });
                         })
                         .done(function (fileObj) {
                             btnAction.innerText = "Instalar";
                             btnAction.style.background = "#1ba1e2";
                             btnAction.disabled = false;
-                            
                             btnAction.onclick = function() {
                                 Windows.System.Launcher.launchFileAsync(fileObj).done(function (success) {
-                                    if (!success) {
-                                        mostrarToast("No se pudo abrir el instalador del sistema.");
-                                    }
-                                }, function(error) {
-                                    mostrarToast("Error al lanzar: " + error.message);
+                                    if (!success) { mostrarToast("No se pudo abrir el instalador del sistema."); }
                                 });
                             };
                         }, function (error) {
@@ -674,11 +688,8 @@
                 iframe.style.display = 'none';
                 iframe.src = app.url; 
                 document.body.appendChild(iframe);
-                
                 setTimeout(function() {
-                    if (document.body.contains(iframe)) {
-                        document.body.removeChild(iframe);
-                    }
+                    if (document.body.contains(iframe)) document.body.removeChild(iframe);
                     btnAction.innerText = "Descargado";
                     btnAction.style.background = "#228B22";
                     btnAction.disabled = true;
@@ -689,27 +700,53 @@
         document.getElementById('app-download-view').classList.add("open");
     }
 
-    // AppBar event listeners (wrapped to ensure elements exist)
-    document.addEventListener('DOMContentLoaded', function() {
-        document.addEventListener("contextmenu", function(e){ 
-            e.preventDefault(); 
-            var ms = document.getElementById("metro-appbar-superior");
-            var mi = document.getElementById("metro-appbar-inferior");
-            if(ms && mi) {
-                ms.classList.toggle("appbar-activa"); 
-                mi.classList.toggle("appbar-activa"); 
-            }
-        });
+    // =========================================================================
+    // 4. PETICIÓN REMOTA Y RENDERIZADO (Compatible con IE11)
+    // =========================================================================
+    function iniciarCatalogoRemoto() {
+        try {
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", "https://raw.githubusercontent.com/SirCoturnix/CodornizStoreServer/main/CodornizApps.json", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    try {
+                        var data = JSON.parse(xhr.responseText);
+                        var contenedor = document.getElementById("grid-search-modular");
+                        if (!contenedor) return;
 
-        document.addEventListener("click", function(e){ 
-            var s = document.getElementById("metro-appbar-superior");
-            var i = document.getElementById("metro-appbar-inferior");
-            if(s && i && !s.contains(e.target) && !i.contains(e.target)){ 
-                s.classList.remove("appbar-activa"); 
-                i.classList.remove("appbar-activa"); 
-            } 
-        });
-    });
-</script>
+                        data.apps.forEach(function (app) {
+                            var item = document.createElement("div");
+                            item.className = "app-item-wrapper";
+                            item.onclick = function () { openAppDetails(app.name); };
+                            
+                            var contenidoHTML = 
+                                '<div class="app-tile" style="background:#228B22;">' +
+                                    '<img src="images/iconos_extraidos/' + (app.icon || 'angrybirds.png') + '">' +
+                                '</div>' +
+                                '<div class="tile-title">' + app.name + '</div>' +
+                                '<div class="tile-sub">' + app.author + ' | ' + app.rating + ' ★</div>';
+
+                            // Autorizamos el innerHTML de forma nativa para evitar bloqueos por CSP de WinRT
+                            if (typeof MSApp !== 'undefined' && MSApp.execUnsafeLocalFunction) {
+                                MSApp.execUnsafeLocalFunction(function () {
+                                    item.innerHTML = contenidoHTML;
+                                });
+                            } else {
+                                item.innerHTML = contenidoHTML;
+                            }
+                            
+                            contenedor.appendChild(item);
+                        });
+                    } catch(e) {
+                        console.error("No se pudo parsear el catálogo remoto.");
+                    }
+                }
+            };
+            xhr.send();
+        } catch(e) {
+            console.error("No se pudo contactar el servidor remoto de CodornizApps.");
+        }
+    }
+    </script>
 </body>
 </html>
