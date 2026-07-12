@@ -3,15 +3,16 @@
     {
       "name": "Angry Birds Space",
       "author": "Rovio Entertainment",
-      "description": "Los iconicos pajaros de angry birds se trasladan al espacio,usa la resortera y tumba cerdos.",
+      "description": "Los iconicos pajaros de angry birds se trasladan al espacio, usa la resortera y tumba cerdos.",
       "icon": "angrybirds.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx",
       "category": "Juegos",
       "featured": true
     },
-       "name": "Test",
+       {
+      "name": "test",
       "author": "Rovio Entertainment",
-      "description": "Los iconicos pajaros de angry birds se trasladan al espacio,usa la resortera y tumba cerdos.",
+      "description": "Los iconicos pajaros de angry birds se trasladan al espacio, usa la resortera y tumba cerdos.",
       "icon": "angrybirds.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx",
       "category": "Juegos",
@@ -110,7 +111,7 @@
     {
       "name": "Nokia AppSocial",
       "author": "Nokia Corporation",
-      "description": "La app social de nokia,habla con tus conocidos.",
+      "description": "La app social de nokia, habla con tus conocidos.",
       "icon": "nokiaappsocial.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/NokiaCorporation.AppSocial_1.9.0.0_x86__6d0q6r3z979nw.appx",
       "category": "Tecnología",
@@ -119,7 +120,7 @@
     {
       "name": "Koode Reader",
       "author": "Koode Team",
-      "description": "Un lector de pdfs,documentos etc etc.",
+      "description": "Un lector de pdfs, documentos etc etc.",
       "icon": "koodereader.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/52487Koode.56414CB813359_1.5.0.4_neutral__m1bqtb7san9p0.appx",
       "category": "Productividad",
@@ -128,7 +129,7 @@
     {
       "name": "El Tenedor",
       "author": "La Fourchette",
-      "description": "Una gran aplicacions de recetas despues de bing food and drink/gourmet.",
+      "description": "Una gran aplicacion de recetas despues de bing food and drink/gourmet.",
       "icon": "eltenedor.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/LaFourchette.comElTenedor.LaFourchette_2015.407.1353.2545_neutral_._xjascxykqffr4.AppxBundle.appx",
       "category": "Comida",
@@ -137,7 +138,7 @@
     {
       "name": "Rayman Jungle Run",
       "author": "Ubisoft",
-      "description": "El Legendario heroe Rayman llega a windows 8.1!juegalo ahora mismo.",
+      "description": "El Legendario heroe Rayman llega a windows 8.1! juegalo ahora mismo.",
       "icon": "raymanjunglerun.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/UbisoftEntertainment.RaymanJungleRun_1.2.0.88_x86__dbgk1hhpxymar.Appx",
       "category": "Juegos",
@@ -164,7 +165,7 @@
     {
       "name": "Fresh Paint",
       "author": "Microsoft Studios",
-      "description": "Pinta,Dibuja,bocetea aqui tienes el set completo de pinceles,pintura seca y lapices.",
+      "description": "Pinta, Dibuja, bocetea aqui tienes el set completo de pinceles, pintura seca y lapices.",
       "icon": "freshpaint.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.FreshPaint_2.0.15133.0_x86__8wekyb3d8bbwe.appx",
       "category": "Otros",
@@ -200,7 +201,7 @@
     {
       "name": "WPCentral",
       "author": "WPCentral Team",
-      "description": "Noticias,y mas en windows 8 y 8.1.",
+      "description": "Noticias, y mas en windows 8 y 8.1.",
       "icon": "WPAPPCENTRAL.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/WPCentral.Win8_1.3.1.2_AnyCPU.appx",
       "category": "Tecnología",
@@ -209,7 +210,7 @@
     {
       "name": "ChromeUWP",
       "author": "ReOpenGlebsur",
-      "description": "A simpe chrome port.",
+      "description": "A simple chrome port.",
       "icon": "Chrome.png",
       "url": "https://github.com/OpenGlebsur/openglebsur.github.io/raw/refs/heads/main/ChromeUWP_1.0.0.0_AnyCPU.appx",
       "category": "Tecnología",
