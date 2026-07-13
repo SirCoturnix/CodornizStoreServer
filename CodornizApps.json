@@ -27,6 +27,15 @@
       "category": "Otros",
       "featured": true
     },
+           {
+      "name": "Live text",
+      "author": "live text team ",
+      "description": "",
+      "icon": " ",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Live.Text.-.Windows.8.1_1.2.0.0_AnyCPU.appx",
+      "category": "Other",
+      "featured": false
+    },
     {
       "name": "Fruit Ninja",
       "author": "Halfbrick Studios",
@@ -124,7 +133,7 @@
       "icon": "nokiaappsocial.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/NokiaCorporation.AppSocial_1.9.0.0_x86__6d0q6r3z979nw.appx",
       "category": "Tecnología",
-      "featured": false
+      "featured": true
     },
     {
       "name": "News Live Tiles",
@@ -136,7 +145,7 @@
       "featured": false
     },
     {
-      "name": "El Tenedor",
+      "name": "TheFork",
       "author": "La Fourchette",
       "description": "Una gran aplicacion de recetas despues de bing food and drink/gourmet.",
       "icon": "eltenedor.png",
