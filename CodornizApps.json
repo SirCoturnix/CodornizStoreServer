@@ -10,11 +10,11 @@
       "featured": true
     },
        {
-      "name": "test",
-      "author": "Rovio Entertainment",
-      "description": "Los iconicos pajaros de angry birds se trasladan al espacio, usa la resortera y tumba cerdos.",
+      "name": "Flappy Bird",
+      "author": "Philino Tech. Ltd",
+      "description": "Extremely addictive and challenging game that will take you for a spin with your patience and focus. It will not rest until all your fingers are tired of tapping. Challenge yourself for how much you can score. Choose from multiple themes. Play across the scrolling landscape to score the highest score possible. Try to beat your own score",
       "icon": " ",
-      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx",
+      "url": "https://github.com/OpenGlebsur/CodornizStoreAppx/raw/refs/heads/main/28845PhilinoTechnologies.FlappyBird_2.1.0.0_neutral__k1kv61aetwx78.Appxx",
       "category": "Juegos",
       "featured": true
     },
