@@ -4,7 +4,7 @@
       "name": "Angry Birds Space",
       "author": "Rovio Entertainment",
       "description": "Los iconicos pajaros de angry birds se trasladan al espacio, usa la resortera y tumba cerdos.",
-      "icon": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/abs.png?raw=true",
+      "icon": "abs.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx",
       "category": "Juegos",
       "featured": true
@@ -22,7 +22,7 @@
       "name": "Fruit Ninja",
       "author": "Halfbrick Studios",
       "description": "Saca tu katana y corta las frutas.",
-      "icon": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/fruitninja.png?raw=true",
+      "icon": "fruitninja.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx",
       "category": "Juegos",
       "featured": true
@@ -31,7 +31,7 @@
       "name": "ProdigyMath",
       "author": "AreoBit",
       "description": "Una Plataforma educativa de matemáticas.",
-      "icon": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
+      "icon": "ProdigyMath_1.17.0.0_AnyCPU_Debug.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ProdigyMath_1.17.0.0_AnyCPU_Debug.appx",
       "category": "Juegos",
       "featured": true
@@ -40,7 +40,7 @@
       "name": "newsXpresso Metro",
       "author": "newsXpresso",
       "description": "Tus noticias en el expreso.",
-      "icon": "",
+      "icon": "newsxpresso.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/esobiIncorporated.newsXpressoMetro_2.0.2.208_neutral__sngswjb5h6fyg.appx",
       "category": "Otros",
       "featured": false
