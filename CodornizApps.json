@@ -4,7 +4,7 @@
       "name": "Angry Birds Space",
       "author": "Rovio Entertainment",
       "description": "Los iconicos pajaros de angry birds se trasladan al espacio, usa la resortera y tumba cerdos.",
-      "icon": "abs.png",
+      "icon": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/abs.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx",
       "category": "Juegos",
       "featured": true
