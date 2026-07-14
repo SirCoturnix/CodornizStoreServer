@@ -45,7 +45,7 @@
       "author": "Halfbrick Studios",
       "description": "Saca tu katana y corta las frutas.",
       "icon": "fruitninja.png",
-            "icon_url": "",
+      "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/fruitninja.png?raw=true",
 
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx",
       "category": "Juegos",
@@ -56,6 +56,7 @@
       "author": "AreoBit",
       "description": "Una Plataforma educativa de matemáticas.",
       "icon": "ProdigyMath_1.17.0.0_AnyCPU_Debug.png",
+      "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ProdigyMath_1.17.0.0_AnyCPU_Debug.appx",
       "category": "Juegos",
       "featured": true
@@ -65,6 +66,7 @@
       "author": "newsXpresso",
       "description": "Tus noticias en el expreso.",
       "icon": "newsxpresso.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/newsxpresso.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/esobiIncorporated.newsXpressoMetro_2.0.2.208_neutral__sngswjb5h6fyg.appx",
       "category": "Otros",
       "featured": false
@@ -74,6 +76,7 @@
       "author": "ChockingNetDude",
       "description": "El reproductor de audio del dramatico de chockingnetdude xdxd OPENDRAMAS cua cua.",
       "icon": "mp3hubesopentracks.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/mp3hubesopentracks.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx",
       "category": "Otros",
       "featured": false
@@ -83,6 +86,7 @@
       "author": "Microsoft",
       "description": "La aplicacion tipo sandbox de windows phone ehh no se.",
       "icon": "wpapp.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/wpapp.appx",
       "category": "Tecnología",
       "featured": false
@@ -92,6 +96,7 @@
       "author": "Evernote",
       "description": "Toma notas y organiza ideas.",
       "icon": "evernote.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Evernote.Evernote_3.3.0.102_x86__q4d96b2w5wcc2.appx",
       "category": "Productividad",
       "featured": false
@@ -101,6 +106,7 @@
       "author": "Ryken",
       "description": "Un cliente de videos iconico para windows 8 y 8.1!.",
       "icon": "mytube.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/mytube.appx",
       "category": "Otros",
       "featured": false
@@ -109,6 +115,7 @@
       "name": "DrayMusic",
       "author": "DraydenYT",
       "description": "Reproductor de musica increible.",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "icon": "1773704616_DrayMusic_1.0.0.0_AnyCPU.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1773704616_DrayMusic_1.0.0.0_AnyCPU.appx",
       "category": "Otros",
@@ -120,6 +127,7 @@
       "description": "Ve tus series y peliculas favoritas agarra tus palomitas ahora mismo.",
       "icon": "netflix.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/4DF9E0F8.Netflix_2.22.0.39_x86__mcm4njqhnhss8.appx",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "category": "Otros",
       "featured": false
     },
@@ -128,6 +136,7 @@
       "author": "Hidden Pineapple",
       "description": "El gran cliente de twitter conocido de windows phone ha llegado a pc.",
       "icon": "rowi-150x150.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HiddenPineappleLLC.Rowi_0.8.0.0_x86__8364z769gkj0p.appx",
       "category": "Otros",
       "featured": false
@@ -135,6 +144,7 @@
     {
       "name": "Nokia AppSocial",
       "author": "Nokia Corporation",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "description": "La app social de nokia, habla con tus conocidos.",
       "icon": "nokiaappsocial.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/NokiaCorporation.AppSocial_1.9.0.0_x86__6d0q6r3z979nw.appx",
@@ -145,6 +155,7 @@
       "name": "News Live Tiles",
       "author": "Koode Team",
       "description": "Un lector de pdfs, documentos etc etc.",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "icon": "koodereader.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/52487Koode.56414CB813359_1.5.0.4_neutral__m1bqtb7san9p0.appx",
       "category": "Productividad",
@@ -155,6 +166,7 @@
       "author": "La Fourchette",
       "description": "Una gran aplicacion de recetas despues de bing food and drink/gourmet.",
       "icon": "eltenedor.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/LaFourchette.comElTenedor.LaFourchette_2015.407.1353.2545_neutral_._xjascxykqffr4.AppxBundle.appx",
       "category": "Comida",
       "featured": false
@@ -162,6 +174,7 @@
     {
       "name": "Rayman Jungle Run",
       "author": "Ubisoft",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "description": "El Legendario heroe Rayman llega a windows 8.1! juegalo ahora mismo.",
       "icon": "raymanjunglerun.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/UbisoftEntertainment.RaymanJungleRun_1.2.0.88_x86__dbgk1hhpxymar.Appx",
@@ -173,6 +186,7 @@
       "author": "ZeptoLab UK",
       "description": "Corta las cuerdas y dale de comer al gran Om Nom.",
       "icon": "CutTheRope.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ZeptoLabUKLimited.CutTheRope_1.2.0.43_x86__sq9zxnwrk84pj.appx",
       "category": "Juegos",
       "featured": false
@@ -182,6 +196,7 @@
       "author": "XunxoCorp",
       "description": "Mira tus noticias en donde sea.",
       "icon": "Xuxo.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/12022Xurxo.XurxoNews_1.0.0.0_neutral__cffdx9p3b7k32.appx",
       "category": "Otros",
       "featured": false
@@ -191,6 +206,7 @@
       "author": "Microsoft Studios",
       "description": "Pinta, Dibuja, bocetea aqui tienes el set completo de pinceles, pintura seca y lapices.",
       "icon": "freshpaint.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.FreshPaint_2.0.15133.0_x86__8wekyb3d8bbwe.appx",
       "category": "Otros",
       "featured": false
@@ -200,6 +216,7 @@
       "author": "Recipe Keeper Team",
       "description": "Organiza tus recetas y cocina para alimentar a tu familia.",
       "icon": "recipekeeper.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/TudorspanLimited.RecipeKeeperFree_1.5.2.0_x86__mnckez06wj9wa.appx",
       "category": "Comida",
       "featured": false
@@ -209,6 +226,7 @@
       "author": "Adobe Systems",
       "description": "El iconico lector de pdfs ha llegado a windows 8.1 prueba y visualiza tus documentos!.",
       "icon": "metro_reader_small_logo.targetsize-256.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/AdobeSystemsIncorporated.AdobeReader_3.1.8.7675_x86__ynb6jyjzte8ga.Appx",
       "category": "Productividad",
       "featured": false
@@ -217,6 +235,7 @@
       "name": "InsiderHub",
       "author": "Microsoft Insider",
       "description": "Opina y prueba las nuevas compilaciones.",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "icon": "insiderhub.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.InsiderHub_15.3.30.1_x86__8wekyb3d8bbwe_1780310454359.appx",
       "category": "Tecnología",
@@ -227,6 +246,7 @@
       "author": "WPCentral Team",
       "description": "Noticias, y mas en windows 8 y 8.1.",
       "icon": "WPAPPCENTRAL.png",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/WPCentral.Win8_1.3.1.2_AnyCPU.appx",
       "category": "Tecnología",
       "featured": false
@@ -238,6 +258,7 @@
       "icon": "Chrome.png",
       "url": "https://github.com/OpenGlebsur/openglebsur.github.io/raw/refs/heads/main/ChromeUWP_1.0.0.0_AnyCPU.appx",
       "category": "Tecnología",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png?raw=true",
       "featured": false
     }
   ]
