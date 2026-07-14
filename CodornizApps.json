@@ -44,7 +44,7 @@
       "name": "Fruit Ninja",
       "author": "Halfbrick Studios",
       "description": "Saca tu katana y corta las frutas.",
-      "icon": "fruitninja.png",
+      "icon": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/fruitninja.png?raw=true",
       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/fruitninja.png?raw=true",
 
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx",
