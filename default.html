@@ -2,12 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>CodornizStore Server</title>
+    <title>CodornizStore</title>
     <link href="//Microsoft.WinJS.2.0/css/ui-dark.css" rel="stylesheet" />
     <script src="//Microsoft.WinJS.2.0/js/base.js"></script>
     <script src="//Microsoft.WinJS.2.0/js/ui.js"></script>
     <style>
-        html, body {
+        /* ===== BASE STYLES ===== */
+        html,
+        body {
             margin: 0;
             background: url('images/storebgr.jpg') no-repeat fixed center / 100% 100% !important;
             background-color: #228B22 !important;
@@ -18,11 +20,25 @@
             height: 100vh !important;
         }
         ::-webkit-scrollbar {
-            display: none !important;
-            width: 0px !important;
-            height: 0px !important;
-            background: transparent !important;
+            width: 10px;
+            height: 10px;
         }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 0;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #228B22;
+            border-radius: 0;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #2eaa2e;
+        }
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #228B22 rgba(0, 0, 0, 0.3);
+        }
+
         #topbar {
             height: 70px;
             background: #1A1A1A;
@@ -32,6 +48,7 @@
             box-sizing: border-box;
             z-index: 1010;
             position: relative;
+            flex-shrink: 0;
         }
         .topbar-codorniz-logo {
             height: 100%;
@@ -48,6 +65,7 @@
             margin-right: 32px;
             color: #fff;
             cursor: pointer;
+            white-space: nowrap;
         }
         .page-title {
             font-size: 24px;
@@ -56,6 +74,7 @@
             opacity: 1 !important;
             cursor: pointer;
             margin-right: 30px;
+            white-space: nowrap;
         }
         .page-title:hover {
             opacity: 0.8 !important;
@@ -63,11 +82,12 @@
         .search-container {
             display: flex;
             align-items: center;
-            background: rgba(0,0,0,0.3);
-            border: 2px solid rgba(255,255,255,0.4);
+            background: rgba(0, 0, 0, 0.3);
+            border: 2px solid rgba(255, 255, 255, 0.4);
             padding: 4px 10px;
             margin-left: auto;
             width: 240px;
+            flex-shrink: 0;
         }
         .search-container input {
             background: transparent;
@@ -82,6 +102,21 @@
             cursor: pointer;
             opacity: 0.7;
         }
+        #lang-switch-top {
+            background: transparent;
+            border: 1px solid #555;
+            color: #fff;
+            padding: 4px 12px;
+            margin-left: 15px;
+            cursor: pointer;
+            font-size: 14px;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        #lang-switch-top:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
         #content {
             padding: 30px 80px;
             height: calc(100vh - 70px);
@@ -97,6 +132,7 @@
             display: inline-block;
             vertical-align: top;
             margin-right: 60px;
+            white-space: normal;
         }
         .section-title-container {
             display: flex;
@@ -104,6 +140,22 @@
             gap: 12px;
             margin-bottom: 5px;
         }
+        .section-title-container h2 {
+            font-weight: 300;
+            font-size: 26px;
+            margin: 0 0 8px 0;
+            color: #fff;
+        }
+        .section-title-container .see-all {
+            font-size: 14px;
+            color: #aaa;
+            cursor: pointer;
+            margin-left: auto;
+        }
+        .section-title-container .see-all:hover {
+            color: #fff;
+        }
+
         .destacados-wrapper {
             display: flex;
             flex-direction: column;
@@ -115,12 +167,31 @@
             margin-top: 10px;
             cursor: pointer;
             background-color: #111;
+            position: relative;
+            overflow: hidden;
         }
         .spotlight-box img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+        .spotlight-box .spotlight-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+        }
+        .spotlight-box .spotlight-overlay .name {
+            font-size: 22px;
+            font-weight: 300;
+        }
+        .spotlight-box .spotlight-overlay .sub {
+            font-size: 14px;
+            color: #ccc;
+        }
+
         .tiles-list-horizontal-grid {
             margin-top: 10px;
             display: inline-flex;
@@ -145,11 +216,22 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            position: relative;
         }
         .app-tile img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+        }
+        .app-tile .tile-badge {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #ffb900;
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 3px;
         }
         .tile-title {
             margin-top: 6px;
@@ -165,9 +247,17 @@
             animation: metroEntrance 0.4s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
         }
         @keyframes metroEntrance {
-            from { opacity: 0; transform: translateX(60px); }
-            to { opacity: 1; transform: translateX(0); }
+            from {
+                opacity: 0;
+                transform: translateX(60px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
+
+        /* ===== APP DETAILS ===== */
         #app-download-view {
             position: fixed !important;
             top: 70px !important;
@@ -182,6 +272,9 @@
             visibility: hidden !important;
             transition: right 0.28s cubic-bezier(0.1, 0.9, 0.2, 1), visibility 0.28s !important;
             box-shadow: none !important;
+            overflow-y: auto !important;
+            white-space: normal !important;
+            flex-wrap: wrap !important;
         }
         #app-download-view.open {
             visibility: visible !important;
@@ -190,6 +283,7 @@
         .download-sidebar {
             width: 280px;
             margin-right: 60px;
+            flex-shrink: 0;
         }
         .download-icon {
             width: 140px;
@@ -203,7 +297,7 @@
         .metro-progress-container {
             width: 100% !important;
             height: 10px;
-            background: rgba(255,255,255,0.15);
+            background: rgba(255, 255, 255, 0.15);
             margin: 25px 0 10px 0;
             display: none;
             position: relative;
@@ -221,6 +315,8 @@
             width: 100%;
             cursor: pointer;
             border: none;
+            font-size: 16px;
+            margin-bottom: 10px;
         }
         .btn-install.btn-open-ready {
             background: #1ba1e2 !important;
@@ -230,20 +326,88 @@
             color: #aaa;
             border: 2px solid #555;
             padding: 8px 20px;
-            width: 100%;
+            width: auto;
             cursor: pointer;
+            font-size: 14px;
+        }
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.05);
         }
         .download-details {
             flex: 1;
             white-space: normal;
+            min-width: 300px;
         }
         .download-details h1 {
             font-weight: 200;
             font-size: 42px;
             margin: 0;
         }
-        #downloads-hub-view, #apps-list-view,
-        #wishlist-view, #account-view {
+        .download-details .publisher {
+            color: #aaa;
+            font-size: 16px;
+        }
+        .download-details .stars-display {
+            color: #ffb900;
+            margin: 10px 0;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+        .download-details .rating-number {
+            color: #ccc;
+            font-size: 16px;
+            margin-left: 8px;
+        }
+        .download-details .desc {
+            color: #ccc;
+            max-width: 700px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .related-section {
+            margin-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            padding-top: 20px;
+        }
+        .related-section h3 {
+            font-weight: 300;
+            font-size: 20px;
+            margin-bottom: 12px;
+            color: #fff;
+        }
+        .related-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .related-item {
+            width: 120px;
+            cursor: pointer;
+        }
+        .related-item .r-icon {
+            width: 120px;
+            height: 120px;
+            background: rgba(51, 51, 51, 0.6);
+            background-size: cover;
+            background-position: center;
+        }
+        .related-item .r-name {
+            font-size: 13px;
+            margin-top: 4px;
+            color: #fff;
+        }
+        .related-item .r-sub {
+            font-size: 11px;
+            color: #aaa;
+        }
+
+        /* ===== OVERLAY PAGES ===== */
+        #apps-list-view,
+        #account-view,
+        #topcharts-view,
+        #categories-view,
+        #collections-view {
             display: none;
             position: fixed !important;
             top: 70px !important;
@@ -260,15 +424,159 @@
             transition: opacity 0.22s ease-in-out;
             box-shadow: none !important;
         }
-        #downloads-hub-view.view-open,
         #apps-list-view.view-open,
-        #wishlist-view.view-open,
-        #account-view.view-open {
+        #account-view.view-open,
+        #topcharts-view.view-open,
+        #categories-view.view-open,
+        #collections-view.view-open {
             display: block !important;
             opacity: 1 !important;
         }
 
-        /* Toast notification */
+        /* ===== TOP CHARTS ===== */
+        .top-chart-section {
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 24px;
+        }
+        .top-chart-section h2 {
+            font-weight: 300;
+            font-size: 26px;
+            color: #228B22;
+            margin-bottom: 16px;
+        }
+        .top-chart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 10px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.15s;
+            max-width: 700px;
+            border-radius: 4px;
+        }
+        .top-chart-item:hover {
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .top-chart-rank {
+            font-size: 24px;
+            font-weight: 300;
+            color: #228B22;
+            min-width: 44px;
+            text-align: center;
+        }
+        .top-chart-icon {
+            width: 48px;
+            height: 48px;
+            background-size: cover;
+            background-position: center;
+            flex-shrink: 0;
+        }
+        .top-chart-info {
+            flex: 1;
+        }
+        .top-chart-info .name {
+            font-size: 17px;
+            font-weight: 400;
+        }
+        .top-chart-info .meta {
+            font-size: 13px;
+            color: #aaa;
+        }
+        .top-chart-stars {
+            color: #ffb900;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+        .top-chart-badge {
+            background: rgba(34, 139, 34, 0.3);
+            color: #228B22;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        /* ===== COLLECTIONS ===== */
+        .collection-group {
+            margin-bottom: 40px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 20px;
+        }
+        .collection-group h2 {
+            font-weight: 300;
+            font-size: 28px;
+            color: #228B22;
+            margin-bottom: 16px;
+        }
+        .collection-apps-grid {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 20px 32px;
+        }
+
+        /* ===== ACCOUNT ===== */
+        .account-tabs {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        .account-tab {
+            cursor: pointer;
+            font-size: 18px;
+            font-weight: 300;
+            padding: 6px 14px;
+            color: #aaa;
+            transition: color 0.15s, border-bottom 0.15s;
+            border-bottom: 2px solid transparent;
+        }
+        .account-tab.active {
+            color: #fff;
+            border-bottom-color: #228B22;
+        }
+        .account-tab:hover {
+            color: #fff;
+        }
+        .account-tab-content {
+            display: none;
+        }
+        .account-tab-content.active {
+            display: block;
+        }
+
+        .view-switcher {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .view-switcher button {
+            background: transparent;
+            border: 2px solid #555;
+            color: #ccc;
+            padding: 8px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            transition: all 0.15s;
+        }
+        .view-switcher button.active {
+            border-color: #228B22;
+            color: #fff;
+            background: rgba(34, 139, 34, 0.2);
+        }
+        .view-switcher button:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* ===== TOAST ===== */
         #toast-container {
             position: fixed;
             top: 90px;
@@ -285,7 +593,7 @@
             padding: 15px 25px;
             font-size: 16px;
             font-weight: 300;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             opacity: 0;
             transform: translateX(100%);
             animation: slideInToast 0.4s forwards, fadeOutToast 0.4s 4s forwards;
@@ -293,463 +601,1897 @@
             border-left: 5px solid #fff;
         }
         @keyframes slideInToast {
-            to { opacity: 1; transform: translateX(0); }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         @keyframes fadeOutToast {
-            to { opacity: 0; transform: translateX(100%); }
+            to {
+                opacity: 0;
+                transform: translateX(100%);
+            }
         }
-        
-        /* AppBar styles */
-        #metro-appbar-superior { 
-            position: fixed; 
-            top: -110px; 
-            left: 0; 
-            width: 100%; 
-            height: 95px; 
-            background: rgba(28, 28, 28, 0.95); 
-            transition: top 0.2s; 
-            z-index: 99998; 
-        } 
-        #metro-appbar-superior.appbar-activa { top: 0; }
-        
-        #metro-appbar-inferior { 
-            position: fixed; 
-            bottom: -130px; 
-            left: 0; 
-            width: 100%; 
-            height: 95px; 
-            background: rgba(28, 28, 28, 0.95); 
-            transition: bottom 0.2s; 
-            z-index: 99998; 
-        } 
-        #metro-appbar-inferior.appbar-activa { bottom: 0; }
+
+        /* ===== APP BARS ===== */
+        #metro-appbar-superior {
+            position: fixed;
+            top: -110px;
+            left: 0;
+            width: 100%;
+            height: 95px;
+            background: rgba(28, 28, 28, 0.95);
+            transition: top 0.2s;
+            z-index: 99998;
+        }
+        #metro-appbar-superior.appbar-activa {
+            top: 0;
+        }
+        #metro-appbar-inferior {
+            position: fixed;
+            bottom: -130px;
+            left: 0;
+            width: 100%;
+            height: 95px;
+            background: rgba(28, 28, 28, 0.95);
+            transition: bottom 0.2s;
+            z-index: 99998;
+        }
+        #metro-appbar-inferior.appbar-activa {
+            bottom: 0;
+        }
+        .lang-btn {
+            background: transparent;
+            border: 1px solid #666;
+            color: #fff;
+            padding: 4px 12px;
+            margin-left: 10px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .account-lang-selector {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .account-lang-selector label {
+            margin-right: 15px;
+            font-size: 15px;
+        }
+        .account-lang-selector select {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid #555;
+            color: #fff;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        .account-lang-selector select option {
+            background: #222;
+        }
+
+        @media (max-width: 1200px) {
+            #content {
+                padding: 20px 40px;
+            }
+            .spotlight-box {
+                width: 480px;
+                height: 240px;
+            }
+        }
+        @media (max-width: 800px) {
+            #topbar {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 10px 16px;
+                gap: 6px;
+            }
+            .topbar-codorniz-logo {
+                max-height: 40px;
+            }
+            .store-brand {
+                font-size: 18px;
+                margin-right: 16px;
+            }
+            .page-title {
+                font-size: 16px;
+                margin-right: 14px;
+            }
+            .search-container {
+                width: 140px;
+                margin-left: 0;
+            }
+            #content {
+                padding: 12px 16px;
+                height: calc(100vh - 120px);
+            }
+            .section-group {
+                margin-right: 30px;
+            }
+            .spotlight-box {
+                width: 320px;
+                height: 180px;
+            }
+            .tiles-list-horizontal-grid {
+                height: 480px;
+                gap: 10px 20px;
+            }
+            .app-item-wrapper {
+                width: 120px;
+            }
+            .app-tile {
+                width: 120px;
+                height: 120px;
+            }
+            #app-download-view {
+                width: calc(100% - 40px) !important;
+                padding: 20px !important;
+                flex-direction: column;
+            }
+            .download-sidebar {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 20px;
+                display: flex;
+                flex-wrap: wrap;
+                gap: 12px;
+                align-items: center;
+            }
+            .download-icon {
+                width: 80px;
+                height: 80px;
+            }
+            .download-details h1 {
+                font-size: 28px;
+            }
+            #apps-list-view,
+            #account-view,
+            #topcharts-view,
+            #categories-view,
+            #collections-view {
+                padding: 20px !important;
+            }
+            .top-chart-item {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
-<div id="topbar">
-    <img src="images/codorniz.png" class="topbar-codorniz-logo" onclick="irAlInicio()">
-    <div class="store-brand" onclick="irAlInicio()">CodornizStore</div>
-    <div class="page-title" onclick="mostrarSeccion('apps-list-view')">Aplicaciones</div>
-    <div class="page-title" onclick="mostrarSeccion('downloads-hub-view')">Descargas</div>
-    <div class="page-title" onclick="mostrarSeccion('account-view')">Mi Cuenta</div>
-    <div class="page-title" onclick="mostrarSeccion('wishlist-view')">Wishlist</div>
-    
-    <div class="search-container">
-        <input type="text" id="store-search-input" placeholder="Buscar...">
-        <span onclick="filtrarCatalogoBoton()">🔍</span>
+
+    <!-- ===== TOPBAR ===== -->
+    <div id="topbar">
+        <img src="images/codorniz.png" class="topbar-codorniz-logo" onclick="irAlInicio()">
+        <div class="store-brand" onclick="irAlInicio()">CodornizStore</div>
+        <div class="page-title" onclick="mostrarTodasApps()" id="nav-apps">Apps</div>
+        <div class="page-title" onclick="mostrarSeccion('topcharts-view')" id="nav-topcharts">Top Charts</div>
+        <div class="page-title" onclick="mostrarSeccion('categories-view')" id="nav-categories">Categories</div>
+        <div class="page-title" onclick="mostrarSeccion('collections-view')" id="nav-collections">Collections</div>
+        <div class="page-title" onclick="mostrarSeccion('account-view')" id="nav-account">My Account</div>
+        <div class="search-container">
+            <input type="text" id="store-search-input" placeholder="Search..." onkeydown="if(event.keyCode===13) buscar()">
+            <span onclick="buscar()">&#128269;</span>
+        </div>
+        <button class="lang-btn" id="lang-switch-top" onclick="toggleLanguage()">Español</button>
     </div>
-</div>
 
-<div id="toast-container"></div>
+    <div id="toast-container"></div>
 
+    <!-- ===== MAIN CONTENT ===== -->
     <div id="content">
+        <!-- Featured (FIRST) -->
         <div class="section-group metro-fade">
             <div class="section-title-container">
-                <h2>Destacados</h2>
+                <h2 id="section-featured-title">Featured</h2>
+                <span class="see-all" onclick="mostrarSeccion('collections-view')" id="featured-see-all">See all</span>
             </div>
-            <div class="destacados-wrapper">
-                <div onclick="openAppDetails('Angry Birds Space')">
-                    <div id="spotlight" class="spotlight-box">
-                        <img src="images/absp.jpg">
-                    </div>
-                    <div class="tile-title">Angry Birds Space</div>
-                </div>
-                <div style="display:flex; flex-direction:row; gap:32px;">
-                    <div class="app-item-wrapper"
-                         onclick="openAppDetails('Fruit Ninja')">
-                        <div class="app-tile">
-                            <img src="images/iconos_extraidos/fruitninja.png">
-                        </div>
-                        <div class="tile-title">Fruit Ninja</div>
-                    </div>
-                    <div class="app-item-wrapper"
-                         onclick="openAppDetails('Netflix')">
-                        <div class="app-tile">
-                            <img src="images/iconos_extraidos/netflix.png">
-                        </div>
-                        <div class="tile-title">Netflix</div>
-                    </div>
-                </div>
-            </div>
+            <div class="destacados-wrapper" id="featured-container"></div>
         </div>
+
+        <!-- Codorniz Picks (SECOND) -->
         <div class="section-group metro-fade" style="animation-delay: 0.05s;">
             <div class="section-title-container">
-                <h2>Más aplicaciones</h2>
+                <h2 id="section-picks-title">Codorniz Picks</h2>
+                <span class="see-all" onclick="mostrarSeccion('collections-view')" id="picks-see-all">See all</span>
             </div>
-            <div class="tiles-list-horizontal-grid">
-                <div class="app-item-wrapper" onclick="openAppDetails('Xunxo News')"><div class="app-tile"><img src="images/iconos_extraidos/Xuxo.png"></div><div class="tile-title">Xunxo News</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('newsXpresso Metro')"><div class="app-tile"><img src="images/iconos_extraidos/newsxpresso.png"></div><div class="tile-title" id="title-3">newsXpresso Metro</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('Fresh Paint')"><div class="app-tile"><img src="images/iconos_extraidos/freshpaint.png"></div><div class="tile-title">Fresh Paint</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('DrayMusic')"><div class="app-tile"><img src="images/iconos_extraidos/1773704616_DrayMusic_1.0.0.0_AnyCPU.png"></div><div class="tile-title">DrayMusic</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('Rowi')"><div class="app-tile"><img src="images/iconos_extraidos/rowi-150x150.png"></div><div class="tile-title">Rowi</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('Opentracks')"><div class="app-tile"><img src="images/iconos_extraidos/mp3hubesopentracks.png"></div><div class="tile-title">Opentracks</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('Nokia AppSocial')"><div class="app-tile"><img src="images/iconos_extraidos/nokiaappsocial.png"></div><div class="tile-title">Nokia AppSocial</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('InsiderHub')"><div class="app-tile"><img src="images/iconos_extraidos/insiderhub.png"></div><div class="tile-title">InsiderHub</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('mytube')"><div class="app-tile"><img src="images/iconos_extraidos/mytube.png"></div><div class="tile-title">mytube</div><div class="tile-sub">Gratis</div></div>
-            </div>
+            <div class="destacados-wrapper" id="picks-container"></div>
         </div>
+
+        <!-- More apps -->
         <div class="section-group metro-fade" style="animation-delay: 0.1s;">
-            <div class="section-title-container">
-                <h2>Juegos</h2>
-            </div>
-            <div class="tiles-list-horizontal-grid">
-                <div class="app-item-wrapper" onclick="openAppDetails('Angry Birds Space')"><div class="app-tile" style="background:#004d99;"><img src="images/iconos_extraidos/angrybirds.png"></div><div class="tile-title">Angry Birds Space</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('Fruit Ninja')"><div class="app-tile" style="background:#5c931e;"><img src="images/iconos_extraidos/fruitninja.png"></div><div class="tile-title">Fruit Ninja</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('Cut The Rope')"><div class="app-tile" style="background:#6aa822;"><img src="images/iconos_extraidos/CutTheRope.png"></div><div class="tile-title">Cut The Rope</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('ProdigyMath')"><div class="app-tile" style="background:#00a2ed;"><img src="images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png"></div><div class="tile-title">ProdigyMath</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('Rayman Jungle Run')"><div class="app-tile" style="background:#d80073;"><img src="images/iconos_extraidos/raymanjunglerun.png"></div><div class="tile-title">Rayman Jungle Run</div><div class="tile-sub">Gratis</div></div>
-            </div>
+            <div class="section-title-container"><h2 id="section-more-title">More apps</h2></div>
+            <div class="tiles-list-horizontal-grid" id="more-container"></div>
         </div>
+
+        <!-- Games -->
         <div class="section-group metro-fade" style="animation-delay: 0.15s;">
-            <div class="section-title-container">
-                <h2>Comida y Productividad</h2>
-            </div>
-            <div class="tiles-list-horizontal-grid">
-                <div class="app-item-wrapper" onclick="openAppDetails('RecipeKeeper')"><div class="app-tile" style="background:#ff0066;"><img src="images/iconos_extraidos/recipekeeper.png"></div><div class="tile-title">RecipeKeeper</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('El Tenedor')"><div class="app-tile" style="background:#00aba9;"><img src="images/iconos_extraidos/eltenedor.png"></div><div class="tile-title">El Tenedor</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('Koode Reader')"><div class="app-tile" style="background:#1ba1e2;"><img src="images/iconos_extraidos/koodereader.png"></div><div class="tile-title">Koode Reader</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('Adobe Reader')"><div class="app-tile" style="background:#d80073;"><img src="images/iconos_extraidos/metro_reader_small_logo.targetsize-256.png"></div><div class="tile-title">Adobe Reader</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('Evernote')"><div class="app-tile" style="background:#33a933;"><img src="images/iconos_extraidos/evernote.png"></div><div class="tile-title">Evernote</div><div class="tile-sub">Gratis</div></div>
-            </div>
+            <div class="section-title-container"><h2 id="section-games-title">Games</h2></div>
+            <div class="tiles-list-horizontal-grid" id="games-container"></div>
         </div>
+
+        <!-- Food & Productivity -->
         <div class="section-group metro-fade" style="animation-delay: 0.2s;">
-            <div class="section-title-container">
-                <h2>Tecnología</h2>
-            </div>
-            <div class="tiles-list-horizontal-grid">
-                <div class="app-item-wrapper" onclick="openAppDetails('wpapp')"><div class="app-tile" style="background:#252525;"><img src="images/iconos_extraidos/wpapp.png"></div><div class="tile-title">wpapp</div><div class="tile-sub">Gratis</div></div>
-                <div class="app-item-wrapper" onclick="openAppDetails('WPCentral')"><div class="app-tile" style="background:#00a300;"><img src="images/iconos_extraidos/WPAPPCENTRAL.png"></div><div class="tile-title">WPCentral</div><div class="tile-sub">Gratis</div></div>
-             <div class="app-item-wrapper" onclick="openAppDetails('WPCentral')"><div class="app-tile" style="background:#00a300;"><img src="images/iconos_extraidos/WPAPPCENTRAL.png"></div><div class="tile-title">Example</div><div class="tile-sub">Gratis</div></div>
-            </div>
+            <div class="section-title-container"><h2 id="section-food-title">Food &amp; Productivity</h2></div>
+            <div class="tiles-list-horizontal-grid" id="food-container"></div>
+        </div>
+
+        <!-- Technology -->
+        <div class="section-group metro-fade" style="animation-delay: 0.25s;">
+            <div class="section-title-container"><h2 id="section-tech-title">Technology</h2></div>
+            <div class="tiles-list-horizontal-grid" id="tech-container"></div>
         </div>
     </div>
-    
+
+    <!-- ===== APP DETAILS ===== -->
     <div id="app-download-view">
         <div class="download-sidebar">
             <div id="view-app-icon" class="download-icon"></div>
             <div class="metro-progress-container" id="view-progress-wrapper">
                 <div class="metro-progress-bar" id="view-progress-bar"></div>
             </div>
-            <button class="btn-install" id="view-download-action">Descargar</button>
-            <button class="btn-back" onclick="closeAppDetails()">Volver</button>
+            <button class="btn-install" id="view-download-action">Download</button>
+            <button class="btn-back" onclick="closeAppDetails()" id="view-back-btn">Back</button>
         </div>
         <div class="download-details">
-            <h1 id="view-app-title">Cargando kaplow...</h1>
+            <h1 id="view-app-title">Loading...</h1>
             <div class="publisher" id="view-app-pub">Codorniz Developer</div>
-            <div id="view-app-stars" style="color:#ffb900; margin:10px 0;">★★★★★</div>
-            <div class="description" id="view-app-desc" style="color:#ccc; max-width:700px; white-space:normal; margin-bottom:20px;">Espere...</div>
-            <div class="screenshots-group">
-                <h3 style="font-weight:300; font-size:18px;">Capturas de pantalla</h3>
-                <div style="width:320px; height:180px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); display:inline-block; margin-right:15px;"></div>
-                <div style="width:320px; height:180px; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.1); display:inline-block;"></div>
+            <div class="stars-display" id="view-app-stars">★★★★★ <span class="rating-number" id="view-rating-number">5.0</span></div>
+            <div class="desc" id="view-app-desc">Please wait...</div>
+
+            <!-- Top Free in Category -->
+            <div class="related-section" id="view-top-free-section">
+                <h3 id="view-top-free-title">Top Free in this Category</h3>
+                <div class="related-grid" id="view-top-free-grid"></div>
             </div>
-        </div>
-    </div>
-    
-    <div id="downloads-hub-view" class="metro-fade">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
-             <h1>Cola de descargas</h1><button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;">Volver</button>
-        </div>
-        <div style="display:flex; flex-direction:row; gap:32px; flex-wrap:wrap;">
-            <div id="empty-downloads-msg" style="opacity:0.6;">No hay descargas pendientes en este momento.</div>
-        </div>
-    </div>
-    
-    <div id="wishlist-view" class="metro-fade">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
-             <h1>Wishlist CodornizStore</h1><button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;">Volver</button>
-        </div>
-        <div style="display:flex; gap:32px;">
-            <div class="app-item-wrapper" onclick="openAppDetails('Angry Birds Space')"><div class="app-tile" style="background:#004d99;"><img src="images/iconos_extraidos/angrybirds.png"></div><div class="tile-title">Angry Birds Space</div></div>
-        </div>
-    </div>
-    
-    <div id="account-view" class="metro-fade">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
-             <h1>Mi Cuenta Codorniz</h1><button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;">Volver</button>
-        </div>
-        <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:30px; max-width:600px;">
-            <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px;">
-                 <div style="width:80px; height:80px; background:#228B22; display:flex; align-items:center; justify-content:center; font-size:36px; color:#fff;">C</div>
-                 <div><h2 style="font-weight:300; margin:0; font-size:24px;">Usuario Familiar</h2><div style="font-size:14px; color:#228B22; font-weight:bold;">Desarrollador Codorniz Oro</div></div>
+
+            <!-- Related Apps -->
+            <div class="related-section" id="view-related-section">
+                <h3 id="view-related-title">Related Apps</h3>
+                <div class="related-grid" id="view-related-grid"></div>
             </div>
-            <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:20px; font-size:14px; color:#ccc; display:flex; flex-direction:column; gap:12px;">
-                 <div><strong>Servidor de Estáticos:</strong> GitHub Pages Server</div><div><strong>Servidor de Descargas:</strong> GitHub Releases CDN</div>
-            </div>
-        </div>
-    </div>
-    
-    <div id="apps-list-view" class="metro-fade">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
-             <h1>Todas las aplicaciones</h1><button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;">Volver</button>
-        </div>
-        <div class="full-grid-container" id="grid-search-modular" style="display:flex; flex-direction:row; gap:20px 32px; flex-wrap:wrap; height:auto;">
-            <div class="app-item-wrapper" onclick="openAppDetails('Angry Birds Space')"><div class="app-tile" style="background:#004d99;"><img src="images/iconos_extraidos/angrybirds.png"></div><div class="tile-title" id="title-0">Angry Birds Space</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Fruit Ninja')"><div class="app-tile" style="background:#5c931e;"><img src="images/iconos_extraidos/fruitninja.png"></div><div class="tile-title" id="title-1">Fruit Ninja</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('ProdigyMath')"><div class="app-tile" style="background:#00a2ed;"><img src="images/iconos_extraidos/ProdigyMath_1.17.0.0_AnyCPU_Debug.png"></div><div class="tile-title" id="title-2">ProdigyMath</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('newsXpresso Metro')"><div class="app-tile" style="background:#e51400;"><img src="images/iconos_extraidos/newsxpresso.png"></div><div class="tile-title" id="title-3">newsXpresso Metro</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Opentracks')"><div class="app-tile" style="background:#ff6a00;"><img src="images/iconos_extraidos/mp3hubesopentracks.png"></div><div class="tile-title" id="title-4">Opentracks</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('wpapp')"><div class="app-tile" style="background:#252525;"><img src="images/iconos_extraidos/wpapp.png"></div><div class="tile-title" id="title-5">wpapp</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Evernote')"><div class="app-tile" style="background:#33a933;"><img src="images/iconos_extraidos/evernote.png"></div><div class="tile-title" id="title-6">Evernote</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('mytube')"><div class="app-tile" style="background:#107c41;"><img src="images/iconos_extraidos/mytube.png"></div><div class="tile-title" id="title-7">mytube</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('DrayMusic')"><div class="app-tile" style="background:#1ba1e2;"><img src="images/iconos_extraidos/1773704616_DrayMusic_1.0.0.0_AnyCPU.png"></div><div class="tile-title" id="title-8">DrayMusic</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Netflix')"><div class="app-tile" style="background:#e50914;"><img src="images/iconos_extraidos/netflix.png"></div><div class="tile-title" id="title-9">Netflix</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Rowi')"><div class="app-tile" style="background:#000;"><img src="images/iconos_extraidos/rowi-150x150.png"></div><div class="tile-title" id="title-10">Rowi</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Nokia AppSocial')"><div class="app-tile" style="background:#0066ff;"><img src="images/iconos_extraidos/nokiaappsocial.png"></div><div class="tile-title" id="title-11">Nokia AppSocial</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Koode Reader')"><div class="app-tile" style="background:#1ba1e2;"><img src="images/iconos_extraidos/koodereader.png"></div><div class="tile-title" id="title-12">Koode Reader</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('El Tenedor')"><div class="app-tile" style="background:#00aba9;"><img src="images/iconos_extraidos/eltenedor.png"></div><div class="tile-title" id="title-13">El Tenedor</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Rayman Jungle Run')"><div class="app-tile" style="background:#d80073;"><img src="images/iconos_extraidos/raymanjunglerun.png"></div><div class="tile-title" id="title-14">Rayman Jungle Run</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Cut The Rope')"><div class="app-tile" style="background:#6aa822;"><img src="images/iconos_extraidos/CutTheRope.png"></div><div class="tile-title" id="title-15">Cut The Rope</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Xunxo News')"><div class="app-tile" style="background:#00b124;"><img src="images/iconos_extraidos/Xuxo.png"></div><div class="tile-title" id="title-16">Xunxo News</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Fresh Paint')"><div class="app-tile" style="background:#603cba;"><img src="images/iconos_extraidos/freshpaint.png"></div><div class="tile-title" id="title-17">Fresh Paint</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('RecipeKeeper')"><div class="app-tile" style="background:#ff0066;"><img src="images/iconos_extraidos/recipekeeper.png"></div><div class="tile-title" id="title-18">RecipeKeeper</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('Adobe Reader')"><div class="app-tile" style="background:#d80073;"><img src="images/iconos_extraidos/metro_reader_small_logo.targetsize-256.png"></div><div class="tile-title" id="title-19">Adobe Reader</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('InsiderHub')"><div class="app-tile" style="background:#2d89ef;"><img src="images/iconos_extraidos/insiderhub.png"></div><div class="tile-title" id="title-20">InsiderHub</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('WPCentral')"><div class="app-tile" style="background:#00a300;"><img src="images/iconos_extraidos/WPAPPCENTRAL.png"></div><div class="tile-title" id="title-21">WPCentral</div></div>
-            <div class="app-item-wrapper" onclick="openAppDetails('ChromeUWP')"><div class="app-tile" style="background:#00a300;"><img src="images/iconos_extraidos/WPAPPCENTRAL.png"></div><div class="tile-title" id="title-22">Chrome Metro</div></div>
         </div>
     </div>
 
-    <!-- AppBar elements -->
+    <!-- ===== ALL APPS ===== -->
+    <div id="apps-list-view" class="metro-fade">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; flex-wrap:wrap; gap:12px;">
+            <h1 id="search-title">All apps</h1>
+            <div style="display:flex; gap:10px; flex-wrap:wrap;">
+                <button class="btn-back" onclick="mostrarTodasApps()" style="width:auto; padding:10px 25px;" id="show-all-btn">Show all</button>
+                <button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;" id="apps-back">Back</button>
+            </div>
+        </div>
+        <div class="view-switcher">
+            <button id="view-all-btn" class="active" onclick="setAppsView('all')">All apps</button>
+            <button id="view-dev-btn" onclick="setAppsView('dev')">By Developer</button>
+        </div>
+        <div class="full-grid-container" id="grid-search-modular" style="display:flex; flex-direction:row; gap:20px 32px; flex-wrap:wrap; height:auto;"></div>
+    </div>
+
+    <!-- ===== ACCOUNT ===== -->
+    <div id="account-view" class="metro-fade">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; flex-wrap:wrap; gap:12px;">
+            <h1 id="account-title">My Account</h1>
+            <button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;" id="account-back">Back</button>
+        </div>
+        <div class="account-tabs">
+            <div class="account-tab active" data-tab="profile" onclick="switchAccountTab('profile')" id="account-tab-profile">Profile</div>
+            <div class="account-tab" data-tab="wishlist" onclick="switchAccountTab('wishlist')" id="account-tab-wishlist">Wishlist</div>
+            <div class="account-tab" data-tab="downloads" onclick="switchAccountTab('downloads')" id="account-tab-downloads">Downloads</div>
+        </div>
+        <div class="account-tab-content active" id="account-content-profile">
+            <div style="background:rgba(255,255,255,0.03); border:1px solid rgba(255,255,255,0.08); padding:30px; max-width:600px;">
+                <div style="display:flex; align-items:center; gap:20px; margin-bottom:25px;">
+                    <div style="width:80px; height:80px; background:#228B22; display:flex; align-items:center; justify-content:center; font-size:36px; color:#fff;">C</div>
+                    <div>
+                        <h2 style="font-weight:300; margin:0; font-size:24px;" id="account-user">Family User</h2>
+                        <div style="font-size:14px; color:#228B22; font-weight:bold;" id="account-role">Codorniz Gold Developer</div>
+                    </div>
+                </div>
+                <div style="border-top:1px solid rgba(255,255,255,0.1); padding-top:20px; font-size:14px; color:#ccc; display:flex; flex-direction:column; gap:12px;">
+                    <div id="account-server"><strong>Static Server:</strong> GitHub Pages Server</div>
+                    <div id="account-downloads"><strong>Downloads Server:</strong> GitHub Releases CDN</div>
+                </div>
+                <div class="account-lang-selector">
+                    <label for="lang-select" id="lang-select-label">Language / Idioma / Язык:</label>
+                    <select id="lang-select" onchange="changeLanguageFromSelect(this.value)">
+                        <option value="es">Español</option>
+                        <option value="en">English</option>
+                        <option value="ru">Русский</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="account-tab-content" id="account-content-wishlist">
+            <h2 style="font-weight:300; margin-bottom:20px;">My Wishlist</h2>
+            <div style="display:flex; gap:32px; flex-wrap:wrap;" id="wishlist-container-account"></div>
+        </div>
+        <div class="account-tab-content" id="account-content-downloads">
+            <h2 style="font-weight:300; margin-bottom:20px;" id="downloads-title">Download queue</h2>
+            <div style="display:flex; flex-direction:row; gap:32px; flex-wrap:wrap;">
+                <div id="empty-downloads-msg" style="opacity:0.6;">No pending downloads at the moment.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== TOP CHARTS ===== -->
+    <div id="topcharts-view" class="metro-fade">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; flex-wrap:wrap; gap:12px;">
+            <h1 id="topcharts-title">Top Charts</h1>
+            <button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;" id="topcharts-back">Back</button>
+        </div>
+        <div id="topcharts-container"></div>
+    </div>
+
+    <!-- ===== CATEGORIES ===== -->
+    <div id="categories-view" class="metro-fade">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; flex-wrap:wrap; gap:12px;">
+            <h1 id="categories-title">Categories</h1>
+            <button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;" id="categories-back">Back</button>
+        </div>
+        <div id="categories-container"></div>
+    </div>
+
+    <!-- ===== COLLECTIONS ===== -->
+    <div id="collections-view" class="metro-fade">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px; flex-wrap:wrap; gap:12px;">
+            <h1 id="collections-title">Collections</h1>
+            <button class="btn-back" onclick="irAlInicio()" style="width:auto; padding:10px 25px;" id="collections-back">Back</button>
+        </div>
+        <div id="collections-container"></div>
+    </div>
+
+    <!-- ===== APP BARS ===== -->
     <div id="metro-appbar-superior">
-        <div style="display:flex; flex-direction:row; gap:32px; padding:20px;">
-            <div onclick="irAlInicio()" style="cursor:pointer;">Inicio Store</div>
-            <div onclick="mostrarSeccion('apps-list-view')" style="cursor:pointer;">Apps</div>
+        <div style="display:flex; flex-direction:row; gap:32px; padding:20px; flex-wrap:wrap;">
+            <div onclick="irAlInicio()" style="cursor:pointer;" id="appbar-home">Store Home</div>
+            <div onclick="mostrarTodasApps()" style="cursor:pointer;" id="appbar-apps">Apps</div>
+            <div onclick="mostrarSeccion('topcharts-view')" style="cursor:pointer;" id="appbar-topcharts">Top Charts</div>
+            <div onclick="mostrarSeccion('categories-view')" style="cursor:pointer;" id="appbar-categories">Categories</div>
+            <div onclick="mostrarSeccion('collections-view')" style="cursor:pointer;" id="appbar-collections">Collections</div>
         </div>
     </div>
     <div id="metro-appbar-inferior">
-        <div style="display:flex; flex-direction:row; gap:32px; padding:20px;">
-            <div onclick="mostrarSeccion('downloads-hub-view')" style="cursor:pointer;">Descargas</div>
-            <div onclick="mostrarSeccion('account-view')" style="cursor:pointer;">Cuenta Oro</div>
-            <div onclick="mostrarSeccion('wishlist-view')" style="cursor:pointer;">Wishlist</div>
+        <div style="display:flex; flex-direction:row; gap:32px; padding:20px; flex-wrap:wrap;">
+            <div onclick="mostrarSeccion('account-view')" style="cursor:pointer;" id="appbar-account">Gold Account</div>
         </div>
     </div>
 
     <script>
-    // =========================================================================
-    // 1. ESCUDO ANTI-CRASH GLOBAL (Evitará que WWAHost cierre la app)
-    // =========================================================================
-    window.onerror = function (msg, url, line) {
-        var errDiv = document.createElement("div");
-        errDiv.style.cssText = "position:fixed; top:0; left:0; width:100%; background:#e51400; color:white; z-index:999999; padding:20px; font-size:16px; font-family:'Segoe UI', sans-serif;";
-        errDiv.innerText = "Error detectado: " + msg + " (Línea: " + line + "). La app sigue abierta gracias al escudo protector.";
-        document.body.appendChild(errDiv);
-        return true; // Magia: Al retornar 'true', Windows no cierra tu app.
-    };
-
-    // =========================================================================
-    // 2. CICLO DE VIDA DE LA APP Y CARGA DE EVENTOS (Crítico para el Splash)
-    // =========================================================================
-    document.addEventListener("DOMContentLoaded", function() {
-        // Eventos del Appbar
-        document.addEventListener("contextmenu", function(e){ 
-            e.preventDefault(); 
-            var ms = document.getElementById("metro-appbar-superior");
-            var mi = document.getElementById("metro-appbar-inferior");
-            if(ms && mi) { ms.classList.toggle("appbar-activa"); mi.classList.toggle("appbar-activa"); }
-        });
-        document.addEventListener("click", function(e){ 
-            var s = document.getElementById("metro-appbar-superior");
-            var i = document.getElementById("metro-appbar-inferior");
-            if(s && i && !s.contains(e.target) && !i.contains(e.target)){ s.classList.remove("appbar-activa"); i.classList.remove("appbar-activa"); } 
-        });
-
-        // Completar activación WinJS si existe
-        if (typeof WinJS !== 'undefined') {
-            WinJS.Application.onerror = function (e) { return true; }; // Protege errores asíncronos
-            WinJS.Application.onactivated = function (args) {
-                args.setPromise(WinJS.UI.processAll().then(function() {
-                    iniciarCatalogoRemoto();
-                }));
-            };
-            WinJS.Application.start(); // <-- ESTE ES EL COMANDO QUE EVITA EL CIERRE TRAS EL SPLASH
-        } else {
-            // Fallback por si la librería no vinculó correctamente
-            iniciarCatalogoRemoto();
-        }
-    });
-
-    // =========================================================================
-    // 3. VARIABLES Y FUNCIONES DE INTERFAZ LOCAL
-    // =========================================================================
-    var catalogoApps = {
-        'Angry Birds Space': { pub: 'Rovio Entertainment', desc: 'Los iconicos pajaros de angry birds se trasladan al espacio,usa la resortera y tumba cerdos.', icon: 'angrybirds.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx' },
-        'Fruit Ninja': { pub: 'Halfbrick Studios', desc: 'Saca tu katana y corta las frutas.', icon: 'fruitninja.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx' },
-        'ProdigyMath': { pub: 'Prodigy Math Team', desc: 'Una Plataforma educativa de matemáticas.', icon: 'ProdigyMath_1.17.0.0_AnyCPU_Debug.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ProdigyMath_1.17.0.0_AnyCPU_Debug.appx' },
-        'newsXpresso Metro': { pub: 'newsXpresso', desc: 'Tus noticias en el expreso.', icon: 'newsxpresso.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/esobiIncorporated.newsXpressoMetro_2.0.2.208_neutral__sngswjb5h6fyg.appx' },
-        'Opentracks': { pub: 'ChockingNetDrama', desc: 'El reproductor de audio del dramatico de chockingnetdude xdxd OPENDRAMAS cua cua.', icon: 'mp3hubesopentracks.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx' },
-        'wpapp': { pub: 'wpapp Team', desc: 'La aplicacion tipo sandbox de windows phone ehh no se.', icon: 'wpapp.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/wpapp.appx' },
-        'Evernote': { pub: 'Evernote Corp', desc: 'Toma notas y organiza ideas.', icon: 'evernote.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Evernote.Evernote_3.3.0.102_x86__q4d96b2w5wcc2.appx' },
-        'mytube': { pub: 'Ryken Studio', desc: 'Un cliente de videos iconico para windows 8 y 8.1!.', icon: 'mytube.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/mytube.appx' },
-        'DrayMusic': { pub: 'DrayMusic Studio', desc: 'Reproductor de musica increible.', icon: '1773704616_DrayMusic_1.0.0.0_AnyCPU.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1773704616_DrayMusic_1.0.0.0_AnyCPU.appx' },
-        'Netflix': { pub: 'Netflix Inc', desc: 'Ve tus series y peliculas favoritas agarra tus palomitas ahora mismo.', icon: 'netflix.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/4DF9E0F8.Netflix_2.22.0.39_x86__mcm4njqhnhss8.appx' },
-        'Rowi': { pub: 'Hidden Pineapple', desc: 'El cliente de twitter conocido de windows phone ha llegado a pc.', icon: 'rowi-150x150.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HiddenPineappleLLC.Rowi_0.8.0.0_x86__8364z769gkj0p.appx' },
-        'Nokia AppSocial': { pub: 'Nokia Corporation', desc: 'La app social de nokia,habla con tus conocidos.', icon: 'nokiaappsocial.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/NokiaCorporation.AppSocial_1.9.0.0_x86__6d0q6r3z979nw.appx' },
-        'Koode Reader': { pub: 'Koode Team', desc: 'Un lector de pdfs,documentos etc etc.', icon: 'koodereader.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/52487Koode.56414CB813359_1.5.0.4_neutral__m1bqtb7san9p0.appx' },
-        'El Tenedor': { pub: 'La Fourchette', desc: 'Una gran aplicacions de recetas despues de bing food and drink/gourmet.', icon: 'eltenedor.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/LaFourchette.comElTenedor.LaFourchette_2015.407.1353.2545_neutral_._xjascxykqffr4.AppxBundle.appx' },
-        'Rayman Jungle Run': { pub: 'Ubisoft', desc: 'El Legendario heroe Rayman llega a windows 8.1!juegalo ahora mismo.', icon: 'raymanjunglerun.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/UbisoftEntertainment.RaymanJungleRun_1.2.0.88_x86__dbgk1hhpxymar.Appx' },
-        'Cut The Rope': { pub: 'ZeptoLab UK', desc: 'Corta las cuerdas y dale de comer al gran Om Nom.', icon: 'CutTheRope.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ZeptoLabUKLimited.CutTheRope_1.2.0.43_x86__sq9zxnwrk84pj.appx' },
-        'Xunxo News': { pub: 'XunxoCorp', desc: 'Mira tus noticias en donde sea.', icon: 'Xuxo.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/12022Xurxo.XurxoNews_1.0.0.0_neutral__cffdx9p3b7k32.appx' },
-        'Fresh Paint': { pub: 'Microsoft Studios', desc: 'Pinta,Dibuja,bocetea aqui tienes el set completo de pinceles,pintura seca y lapices.', icon: 'freshpaint.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.FreshPaint_2.0.15133.0_x86__8wekyb3d8bbwe.appx' },
-        'RecipeKeeper': { pub: 'Recipe Keeper Team', desc: 'Organiza tus recetas y cocina para alimentar a tu familia.', icon: 'recipekeeper.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/TudorspanLimited.RecipeKeeperFree_1.5.2.0_x86__mnckez06wj9wa.appx' },
-        'Adobe Reader': { pub: 'Adobe Systems', desc: 'El iconico lector de pdfs ha llegado a windows 8.1 prueba y visualiza tus documentos!.', icon: 'metro_reader_small_logo.targetsize-256.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/AdobeSystemsIncorporated.AdobeReader_3.1.8.7675_x86__ynb6jyjzte8ga.Appx' },
-        'InsiderHub': { pub: 'Microsoft Insider', desc: 'Opina y prueba las nuevas compilaciones.', icon: 'insiderhub.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.InsiderHub_15.3.30.1_x86__8wekyb3d8bbwe_1780310454359.appx' },
-        'WPCentral': { pub: 'WPCentral Team', desc: 'Noticias,y mas en windows 8 y 8.1.', icon: 'WPAPPCENTRAL.png', url: 'https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/WPCentral.Win8_1.3.1.2_AnyCPU.appx' },
-           "ChromeUWP": { "pub": "ReOpenGlebsur", "desc": "A simpe chrome port.", "icon": "Chrome.png", "url": "https://github.com/OpenGlebsur/openglebsur.github.io/raw/refs/heads/main/ChromeUWP_1.0.0.0_AnyCPU.appx" }
-    };
-
-    function irAlInicio() {
-        var vistas = document.querySelectorAll('[id$="-view"]');
-        for (var i = 0; i < vistas.length; i++) {
-            vistas[i].classList.remove('view-open', 'open');
-        }
-    }
-
-    function closeAppDetails() { document.getElementById('app-download-view').classList.remove("open"); }
-    function mostrarSeccion(id) {
-        irAlInicio();
-        var seccion = document.getElementById(id);
-        if (seccion) seccion.classList.add('view-open');
-    }
-    
-    function filtrarCatalogoBoton() { console.log("Búsqueda en desarrollo..."); }
-
-    function mostrarToast(mensaje) {
-        var container = document.getElementById('toast-container');
-        var toast = document.createElement('div');
-        toast.className = 'Codorniz-toast';
-        toast.innerText = mensaje;
-        container.appendChild(toast);
-        setTimeout(function() { if (container.contains(toast)) { container.removeChild(toast); } }, 4500);
-
-        if (typeof Windows !== 'undefined' && typeof Windows.UI !== 'undefined') {
-            try {
-                var notifications = Windows.UI.Notifications;
-                var template = notifications.ToastTemplateType.toastText01;
-                var toastXml = notifications.ToastNotificationManager.getTemplateContent(template);
-                var toastTextElements = toastXml.getElementsByTagName("text");
-                toastTextElements[0].appendChild(toastXml.createTextNode(mensaje));
-                var nativeToast = new notifications.ToastNotification(toastXml);
-                notifications.ToastNotificationManager.createToastNotifier().show(nativeToast);
-            } catch(e) {}
-        }
-    }
-
-    function openAppDetails(nombreApp) {
-        var app = catalogoApps[nombreApp];
-        if (!app) return;
-        
-        document.getElementById('view-app-title').innerText = nombreApp;
-        document.getElementById('view-app-pub').innerText = app.pub;
-        document.getElementById('view-app-desc').innerText = app.desc;
-        document.getElementById('view-app-icon').style.backgroundImage = "url('images/iconos_extraidos/" + app.icon + "')";
-        
-        var btnAction = document.getElementById('view-download-action');
-        btnAction.innerText = "Descargar";
-        btnAction.style.background = "#228B22";
-        btnAction.disabled = false;
-        
-        btnAction.onclick = function() {
-            btnAction.innerText = "Descargando...";
-            btnAction.style.background = "#555";
-            btnAction.disabled = true;
-            
-            mostrarToast("Mr Codorniz está cargando tu appx hacia tu pc, espérate un ratito.");
-            
-            if (typeof Windows !== 'undefined' && typeof Windows.Networking !== 'undefined') {
-                try {
-                    var uri = new Windows.Foundation.Uri(app.url);
-                    var localFolder = Windows.Storage.ApplicationData.current.localFolder;
-                    var nombreArchivoLimpio = app.icon.replace(".png", "") + ".appx";
-                    
-                    localFolder.createFileAsync(nombreArchivoLimpio, Windows.Storage.CreationCollisionOption.replaceExisting)
-                        .then(function (newFile) {
-                            var downloader = new Windows.Networking.BackgroundTransfer.BackgroundDownloader();
-                            var download = downloader.createDownload(uri, newFile);
-                            return download.startAsync().then(function () { return newFile; });
-                        })
-                        .done(function (fileObj) {
-                            btnAction.innerText = "Instalar";
-                            btnAction.style.background = "#1ba1e2";
-                            btnAction.disabled = false;
-                            btnAction.onclick = function() {
-                                Windows.System.Launcher.launchFileAsync(fileObj).done(function (success) {
-                                    if (!success) { mostrarToast("No se pudo abrir el instalador del sistema."); }
-                                });
-                            };
-                        }, function (error) {
-                            btnAction.innerText = "Error";
-                            btnAction.style.background = "#e51400";
-                            mostrarToast("Error en la descarga: " + error.message);
-                        });
-                } catch (e) {
-                    mostrarToast("Error de sistema: " + e.message);
+        // =========================================================================
+        // POLYFILLS
+        // =========================================================================
+        if (!Object.values) {
+            Object.values = function(obj) {
+                var result = [];
+                for (var key in obj) {
+                    if (obj.hasOwnProperty(key)) result.push(obj[key]);
                 }
-            } 
-            else {
-                var iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = app.url; 
-                document.body.appendChild(iframe);
-                setTimeout(function() {
-                    if (document.body.contains(iframe)) document.body.removeChild(iframe);
-                    btnAction.innerText = "Descargado";
-                    btnAction.style.background = "#228B22";
-                    btnAction.disabled = true;
-                }, 5000); 
+                return result;
+            };
+        }
+        if (!Array.prototype.find) {
+            Array.prototype.find = function(predicate) {
+                for (var i = 0; i < this.length; i++) {
+                    if (predicate(this[i])) return this[i];
+                }
+                return undefined;
+            };
+        }
+
+        // =========================================================================
+        // TRANSLATIONS (no emojis)
+        // =========================================================================
+        var translations = {
+            en: {
+                'nav-apps': 'Apps',
+                'nav-account': 'My Account',
+                'nav-topcharts': 'Top Charts',
+                'nav-categories': 'Categories',
+                'nav-collections': 'Collections',
+                'section-picks-title': 'Codorniz Picks',
+                'section-featured-title': 'Featured',
+                'section-more-title': 'More apps',
+                'section-games-title': 'Games',
+                'section-food-title': 'Food & Productivity',
+                'section-tech-title': 'Technology',
+                'picks-see-all': 'See all',
+                'featured-see-all': 'See all',
+                'view-back-btn': 'Back',
+                'view-download-action': 'Download',
+                'view-app-title': 'Loading...',
+                'view-app-pub': 'Codorniz Developer',
+                'view-app-desc': 'Please wait...',
+                'view-top-free-title': 'Top Free in this Category',
+                'view-related-title': 'Related Apps',
+                'downloads-title': 'Download queue',
+                'empty-downloads-msg': 'No pending downloads at the moment.',
+                'account-title': 'My Account',
+                'account-back': 'Back',
+                'account-user': 'Family User',
+                'account-role': 'Codorniz Gold Developer',
+                'account-server': 'Static Server:',
+                'account-downloads': 'Downloads Server:',
+                'search-title': 'All apps',
+                'show-all-btn': 'Show all',
+                'apps-back': 'Back',
+                'appbar-home': 'Store Home',
+                'appbar-apps': 'Apps',
+                'appbar-account': 'Gold Account',
+                'appbar-topcharts': 'Top Charts',
+                'appbar-categories': 'Categories',
+                'appbar-collections': 'Collections',
+                'search-placeholder': 'Search...',
+                'lang-select-label': 'Language:',
+                'toast-catalog-loaded': 'Catalog loaded from GitHub.',
+                'toast-catalog-error': 'Could not load catalog. Check connection.',
+                'toast-downloading': 'Mr Codorniz is downloading your appx, please wait.',
+                'toast-download-error': 'Download error: ',
+                'toast-system-error': 'System error: ',
+                'toast-no-app': 'App not found.',
+                'toast-parse-error': 'Data invalid.',
+                'toast-http-error': 'HTTP error: ',
+                'toast-timeout': 'Timeout (30 sec)',
+                'toast-network-error': 'Network error',
+                'toast-all-failed': 'Failed to load catalog from all sources.',
+                'toast-fallback': 'Using built-in fallback catalog.',
+                'topcharts-title': 'Top Charts',
+                'topcharts-back': 'Back',
+                'categories-title': 'Categories',
+                'categories-back': 'Back',
+                'collections-title': 'Collections',
+                'collections-back': 'Back',
+                'no-topcharts': 'No apps with ratings yet.',
+                'no-categories': 'No categories found.',
+                'no-collections': 'No collections available.',
+                'account-tab-profile': 'Profile',
+                'account-tab-wishlist': 'Wishlist',
+                'account-tab-downloads': 'Downloads',
+                'wishlist-empty': 'Your wishlist is empty.',
+                'view-all-apps': 'All apps',
+                'view-by-dev': 'By Developer',
+                'top-charts-top-apps': 'Top Apps',
+                'top-charts-top-games': 'Top Games',
+                'top-charts-top-paid': 'Top Paid',
+                'top-charts-top-free': 'Top Free',
+                'top-charts-picks-for-you': 'Picks for You',
+                'top-charts-top-free-games': 'Top Free Games',
+                'top-charts-top-paid-games': 'Top Paid Games'
+            },
+            es: {
+                'nav-apps': 'Aplicaciones',
+                'nav-account': 'Mi Cuenta',
+                'nav-topcharts': 'Top Charts',
+                'nav-categories': 'Categorías',
+                'nav-collections': 'Colecciones',
+                'section-picks-title': 'Selección Codorniz',
+                'section-featured-title': 'Destacados',
+                'section-more-title': 'Más aplicaciones',
+                'section-games-title': 'Juegos',
+                'section-food-title': 'Comida y Productividad',
+                'section-tech-title': 'Tecnología',
+                'picks-see-all': 'Ver todo',
+                'featured-see-all': 'Ver todo',
+                'view-back-btn': 'Volver',
+                'view-download-action': 'Descargar',
+                'view-app-title': 'Cargando...',
+                'view-app-pub': 'Desarrollador Codorniz',
+                'view-app-desc': 'Por favor, espere...',
+                'view-top-free-title': 'Top Gratis en esta Categoría',
+                'view-related-title': 'Aplicaciones Relacionadas',
+                'downloads-title': 'Cola de descargas',
+                'empty-downloads-msg': 'No hay descargas pendientes en este momento.',
+                'account-title': 'Mi Cuenta',
+                'account-back': 'Volver',
+                'account-user': 'Usuario Familiar',
+                'account-role': 'Desarrollador Codorniz Oro',
+                'account-server': 'Servidor de Estáticos:',
+                'account-downloads': 'Servidor de Descargas:',
+                'search-title': 'Todas las aplicaciones',
+                'show-all-btn': 'Mostrar todas',
+                'apps-back': 'Volver',
+                'appbar-home': 'Inicio Store',
+                'appbar-apps': 'Apps',
+                'appbar-account': 'Cuenta Oro',
+                'appbar-topcharts': 'Top Charts',
+                'appbar-categories': 'Categorías',
+                'appbar-collections': 'Colecciones',
+                'search-placeholder': 'Buscar...',
+                'lang-select-label': 'Idioma:',
+                'toast-catalog-loaded': 'Catálogo cargado desde GitHub.',
+                'toast-catalog-error': 'No se pudo cargar el catálogo. Verifique la conexión.',
+                'toast-downloading': 'Mr Codorniz está descargando tu appx, espera un momento.',
+                'toast-download-error': 'Error en la descarga: ',
+                'toast-system-error': 'Error de sistema: ',
+                'toast-no-app': 'Aplicación no encontrada.',
+                'toast-parse-error': 'Datos inválidos.',
+                'toast-http-error': 'Error HTTP: ',
+                'toast-timeout': 'Tiempo de espera agotado (30 seg)',
+                'toast-network-error': 'Error de red',
+                'toast-all-failed': 'No se pudo cargar el catálogo desde ninguna fuente.',
+                'toast-fallback': 'Usando catálogo de respaldo interno.',
+                'topcharts-title': 'Top Charts',
+                'topcharts-back': 'Volver',
+                'categories-title': 'Categorías',
+                'categories-back': 'Volver',
+                'collections-title': 'Colecciones',
+                'collections-back': 'Volver',
+                'no-topcharts': 'Aún no hay aplicaciones con puntuación.',
+                'no-categories': 'No se encontraron categorías.',
+                'no-collections': 'No hay colecciones disponibles.',
+                'account-tab-profile': 'Perfil',
+                'account-tab-wishlist': 'Wishlist',
+                'account-tab-downloads': 'Descargas',
+                'wishlist-empty': 'Tu wishlist está vacía.',
+                'view-all-apps': 'Todas las apps',
+                'view-by-dev': 'Por desarrollador',
+                'top-charts-top-apps': 'Top Apps',
+                'top-charts-top-games': 'Top Juegos',
+                'top-charts-top-paid': 'Top de Pago',
+                'top-charts-top-free': 'Top Gratis',
+                'top-charts-picks-for-you': 'Selección para ti',
+                'top-charts-top-free-games': 'Top Juegos Gratis',
+                'top-charts-top-paid-games': 'Top Juegos de Pago'
+            },
+            ru: {
+                'nav-apps': 'Приложения',
+                'nav-account': 'Моя учетная запись',
+                'nav-topcharts': 'Топ-чарты',
+                'nav-categories': 'Категории',
+                'nav-collections': 'Коллекции',
+                'section-picks-title': 'Выбор Codorniz',
+                'section-featured-title': 'Избранное',
+                'section-more-title': 'Другие приложения',
+                'section-games-title': 'Игры',
+                'section-food-title': 'Еда и продуктивность',
+                'section-tech-title': 'Технологии',
+                'picks-see-all': 'Смотреть все',
+                'featured-see-all': 'Смотреть все',
+                'view-back-btn': 'Назад',
+                'view-download-action': 'Скачать',
+                'view-app-title': 'Загрузка...',
+                'view-app-pub': 'Разработчик Codorniz',
+                'view-app-desc': 'Пожалуйста, подождите...',
+                'view-top-free-title': 'Топ бесплатных в категории',
+                'view-related-title': 'Похожие приложения',
+                'downloads-title': 'Очередь загрузок',
+                'empty-downloads-msg': 'Нет активных загрузок.',
+                'account-title': 'Моя учетная запись',
+                'account-back': 'Назад',
+                'account-user': 'Семейный пользователь',
+                'account-role': 'Разработчик Codorniz Gold',
+                'account-server': 'Статический сервер:',
+                'account-downloads': 'Сервер загрузок:',
+                'search-title': 'Все приложения',
+                'show-all-btn': 'Показать все',
+                'apps-back': 'Назад',
+                'appbar-home': 'Главная',
+                'appbar-apps': 'Приложения',
+                'appbar-account': 'Gold аккаунт',
+                'appbar-topcharts': 'Топ-чарты',
+                'appbar-categories': 'Категории',
+                'appbar-collections': 'Коллекции',
+                'search-placeholder': 'Поиск...',
+                'lang-select-label': 'Язык:',
+                'toast-catalog-loaded': 'Каталог загружен с GitHub.',
+                'toast-catalog-error': 'Не удалось загрузить каталог. Проверьте соединение.',
+                'toast-downloading': 'Mr Codorniz загружает ваш appx, подождите.',
+                'toast-download-error': 'Ошибка загрузки: ',
+                'toast-system-error': 'Системная ошибка: ',
+                'toast-no-app': 'Приложение не найдено.',
+                'toast-parse-error': 'Неверные данные.',
+                'toast-http-error': 'Ошибка HTTP: ',
+                'toast-timeout': 'Таймаут (30 сек)',
+                'toast-network-error': 'Ошибка сети',
+                'toast-all-failed': 'Не удалось загрузить каталог ни с одного источника.',
+                'toast-fallback': 'Используется встроенный резервный каталог.',
+                'topcharts-title': 'Топ-чарты',
+                'topcharts-back': 'Назад',
+                'categories-title': 'Категории',
+                'categories-back': 'Назад',
+                'collections-title': 'Коллекции',
+                'collections-back': 'Назад',
+                'no-topcharts': 'Пока нет приложений с оценками.',
+                'no-categories': 'Категории не найдены.',
+                'no-collections': 'Нет доступных коллекций.',
+                'account-tab-profile': 'Профиль',
+                'account-tab-wishlist': 'Wishlist',
+                'account-tab-downloads': 'Загрузки',
+                'wishlist-empty': 'Ваш список желаний пуст.',
+                'view-all-apps': 'Все приложения',
+                'view-by-dev': 'По разработчикам',
+                'top-charts-top-apps': 'Топ приложений',
+                'top-charts-top-games': 'Топ игр',
+                'top-charts-top-paid': 'Топ платных',
+                'top-charts-top-free': 'Топ бесплатных',
+                'top-charts-picks-for-you': 'Выбор для вас',
+                'top-charts-top-free-games': 'Топ бесплатных игр',
+                'top-charts-top-paid-games': 'Топ платных игр'
             }
         };
-        
-        document.getElementById('app-download-view').classList.add("open");
-    }
 
-    // =========================================================================
-    // 4. PETICIÓN REMOTA Y RENDERIZADO (Compatible con IE11)
-    // =========================================================================
-    function iniciarCatalogoRemoto() {
-        try {
-            var xhr = new XMLHttpRequest();
-            xhr.open("GET", "https://raw.githubusercontent.com/SirCoturnix/CodornizStoreServer/main/CodornizApps.json", true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    try {
-                        var data = JSON.parse(xhr.responseText);
-                        var contenedor = document.getElementById("grid-search-modular");
-                        if (!contenedor) return;
+        var currentLang = 'es';
 
-                        data.apps.forEach(function (app) {
-                            var item = document.createElement("div");
-                            item.className = "app-item-wrapper";
-                            item.onclick = function () { openAppDetails(app.name); };
-                            
-                            var contenidoHTML = 
-                                '<div class="app-tile" style="background:#228B22;">' +
-                                    '<img src="images/iconos_extraidos/' + (app.icon || 'angrybirds.png') + '">' +
-                                '</div>' +
-                                '<div class="tile-title">' + app.name + '</div>' +
-                                '<div class="tile-sub">' + app.author + ' | ' + app.rating + ' ★</div>';
+        function toggleLanguage() {
+            if (currentLang === 'es') currentLang = 'en';
+            else if (currentLang === 'en') currentLang = 'ru';
+            else if (currentLang === 'ru') currentLang = 'es';
+            updateLanguage();
+        }
 
-                            // Autorizamos el innerHTML de forma nativa para evitar bloqueos por CSP de WinRT
-                            if (typeof MSApp !== 'undefined' && MSApp.execUnsafeLocalFunction) {
-                                MSApp.execUnsafeLocalFunction(function () {
-                                    item.innerHTML = contenidoHTML;
-                                });
-                            } else {
-                                item.innerHTML = contenidoHTML;
-                            }
-                            
-                            contenedor.appendChild(item);
-                        });
-                    } catch(e) {
-                        console.error("No se pudo parsear el catálogo remoto.");
+        function changeLanguageFromSelect(lang) {
+            currentLang = lang;
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            var topBtn = document.getElementById('lang-switch-top');
+            if (topBtn) {
+                if (currentLang === 'es') topBtn.innerText = 'English';
+                else if (currentLang === 'en') topBtn.innerText = 'Русский';
+                else if (currentLang === 'ru') topBtn.innerText = 'Español';
+            }
+            var select = document.getElementById('lang-select');
+            if (select) select.value = currentLang;
+            applyTranslations();
+        }
+
+        function applyTranslations() {
+            var t = translations[currentLang];
+            if (!t) return;
+            for (var key in t) {
+                var el = document.getElementById(key);
+                if (el) {
+                    if (el.tagName === 'INPUT' && key === 'search-placeholder') {
+                        el.placeholder = t[key];
+                    } else {
+                        el.innerText = t[key];
                     }
                 }
-            };
-            xhr.send();
-        } catch(e) {
-            console.error("No se pudo contactar el servidor remoto de CodornizApps.");
+            }
+            var downloadBtn = document.getElementById('view-download-action');
+            if (downloadBtn && downloadBtn.innerText !== 'Downloading...' && downloadBtn.innerText !== 'Загрузка...' && downloadBtn
+                .innerText !== 'Descargando...') {
+                downloadBtn.innerText = t['view-download-action'] || 'Download';
+            }
+            var searchInput = document.getElementById('store-search-input');
+            if (searchInput) {
+                searchInput.placeholder = t['search-placeholder'] || 'Search...';
+            }
+            var tabProfile = document.getElementById('account-tab-profile');
+            if (tabProfile) tabProfile.innerText = t['account-tab-profile'] || 'Profile';
+            var tabWish = document.getElementById('account-tab-wishlist');
+            if (tabWish) tabWish.innerText = t['account-tab-wishlist'] || 'Wishlist';
+            var tabDown = document.getElementById('account-tab-downloads');
+            if (tabDown) tabDown.innerText = t['account-tab-downloads'] || 'Downloads';
+            var btnAll = document.getElementById('view-all-btn');
+            if (btnAll) btnAll.innerText = t['view-all-apps'] || 'All apps';
+            var btnDev = document.getElementById('view-dev-btn');
+            if (btnDev) btnDev.innerText = t['view-by-dev'] || 'By Developer';
         }
-    }
+
+        // =========================================================================
+        // GLOBALS
+        // =========================================================================
+        window.onerror = function(msg, url, line) {
+            if (document.body) {
+                var errDiv = document.createElement("div");
+                errDiv.style.cssText =
+                    "position:fixed; top:0; left:0; width:100%; background:#e51400; color:white; z-index:999999; padding:20px; font-size:16px; font-family:'Segoe UI', sans-serif;";
+                errDiv.innerText = "Error: " + msg + " (Line " + line + ")";
+                document.body.appendChild(errDiv);
+            }
+            return true;
+        };
+
+        var catalogoApps = {};
+        var cargaExitosa = false;
+        var currentAppsView = 'all';
+
+        // =========================================================================
+        // FALLBACK CATALOG
+        // =========================================================================
+        var fallbackCatalog = {
+            apps: [{
+                name: "Codorniz Browser",
+                author: "SirCoturnix",
+                pub: "SirCoturnix",
+                description: "Fast and secure web browser with built-in ad blocker and privacy features.",
+                icon: "browser.png",
+                url: "https://example.com/browser.appx",
+                category: "Technology",
+                featured: true,
+                rating: 4.8,
+                price: "Free"
+            }, {
+                name: "Codorniz Music",
+                author: "SirCoturnix",
+                pub: "SirCoturnix",
+                description: "Stream high-quality music with offline mode and smart playlists.",
+                icon: "music.png",
+                url: "https://example.com/music.appx",
+                category: "Entertainment",
+                featured: true,
+                rating: 4.6,
+                price: "Free"
+            }, {
+                name: "Codorniz Notes",
+                author: "CodeLab",
+                pub: "CodeLab",
+                description: "Simple yet powerful note-taking app with cloud sync and markdown support.",
+                icon: "notes.png",
+                url: "https://example.com/notes.appx",
+                category: "Productivity",
+                featured: false,
+                rating: 4.3,
+                price: "Free"
+            }, {
+                name: "Codorniz Chess",
+                author: "GameForge",
+                pub: "GameForge",
+                description: "Play chess against AI or friends. Multiple difficulty levels and tutorials.",
+                icon: "chess.png",
+                url: "https://example.com/chess.appx",
+                category: "Games",
+                featured: true,
+                rating: 4.9,
+                price: "$4.99"
+            }, {
+                name: "Codorniz Cookbook",
+                author: "Foodies Inc",
+                pub: "Foodies Inc",
+                description: "500+ recipes with step-by-step instructions and video guides.",
+                icon: "cookbook.png",
+                url: "https://example.com/cookbook.appx",
+                category: "Food",
+                featured: false,
+                rating: 4.2,
+                price: "Free"
+            }, {
+                name: "Codorniz Weather",
+                author: "SirCoturnix",
+                pub: "SirCoturnix",
+                description: "Accurate weather forecasts with radar maps and severe weather alerts.",
+                icon: "weather.png",
+                url: "https://example.com/weather.appx",
+                category: "Technology",
+                featured: false,
+                rating: 4.4,
+                price: "Free"
+            }, {
+                name: "Codorniz Runner",
+                author: "GameForge",
+                pub: "GameForge",
+                description: "Endless runner game with stunning graphics and power-ups.",
+                icon: "runner.png",
+                url: "https://example.com/runner.appx",
+                category: "Games",
+                featured: false,
+                rating: 4.7,
+                price: "$2.99"
+            }, {
+                name: "Codorniz Finance",
+                author: "FinTech Labs",
+                pub: "FinTech Labs",
+                description: "Track your expenses, create budgets, and get financial insights.",
+                icon: "finance.png",
+                url: "https://example.com/finance.appx",
+                category: "Productivity",
+                featured: false,
+                rating: 4.1,
+                price: "$9.99"
+            }, {
+                name: "Codorniz Chat",
+                author: "SirCoturnix",
+                pub: "SirCoturnix",
+                description: "Secure messaging app with end-to-end encryption and voice calls.",
+                icon: "chat.png",
+                url: "https://example.com/chat.appx",
+                category: "Technology",
+                featured: false,
+                rating: 4.5,
+                price: "Free"
+            }, {
+                name: "Codorniz Recipes",
+                author: "Foodies Inc",
+                pub: "Foodies Inc",
+                description: "Healthy and delicious recipes for every meal of the day.",
+                icon: "recipes.png",
+                url: "https://example.com/recipes.appx",
+                category: "Food",
+                featured: false,
+                rating: 3.9,
+                price: "Free"
+            }, {
+                name: "Codorniz Space",
+                author: "SpaceXplore",
+                pub: "SpaceXplore",
+                description: "Explore the universe with interactive 3D models of planets and stars.",
+                icon: "space.png",
+                url: "https://example.com/space.appx",
+                category: "Education",
+                featured: false,
+                rating: 4.0,
+                price: "$6.99"
+            }, {
+                name: "Codorniz Fitness",
+                author: "FitTech",
+                pub: "FitTech",
+                description: "Workout plans, exercise videos, and progress tracking.",
+                icon: "fitness.png",
+                url: "https://example.com/fitness.appx",
+                category: "Health",
+                featured: false,
+                rating: 4.3,
+                price: "Free"
+            }, {
+                name: "Codorniz Puzzle",
+                author: "GameForge",
+                pub: "GameForge",
+                description: "Challenging puzzles for brain training and fun.",
+                icon: "puzzle.png",
+                url: "https://example.com/puzzle.appx",
+                category: "Games",
+                featured: false,
+                rating: 4.6,
+                price: "$1.99"
+            }, {
+                name: "Codorniz Translator",
+                author: "SirCoturnix",
+                pub: "SirCoturnix",
+                description: "Translate text and speech between 100+ languages.",
+                icon: "translate.png",
+                url: "https://example.com/translate.appx",
+                category: "Productivity",
+                featured: false,
+                rating: 4.4,
+                price: "Free"
+            }, {
+                name: "Codorniz Camera Pro",
+                author: "SirCoturnix",
+                pub: "SirCoturnix",
+                description: "Professional camera app with manual controls and filters.",
+                icon: "camera.png",
+                url: "https://example.com/camera.appx",
+                category: "Photography",
+                featured: false,
+                rating: 4.7,
+                price: "$3.99"
+            }, {
+                name: "Codorniz Racing",
+                author: "GameForge",
+                pub: "GameForge",
+                description: "High-speed racing game with realistic physics and multiple tracks.",
+                icon: "racing.png",
+                url: "https://example.com/racing.appx",
+                category: "Games",
+                featured: false,
+                rating: 4.8,
+                price: "$4.99"
+            }, {
+                name: "Codorniz Sudoku",
+                author: "GameForge",
+                pub: "GameForge",
+                description: "Classic sudoku puzzles with multiple difficulty levels.",
+                icon: "sudoku.png",
+                url: "https://example.com/sudoku.appx",
+                category: "Games",
+                featured: false,
+                rating: 4.2,
+                price: "Free"
+            }]
+        };
+
+        // =========================================================================
+        // TOAST
+        // =========================================================================
+        function mostrarToast(mensaje) {
+            var container = document.getElementById('toast-container');
+            var toast = document.createElement('div');
+            toast.className = 'Codorniz-toast';
+            toast.innerText = mensaje;
+            container.appendChild(toast);
+            setTimeout(function() {
+                if (container.contains(toast)) container.removeChild(toast);
+            }, 4500);
+
+            if (typeof Windows !== 'undefined' && typeof Windows.UI !== 'undefined') {
+                try {
+                    var notifications = Windows.UI.Notifications;
+                    var template = notifications.ToastTemplateType.toastText01;
+                    var toastXml = notifications.ToastNotificationManager.getTemplateContent(template);
+                    var toastTextElements = toastXml.getElementsByTagName("text");
+                    toastTextElements[0].appendChild(toastXml.createTextNode(mensaje));
+                    var nativeToast = new notifications.ToastNotification(toastXml);
+                    notifications.ToastNotificationManager.createToastNotifier().show(nativeToast);
+                } catch (e) {}
+            }
+        }
+
+        // =========================================================================
+        // NAVIGATION
+        // =========================================================================
+        function irAlInicio() {
+            var vistas = document.querySelectorAll('[id$="-view"]');
+            for (var i = 0; i < vistas.length; i++) {
+                vistas[i].classList.remove('view-open', 'open');
+            }
+            var title = document.getElementById('search-title');
+            if (title) title.innerText = translations[currentLang]['search-title'] || 'All apps';
+            var searchInput = document.getElementById('store-search-input');
+            if (searchInput) searchInput.value = '';
+            setAppsView('all');
+        }
+
+        function closeAppDetails() {
+            document.getElementById('app-download-view').classList.remove("open");
+        }
+
+        function mostrarSeccion(id) {
+            irAlInicio();
+            var seccion = document.getElementById(id);
+            if (seccion) seccion.classList.add('view-open');
+            if (id === 'topcharts-view') renderTopCharts();
+            if (id === 'categories-view') renderCategories();
+            if (id === 'collections-view') renderCollections();
+            if (id === 'account-view') {
+                switchAccountTab('profile');
+                renderAccountWishlist();
+            }
+            if (id === 'apps-list-view') {
+                renderAppsView(currentAppsView);
+            }
+        }
+
+        function mostrarTodasApps() {
+            var searchInput = document.getElementById('store-search-input');
+            if (searchInput) searchInput.value = '';
+            var title = document.getElementById('search-title');
+            if (title) title.innerText = translations[currentLang]['search-title'] || 'All apps';
+            mostrarSeccion('apps-list-view');
+            setAppsView('all');
+        }
+
+        function buscar() {
+            var query = document.getElementById('store-search-input').value.trim();
+            if (query === '') {
+                mostrarTodasApps();
+                return;
+            }
+            mostrarSeccion('apps-list-view');
+            var title = document.getElementById('search-title');
+            if (title) {
+                if (currentLang === 'es') title.innerText = 'Resultados para: "' + query + '"';
+                else if (currentLang === 'en') title.innerText = 'Results for: "' + query + '"';
+                else if (currentLang === 'ru') title.innerText = 'Результаты для: "' + query + '"';
+            }
+            filtrarCatalogo(query);
+        }
+
+        // =========================================================================
+        // APP DETAILS
+        // =========================================================================
+        function openAppDetails(nombreApp) {
+            var app = catalogoApps[nombreApp];
+            if (!app) {
+                mostrarToast(translations[currentLang]['toast-no-app'] || 'App not found.');
+                return;
+            }
+
+            var titleEl = document.getElementById('view-app-title');
+            if (titleEl) titleEl.innerText = nombreApp;
+            var pubEl = document.getElementById('view-app-pub');
+            if (pubEl) pubEl.innerText = app.pub || app.author || 'Unknown';
+            var descEl = document.getElementById('view-app-desc');
+            if (descEl) descEl.innerText = app.desc || 'No description available.';
+
+            var rating = app.rating || 0;
+            var starsHtml = '';
+            var full = Math.floor(rating);
+            var half = (rating - full) >= 0.5 ? 1 : 0;
+            for (var i = 0; i < full; i++) starsHtml += '★';
+            if (half) starsHtml += '½';
+            var empty = 5 - full - half;
+            for (var j = 0; j < empty; j++) starsHtml += '☆';
+            var starsEl = document.getElementById('view-app-stars');
+            if (starsEl) starsEl.innerHTML = starsHtml;
+            var ratingNumEl = document.getElementById('view-rating-number');
+            if (ratingNumEl) ratingNumEl.innerText = rating.toFixed(1);
+
+            var iconUrl = 'images/iconos_extraidos/' + (app.icon || 'default.png');
+            var iconEl = document.getElementById('view-app-icon');
+            if (iconEl) iconEl.style.backgroundImage = "url('" + iconUrl + "')";
+
+            var btnAction = document.getElementById('view-download-action');
+            if (btnAction) {
+                btnAction.innerText = translations[currentLang]['view-download-action'] || 'Download';
+                btnAction.style.background = "#228B22";
+                btnAction.disabled = false;
+
+                btnAction.onclick = function() {
+                    var lang = currentLang;
+                    btnAction.innerText = (lang === 'es' ? 'Descargando...' : (lang === 'en' ? 'Downloading...' :
+                        'Загрузка...'));
+                    btnAction.style.background = "#555";
+                    btnAction.disabled = true;
+
+                    mostrarToast(translations[currentLang]['toast-downloading'] ||
+                        'Mr Codorniz is downloading your appx, please wait.');
+
+                    if (typeof Windows !== 'undefined' && typeof Windows.Networking !== 'undefined') {
+                        try {
+                            var uri = new Windows.Foundation.Uri(app.url);
+                            var localFolder = Windows.Storage.ApplicationData.current.localFolder;
+                            var nombreArchivoLimpio = (app.icon || 'app').replace(".png", "") + ".appx";
+
+                            localFolder.createFileAsync(nombreArchivoLimpio, Windows.Storage.CreationCollisionOption
+                                    .replaceExisting)
+                                .then(function(newFile) {
+                                    var downloader = new Windows.Networking.BackgroundTransfer
+                                    .BackgroundDownloader();
+                                    var download = downloader.createDownload(uri, newFile);
+                                    return download.startAsync().then(function() { return newFile; });
+                                })
+                                .done(function(fileObj) {
+                                    btnAction.innerText = (lang === 'es' ? 'Instalar' : (lang === 'en' ?
+                                        'Install' : 'Установить'));
+                                    btnAction.style.background = "#1ba1e2";
+                                    btnAction.disabled = false;
+                                    btnAction.onclick = function() {
+                                        Windows.System.Launcher.launchFileAsync(fileObj).done(
+                                            function(success) {
+                                                if (!success) {
+                                                    var msg = lang === 'es' ?
+                                                        'No se pudo abrir el instalador.' :
+                                                        (lang === 'en' ?
+                                                            'Could not open installer.' :
+                                                            'Не удалось открыть установщик.');
+                                                    mostrarToast(msg);
+                                                }
+                                            });
+                                    };
+                                }, function(error) {
+                                    btnAction.innerText = (lang === 'es' ? 'Error' : (lang === 'en' ?
+                                        'Error' : 'Ошибка'));
+                                    btnAction.style.background = "#e51400";
+                                    var prefix = translations[currentLang]['toast-download-error'] ||
+                                        'Download error: ';
+                                    mostrarToast(prefix + error.message);
+                                });
+                        } catch (e) {
+                            var prefix = translations[currentLang]['toast-system-error'] ||
+                                'System error: ';
+                            mostrarToast(prefix + e.message);
+                        }
+                    } else {
+                        var iframe = document.createElement('iframe');
+                        iframe.style.display = 'none';
+                        iframe.src = app.url;
+                        document.body.appendChild(iframe);
+                        setTimeout(function() {
+                            if (document.body.contains(iframe)) document.body.removeChild(iframe);
+                            btnAction.innerText = (lang === 'es' ? 'Descargado' : (lang === 'en' ?
+                                'Downloaded' : 'Загружено'));
+                            btnAction.style.background = "#228B22";
+                            btnAction.disabled = true;
+                        }, 5000);
+                    }
+                };
+            }
+
+            // ---- Top Free in Category ----
+            var topFreeContainer = document.getElementById('view-top-free-grid');
+            if (topFreeContainer) {
+                topFreeContainer.innerHTML = '';
+                var category = app.category || 'Other';
+                var allApps = Object.values(catalogoApps);
+                var topFree = allApps
+                    .filter(function(a) { return a.category === category && a.name !== app.name && (!a.price || a
+                            .price === 'Free' || a.price === 'Gratis' || a.price === 'Бесплатно'); })
+                    .sort(function(a, b) { return (b.rating || 0) - (a.rating || 0); })
+                    .slice(0, 4);
+
+                if (topFree.length === 0) {
+                    topFree = allApps
+                        .filter(function(a) { return a.name !== app.name && (!a.price || a.price === 'Free' || a
+                                .price === 'Gratis' || a.price === 'Бесплатно'); })
+                        .sort(function(a, b) { return (b.rating || 0) - (a.rating || 0); })
+                        .slice(0, 4);
+                }
+
+                topFree.forEach(function(a) {
+                    topFreeContainer.appendChild(createRelatedItem(a));
+                });
+                if (topFree.length === 0) {
+                    var emptyMsg = document.createElement('div');
+                    emptyMsg.style.cssText = 'color:#888; font-size:14px; padding:10px 0;';
+                    emptyMsg.innerText = 'No free apps in this category.';
+                    topFreeContainer.appendChild(emptyMsg);
+                }
+            }
+
+            // ---- Related Apps ----
+            var relatedContainer = document.getElementById('view-related-grid');
+            if (relatedContainer) {
+                relatedContainer.innerHTML = '';
+                var allApps2 = Object.values(catalogoApps);
+                var related = allApps2
+                    .filter(function(a) { return a.category === category && a.name !== app.name; })
+                    .sort(function(a, b) { return (b.rating || 0) - (a.rating || 0); })
+                    .slice(0, 4);
+
+                if (related.length === 0) {
+                    related = allApps2
+                        .filter(function(a) { return a.name !== app.name; })
+                        .sort(function(a, b) { return (b.rating || 0) - (a.rating || 0); })
+                        .slice(0, 4);
+                }
+
+                related.forEach(function(a) {
+                    relatedContainer.appendChild(createRelatedItem(a));
+                });
+                if (related.length === 0) {
+                    var emptyMsg2 = document.createElement('div');
+                    emptyMsg2.style.cssText = 'color:#888; font-size:14px; padding:10px 0;';
+                    emptyMsg2.innerText = 'No related apps found.';
+                    relatedContainer.appendChild(emptyMsg2);
+                }
+            }
+
+            document.getElementById('app-download-view').classList.add("open");
+        }
+
+        function createRelatedItem(app) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'related-item';
+            wrapper.onclick = function() { openAppDetails(app.name); };
+
+            var icon = document.createElement('div');
+            icon.className = 'r-icon';
+            icon.style.backgroundImage = "url('images/iconos_extraidos/" + (app.icon || 'default.png') + "')";
+
+            var name = document.createElement('div');
+            name.className = 'r-name';
+            name.innerText = app.name;
+
+            var sub = document.createElement('div');
+            sub.className = 'r-sub';
+            sub.innerText = (app.rating ? app.rating.toFixed(1) + ' ★' : '');
+
+            wrapper.appendChild(icon);
+            wrapper.appendChild(name);
+            wrapper.appendChild(sub);
+            return wrapper;
+        }
+
+        // =========================================================================
+        // RENDER HELPERS
+        // =========================================================================
+        function crearAppItem(app) {
+            var wrapper = document.createElement('div');
+            wrapper.className = 'app-item-wrapper';
+            wrapper.onclick = function() { openAppDetails(app.name); };
+
+            var tile = document.createElement('div');
+            tile.className = 'app-tile';
+            tile.style.background = '#228B22';
+            var img = document.createElement('img');
+            img.src = 'images/iconos_extraidos/' + (app.icon || 'default.png');
+            img.alt = app.name;
+            tile.appendChild(img);
+
+            if (app.price && app.price !== 'Free' && app.price !== 'Gratis' && app.price !== 'Бесплатно') {
+                var badge = document.createElement('div');
+                badge.className = 'tile-badge';
+                badge.innerText = '$';
+                tile.appendChild(badge);
+            }
+
+            var title = document.createElement('div');
+            title.className = 'tile-title';
+            title.innerText = app.name;
+
+            var sub = document.createElement('div');
+            sub.className = 'tile-sub';
+            var ratingText = (app.rating ? app.rating.toFixed(1) + ' ★' : '');
+            var priceText = app.price && app.price !== 'Free' && app.price !== 'Gratis' && app.price !== 'Бесплатно' ? ' | ' +
+                app.price : '';
+            sub.innerText = (app.author || app.pub || '') + ratingText + priceText;
+
+            wrapper.appendChild(tile);
+            wrapper.appendChild(title);
+            wrapper.appendChild(sub);
+            return wrapper;
+        }
+
+        function renderizarGrid(containerId, apps) {
+            var container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = '';
+            apps.forEach(function(app) {
+                container.appendChild(crearAppItem(app));
+            });
+        }
+
+        // =========================================================================
+        // MAIN PAGE RENDER
+        // =========================================================================
+        function renderizarTodo() {
+            var appsArray = Object.values(catalogoApps);
+            var container = document.getElementById('featured-container');
+            if (!container) return;
+
+            var containers = ['featured-container', 'picks-container', 'more-container', 'games-container',
+                'food-container', 'tech-container', 'wishlist-container-account'
+            ];
+            containers.forEach(function(id) {
+                var el = document.getElementById(id);
+                if (el) el.innerHTML = '';
+            });
+
+            if (appsArray.length === 0) {
+                var msg = cargaExitosa ? (translations[currentLang]['toast-parse-error'] || 'Catalog is empty.') :
+                    (translations[currentLang]['toast-catalog-error'] || 'Loading catalog...');
+                var errorDiv = document.createElement('div');
+                errorDiv.style.cssText = 'color:#ffb900; font-size:18px; padding:20px;';
+                errorDiv.innerText = '⚠ ' + msg;
+                var subSpan = document.createElement('span');
+                subSpan.style.cssText = 'font-size:14px; color:#aaa; display:block; margin-top:5px;';
+                subSpan.innerText = translations[currentLang]['toast-network-error'] ||
+                    'Check your internet connection.';
+                errorDiv.appendChild(subSpan);
+                container.appendChild(errorDiv);
+                return;
+            }
+
+            // Featured (first)
+            var featured = appsArray.filter(function(app) { return app.featured === true; });
+            if (featured.length === 0) featured = appsArray.slice(0, 3);
+            renderizarDestacados('featured-container', featured, false);
+
+            // Codorniz Picks (second)
+            var picks = appsArray.filter(function(app) { return app.featured === true && (app.rating || 0) >= 4.5; });
+            if (picks.length === 0) picks = appsArray.filter(function(app) { return (app.rating || 0) >= 4.5; });
+            if (picks.length === 0) picks = appsArray.slice(0, 3);
+            renderizarDestacados('picks-container', picks, true);
+
+            // More apps
+            var moreApps = appsArray.filter(function(app) { return !app.featured; });
+            if (moreApps.length > 12) moreApps = moreApps.slice(0, 12);
+            renderizarGrid('more-container', moreApps);
+
+            // Games
+            var games = appsArray.filter(function(app) {
+                return app.category && app.category.toLowerCase() === 'games';
+            });
+            renderizarGrid('games-container', games);
+            var gamesSection = document.getElementById('section-games');
+            if (gamesSection) gamesSection.style.display = (games.length > 0) ? 'inline-block' : 'none';
+
+            // Food & Productivity
+            var food = appsArray.filter(function(app) {
+                return app.category && (app.category.toLowerCase() === 'food' || app.category.toLowerCase() ===
+                    'productivity' || app.category.toLowerCase() === 'comida' || app.category.toLowerCase() ===
+                    'productividad');
+            });
+            renderizarGrid('food-container', food);
+            var foodSection = document.getElementById('section-food');
+            if (foodSection) foodSection.style.display = (food.length > 0) ? 'inline-block' : 'none';
+
+            // Technology
+            var tech = appsArray.filter(function(app) {
+                return app.category && (app.category.toLowerCase() === 'technology' || app.category.toLowerCase() ===
+                    'tecnología');
+            });
+            renderizarGrid('tech-container', tech);
+            var techSection = document.getElementById('section-tech');
+            if (techSection) techSection.style.display = (tech.length > 0) ? 'inline-block' : 'none';
+
+            // Wishlist
+            var wishContainer = document.getElementById('wishlist-container-account');
+            if (wishContainer) {
+                wishContainer.innerHTML = '';
+                var wishItems = appsArray.slice(0, 6);
+                wishItems.forEach(function(app) {
+                    wishContainer.appendChild(crearAppItem(app));
+                });
+                if (wishItems.length === 0) {
+                    var emptyMsg = document.createElement('div');
+                    emptyMsg.style.cssText = 'color:#aaa; font-size:18px; padding:20px;';
+                    emptyMsg.innerText = translations[currentLang]['wishlist-empty'] || 'Your wishlist is empty.';
+                    wishContainer.appendChild(emptyMsg);
+                }
+            }
+
+            // Update open pages
+            var topView = document.getElementById('topcharts-view');
+            if (topView && topView.classList.contains('view-open')) renderTopCharts();
+            var catView = document.getElementById('categories-view');
+            if (catView && catView.classList.contains('view-open')) renderCategories();
+            var colView = document.getElementById('collections-view');
+            if (colView && colView.classList.contains('view-open')) renderCollections();
+            var appsView = document.getElementById('apps-list-view');
+            if (appsView && appsView.classList.contains('view-open')) renderAppsView(currentAppsView);
+        }
+
+        function renderizarDestacados(containerId, apps, showAll) {
+            var container = document.getElementById(containerId);
+            if (!container || apps.length === 0) return;
+
+            var first = apps[0];
+            var spotlightDiv = document.createElement('div');
+            spotlightDiv.className = 'spotlight-box';
+            spotlightDiv.onclick = function() { openAppDetails(first.name); };
+
+            var img = document.createElement('img');
+            img.src = 'images/iconos_extraidos/' + (first.icon || 'default.png');
+            img.alt = first.name;
+
+            var overlay = document.createElement('div');
+            overlay.className = 'spotlight-overlay';
+            var nameSpan = document.createElement('div');
+            nameSpan.className = 'name';
+            nameSpan.innerText = first.name;
+            var subSpan = document.createElement('div');
+            subSpan.className = 'sub';
+            subSpan.innerText = (first.author || first.pub || '') + ' | ' + (first.rating ? first.rating.toFixed(1) +
+                ' ★' : '');
+
+            overlay.appendChild(nameSpan);
+            overlay.appendChild(subSpan);
+            spotlightDiv.appendChild(img);
+            spotlightDiv.appendChild(overlay);
+            container.appendChild(spotlightDiv);
+
+            var rowDiv = document.createElement('div');
+            rowDiv.style.display = 'flex';
+            rowDiv.style.flexDirection = 'row';
+            rowDiv.style.gap = '32px';
+            rowDiv.style.flexWrap = 'wrap';
+            var restantes = apps.slice(1, 3);
+            restantes.forEach(function(app) {
+                rowDiv.appendChild(crearAppItem(app));
+            });
+            container.appendChild(rowDiv);
+        }
+
+        // =========================================================================
+        // ALL APPS PAGE
+        // =========================================================================
+        function setAppsView(mode) {
+            currentAppsView = mode;
+            var btnAll = document.getElementById('view-all-btn');
+            var btnDev = document.getElementById('view-dev-btn');
+            if (btnAll && btnDev) {
+                btnAll.classList.toggle('active', mode === 'all');
+                btnDev.classList.toggle('active', mode === 'dev');
+            }
+            renderAppsView(mode);
+        }
+
+        function renderAppsView(mode) {
+            var container = document.getElementById('grid-search-modular');
+            if (!container) return;
+            container.innerHTML = '';
+
+            var appsArray = Object.values(catalogoApps);
+            if (appsArray.length === 0) {
+                var msg = document.createElement('div');
+                msg.style.cssText = 'color:#aaa; font-size:18px; padding:20px;';
+                msg.innerText = translations[currentLang]['toast-catalog-error'] || 'No apps available.';
+                container.appendChild(msg);
+                return;
+            }
+
+            if (mode === 'all') {
+                renderizarGrid('grid-search-modular', appsArray);
+            } else if (mode === 'dev') {
+                var devMap = {};
+                appsArray.forEach(function(app) {
+                    var dev = app.pub || app.author || 'Unknown';
+                    if (!devMap[dev]) devMap[dev] = [];
+                    devMap[dev].push(app);
+                });
+                var devNames = Object.keys(devMap).sort();
+                devNames.forEach(function(dev) {
+                    var group = document.createElement('div');
+                    group.style.cssText =
+                        'width:100%; margin-bottom:30px; border-bottom:1px solid rgba(255,255,255,0.06); padding-bottom:15px;';
+                    var h3 = document.createElement('h3');
+                    h3.style.cssText = 'font-weight:300; font-size:24px; color:#228B22; margin-bottom:12px;';
+                    h3.innerText = dev + ' (' + devMap[dev].length + ')';
+                    group.appendChild(h3);
+
+                    var grid = document.createElement('div');
+                    grid.style.cssText = 'display:flex; flex-direction:row; flex-wrap:wrap; gap:20px 32px;';
+                    devMap[dev].forEach(function(app) {
+                        grid.appendChild(crearAppItem(app));
+                    });
+                    group.appendChild(grid);
+                    container.appendChild(group);
+                });
+            }
+        }
+
+        function filtrarCatalogo(query) {
+            var container = document.getElementById('grid-search-modular');
+            if (!container) return;
+
+            var allApps = Object.values(catalogoApps);
+            var filtradas = allApps.filter(function(app) {
+                return app.name.toLowerCase().indexOf(query.toLowerCase()) !== -1 ||
+                    (app.author && app.author.toLowerCase().indexOf(query.toLowerCase()) !== -1) ||
+                    (app.pub && app.pub.toLowerCase().indexOf(query.toLowerCase()) !== -1);
+            });
+            renderizarGrid('grid-search-modular', filtradas);
+            if (filtradas.length === 0) {
+                var msg = (currentLang === 'es' ? 'No se encontraron aplicaciones para "' : (currentLang === 'en' ?
+                    'No apps found for "' : 'Нет приложений для "')) + query + '"';
+                var emptyDiv = document.createElement('div');
+                emptyDiv.style.cssText = 'color:#aaa; font-size:18px; padding:20px;';
+                emptyDiv.innerText = msg;
+                container.appendChild(emptyDiv);
+            }
+        }
+
+        // =========================================================================
+        // TOP CHARTS PAGE
+        // =========================================================================
+        function renderTopCharts() {
+            var container = document.getElementById('topcharts-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            var appsArray = Object.values(catalogoApps);
+            if (appsArray.length === 0) {
+                var msg = document.createElement('div');
+                msg.style.cssText = 'color:#aaa; font-size:18px; padding:20px;';
+                msg.innerText = translations[currentLang]['no-topcharts'] || 'No apps with ratings yet.';
+                container.appendChild(msg);
+                return;
+            }
+
+            function renderSection(titleKey, filterFn, limit) {
+                limit = limit || 6;
+                var filtered = appsArray.filter(filterFn);
+                if (filtered.length === 0) filtered = appsArray;
+                var sorted = filtered.slice().sort(function(a, b) { return (b.rating || 0) - (a.rating || 0); });
+                var top = sorted.slice(0, limit);
+
+                var sectionDiv = document.createElement('div');
+                sectionDiv.className = 'top-chart-section';
+                var h2 = document.createElement('h2');
+                var t = translations[currentLang];
+                h2.innerText = t[titleKey] || titleKey;
+                sectionDiv.appendChild(h2);
+
+                top.forEach(function(app, index) {
+                    var item = document.createElement('div');
+                    item.className = 'top-chart-item';
+                    item.onclick = function() { openAppDetails(app.name); };
+
+                    var rank = document.createElement('div');
+                    rank.className = 'top-chart-rank';
+                    rank.innerText = '#' + (index + 1);
+                    item.appendChild(rank);
+
+                    var icon = document.createElement('div');
+                    icon.className = 'top-chart-icon';
+                    icon.style.backgroundImage = "url('images/iconos_extraidos/" + (app.icon || 'default.png') + "')";
+                    icon.style.backgroundSize = 'cover';
+                    icon.style.backgroundPosition = 'center';
+                    item.appendChild(icon);
+
+                    var info = document.createElement('div');
+                    info.className = 'top-chart-info';
+                    var name = document.createElement('div');
+                    name.className = 'name';
+                    var priceBadge = app.price && app.price !== 'Free' && app.price !== 'Gratis' && app.price !==
+                        'Бесплатно' ? ' <span class="top-chart-badge">' + app.price + '</span>' : '';
+                    name.innerHTML = app.name + priceBadge;
+                    info.appendChild(name);
+
+                    var meta = document.createElement('div');
+                    meta.className = 'meta';
+                    meta.innerText = (app.pub || app.author || '') + ' • ' + (app.category || 'Other');
+                    info.appendChild(meta);
+
+                    var stars = document.createElement('div');
+                    stars.className = 'top-chart-stars';
+                    var r = app.rating || 0;
+                    var full = Math.floor(r);
+                    var half = (r - full) >= 0.5 ? 1 : 0;
+                    var starStr = '';
+                    for (var i = 0; i < full; i++) starStr += '★';
+                    if (half) starStr += '½';
+                    var empty = 5 - full - half;
+                    for (var j = 0; j < empty; j++) starStr += '☆';
+                    stars.innerText = starStr + ' ' + r.toFixed(1);
+                    info.appendChild(stars);
+
+                    item.appendChild(info);
+                    sectionDiv.appendChild(item);
+                });
+                container.appendChild(sectionDiv);
+            }
+
+            // Sections
+            renderSection('top-charts-top-apps', function(a) { return true; }, 6);
+            renderSection('top-charts-top-games', function(a) { return a.category && a.category.toLowerCase() === 'games'; },
+                6);
+            renderSection('top-charts-top-paid', function(a) {
+                return a.price && a.price !== 'Free' && a.price !== 'Gratis' && a.price !== 'Бесплатно';
+            }, 6);
+            renderSection('top-charts-top-free', function(a) {
+                return !a.price || a.price === 'Free' || a.price === 'Gratis' || a.price === 'Бесплатно';
+            }, 6);
+            renderSection('top-charts-top-free-games', function(a) {
+                return a.category && a.category.toLowerCase() === 'games' &&
+                    (!a.price || a.price === 'Free' || a.price === 'Gratis' || a.price === 'Бесплатно');
+            }, 6);
+            renderSection('top-charts-top-paid-games', function(a) {
+                return a.category && a.category.toLowerCase() === 'games' &&
+                    a.price && a.price !== 'Free' && a.price !== 'Gratis' && a.price !== 'Бесплатно';
+            }, 6);
+            renderSection('top-charts-picks-for-you', function(a) { return (a.rating || 0) >= 4.0; }, 6);
+        }
+
+        // =========================================================================
+        // CATEGORIES PAGE
+        // =========================================================================
+        function renderCategories() {
+            var container = document.getElementById('categories-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            var appsArray = Object.values(catalogoApps);
+            if (appsArray.length === 0) {
+                var msg = document.createElement('div');
+                msg.style.cssText = 'color:#aaa; font-size:18px; padding:20px;';
+                msg.innerText = translations[currentLang]['no-categories'] || 'No categories found.';
+                container.appendChild(msg);
+                return;
+            }
+
+            var catMap = {};
+            appsArray.forEach(function(app) {
+                var cat = app.category || 'Other';
+                if (!catMap[cat]) catMap[cat] = [];
+                catMap[cat].push(app);
+            });
+
+            var catNames = Object.keys(catMap).sort();
+            catNames.forEach(function(cat) {
+                var group = document.createElement('div');
+                group.className = 'collection-group';
+                var h2 = document.createElement('h2');
+                h2.innerText = cat + ' (' + catMap[cat].length + ')';
+                group.appendChild(h2);
+
+                var grid = document.createElement('div');
+                grid.className = 'collection-apps-grid';
+                catMap[cat].forEach(function(app) {
+                    grid.appendChild(crearAppItem(app));
+                });
+                group.appendChild(grid);
+                container.appendChild(group);
+            });
+        }
+
+        // =========================================================================
+        // COLLECTIONS PAGE
+        // =========================================================================
+        function renderCollections() {
+            var container = document.getElementById('collections-container');
+            if (!container) return;
+            container.innerHTML = '';
+
+            var appsArray = Object.values(catalogoApps);
+            if (appsArray.length === 0) {
+                var msg = document.createElement('div');
+                msg.style.cssText = 'color:#aaa; font-size:18px; padding:20px;';
+                msg.innerText = translations[currentLang]['no-collections'] || 'No collections available.';
+                container.appendChild(msg);
+                return;
+            }
+
+            var collections = [];
+
+            var featured = appsArray.filter(function(app) { return app.featured === true; });
+            if (featured.length > 0) collections.push({ title: 'Editor\'s Choice', apps: featured });
+
+            var topRated = appsArray.filter(function(app) { return (app.rating || 0) >= 4.5; });
+            if (topRated.length > 0) collections.push({ title: 'Top Rated', apps: topRated });
+
+            var games = appsArray.filter(function(app) { return app.category && app.category.toLowerCase() === 'games'; });
+            if (games.length > 0) collections.push({ title: 'Games', apps: games });
+
+            var productivity = appsArray.filter(function(app) {
+                return app.category && (app.category.toLowerCase() === 'productivity' || app.category.toLowerCase() ===
+                    'productividad');
+            });
+            if (productivity.length > 0) collections.push({ title: 'Productivity', apps: productivity });
+
+            var tech = appsArray.filter(function(app) {
+                return app.category && (app.category.toLowerCase() === 'technology' || app.category.toLowerCase() ===
+                    'tecnología');
+            });
+            if (tech.length > 0) collections.push({ title: 'Technology', apps: tech });
+
+            var freeApps = appsArray.filter(function(app) {
+                return !app.price || app.price === 'Free' || app.price === 'Gratis' || app.price === 'Бесплатно';
+            });
+            if (freeApps.length > 0) collections.push({ title: 'Free Apps', apps: freeApps });
+
+            var paidApps = appsArray.filter(function(app) {
+                return app.price && app.price !== 'Free' && app.price !== 'Gratis' && app.price !== 'Бесплатно';
+            });
+            if (paidApps.length > 0) collections.push({ title: 'Paid Apps', apps: paidApps });
+
+            var foodHealth = appsArray.filter(function(app) {
+                return app.category && (app.category.toLowerCase() === 'food' || app.category.toLowerCase() ===
+                    'comida' || app.category.toLowerCase() === 'health');
+            });
+            if (foodHealth.length > 0) collections.push({ title: 'Food & Health', apps: foodHealth });
+
+            if (collections.length === 0) {
+                var msg2 = document.createElement('div');
+                msg2.style.cssText = 'color:#aaa; font-size:18px; padding:20px;';
+                msg2.innerText = translations[currentLang]['no-collections'] || 'No collections available.';
+                container.appendChild(msg2);
+                return;
+            }
+
+            collections.forEach(function(col) {
+                var group = document.createElement('div');
+                group.className = 'collection-group';
+                var h2 = document.createElement('h2');
+                h2.innerText = col.title + ' (' + col.apps.length + ')';
+                group.appendChild(h2);
+
+                var grid = document.createElement('div');
+                grid.className = 'collection-apps-grid';
+                col.apps.forEach(function(app) {
+                    grid.appendChild(crearAppItem(app));
+                });
+                group.appendChild(grid);
+                container.appendChild(group);
+            });
+        }
+
+        // =========================================================================
+        // ACCOUNT TABS
+        // =========================================================================
+        function switchAccountTab(tab) {
+            var tabs = document.querySelectorAll('.account-tab');
+            tabs.forEach(function(t) { t.classList.remove('active'); });
+            var contents = document.querySelectorAll('.account-tab-content');
+            contents.forEach(function(c) { c.classList.remove('active'); });
+
+            var selectedTab = document.querySelector('.account-tab[data-tab="' + tab + '"]');
+            if (selectedTab) selectedTab.classList.add('active');
+            var selectedContent = document.getElementById('account-content-' + tab);
+            if (selectedContent) selectedContent.classList.add('active');
+
+            if (tab === 'wishlist') renderAccountWishlist();
+        }
+
+        function renderAccountWishlist() {
+            var container = document.getElementById('wishlist-container-account');
+            if (!container) return;
+            if (container.children.length === 0) {
+                var appsArray = Object.values(catalogoApps);
+                if (appsArray.length === 0) {
+                    var emptyMsg = document.createElement('div');
+                    emptyMsg.style.cssText = 'color:#aaa; font-size:18px; padding:20px;';
+                    emptyMsg.innerText = translations[currentLang]['wishlist-empty'] || 'Your wishlist is empty.';
+                    container.appendChild(emptyMsg);
+                } else {
+                    var wishItems = appsArray.slice(0, 6);
+                    wishItems.forEach(function(app) {
+                        container.appendChild(crearAppItem(app));
+                    });
+                }
+            }
+        }
+
+        // =========================================================================
+        // LOAD CATALOG
+        // =========================================================================
+        function cargarCatalogoRemoto() {
+            var urls = [
+                'CodornizApps.json',
+                'https://raw.githubusercontent.com/SirCoturnix/CodornizStoreServer/refs/heads/main/CodornizApps.json',
+                'https://raw.githubusercontent.com/SirCoturnix/CodornizStoreServer/main/CodornizApps.json',
+                'https://cdn.jsdelivr.net/gh/SirCoturnix/CodornizStoreServer/CodornizApps.json'
+            ];
+
+            var intentoActual = 0;
+            var fallbackUsado = false;
+
+            function procesarDatos(data) {
+                if (!data || !data.apps || data.apps.length === 0) return false;
+                var nuevoCatalogo = {};
+                data.apps.forEach(function(item) {
+                    var app = {
+                        pub: item.author || item.pub || 'Desconocido',
+                        desc: item.description || item.desc || '',
+                        icon: item.icon || 'default.png',
+                        url: item.url || '',
+                        category: item.category || 'Other',
+                        featured: item.featured || false,
+                        name: item.name || 'Sin nombre',
+                        rating: item.rating || (item.stars ? parseFloat(item.stars) : 0),
+                        author: item.author || item.pub || 'Desconocido',
+                        price: item.price || 'Free'
+                    };
+                    nuevoCatalogo[app.name] = app;
+                });
+                if (Object.keys(nuevoCatalogo).length === 0) return false;
+                catalogoApps = nuevoCatalogo;
+                cargaExitosa = true;
+                return true;
+            }
+
+            function usarFallback() {
+                if (fallbackUsado) return;
+                fallbackUsado = true;
+                mostrarToast(translations[currentLang]['toast-fallback'] || 'Using built-in fallback catalog.');
+                var data = fallbackCatalog;
+                if (procesarDatos(data)) {
+                    cargaExitosa = true;
+                    renderizarTodo();
+                } else {
+                    mostrarToast(translations[currentLang]['toast-parse-error'] || 'Data invalid.');
+                    renderizarTodo();
+                }
+            }
+
+            function manejarExito(data) {
+                if (procesarDatos(data)) {
+                    mostrarToast(translations[currentLang]['toast-catalog-loaded'] || 'Catalog loaded from GitHub.');
+                    renderizarTodo();
+                } else {
+                    mostrarToast(translations[currentLang]['toast-parse-error'] || 'Data invalid.');
+                    usarFallback();
+                }
+            }
+
+            function manejarError(errorMsg) {
+                console.warn("Error loading:", errorMsg);
+                intentoActual++;
+                if (intentoActual < urls.length) {
+                    intentarCargar(intentoActual);
+                } else {
+                    mostrarToast(translations[currentLang]['toast-all-failed'] ||
+                        'Failed to load catalog from all sources.');
+                    usarFallback();
+                }
+            }
+
+            function intentarCargar(indice) {
+                var url = urls[indice];
+                if (url === 'CodornizApps.json' && window.location.protocol === 'file:') {
+                    manejarError('Local file not accessible from file://');
+                    return;
+                }
+
+                if (typeof Windows !== 'undefined' && Windows.Web && Windows.Web.Http) {
+                    try {
+                        var httpClient = new Windows.Web.Http.HttpClient();
+                        var uri = new Windows.Foundation.Uri(url);
+                        var timeout = new Windows.Foundation.TimeSpan(300000000);
+                        httpClient.defaultRequestHeaders.timeout = timeout;
+
+                        httpClient.getStringAsync(uri).done(
+                            function(responseText) {
+                                try {
+                                    var data = JSON.parse(responseText);
+                                    manejarExito(data);
+                                } catch (e) {
+                                    manejarError('Parse error: ' + e.message);
+                                }
+                            },
+                            function(error) {
+                                var msg = error.message || 'HTTP error';
+                                if (error.status) msg += ' (code ' + error.status + ')';
+                                manejarError(msg);
+                            }
+                        );
+                        return;
+                    } catch (e) {}
+                }
+
+                if (typeof WinJS !== 'undefined' && WinJS.xhr) {
+                    WinJS.xhr({ url: url, responseType: 'json' }).done(
+                        function(xhr) {
+                            try {
+                                var data = xhr.response;
+                                manejarExito(data);
+                            } catch (e) {
+                                manejarError('Parse error: ' + e.message);
+                            }
+                        },
+                        function(error) {
+                            var msg = error.message || 'WinJS.xhr error';
+                            if (error.status) msg += ' (code ' + error.status + ')';
+                            manejarError(msg);
+                        }
+                    );
+                    return;
+                }
+
+                var xhr = new XMLHttpRequest();
+                xhr.open("GET", url, true);
+                xhr.timeout = 30000;
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState === 4) {
+                        if (xhr.status === 200) {
+                            try {
+                                var data = JSON.parse(xhr.responseText);
+                                manejarExito(data);
+                            } catch (e) {
+                                manejarError('Parse error: ' + e.message);
+                            }
+                        } else {
+                            manejarError('HTTP ' + xhr.status + ' ' + xhr.statusText);
+                        }
+                    }
+                };
+                xhr.ontimeout = function() {
+                    manejarError(translations[currentLang]['toast-timeout'] || 'Timeout (30 sec)');
+                };
+                xhr.onerror = function() {
+                    manejarError(translations[currentLang]['toast-network-error'] || 'Network error');
+                };
+                xhr.send();
+            }
+
+            intentarCargar(0);
+        }
+
+        // =========================================================================
+        // INIT
+        // =========================================================================
+        document.addEventListener("DOMContentLoaded", function() {
+            document.addEventListener("contextmenu", function(e) {
+                e.preventDefault();
+                var ms = document.getElementById("metro-appbar-superior");
+                var mi = document.getElementById("metro-appbar-inferior");
+                if (ms && mi) {
+                    ms.classList.toggle("appbar-activa");
+                    mi.classList.toggle("appbar-activa");
+                }
+            });
+            document.addEventListener("click", function(e) {
+                var s = document.getElementById("metro-appbar-superior");
+                var i = document.getElementById("metro-appbar-inferior");
+                if (s && i && !s.contains(e.target) && !i.contains(e.target)) {
+                    s.classList.remove("appbar-activa");
+                    i.classList.remove("appbar-activa");
+                }
+            });
+
+            currentLang = 'es';
+            updateLanguage();
+
+            renderizarTodo();
+            cargarCatalogoRemoto();
+
+            if (typeof WinJS !== 'undefined') {
+                WinJS.Application.onerror = function(e) { return true; };
+                WinJS.Application.onactivated = function(args) {
+                    args.setPromise(WinJS.UI.processAll());
+                };
+                WinJS.Application.start();
+            }
+        });
     </script>
 </body>
 </html>
