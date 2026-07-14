@@ -14,7 +14,7 @@
       "name": "Flappy Bird",
       "author": "Philino Tech. Ltd",
       "description": "Extremely addictive and challenging game that will take you for a spin with your patience and focus. It will not rest until all your fingers are tired of tapping. Challenge yourself for how much you can score. Choose from multiple themes. Play across the scrolling landscape to score the highest score possible. Try to beat your own score",
-      "icon": " ",
+      "icon": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/FlappyBirdIcon.png?raw=tru ",
        "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/FlappyBirdIcon.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/28845PhilinoTechnologies.FlappyBird_2.1.0.0_neutral__k1kv61aetwx78.1.Appx",
       "category": "Juegos",
@@ -35,6 +35,7 @@
       "author": "live text team ",
       "description": "",
       "icon": " ",
+                    "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/FlappyBirdIcon.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Live.Text.-.Windows.8.1_1.2.0.0_AnyCPU.appx",
       "category": "Other",
       "featured": false
