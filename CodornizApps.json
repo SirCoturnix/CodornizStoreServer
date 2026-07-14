@@ -14,7 +14,7 @@
       "name": "Flappy Bird",
       "author": "Philino Tech. Ltd",
       "description": "Extremely addictive and challenging game that will take you for a spin with your patience and focus. It will not rest until all your fingers are tired of tapping. Challenge yourself for how much you can score. Choose from multiple themes. Play across the scrolling landscape to score the highest score possible. Try to beat your own score",
-      "icon": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/FlappyBirdIcon.png?raw=tru ",
+      "icon": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/FlappyBirdIcon.png?raw=true ",
        "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/FlappyBirdIcon.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/28845PhilinoTechnologies.FlappyBird_2.1.0.0_neutral__k1kv61aetwx78.1.Appx",
       "category": "Juegos",
@@ -31,11 +31,11 @@
       "featured": true
     },
            {
-      "name": "Live text",
-      "author": "live text team ",
-      "description": "",
+      "name": "Live Text",
+      "author": "Live Text Team ",
+      "description": "All in one quote-text app! The Live Text app for Windows 8.1 gives you quotes from a API and you can customize it and it will fit with your design! You can even write your texts to appear on the live tile and don't forget that the next version will come soon!",
       "icon": " ",
-                    "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/FlappyBirdIcon.png?raw=true",
+      "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/2026-07-13_17_31_26-submit-patch-app___CodornizStore_-_Discord.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Live.Text.-.Windows.8.1_1.2.0.0_AnyCPU.appx",
       "category": "Other",
       "featured": false
@@ -45,6 +45,8 @@
       "author": "Halfbrick Studios",
       "description": "Saca tu katana y corta las frutas.",
       "icon": "fruitninja.png",
+            "icon_url": "",
+
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx",
       "category": "Juegos",
       "featured": true
