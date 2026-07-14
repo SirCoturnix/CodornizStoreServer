@@ -15,7 +15,7 @@
       "author": "Philino Tech. Ltd",
       "description": "Extremely addictive and challenging game that will take you for a spin with your patience and focus. It will not rest until all your fingers are tired of tapping. Challenge yourself for how much you can score. Choose from multiple themes. Play across the scrolling landscape to score the highest score possible. Try to beat your own score",
       "icon": " ",
-       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/21ZzpgClpiL.webp?raw=true",
+       "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/FlappyBirdIcon.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/28845PhilinoTechnologies.FlappyBird_2.1.0.0_neutral__k1kv61aetwx78.1.Appx",
       "category": "Juegos",
       "featured": true
@@ -25,6 +25,7 @@
       "author": "LazyWorm Applications",
       "description": "Patched with newRetiled, credit to migbrunluz YouTube. Beautifully designed. The #1 TOP rated YouTube app on the Windows Phone Store is now available for Windows 8! WHAT THE MEDIA IS SAYING  It's been a fan favorite since it first launched on Windows Phone what feels like eons ago... So how's the app? Really rad. - WPCentral We've always found navigating YouTube on a computer clunky as compared to our smartphones, and now there's a remedy to make that transition much smoother. As promised a few weeks ago, Metrotube for Windows 8 is now available in the Store for free. - Windows Phone Daily having Metrotube, which has already proven to be highly popular on another Microsoft platform, come to Windows 8 is certainly welcome news. - Neowin",
       "icon": " ",
+                "icon_url": "https://github.com/SirCoturnix/CodornizStoreServer/blob/main/images/iconos_extraidos/MetroTube.png?raw=true",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Metrotube.Patched.Desktop.Beta.5.appx",
       "category": "Otros",
       "featured": true
