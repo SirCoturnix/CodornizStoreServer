@@ -8,8 +8,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx",
       "category": "Juegos",
       "featured": true,
-      "rating": 4.7,
-      "price": "Free"
+ 
     },
     {
       "name": "Flappy Bird",
@@ -19,8 +18,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/28845PhilinoTechnologies.FlappyBird_2.1.0.0_neutral__k1kv61aetwx78.1.Appx",
       "category": "Juegos",
       "featured": true,
-      "rating": 4.5,
-      "price": "Free"
+   
     },
     {
       "name": "MetroTube PATCHED",
@@ -30,8 +28,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Metrotube.Patched.Desktop.Beta.5.appx",
       "category": "Otros",
       "featured": true,
-      "rating": 4.8,
-      "price": "Free"
+    
     },
     {
       "name": "Live Text",
@@ -41,8 +38,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Live.Text.-.Windows.8.1_1.2.0.0_AnyCPU.appx",
       "category": "Other",
       "featured": false,
-      "rating": 3.8,
-      "price": "Free"
+  
     },
     {
       "name": "Fruit Ninja",
@@ -52,8 +48,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx",
       "category": "Juegos",
       "featured": true,
-      "rating": 4.6,
-      "price": "Free"
+
     },
     {
       "name": "ProdigyMath",
@@ -63,8 +58,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ProdigyMath_1.17.0.0_AnyCPU_Debug.appx",
       "category": "Juegos",
       "featured": true,
-      "rating": 4.2,
-      "price": "Free"
+ 
     },
     {
       "name": "newsXpresso Metro",
@@ -74,8 +68,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/esobiIncorporated.newsXpressoMetro_2.0.2.208_neutral__sngswjb5h6fyg.appx",
       "category": "Otros",
       "featured": false,
-      "rating": 3.5,
-      "price": "Free"
+    
     },
     {
       "name": "Opentracks",
@@ -85,8 +78,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx",
       "category": "Otros",
       "featured": false,
-      "rating": 3.2,
-      "price": "Free"
+      
     },
     {
       "name": "Windows phone app",
@@ -96,8 +88,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/wpapp.appx",
       "category": "Tecnología",
       "featured": false,
-      "rating": 2.5,
-      "price": "Free"
+     
     },
     {
       "name": "Evernote",
@@ -107,8 +98,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Evernote.Evernote_3.3.0.102_x86__q4d96b2w5wcc2.appx",
       "category": "Productividad",
       "featured": false,
-      "rating": 4.4,
-      "price": "Free"
+   
     },
     {
       "name": "mytube",
@@ -118,8 +108,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/mytube.appx",
       "category": "Otros",
       "featured": false,
-      "rating": 4.3,
-      "price": "Free"
+      
     },
     {
       "name": "DrayMusic",
@@ -129,8 +118,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1773704616_DrayMusic_1.0.0.0_AnyCPU.appx",
       "category": "Otros",
       "featured": false,
-      "rating": 4.0,
-      "price": "Free"
+     
     },
     {
       "name": "Netflix",
@@ -140,8 +128,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/4DF9E0F8.Netflix_2.22.0.39_x86__mcm4njqhnhss8.appx",
       "category": "Otros",
       "featured": false,
-      "rating": 4.9,
-      "price": "Free"
+ 
     },
     {
       "name": "Rowi",
@@ -151,8 +138,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HiddenPineappleLLC.Rowi_0.8.0.0_x86__8364z769gkj0p.appx",
       "category": "Otros",
       "featured": false,
-      "rating": 4.1,
-      "price": "Free"
+    
     },
     {
       "name": "Nokia AppSocial",
@@ -162,8 +148,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/NokiaCorporation.AppSocial_1.9.0.0_x86__6d0q6r3z979nw.appx",
       "category": "Tecnología",
       "featured": true,
-      "rating": 4.2,
-      "price": "Free"
+    
     },
     {
       "name": "News Live Tiles",
@@ -173,8 +158,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/52487Koode.56414CB813359_1.5.0.4_neutral__m1bqtb7san9p0.appx",
       "category": "Productividad",
       "featured": false,
-      "rating": 3.9,
-      "price": "Free"
+     
     },
     {
       "name": "TheFork",
@@ -184,8 +168,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/LaFourchette.comElTenedor.LaFourchette_2015.407.1353.2545_neutral_._xjascxykqffr4.AppxBundle.appx",
       "category": "Comida",
       "featured": false,
-      "rating": 3.7,
-      "price": "Free"
+
     },
     {
       "name": "Rayman Jungle Run",
@@ -195,8 +178,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/UbisoftEntertainment.RaymanJungleRun_1.2.0.88_x86__dbgk1hhpxymar.Appx",
       "category": "Juegos",
       "featured": false,
-      "rating": 4.5,
-      "price": "$4.99"
+    
     },
     {
       "name": "Cut The Rope",
@@ -206,8 +188,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ZeptoLabUKLimited.CutTheRope_1.2.0.43_x86__sq9zxnwrk84pj.appx",
       "category": "Juegos",
       "featured": false,
-      "rating": 4.4,
-      "price": "$1.99"
+
     },
     {
       "name": "Xunxo News",
@@ -217,8 +198,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/12022Xurxo.XurxoNews_1.0.0.0_neutral__cffdx9p3b7k32.appx",
       "category": "Otros",
       "featured": false,
-      "rating": 3.3,
-      "price": "Free"
+     
     },
     {
       "name": "Fresh Paint",
@@ -228,8 +208,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.FreshPaint_2.0.15133.0_x86__8wekyb3d8bbwe.appx",
       "category": "Otros",
       "featured": false,
-      "rating": 4.6,
-      "price": "Free"
+  
     },
     {
       "name": "RecipeKeeper",
@@ -239,8 +218,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/TudorspanLimited.RecipeKeeperFree_1.5.2.0_x86__mnckez06wj9wa.appx",
       "category": "Comida",
       "featured": false,
-      "rating": 4.0,
-      "price": "Free"
+     
     },
     {
       "name": "Adobe Reader",
@@ -250,8 +228,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/AdobeSystemsIncorporated.AdobeReader_3.1.8.7675_x86__ynb6jyjzte8ga.Appx",
       "category": "Productividad",
       "featured": false,
-      "rating": 4.3,
-      "price": "Free"
+
     },
     {
       "name": "Insider Hub",
@@ -261,8 +238,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.InsiderHub_15.3.30.1_x86__8wekyb3d8bbwe_1780310454359.appx",
       "category": "Tecnología",
       "featured": false,
-      "rating": 4.1,
-      "price": "Free"
+     
     },
     {
       "name": "WPCentral",
@@ -272,8 +248,7 @@
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/WPCentral.Win8_1.3.1.2_AnyCPU.appx",
       "category": "Tecnología",
       "featured": false,
-      "rating": 4.2,
-      "price": "Free"
+    
     },
     {
       "name": "ChromeUWP",
@@ -283,8 +258,7 @@
       "url": "https://github.com/OpenGlebsur/openglebsur.github.io/raw/refs/heads/main/ChromeUWP_1.0.0.0_AnyCPU.appx",
       "category": "Tecnología",
       "featured": false,
-      "rating": 3.6,
-      "price": "Free"
+    
     }
   ]
 }
