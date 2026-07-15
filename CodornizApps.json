@@ -7,8 +7,7 @@
       "icon": "abs.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx",
       "category": "Juegos",
-      "featured": true,
- 
+      "featured": true
     },
     {
       "name": "Flappy Bird",
@@ -17,8 +16,7 @@
       "icon": "flappybird.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/28845PhilinoTechnologies.FlappyBird_2.1.0.0_neutral__k1kv61aetwx78.1.Appx",
       "category": "Juegos",
-      "featured": true,
-   
+      "featured": true
     },
     {
       "name": "MetroTube PATCHED",
@@ -27,8 +25,7 @@
       "icon": "metrotube.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Metrotube.Patched.Desktop.Beta.5.appx",
       "category": "Otros",
-      "featured": true,
-    
+      "featured": true
     },
     {
       "name": "Live Text",
@@ -36,9 +33,8 @@
       "description": "All in one quote-text app for Windows 8.1 with live tile support.",
       "icon": "livetext.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Live.Text.-.Windows.8.1_1.2.0.0_AnyCPU.appx",
-      "category": "Other",
-      "featured": false,
-  
+      "category": "Otros",
+      "featured": false
     },
     {
       "name": "Fruit Ninja",
@@ -47,8 +43,7 @@
       "icon": "fruitninja.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx",
       "category": "Juegos",
-      "featured": true,
-
+      "featured": true
     },
     {
       "name": "ProdigyMath",
@@ -57,8 +52,7 @@
       "icon": "prodigymath.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ProdigyMath_1.17.0.0_AnyCPU_Debug.appx",
       "category": "Juegos",
-      "featured": true,
- 
+      "featured": true
     },
     {
       "name": "newsXpresso Metro",
@@ -67,8 +61,7 @@
       "icon": "newsxpresso.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/esobiIncorporated.newsXpressoMetro_2.0.2.208_neutral__sngswjb5h6fyg.appx",
       "category": "Otros",
-      "featured": false,
-    
+      "featured": false
     },
     {
       "name": "Opentracks",
@@ -77,8 +70,7 @@
       "icon": "opentracks.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx",
       "category": "Otros",
-      "featured": false,
-      
+      "featured": false
     },
     {
       "name": "Windows phone app",
@@ -87,8 +79,7 @@
       "icon": "wpapp.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/wpapp.appx",
       "category": "Tecnología",
-      "featured": false,
-     
+      "featured": false
     },
     {
       "name": "Evernote",
@@ -97,8 +88,7 @@
       "icon": "evernote.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Evernote.Evernote_3.3.0.102_x86__q4d96b2w5wcc2.appx",
       "category": "Productividad",
-      "featured": false,
-   
+      "featured": false
     },
     {
       "name": "mytube",
@@ -107,8 +97,7 @@
       "icon": "mytube.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/mytube.appx",
       "category": "Otros",
-      "featured": false,
-      
+      "featured": false
     },
     {
       "name": "DrayMusic",
@@ -117,8 +106,7 @@
       "icon": "draymusic.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1773704616_DrayMusic_1.0.0.0_AnyCPU.appx",
       "category": "Otros",
-      "featured": false,
-     
+      "featured": false
     },
     {
       "name": "Netflix",
@@ -127,8 +115,7 @@
       "icon": "netflix.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/4DF9E0F8.Netflix_2.22.0.39_x86__mcm4njqhnhss8.appx",
       "category": "Otros",
-      "featured": false,
- 
+      "featured": false
     },
     {
       "name": "Rowi",
@@ -137,8 +124,7 @@
       "icon": "rowi.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HiddenPineappleLLC.Rowi_0.8.0.0_x86__8364z769gkj0p.appx",
       "category": "Otros",
-      "featured": false,
-    
+      "featured": false
     },
     {
       "name": "Nokia AppSocial",
@@ -147,8 +133,7 @@
       "icon": "nokiaappsocial.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/NokiaCorporation.AppSocial_1.9.0.0_x86__6d0q6r3z979nw.appx",
       "category": "Tecnología",
-      "featured": true,
-    
+      "featured": true
     },
     {
       "name": "News Live Tiles",
@@ -157,8 +142,7 @@
       "icon": "koodereader.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/52487Koode.56414CB813359_1.5.0.4_neutral__m1bqtb7san9p0.appx",
       "category": "Productividad",
-      "featured": false,
-     
+      "featured": false
     },
     {
       "name": "TheFork",
@@ -167,8 +151,7 @@
       "icon": "eltenedor.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/LaFourchette.comElTenedor.LaFourchette_2015.407.1353.2545_neutral_._xjascxykqffr4.AppxBundle.appx",
       "category": "Comida",
-      "featured": false,
-
+      "featured": false
     },
     {
       "name": "Rayman Jungle Run",
@@ -177,8 +160,7 @@
       "icon": "raymanjunglerun.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/UbisoftEntertainment.RaymanJungleRun_1.2.0.88_x86__dbgk1hhpxymar.Appx",
       "category": "Juegos",
-      "featured": false,
-    
+      "featured": false
     },
     {
       "name": "Cut The Rope",
@@ -187,8 +169,7 @@
       "icon": "cuttherope.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ZeptoLabUKLimited.CutTheRope_1.2.0.43_x86__sq9zxnwrk84pj.appx",
       "category": "Juegos",
-      "featured": false,
-
+      "featured": false
     },
     {
       "name": "Xunxo News",
@@ -197,8 +178,7 @@
       "icon": "xunxo.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/12022Xurxo.XurxoNews_1.0.0.0_neutral__cffdx9p3b7k32.appx",
       "category": "Otros",
-      "featured": false,
-     
+      "featured": false
     },
     {
       "name": "Fresh Paint",
@@ -207,8 +187,7 @@
       "icon": "freshpaint.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.FreshPaint_2.0.15133.0_x86__8wekyb3d8bbwe.appx",
       "category": "Otros",
-      "featured": false,
-  
+      "featured": false
     },
     {
       "name": "RecipeKeeper",
@@ -217,8 +196,7 @@
       "icon": "recipekeeper.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/TudorspanLimited.RecipeKeeperFree_1.5.2.0_x86__mnckez06wj9wa.appx",
       "category": "Comida",
-      "featured": false,
-     
+      "featured": false
     },
     {
       "name": "Adobe Reader",
@@ -227,8 +205,7 @@
       "icon": "adobereader.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/AdobeSystemsIncorporated.AdobeReader_3.1.8.7675_x86__ynb6jyjzte8ga.Appx",
       "category": "Productividad",
-      "featured": false,
-
+      "featured": false
     },
     {
       "name": "Insider Hub",
@@ -237,8 +214,7 @@
       "icon": "insiderhub.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.InsiderHub_15.3.30.1_x86__8wekyb3d8bbwe_1780310454359.appx",
       "category": "Tecnología",
-      "featured": false,
-     
+      "featured": false
     },
     {
       "name": "WPCentral",
@@ -247,8 +223,7 @@
       "icon": "wpcentral.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/WPCentral.Win8_1.3.1.2_AnyCPU.appx",
       "category": "Tecnología",
-      "featured": false,
-    
+      "featured": false
     },
     {
       "name": "ChromeUWP",
@@ -257,8 +232,7 @@
       "icon": "chrome.png",
       "url": "https://github.com/OpenGlebsur/openglebsur.github.io/raw/refs/heads/main/ChromeUWP_1.0.0.0_AnyCPU.appx",
       "category": "Tecnología",
-      "featured": false,
-    
+      "featured": false
     }
   ]
 }
