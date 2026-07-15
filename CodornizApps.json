@@ -11,6 +11,17 @@
       "featured": false,
       "rating": "4.6"
     },
+        {
+      "name": "MixRadio",
+      "author": "Microsoft Mobile",
+      "pub": "Nokia Corporation",
+      "description": "Nokia MixRadio was a music streaming app and service that allowed users to listen to personalized playlists for free. It was primarily available for Nokia Lumia phones and helped users discover new music based on their tastes.",
+      "icon": "mixradio.png",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/NokiaCorporation.NokiaMusic_2015.121.1258.5497_neutral___6d0q6r3z979nw_1783209028129.appxbundle",
+      "category": "Music",
+      "featured": false,
+      "rating": "4.6"
+    },
     {
       "name": "Angry Birds Space",
       "author": "Rovio Entertainment",
