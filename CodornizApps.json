@@ -12,6 +12,28 @@
       "rating": "4.6"
     },
         {
+      "name": "News (NewRetiled)",
+      "author": "Microsoft",
+      "pub": "Microsoft",
+      "description": "Bing News is a news aggregator and search service integrated into Microsoft’s Bing search engine. It collects news articles from a wide array of reputable sources, including major news outlets, local publications, blogs, and online news portals. ",
+      "icon": "",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.BingNews_3.0.4.213_x64__8wekyb3d8bbwe.appx",
+      "category": "News and weather",
+      "featured": false,
+      "rating": "4.6"
+    },
+          {
+      "name": "Weather (NewRetiled)",
+      "author": "Microsoft",
+      "pub": "Microsoft",
+      "description": "Bing Weather does a fantastic job of delivering location-specific weather conditions and forecasts. Its simple and colorful design makes it easy to quickly glance at the app or live tile to find what’s happening outside, and see the upcoming weather forecasts. ",
+      "icon": "",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.BingWeather_3.0.4.214_x64__8wekyb3d8bbwe.appx",
+      "category": "News and weather",
+      "featured": false,
+      "rating": "4.6"
+    },
+        {
       "name": "MixRadio",
       "author": "Microsoft Mobile",
       "pub": "Nokia Corporation",
@@ -30,7 +52,7 @@
       "icon": "abs.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx",
       "category": "Juegos",
-      "featured": true,
+      "featured": false,
       "rating": "4.8"
     },
     {
