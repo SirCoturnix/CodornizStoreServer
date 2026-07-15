@@ -14,7 +14,7 @@
     {
       "name": "Flappy Bird",
       "author": "Philino Tech. Ltd",
-      "description": "Extremely addictive and challenging game that will take you for a spin with your patience and focus. It will not rest until all your fingers are tired of tapping. Challenge yourself for how much you can score. Choose from multiple themes. Play across the scrolling landscape to score the highest score possible. Try to beat your own score",
+      "description": "Extremely addictive and challenging game that will take you for a spin with your patience and focus.",
       "icon": "flappybird.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/28845PhilinoTechnologies.FlappyBird_2.1.0.0_neutral__k1kv61aetwx78.1.Appx",
       "category": "Juegos",
@@ -25,7 +25,7 @@
     {
       "name": "MetroTube PATCHED",
       "author": "LazyWorm Applications",
-      "description": "Patched with newRetiled, credit to migbrunluz YouTube. Beautifully designed. The #1 TOP rated YouTube app on the Windows Phone Store is now available for Windows 8! WHAT THE MEDIA IS SAYING  It's been a fan favorite since it first launched on Windows Phone what feels like eons ago... So how's the app? Really rad. - WPCentral We've always found navigating YouTube on a computer clunky as compared to our smartphones, and now there's a remedy to make that transition much smoother. As promised a few weeks ago, Metrotube for Windows 8 is now available in the Store for free. - Windows Phone Daily having Metrotube, which has already proven to be highly popular on another Microsoft platform, come to Windows 8 is certainly welcome news. - Neowin",
+      "description": "Patched with newRetiled. Beautifully designed YouTube client for Windows 8.",
       "icon": "metrotube.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Metrotube.Patched.Desktop.Beta.5.appx",
       "category": "Otros",
@@ -36,7 +36,7 @@
     {
       "name": "Live Text",
       "author": "Live Text Team",
-      "description": "All in one quote-text app! The Live Text app for Windows 8.1 gives you quotes from a API and you can customize it and it will fit with your design! You can even write your texts to appear on the live tile and don't forget that the next version will come soon!",
+      "description": "All in one quote-text app for Windows 8.1 with live tile support.",
       "icon": "livetext.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Live.Text.-.Windows.8.1_1.2.0.0_AnyCPU.appx",
       "category": "Other",
@@ -80,7 +80,7 @@
     {
       "name": "Opentracks",
       "author": "ChockingNetDude",
-      "description": "El reproductor de audio del dramatico de chockingnetdude xdxd OPENDRAMAS cua cua.",
+      "description": "El reproductor de audio del dramatico de chockingnetdude.",
       "icon": "opentracks.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx",
       "category": "Otros",
@@ -89,9 +89,9 @@
       "price": "Free"
     },
     {
-      "name": "wpapp",
+      "name": "Windows phone app",
       "author": "Microsoft",
-      "description": "La aplicacion tipo sandbox de windows phone ehh no se.",
+      "description": "La aplicacion tipo sandbox de windows phone.",
       "icon": "wpapp.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/wpapp.appx",
       "category": "Tecnología",
@@ -113,7 +113,7 @@
     {
       "name": "mytube",
       "author": "Ryken",
-      "description": "Un cliente de videos iconico para windows 8 y 8.1!.",
+      "description": "Un cliente de videos iconico para windows 8 y 8.1!",
       "icon": "mytube.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/mytube.appx",
       "category": "Otros",
@@ -222,7 +222,7 @@
     },
     {
       "name": "Fresh Paint",
-      "author": "Microsoft Studios",
+      "author": "Microsoft",
       "description": "Pinta, Dibuja, bocetea aqui tienes el set completo de pinceles, pintura seca y lapices.",
       "icon": "freshpaint.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.FreshPaint_2.0.15133.0_x86__8wekyb3d8bbwe.appx",
@@ -245,7 +245,7 @@
     {
       "name": "Adobe Reader",
       "author": "Adobe Systems",
-      "description": "El iconico lector de pdfs ha llegado a windows 8.1 prueba y visualiza tus documentos!.",
+      "description": "El iconico lector de pdfs ha llegado a windows 8.1 prueba y visualiza tus documentos!",
       "icon": "adobereader.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/AdobeSystemsIncorporated.AdobeReader_3.1.8.7675_x86__ynb6jyjzte8ga.Appx",
       "category": "Productividad",
@@ -254,8 +254,8 @@
       "price": "Free"
     },
     {
-      "name": "InsiderHub",
-      "author": "Microsoft Insider",
+      "name": "Insider Hub",
+      "author": "Microsoft",
       "description": "Opina y prueba las nuevas compilaciones.",
       "icon": "insiderhub.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.InsiderHub_15.3.30.1_x86__8wekyb3d8bbwe_1780310454359.appx",
