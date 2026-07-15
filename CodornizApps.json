@@ -172,6 +172,15 @@
       "featured": false
     },
     {
+      "name": "Cut The Rope 2",
+      "author": "ZeptoLab UK",
+      "description": "Cut the Rope 2 is a physics-based puzzle video game where the player must cut ropes to deliver candy to the little monster Om Nom. It includes new characters, levels, challenges, and mechanics that make the game more fun and varied.",
+      "icon": "cuttherope.png",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ZeptoLabUKLimited.CuttheRope2_1.0.0.46_neutral_._sq9zxnwrk84pj.appxbundle",
+      "category": "Juegos",
+      "featured": false
+    },
+    {
       "name": "Xunxo News",
       "author": "XunxoCorp",
       "description": "Mira tus noticias en donde sea.",
