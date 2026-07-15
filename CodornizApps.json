@@ -11,7 +11,7 @@
       "featured": false,
       "rating": "4.6"
     },
-        {
+    {
       "name": "News (NewRetiled)",
       "author": "Microsoft",
       "pub": "Microsoft",
@@ -22,7 +22,7 @@
       "featured": false,
       "rating": "4.6"
     },
-          {
+    {
       "name": "Weather (NewRetiled)",
       "author": "Microsoft",
       "pub": "Microsoft",
@@ -33,7 +33,7 @@
       "featured": false,
       "rating": "4.6"
     },
-        {
+    {
       "name": "MixRadio",
       "author": "Microsoft Mobile",
       "pub": "Nokia Corporation",
@@ -329,6 +329,84 @@
       "category": "Otros",
       "featured": false,
       "rating": "3.8"
+    },
+    {
+      "name": "Bing Finance",
+      "author": "Microsoft",
+      "pub": "Microsoft",
+      "description": "Keep track of your stocks, currencies, and financial news with Bing Finance.",
+      "icon": "",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.BingFinance_2.0.0.320_x64__8wekyb3d8bbwe.appx",
+      "category": "News and weather",
+      "featured": false,
+      "rating": "4.5"
+    },
+    {
+      "name": "Bing Food and Drink",
+      "author": "Microsoft",
+      "pub": "Microsoft",
+      "description": "Discover recipes, cooking tips, and dining recommendations with Bing Food and Drink.",
+      "icon": "",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.BingFoodAndDrink_3.0.4.212_x64__8wekyb3d8bbwe.appx",
+      "category": "Comida",
+      "featured": false,
+      "rating": "4.5"
+    },
+    {
+      "name": "Bing Health and Fitness",
+      "author": "Microsoft",
+      "pub": "Microsoft",
+      "description": "Track your fitness goals, get health tips, and monitor your well-being with Bing Health and Fitness.",
+      "icon": "",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.BingHealthAndFitness_3.0.4.212_x64__8wekyb3d8bbwe.appx",
+      "category": "Otros",
+      "featured": false,
+      "rating": "4.4"
+    },
+    {
+      "name": "Bing Sports",
+      "author": "Microsoft",
+      "pub": "Microsoft",
+      "description": "Stay updated with live scores, news, and stats from your favorite sports with Bing Sports.",
+      "icon": "",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.BingSports_3.0.4.212_x64__8wekyb3d8bbwe.appx",
+      "category": "News and weather",
+      "featured": false,
+      "rating": "4.5"
+    },
+    {
+      "name": "Bing Travel",
+      "author": "Microsoft",
+      "pub": "Microsoft",
+      "description": "Plan your trips, find flights, hotels, and explore destinations with Bing Travel.",
+      "icon": "",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.BingTravel_3.0.4.212_x86__8wekyb3d8bbwe.appx",
+      "category": "Otros",
+      "featured": false,
+      "rating": "4.3"
+    },
+    {
+      "name": "Mail and Calendar",
+      "author": "Microsoft",
+      "pub": "Microsoft",
+      "description": "Manage your emails, calendar events, and contacts with the built-in Windows communications apps.",
+      "icon": "",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/microsoft.windowscommunicationsapps_17.5.9600.22013_x64__8wekyb3d8bbwe.appx",
+      "category": "Productividad",
+      "featured": false,
+      "rating": "4.4"
+    },
+    {
+      "name": "Xbox Live Games",
+      "author": "Microsoft",
+      "pub": "Microsoft",
+      "description": "Access your Xbox Live games, achievements, and connect with friends on Windows 8.1.",
+      "icon": "",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.XboxLIVEGames_2013.1011.10.5965_neutral_._8wekyb3d8bbwe.appxbundle",
+      "category": "Juegos",
+      "featured": false,
+      "rating": "4.3"
     }
   ]
+}
 }
