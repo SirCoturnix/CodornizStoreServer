@@ -9,7 +9,61 @@
       "category": "Juegos",
       "featured": true
     },
+       {
+      "name": "test",
+      "author": "Rovio Entertainment",
+      "description": "Los iconicos pajaros de angry birds se trasladan al espacio, usa la resortera y tumba cerdos.",
+      "icon": " ",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1ED5AEA5.AngryBirdsSpace_1.3.1.0_x86__p2gbknwb5d8r2.appx",
+      "category": "Juegos",
+      "featured": true
+    },
     {
+      "name": "Fruit Ninja",
+      "author": "Halfbrick Studios",
+      "description": "Saca tu katana y corta las frutas.",
+      "icon": "fruitninja.png",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx",
+      "category": "Juegos",
+      "featured": true
+    },
+    {
+      "name": "ProdigyMath",
+      "author": "AreoBit",
+      "description": "Una Plataforma educativa de matemáticas.",
+      "icon": "ProdigyMath_1.17.0.0_AnyCPU_Debug.png",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ProdigyMath_1.17.0.0_AnyCPU_Debug.appx",
+      "category": "Juegos",
+      "featured": true
+    },
+    {
+      "name": "newsXpresso Metro",
+      "author": "newsXpresso",
+      "description": "Tus noticias en el expreso.",
+      "icon": "newsxpresso.png",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/esobiIncorporated.newsXpressoMetro_2.0.2.208_neutral__sngswjb5h6fyg.appx",
+      "category": "Otros",
+      "featured": false
+    },
+    {
+      "name": "Opentracks",
+      "author": "ChockingNetDude",
+      "description": "El reproductor de audio del dramatico de chockingnetdude xdxd OPENDRAMAS cua cua.",
+      "icon": "mp3hubesopentracks.png",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx",
+      "category": "Otros",
+      "featured": false
+    },
+    {
+      "name": "Windows Phone",
+      "author": "Microsoft",
+      "description": "La aplicacion tipo sandbox de windows phone ehh no se.",
+      "icon": "wpapp.png",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/wpapp.appx",
+      "category": "Tecnología",
+      "featured": false
+    },
+       {
       "name": "Flappy Bird",
       "author": "Philino Tech. Ltd",
       "description": "Extremely addictive and challenging game that will take you for a spin with your patience and focus.",
@@ -18,7 +72,8 @@
       "category": "Juegos",
       "featured": true
     },
-    {
+
+   {
       "name": "MetroTube PATCHED",
       "author": "LazyWorm Applications",
       "description": "Patched with newRetiled. Beautifully designed YouTube client for Windows 8.",
@@ -37,48 +92,12 @@
       "featured": false
     },
     {
-      "name": "Fruit Ninja",
-      "author": "Halfbrick Studios",
-      "description": "Saca tu katana y corta las frutas.",
-      "icon": "fruitninja.png",
-      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HalfbrickStudiosPtyLtd.FruitNinja_1.8.1.66_x86__w77bc8x1h5kya.appx",
+      "name": "Cut The Rope 2",
+      "author": "ZeptoLab UK",
+      "description": "Cut the Rope 2 is a physics-based puzzle video game where the player must cut ropes to deliver candy to the little monster Om Nom. It includes new characters, levels, challenges, and mechanics that make the game more fun and varied.",
+      "icon": "cuttheropetwo.png",
+      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ZeptoLabUKLimited.CuttheRope2_1.0.0.46_neutral_._sq9zxnwrk84pj.appxbundle",
       "category": "Juegos",
-      "featured": true
-    },
-    {
-      "name": "ProdigyMath",
-      "author": "AreoBit",
-      "description": "Una Plataforma educativa de matemáticas.",
-      "icon": "prodigymath.png",
-      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ProdigyMath_1.17.0.0_AnyCPU_Debug.appx",
-      "category": "Juegos",
-      "featured": true
-    },
-    {
-      "name": "newsXpresso Metro",
-      "author": "newsXpresso",
-      "description": "Tus noticias en el expreso.",
-      "icon": "newsxpresso.png",
-      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/esobiIncorporated.newsXpressoMetro_2.0.2.208_neutral__sngswjb5h6fyg.appx",
-      "category": "Otros",
-      "featured": false
-    },
-    {
-      "name": "Opentracks",
-      "author": "ChockingNetDude",
-      "description": "El reproductor de audio del dramatico de chockingnetdude.",
-      "icon": "opentracks.png",
-      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Mp3HubPlayer_1.0.0.2_AnyCPU_Debug.appx",
-      "category": "Otros",
-      "featured": false
-    },
-    {
-      "name": "Windows phone app",
-      "author": "Microsoft",
-      "description": "La aplicacion tipo sandbox de windows phone.",
-      "icon": "wpapp.png",
-      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/wpapp.appx",
-      "category": "Tecnología",
       "featured": false
     },
     {
@@ -93,7 +112,7 @@
     {
       "name": "mytube",
       "author": "Ryken",
-      "description": "Un cliente de videos iconico para windows 8 y 8.1!",
+      "description": "Un cliente de videos iconico para windows 8 y 8.1!.",
       "icon": "mytube.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/mytube.appx",
       "category": "Otros",
@@ -103,7 +122,7 @@
       "name": "DrayMusic",
       "author": "DraydenYT",
       "description": "Reproductor de musica increible.",
-      "icon": "draymusic.png",
+      "icon": "1773704616_DrayMusic_1.0.0.0_AnyCPU.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/1773704616_DrayMusic_1.0.0.0_AnyCPU.appx",
       "category": "Otros",
       "featured": false
@@ -121,7 +140,7 @@
       "name": "Rowi",
       "author": "Hidden Pineapple",
       "description": "El gran cliente de twitter conocido de windows phone ha llegado a pc.",
-      "icon": "rowi.png",
+      "icon": "rowi-150x150.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/HiddenPineappleLLC.Rowi_0.8.0.0_x86__8364z769gkj0p.appx",
       "category": "Otros",
       "featured": false
@@ -133,7 +152,7 @@
       "icon": "nokiaappsocial.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/NokiaCorporation.AppSocial_1.9.0.0_x86__6d0q6r3z979nw.appx",
       "category": "Tecnología",
-      "featured": true
+      "featured": false
     },
     {
       "name": "News Live Tiles",
@@ -145,7 +164,7 @@
       "featured": false
     },
     {
-      "name": "TheFork",
+      "name": "El Tenedor",
       "author": "La Fourchette",
       "description": "Una gran aplicacion de recetas despues de bing food and drink/gourmet.",
       "icon": "eltenedor.png",
@@ -166,17 +185,8 @@
       "name": "Cut The Rope",
       "author": "ZeptoLab UK",
       "description": "Corta las cuerdas y dale de comer al gran Om Nom.",
-      "icon": "cuttherope.png",
+      "icon": "CutTheRope.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ZeptoLabUKLimited.CutTheRope_1.2.0.43_x86__sq9zxnwrk84pj.appx",
-      "category": "Juegos",
-      "featured": false
-    },
-    {
-      "name": "Cut The Rope 2",
-      "author": "ZeptoLab UK",
-      "description": "Cut the Rope 2 is a physics-based puzzle video game where the player must cut ropes to deliver candy to the little monster Om Nom. It includes new characters, levels, challenges, and mechanics that make the game more fun and varied.",
-      "icon": "cuttheropetwo.png",
-      "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/ZeptoLabUKLimited.CuttheRope2_1.0.0.46_neutral_._sq9zxnwrk84pj.appxbundle",
       "category": "Juegos",
       "featured": false
     },
@@ -184,14 +194,14 @@
       "name": "Xunxo News",
       "author": "XunxoCorp",
       "description": "Mira tus noticias en donde sea.",
-      "icon": "xunxo.png",
+      "icon": "Xuxo.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/12022Xurxo.XurxoNews_1.0.0.0_neutral__cffdx9p3b7k32.appx",
       "category": "Otros",
       "featured": false
     },
     {
       "name": "Fresh Paint",
-      "author": "Microsoft",
+      "author": "Microsoft ",
       "description": "Pinta, Dibuja, bocetea aqui tienes el set completo de pinceles, pintura seca y lapices.",
       "icon": "freshpaint.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/Microsoft.FreshPaint_2.0.15133.0_x86__8wekyb3d8bbwe.appx",
@@ -210,14 +220,14 @@
     {
       "name": "Adobe Reader",
       "author": "Adobe Systems",
-      "description": "El iconico lector de pdfs ha llegado a windows 8.1 prueba y visualiza tus documentos!",
-      "icon": "adobereader.png",
+      "description": "El iconico lector de pdfs ha llegado a windows 8.1 prueba y visualiza tus documentos!.",
+      "icon": "metro_reader_small_logo.targetsize-256.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/AdobeSystemsIncorporated.AdobeReader_3.1.8.7675_x86__ynb6jyjzte8ga.Appx",
       "category": "Productividad",
       "featured": false
     },
     {
-      "name": "Insider Hub",
+      "name": "InsiderHub",
       "author": "Microsoft",
       "description": "Opina y prueba las nuevas compilaciones.",
       "icon": "insiderhub.png",
@@ -229,7 +239,7 @@
       "name": "WPCentral",
       "author": "WPCentral Team",
       "description": "Noticias, y mas en windows 8 y 8.1.",
-      "icon": "wpcentral.png",
+      "icon": "WPAPPCENTRAL.png",
       "url": "https://github.com/SirCoturnix/CodornizStoreServer/releases/download/CodornizStoreTeam/WPCentral.Win8_1.3.1.2_AnyCPU.appx",
       "category": "Tecnología",
       "featured": false
@@ -238,7 +248,7 @@
       "name": "ChromeUWP",
       "author": "ReOpenGlebsur",
       "description": "A simple chrome port.",
-      "icon": "chrome.png",
+      "icon": "Chrome.png",
       "url": "https://github.com/OpenGlebsur/openglebsur.github.io/raw/refs/heads/main/ChromeUWP_1.0.0.0_AnyCPU.appx",
       "category": "Tecnología",
       "featured": false
