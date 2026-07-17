@@ -22,6 +22,17 @@
       "featured": false,
       "rating": "4.6"
     },
+      {
+      "name": "Where's My Mickey XL",
+      "author": "disney ",
+      "pub": "disney ",
+      "description": "Where's My Mickey? is based on the gameplay of Where's My Water?, but now with Mickey Mouse as the protagonist. As with all games in the series the puzzle element is based around guiding water from a source to a finishing point by removing dirt. This is mainly done by tracing a path with a finger, avoiding obstacles and manipulating spouts and other elements, to change the water flow. The game consists of three chapters each with their own story, theme and animated cut-scenes with 20 levels for each one. In When Life Gives You Lemons Mickey wants to set up a lemonade stand on a hot day on the beach and he needs water for that. In Fanning the Flames he needs to douse flames to prevent them from reaching TNT and in Growing Pains water is used to enter a gardening competition. A fourth mission, called It's a Big World After All, is about intergalactic travel in a water powered spacecraft. It is exclusive to the XL version of the game (iPad / Windows App) and makes use of a widescreen for a larger environment. Unlike the other games of the series it is not entirely set underground and offers new ways to interact with the water. Clouds can be used to absorb water and release it by tapping them. Wind also plays a role, diverting the water or moving clouds in a certain direction. There also plants that can be grown, sand has a specific use and water can be guided using long hoses. Visually the game uses elements from a new series of Mickey animated shorts. The ducks from the original game are replaced by stars. Optionally up to three can be collected to complete a level perfectly. Each mission has three collectible items hidden in the environment. When all items have been collected a bonus level can be played.",
+      "icon": "",
+      "url": " https://www.github.com/kitty93341-commits/Windows8Appx/releases/download/WheresMyMickey/wmmxl.appx",
+      "category": "Juegos",
+      "featured": false,
+      "rating": "4.6"
+    },
     {
       "name": "News (NewRetiled)",
       "author": "Microsoft",
